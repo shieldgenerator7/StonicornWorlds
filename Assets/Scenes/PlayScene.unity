@@ -253,32 +253,12 @@ MonoBehaviour:
   podTypeList:
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   - {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
-  - {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
-  - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-  - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-  - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-  - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-  - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
   - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
-  - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
-  - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
-  - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
-  - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
-  - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
   - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
+  indexOffset: 0.25
 --- !u!4 &752787613
 Transform:
   m_ObjectHideFlags: 0
@@ -307,4 +287,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetManager: {fileID: 752787612}
   addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
-  podPrefab: {fileID: 8810947915405303633, guid: d61621d29792bbc4080235f73e5bb7cc, type: 3}

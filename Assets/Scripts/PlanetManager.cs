@@ -51,7 +51,7 @@ public class PlanetManager : MonoBehaviour
             if (clickedUI != Vector2.zero || addPosList.Count == 1)
             {
                 int index = Mathf.FloorToInt(Vector2.Distance(clickedUI, Vector2.zero) + indexOffset);
-                index = Mathf.Min(index, 27);
+                index = Mathf.Min(index, podTypeList.Count - 1);
                 pods.Add(new Pod(
                     clickedUI,
                     podTypeList[index]
