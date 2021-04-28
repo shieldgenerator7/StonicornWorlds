@@ -7,7 +7,6 @@ public class PlanetManagerEffects : MonoBehaviour
     public PlanetManager planetManager;
 
     public GameObject addPodPrefab;
-    public GameObject podPrefab;
 
     List<GameObject> goPods = new List<GameObject>();
     List<GameObject> addPods = new List<GameObject>();
@@ -28,7 +27,7 @@ public class PlanetManagerEffects : MonoBehaviour
         pods.ForEach(pod =>
         {
             GameObject go = Instantiate(
-                podPrefab,
+                pod.podType.podPrefab,
                 pod.pos,
                 Quaternion.identity,
                 transform

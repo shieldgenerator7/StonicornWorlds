@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlanetManager : MonoBehaviour
 {
+    public List<PodType> podTypeList;
+    public float indexOffset = 0;
+
     List<Pod> pods = new List<Pod>();
     List<Vector2> addPosList = new List<Vector2>();
 
@@ -47,7 +50,12 @@ public class PlanetManager : MonoBehaviour
             Vector2 clickedUI = addPosList.FirstOrDefault(addPos => checkAddPodUI(pos, addPos));
             if (clickedUI != Vector2.zero || addPosList.Count == 1)
             {
-                pods.Add(new Pod(clickedUI));
+                int index = Mathf.FloorToInt(Vector2.Distance(clickedUI, Vector2.zero) + indexOffset);
+                index = Mathf.Min(index, 27);
+                pods.Add(new Pod(
+                    clickedUI,
+                    podTypeList[index]
+                    ));
                 podsListChanged?.Invoke(pods);
             }
         }
