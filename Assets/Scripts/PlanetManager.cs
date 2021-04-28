@@ -31,7 +31,8 @@ public class PlanetManager : MonoBehaviour
                 List<Vector2> adjs = getAdjacentPositions(pos);
                 foreach (Vector2 adj in adjs)
                 {
-                    if (!posList.Contains(adj) && !addPosList.Contains(adj))
+                    if (!doesListContainPosition(posList, adj, 0.1f)
+                    && !doesListContainPosition(addPosList, adj, 0.1f))
                     {
                         addPosList.Add(adj);
                     }
@@ -79,5 +80,10 @@ public class PlanetManager : MonoBehaviour
     {
         float radius = 0.5f;
         return Vector2.Distance(pos1, pos2) <= radius;
+    }
+
+    public bool doesListContainPosition(List<Vector2> list, Vector2 pos, float radius)
+    {
+        return list.Any(v => Vector2.Distance(v, pos) <= radius);
     }
 }
