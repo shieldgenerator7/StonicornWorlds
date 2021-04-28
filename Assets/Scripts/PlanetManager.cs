@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlanetManager : MonoBehaviour
 {
-    public List<PodType> podTypeList;
-    public float indexOffset = 0;
+    public PodType podType;
+    public PodType corePodType;
 
     List<Pod> pods = new List<Pod>();
     List<Vector2> addPosList = new List<Vector2>();
@@ -20,26 +20,28 @@ public class PlanetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        addPosList.Add(Vector2.zero);
-        addPosListChanged?.Invoke(addPosList);
-        podsListChanged += (list) =>
+        podsListChanged += updateEdges;
+        pods.Add(new Pod(Vector2.zero, corePodType));
+        podsListChanged?.Invoke(pods);
+    }
+
+    public void updateEdges(List<Pod> list)
+    {
+        List<Vector2> posList = list.ConvertAll(pod => pod.pos);
+        addPosList = new List<Vector2>();
+        foreach (Vector2 pos in posList)
         {
-            List<Vector2> posList = list.ConvertAll(pod => pod.pos);
-            addPosList = new List<Vector2>();
-            foreach (Vector2 pos in posList)
+            List<Vector2> adjs = getAdjacentPositions(pos);
+            foreach (Vector2 adj in adjs)
             {
-                List<Vector2> adjs = getAdjacentPositions(pos);
-                foreach (Vector2 adj in adjs)
+                if (!doesListContainPosition(posList, adj, 0.1f)
+                && !doesListContainPosition(addPosList, adj, 0.1f))
                 {
-                    if (!doesListContainPosition(posList, adj, 0.1f)
-                    && !doesListContainPosition(addPosList, adj, 0.1f))
-                    {
-                        addPosList.Add(adj);
-                    }
+                    addPosList.Add(adj);
                 }
             }
-            addPosListChanged?.Invoke(addPosList);
-        };
+        }
+        addPosListChanged?.Invoke(addPosList);
     }
 
     // Update is called once per frame
@@ -51,11 +53,9 @@ public class PlanetManager : MonoBehaviour
             Vector2 clickedUI = addPosList.FirstOrDefault(addPos => checkAddPodUI(pos, addPos));
             if (clickedUI != Vector2.zero || addPosList.Count == 1)
             {
-                int index = Mathf.FloorToInt(Vector2.Distance(clickedUI, Vector2.zero) + indexOffset);
-                index = Mathf.Min(index, podTypeList.Count - 1);
                 pods.Add(new Pod(
                     clickedUI,
-                    podTypeList[index]
+                    podType
                     ));
                 podsListChanged?.Invoke(pods);
             }
