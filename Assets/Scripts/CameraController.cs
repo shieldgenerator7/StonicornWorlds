@@ -21,15 +21,13 @@ public class CameraController : MonoBehaviour
         float maxX = posList.Max(pos => pos.x);
         float maxY = posList.Max(pos => pos.y);
         Vector2 max = new Vector2(maxX, maxY);
-
-        Vector2 avg = posList.Aggregate((sum, pos) => pos + sum) / posList.Count;
-        Camera.main.transform.position = new Vector3(
-            avg.x,
-            avg.y,
-            Camera.main.transform.position.z
-            );
+        List<Vector2> boundList = new List<Vector2>()
+        {
+            min,
+            max
+        };
         Camera.main.orthographicSize = 5;
-        while (!areVectorsInFrame(posList, 1))
+        while (!areVectorsInFrame(boundList, 1))
         {
             Camera.main.orthographicSize += 0.1f;
         }
