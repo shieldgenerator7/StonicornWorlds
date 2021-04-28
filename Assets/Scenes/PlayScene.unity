@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752787613}
   - component: {fileID: 752787612}
+  - component: {fileID: 752787614}
   m_Layer: 0
   m_Name: PlanetManager
   m_TagString: Untagged
@@ -235,10 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fde001c0a2a81438c2e02362415808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
-  podPrefab: {fileID: 8810947915405303633, guid: d61621d29792bbc4080235f73e5bb7cc, type: 3}
-  goPods: []
-  addPods: []
 --- !u!4 &752787613
 Transform:
   m_ObjectHideFlags: 0
@@ -253,3 +250,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752787614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35ce9e699891dc47b31ea5095b80a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetManager: {fileID: 752787612}
+  addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
+  podPrefab: {fileID: 8810947915405303633, guid: d61621d29792bbc4080235f73e5bb7cc, type: 3}
