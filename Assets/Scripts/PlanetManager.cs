@@ -8,6 +8,8 @@ public class PlanetManager : MonoBehaviour
     public PodType podType;
     public PodType corePodType;
 
+    public QueueManager queueManager;
+
     List<Pod> pods = new List<Pod>();
     List<Vector2> addPosList = new List<Vector2>();
 
@@ -23,6 +25,11 @@ public class PlanetManager : MonoBehaviour
         podsListChanged += updateEdges;
         pods.Add(new Pod(Vector2.zero, corePodType));
         podsListChanged?.Invoke(pods);
+        queueManager.onPodCompleted += (pod) =>
+        {
+            pods.Add(pod);
+            podsListChanged?.Invoke(pods);
+        };
     }
 
     public void updateEdges(List<Pod> list)
@@ -53,11 +60,11 @@ public class PlanetManager : MonoBehaviour
             Vector2 clickedUI = addPosList.FirstOrDefault(addPos => checkAddPodUI(pos, addPos));
             if (clickedUI != Vector2.zero || addPosList.Count == 1)
             {
-                pods.Add(new Pod(
+                Pod pod = new Pod(
                     clickedUI,
                     podType
-                    ));
-                podsListChanged?.Invoke(pods);
+                    );
+                queueManager.addToQueue(pod);
             }
         }
     }
