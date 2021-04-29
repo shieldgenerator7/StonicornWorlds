@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Core
   podPrefab: {fileID: 3152663368555482380, guid: 8a0f68026373c79439fec6cc146242f5, type: 3}
+  progressRequired: 1000

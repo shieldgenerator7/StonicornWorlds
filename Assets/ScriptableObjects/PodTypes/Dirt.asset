@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Dirt
   podPrefab: {fileID: 7875099125704197678, guid: 878c03bf04a70ea4db5df9181505015e, type: 3}
+  progressRequired: 150

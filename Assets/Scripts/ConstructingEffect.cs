@@ -23,7 +23,7 @@ public class ConstructingEffect : MonoBehaviour
     public void updateDisplay(float progress)
     {
         Vector2 size = fillSR.size;
-        size.y = progress / Pod.PROGRESS_REQUIRED;
+        size.y = progress / pod.podType.progressRequired;
         fillSR.size = size;
     }
 }

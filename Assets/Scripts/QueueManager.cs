@@ -29,8 +29,7 @@ public class QueueManager : MonoBehaviour
         if (currentPod)
         {
             currentPod.Progress += progressRate * Time.deltaTime;
-            currentPod.Progress = Mathf.Min(currentPod.Progress, Pod.PROGRESS_REQUIRED);
-            if (currentPod.Progress == Pod.PROGRESS_REQUIRED)
+            if (currentPod.Completed)
             {
                 onPodCompleted?.Invoke(currentPod);
                 queue.Dequeue();

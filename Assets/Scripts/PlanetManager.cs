@@ -45,7 +45,8 @@ public class PlanetManager : MonoBehaviour
         }
         //Call list changed even if the pod is already in the list
         podsListChanged?.Invoke(pods);
-        if (pod.Progress < Pod.PROGRESS_REQUIRED)
+        //If it's not complete, add it to build queue
+        if (!pod.Completed)
         {
             queueManager.addToQueue(pod);
         }

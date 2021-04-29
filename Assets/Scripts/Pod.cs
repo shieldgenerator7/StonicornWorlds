@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Pod
 {
-    public const float PROGRESS_REQUIRED = 100;
-
     public Vector2 pos;
     public PodType podType;
     private float progress;
@@ -14,7 +12,7 @@ public class Pod
         get => progress;
         set
         {
-            progress = Mathf.Min(value, PROGRESS_REQUIRED);
+            progress = Mathf.Min(value, podType.progressRequired);
             onProgressChanged?.Invoke(progress);
         }
     }
@@ -23,10 +21,10 @@ public class Pod
 
     public bool Completed
     {
-        get => progress == PROGRESS_REQUIRED;
+        get => progress == podType.progressRequired;
         set
         {
-            Progress = (value) ? PROGRESS_REQUIRED : 0;
+            Progress = (value) ? podType.progressRequired : 0;
         }
     }
 

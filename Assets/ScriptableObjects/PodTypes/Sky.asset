@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Sky
   podPrefab: {fileID: 7875099125704197678, guid: 3aae089ad7e43834faefa001306a782d, type: 3}
+  progressRequired: 10

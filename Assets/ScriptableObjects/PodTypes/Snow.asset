@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Snow
   podPrefab: {fileID: 7875099125704197678, guid: 87e5925dc6027d34eac177dc72763ca6, type: 3}
+  progressRequired: 37

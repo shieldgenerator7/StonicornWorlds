@@ -7,4 +7,5 @@ public class PodType : ScriptableObject
 {
     public string typeName = "PodTypeName";
     public GameObject podPrefab;
+    public float progressRequired = 100;
 }
