@@ -12,7 +12,7 @@ public class ConstructingEffect : MonoBehaviour
     void Start()
     {
         FindObjectOfType<QueueManager>().onPodProgressed += updateDisplay;
-        updateDisplay(pod, 0);
+        updateDisplay(pod);
     }
 
     private void OnDestroy()
@@ -20,12 +20,12 @@ public class ConstructingEffect : MonoBehaviour
         FindObjectOfType<QueueManager>().onPodProgressed -= updateDisplay;
     }
 
-    void updateDisplay(Pod pod, float progress)
+    public void updateDisplay(Pod pod)
     {
         if (pod == this.pod)
         {
             Vector2 size = fillSR.size;
-            size.y = progress / 100;
+            size.y = pod.progress / Pod.PROGRESS_REQUIRED;
             fillSR.size = size;
         }
     }

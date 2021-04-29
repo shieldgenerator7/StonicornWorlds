@@ -8,7 +8,7 @@ public class QueueManager : MonoBehaviour
 
     Queue<Pod> queue = new Queue<Pod>();
 
-    float currentProgress = 0;
+    Pod currentPod;
 
     public void addToQueue(Pod pod)
     {
@@ -22,21 +22,25 @@ public class QueueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (queue.Count > 0)
+        if (!currentPod && queue.Count > 0)
         {
-            currentProgress += progressRate * Time.deltaTime;
-            onPodProgressed?.Invoke(queue.Peek(), currentProgress);
-            if (currentProgress >= 100)
+            currentPod = queue.Peek();
+        }
+        if (currentPod)
+        {
+            currentPod.progress += progressRate * Time.deltaTime;
+            currentPod.progress = Mathf.Min(currentPod.progress, Pod.PROGRESS_REQUIRED);
+            onPodProgressed?.Invoke(currentPod);
+            if (currentPod.progress == Pod.PROGRESS_REQUIRED)
             {
-                currentProgress = 0;
-                Pod pod = queue.Dequeue();
-                onPodCompleted?.Invoke(pod);
+                queue.Dequeue();
+                onPodCompleted?.Invoke(currentPod);
                 onQueueChanged?.Invoke(queue);
+                currentPod = Pod.Null;
             }
         }
     }
-    public delegate void OnPodProgressed(Pod pod, float progress);
-    public event OnPodProgressed onPodProgressed;
-    public delegate void OnPodCompleted(Pod pod);
-    public event OnPodCompleted onPodCompleted;
+    public delegate void PodEvent(Pod pod);
+    public event PodEvent onPodProgressed;
+    public event PodEvent onPodCompleted;
 }
