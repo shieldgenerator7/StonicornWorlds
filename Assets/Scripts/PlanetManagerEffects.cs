@@ -16,7 +16,6 @@ public class PlanetManagerEffects : MonoBehaviour
     void Awake()
     {
         planetManager.podsListChanged += updateDisplay;
-
         edgeManager.onEdgeListChanged += updateAddDisplay;
     }
 
@@ -25,16 +24,17 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update pods
         goPods.ForEach(go => Destroy(go));
         goPods.Clear();
-        pods.ForEach(pod =>
-        {
-            GameObject go = Instantiate(
-                pod.podType.podPrefab,
-                pod.pos,
-                Quaternion.identity,
-                transform
-                );
-            goPods.Add(go);
-        });
+        pods.FindAll(pod => pod.Completed)
+            .ForEach(pod =>
+            {
+                GameObject go = Instantiate(
+                    pod.podType.podPrefab,
+                    pod.pos,
+                    Quaternion.identity,
+                    transform
+                    );
+                goPods.Add(go);
+            });
     }
     public void updateAddDisplay(List<Vector2> edges)
     {

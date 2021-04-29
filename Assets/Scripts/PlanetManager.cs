@@ -19,13 +19,24 @@ public class PlanetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pods.Add(new Pod(Vector2.zero, corePodType));
-        podsListChanged?.Invoke(pods);
-        queueManager.onPodCompleted += (pod) =>
+        Pod starter = new Pod(Vector2.zero, corePodType);
+        starter.Completed = true;
+        addPod(starter);
+        queueManager.onPodCompleted += (pod) => addPod(pod);
+    }
+
+    public void addPod(Pod pod)
+    {
+        if (!pods.Contains(pod))
         {
             pods.Add(pod);
-            podsListChanged?.Invoke(pods);
-        };
+        }
+        //Call list changed even if the pod is already in the list
+        podsListChanged?.Invoke(pods);
+        if (pod.Progress < Pod.PROGRESS_REQUIRED)
+        {
+            queueManager.addToQueue(pod);
+        }
     }
 
     public List<Vector2> getAdjacentPositions(Vector2 pos)

@@ -21,6 +21,11 @@ public class QueueManagerEffects : MonoBehaviour
         constructs.Clear();
         foreach (Pod pod in pods)
         {
+            if (pod.Completed)
+            {
+                //don't process completed pods
+                continue;
+            }
             GameObject construct = Instantiate(
                 constructingPrefab,
                 pod.pos,

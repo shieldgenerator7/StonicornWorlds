@@ -18,9 +18,17 @@ public class Pod
             onProgressChanged?.Invoke(progress);
         }
     }
-
     public delegate void OnProgressChanged(float progress);
     public event OnProgressChanged onProgressChanged;
+
+    public bool Completed
+    {
+        get => progress == PROGRESS_REQUIRED;
+        set
+        {
+            Progress = (value) ? PROGRESS_REQUIRED : 0;
+        }
+    }
 
     public Pod(Vector2 pos, PodType podType)
     {
