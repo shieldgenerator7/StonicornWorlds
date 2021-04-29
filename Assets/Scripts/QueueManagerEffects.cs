@@ -34,7 +34,6 @@ public class QueueManagerEffects : MonoBehaviour
                 .color = color;
             effect.fillSR
                 .color = color;
-            effect.updateDisplay(pod);
             constructs.Add(construct);
         }
     }

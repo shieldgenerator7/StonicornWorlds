@@ -28,10 +28,9 @@ public class QueueManager : MonoBehaviour
         }
         if (currentPod)
         {
-            currentPod.progress += progressRate * Time.deltaTime;
-            currentPod.progress = Mathf.Min(currentPod.progress, Pod.PROGRESS_REQUIRED);
-            onPodProgressed?.Invoke(currentPod);
-            if (currentPod.progress == Pod.PROGRESS_REQUIRED)
+            currentPod.Progress += progressRate * Time.deltaTime;
+            currentPod.Progress = Mathf.Min(currentPod.Progress, Pod.PROGRESS_REQUIRED);
+            if (currentPod.Progress == Pod.PROGRESS_REQUIRED)
             {
                 onPodCompleted?.Invoke(currentPod);
                 queue.Dequeue();
@@ -41,6 +40,5 @@ public class QueueManager : MonoBehaviour
         }
     }
     public delegate void PodEvent(Pod pod);
-    public event PodEvent onPodProgressed;
     public event PodEvent onPodCompleted;
 }

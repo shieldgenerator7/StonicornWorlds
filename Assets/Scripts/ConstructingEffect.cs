@@ -11,22 +11,19 @@ public class ConstructingEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<QueueManager>().onPodProgressed += updateDisplay;
-        updateDisplay(pod);
+        pod.onProgressChanged += updateDisplay;
+        updateDisplay(pod.Progress);
     }
 
     private void OnDestroy()
     {
-        FindObjectOfType<QueueManager>().onPodProgressed -= updateDisplay;
+        pod.onProgressChanged -= updateDisplay;
     }
 
-    public void updateDisplay(Pod pod)
+    public void updateDisplay(float progress)
     {
-        if (pod == this.pod)
-        {
-            Vector2 size = fillSR.size;
-            size.y = pod.progress / Pod.PROGRESS_REQUIRED;
-            fillSR.size = size;
-        }
+        Vector2 size = fillSR.size;
+        size.y = progress / Pod.PROGRESS_REQUIRED;
+        fillSR.size = size;
     }
 }
