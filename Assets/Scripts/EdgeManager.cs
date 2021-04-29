@@ -31,7 +31,7 @@ public class EdgeManager : MonoBehaviour
             {
                 Pod pod = new Pod(
                     clickedUI,
-                    planetManager.podType
+                    planetManager.PodType
                     );
                 queueManager.addToQueue(pod);
             }

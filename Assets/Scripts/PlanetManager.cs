@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class PlanetManager : MonoBehaviour
 {
-    public PodType podType;
     public PodType corePodType;
+    [SerializeField]
+    private PodType podType;
+    public PodType PodType
+    {
+        get => podType;
+        set
+        {
+            podType = value;
+            onPodTypeChanged?.Invoke(podType);
+        }
+    }
+    public delegate void OnPodTypeChanged(PodType podType);
+    public event OnPodTypeChanged onPodTypeChanged;
 
     public QueueManager queueManager;
 
     List<Pod> pods = new List<Pod>();
 
     public delegate void PodsListChanged(List<Pod> list);
-    public PodsListChanged podsListChanged;
+    public event PodsListChanged podsListChanged;
 
 
     // Start is called before the first frame update

@@ -19,7 +19,7 @@ public class PodTypeButton : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && checkClick(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
-            FindObjectOfType<PlanetManager>().podType = podType;
+            FindObjectOfType<PlanetManager>().PodType = podType;
         }
     }
 
