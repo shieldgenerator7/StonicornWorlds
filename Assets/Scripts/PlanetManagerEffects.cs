@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlanetManagerEffects : MonoBehaviour
 {
     public PlanetManager planetManager;
+    public EdgeManager edgeManager;
 
     public GameObject addPodPrefab;
 
@@ -16,7 +17,7 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         planetManager.podsListChanged += updateDisplay;
 
-        planetManager.addPosListChanged += updateAddDisplay;
+        edgeManager.onEdgeListChanged += updateAddDisplay;
     }
 
     public void updateDisplay(List<Pod> pods)

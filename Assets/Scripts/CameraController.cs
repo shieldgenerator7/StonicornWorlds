@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public PlanetManager planetManager;
+    public EdgeManager edgeManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        planetManager.addPosListChanged += autoFrame;
+        edgeManager.onEdgeListChanged += autoFrame;
     }
 
     public void autoFrame(List<Vector2> posList)
