@@ -33,10 +33,10 @@ public class QueueManager : MonoBehaviour
             onPodProgressed?.Invoke(currentPod);
             if (currentPod.progress == Pod.PROGRESS_REQUIRED)
             {
-                queue.Dequeue();
                 onPodCompleted?.Invoke(currentPod);
+                queue.Dequeue();
                 onQueueChanged?.Invoke(queue);
-                currentPod = Pod.Null;
+                currentPod = null;
             }
         }
     }
