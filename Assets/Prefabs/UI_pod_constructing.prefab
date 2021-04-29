@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2985604496036067311}
   - component: {fileID: 8735924438089046681}
   - component: {fileID: 4477750025842986307}
+  - component: {fileID: 4790744201795173420}
   m_Layer: 0
   m_Name: UI_pod_constructing
   m_TagString: Untagged
@@ -97,6 +98,19 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4790744201795173420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155356770574072560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caeb71f815098d349b488dcfef581a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillSR: {fileID: 6718230192648230246}
 --- !u!1 &4259456006507411562
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5443858381879907327
 Transform:
   m_ObjectHideFlags: 0
@@ -122,8 +136,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4259456006507411562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.4327, z: 0}
+  m_LocalScale: {x: 1, y: 0.84, z: 1}
   m_Children: []
   m_Father: {fileID: 2985604496036067311}
   m_RootOrder: 1
@@ -169,11 +183,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ffa906a76de5ddb4b822629179a10330, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32a6d0daca7e600418f5e289e7079327, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0

@@ -25,6 +25,7 @@ public class QueueManager : MonoBehaviour
         if (queue.Count > 0)
         {
             currentProgress += progressRate * Time.deltaTime;
+            onPodProgressed?.Invoke(queue.Peek(), currentProgress);
             if (currentProgress >= 100)
             {
                 currentProgress = 0;
@@ -34,6 +35,8 @@ public class QueueManager : MonoBehaviour
             }
         }
     }
+    public delegate void OnPodProgressed(Pod pod, float progress);
+    public event OnPodProgressed onPodProgressed;
     public delegate void OnPodCompleted(Pod pod);
     public event OnPodCompleted onPodCompleted;
 }

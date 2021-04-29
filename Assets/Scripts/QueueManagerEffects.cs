@@ -27,10 +27,12 @@ public class QueueManagerEffects : MonoBehaviour
                 Quaternion.identity,
                 transform
                 );
+            ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
+            effect.pod = pod;
             Color color = pod.podType.podPrefab.GetComponent<SpriteRenderer>().color;
             construct.GetComponent<SpriteRenderer>()
                 .color = color;
-            construct.GetComponentInChildren<SpriteRenderer>()
+            effect.fillSR
                 .color = color;
             constructs.Add(construct);
         }
