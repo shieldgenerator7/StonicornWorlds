@@ -75,4 +75,16 @@ public class PlanetManager : MonoBehaviour
     {
         return list.Any(v => Vector2.Distance(v, pos) <= radius);
     }
+
+    public Vector2 upDir(Vector2 pos)
+    {
+        Vector2 origin = Vector2.zero;
+        Vector2 ground = getAdjacentPositions(pos).Aggregate(
+            (best, cur) =>
+                (Vector2.Distance(cur, origin) < Vector2.Distance(best, origin))
+                    ? cur
+                    : best
+            );
+        return (pos - ground).normalized;
+    }
 }

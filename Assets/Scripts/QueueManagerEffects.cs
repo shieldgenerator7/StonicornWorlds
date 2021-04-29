@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QueueManagerEffects : MonoBehaviour
 {
+    public PlanetManager planetManager;
     public QueueManager queueManager;
     public GameObject constructingPrefab;
 
@@ -32,6 +33,7 @@ public class QueueManagerEffects : MonoBehaviour
                 Quaternion.identity,
                 transform
                 );
+            construct.transform.up = planetManager.upDir(construct.transform.position);
             ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
             effect.pod = pod;
             Color color = pod.podType.podPrefab.GetComponent<SpriteRenderer>().color;

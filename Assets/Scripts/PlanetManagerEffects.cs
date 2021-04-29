@@ -34,6 +34,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     Quaternion.identity,
                     transform
                     );
+                go.transform.up = planetManager.upDir(go.transform.position);
                 goPods.Add(go);
             });
     }

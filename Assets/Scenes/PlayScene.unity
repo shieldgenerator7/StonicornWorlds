@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9f4924c1506324a97871eae7354c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetManager: {fileID: 752787612}
   queueManager: {fileID: 1302935092}
   constructingPrefab: {fileID: 3155356770574072560, guid: e367e28746d7d624397fde1907ef6639, type: 3}
 --- !u!1001 &1750679637
