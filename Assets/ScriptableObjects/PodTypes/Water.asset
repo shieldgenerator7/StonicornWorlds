@@ -25,4 +25,5 @@ MonoBehaviour:
   requiredNeighbors:
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+  - {fileID: 11400000}
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
