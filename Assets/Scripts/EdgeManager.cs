@@ -12,7 +12,7 @@ public class EdgeManager : MonoBehaviour
     List<Vector2> edges;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         planetManager.podsListChanged += addPod;
         queueManager.onQueueChanged += addPod;
