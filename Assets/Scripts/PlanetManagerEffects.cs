@@ -75,6 +75,6 @@ public class PlanetManagerEffects : MonoBehaviour
 
     void updateUI(float resources)
     {
-        txtResources.text = "Resources: " + Mathf.CeilToInt(resources);
+        txtResources.text = "Resources: " + (int)resources;
     }
 }
