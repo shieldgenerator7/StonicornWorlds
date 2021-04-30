@@ -16,3 +16,8 @@ MonoBehaviour:
   podPrefab: {fileID: 7875099125704197678, guid: 60515f72d85949a4881c532120f51676, type: 3}
   progressRequired: 75
   allowedNeighbors: []
+  requiredNeighbors:
+  - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+  - {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}

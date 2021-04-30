@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
   - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+  requiredNeighbors: []

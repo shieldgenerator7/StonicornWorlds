@@ -93,7 +93,8 @@ public class PlanetManager : MonoBehaviour
     {
         List<PodType> neighborTypes = getNeighbors(pos)
             .ConvertAll(pod => pod.podType);
-        return podType.areAllNeighborsAllowed(neighborTypes);
+        return podType.areAllNeighborsAllowed(neighborTypes)
+            && podType.isRequiredNeighborPresent(neighborTypes);
     }
 
     public List<Pod> getNeighbors(Vector2 pos)

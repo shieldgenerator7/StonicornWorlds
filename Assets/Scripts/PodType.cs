@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PodType", menuName = "PodType", order = 0)]
@@ -9,6 +10,7 @@ public class PodType : ScriptableObject
     public GameObject podPrefab;
     public float progressRequired = 100;
     public List<PodType> allowedNeighbors;
+    public List<PodType> requiredNeighbors;
 
     public bool areAllNeighborsAllowed(List<PodType> podTypes)
     {
@@ -25,6 +27,18 @@ public class PodType : ScriptableObject
                 allowedNeighbors.Contains(podType)
                 || podType.allowedNeighbors.Contains(this)
             );
+        }
+    }
+
+    public bool isRequiredNeighborPresent(List<PodType> podTypes)
+    {
+        if (requiredNeighbors.Count == 0)
+        {
+            return podTypes.Count > 0;
+        }
+        else
+        {
+            return podTypes.Any(podType => requiredNeighbors.Contains(podType));
         }
     }
 }
