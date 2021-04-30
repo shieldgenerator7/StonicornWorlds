@@ -15,7 +15,7 @@ public class ResourceMine : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         planetManager.Resources += resourceGain * Time.deltaTime;
     }
