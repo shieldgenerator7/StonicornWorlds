@@ -14,7 +14,7 @@ public class EdgeManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        planetManager.podsListChanged += addPod;
+        planetManager.onPodsListChanged += addPod;
         queueManager.onQueueChanged += addPod;
     }
 

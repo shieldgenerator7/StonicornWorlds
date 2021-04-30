@@ -39,8 +39,8 @@ public class PlanetManager : MonoBehaviour
     public float ResourceCap => pods.FindAll(pod => pod.podType == corePodType).Count * resourceCapPerCore;
 
     List<Pod> pods = new List<Pod>();
-    public delegate void PodsListChanged(List<Pod> list);
-    public event PodsListChanged podsListChanged;
+    public delegate void OnPodsListChanged(List<Pod> list);
+    public event OnPodsListChanged onPodsListChanged;
 
 
     // Start is called before the first frame update
@@ -61,7 +61,7 @@ public class PlanetManager : MonoBehaviour
             pods.Add(pod);
         }
         //Call list changed even if the pod is already in the list
-        podsListChanged?.Invoke(pods);
+        onPodsListChanged?.Invoke(pods);
         //If it's not complete, add it to build queue
         if (!pod.Completed)
         {

@@ -18,7 +18,7 @@ public class PlanetManagerEffects : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        planetManager.podsListChanged += updateDisplay;
+        planetManager.onPodsListChanged += updateDisplay;
         planetManager.onPodTypeChanged += updateEdgeTypes;
         planetManager.onResourcesChanged += updateUI;
         edgeManager.onEdgeListChanged += updateAddDisplay;
