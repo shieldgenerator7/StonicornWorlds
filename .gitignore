@@ -5,6 +5,7 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 Logs/
+TextMesh Pro/
 
 # Visual Studio cache directory
 .vs/
