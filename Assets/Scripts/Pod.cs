@@ -35,6 +35,12 @@ public class Pod
         this.progress = 0;
     }
 
+    public override string ToString()
+    {
+        return "" + podType.name + " Pod"
+            + ((!Completed) ? "[" + Progress + "/" + podType.progressRequired + "]" : "");
+    }
+
     public static implicit operator bool(Pod p)
         => p != null;
 }

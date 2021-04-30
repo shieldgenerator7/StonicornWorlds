@@ -36,7 +36,10 @@ public class PlanetManager : MonoBehaviour
     public delegate void OnResourcesChanged(float resources);
     public event OnResourcesChanged onResourcesChanged;
 
-    public float ResourceCap => pods.FindAll(pod => pod.podType == corePodType).Count * resourceCapPerCore;
+    public float ResourceCap => CoreCount * resourceCapPerCore;
+
+    public int CoreCount =>
+        pods.FindAll(pod => pod.podType == corePodType && pod.Completed).Count;
 
     List<Pod> pods = new List<Pod>();
     public delegate void OnPodsListChanged(List<Pod> list);
