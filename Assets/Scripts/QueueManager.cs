@@ -34,15 +34,29 @@ public class QueueManager : MonoBehaviour
     {
         if (queue.Count > 0)
         {
-            Pod pod = queue[0];
-            if (planetManager.Resources >= pod.podType.progressRequired)
+            while (AnyWorkersFree)
             {
-                if (dispatchWorker(pod))
+                Pod pod = queue[0];
+                //Try to start pod
+                if (pod.Progress == 0
+                    && planetManager.Resources >= pod.podType.progressRequired)
                 {
                     planetManager.Resources -= pod.podType.progressRequired;
+                    pod.Progress = 0.01f;
+                }
+                //If pod in front of queue has been started,
+                if (pod.Progress > 0)
+                {
+                    //Work on it more
+                    dispatchWorker(pod);
                     //Move pod to end of list
                     queue.Remove(pod);
                     queue.Add(pod);
+                }
+                //Else stop, can't do anything
+                else
+                {
+                    break;
                 }
             }
         }
@@ -65,15 +79,12 @@ public class QueueManager : MonoBehaviour
         }
     }
 
-    bool dispatchWorker(Pod pod)
+    bool AnyWorkersFree => workers.Any(w => !w.Busy);
+
+    void dispatchWorker(Pod pod)
     {
-        QueueWorker worker = workers.FirstOrDefault(w => !w.Busy);
-        if (worker)
-        {
-            worker.dispatch(pod);
-            return true;
-        }
-        return false;
+        QueueWorker worker = workers.First(w => !w.Busy);
+        worker.dispatch(pod);
     }
 
     void podCompleted(Pod pod)
