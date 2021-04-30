@@ -7,31 +7,19 @@ public class QueueManager : MonoBehaviour
 {
     public PlanetManager planetManager;
 
-    Queue<Pod> queue = new Queue<Pod>();
+    List<Pod> queue = new List<Pod>();
 
     List<QueueWorker> workers = new List<QueueWorker>();
 
     public void addToQueue(Pod pod)
     {
-        queue.Enqueue(pod);
+        queue.Remove(pod);
+        queue.Add(pod);
         callOnQueueChanged();
     }
     private void callOnQueueChanged()
     {
-        if (onQueueChanged != null)
-        {
-            List<Pod> pods = new List<Pod>();
-            pods.AddRange(queue.ToList());
-            workers.ConvertAll(w => w.constructPod)
-                .ForEach(pod =>
-                {
-                    if (pod != null && !pods.Contains(pod))
-                    {
-                        pods.Add(pod);
-                    }
-                });
-            onQueueChanged(pods);
-        }
+        onQueueChanged?.Invoke(queue);
     }
     public delegate void OnQueueChanged(List<Pod> queue);
     public event OnQueueChanged onQueueChanged;
@@ -46,14 +34,15 @@ public class QueueManager : MonoBehaviour
     {
         if (queue.Count > 0)
         {
-            Pod pod = queue.Peek();
+            Pod pod = queue[0];
             if (planetManager.Resources >= pod.podType.progressRequired)
             {
                 if (dispatchWorker(pod))
                 {
                     planetManager.Resources -= pod.podType.progressRequired;
-                    queue.Dequeue();
-                    callOnQueueChanged();
+                    //Move pod to end of list
+                    queue.Remove(pod);
+                    queue.Add(pod);
                 }
             }
         }
@@ -89,6 +78,8 @@ public class QueueManager : MonoBehaviour
 
     void podCompleted(Pod pod)
     {
+        queue.Remove(pod);
+        callOnQueueChanged();
         onPodCompleted?.Invoke(pod);
     }
     public delegate void PodEvent(Pod pod);
