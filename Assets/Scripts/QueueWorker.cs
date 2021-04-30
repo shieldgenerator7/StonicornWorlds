@@ -6,7 +6,7 @@ public class QueueWorker : MonoBehaviour
 {
     public float constructSpeed = 20;
 
-    Pod constructPod;
+    public Pod constructPod { get; private set; }
 
     public bool Busy => constructPod;
 

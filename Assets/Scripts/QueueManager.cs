@@ -14,14 +14,31 @@ public class QueueManager : MonoBehaviour
     public void addToQueue(Pod pod)
     {
         queue.Enqueue(pod);
-        onQueueChanged?.Invoke(queue);
+        callOnQueueChanged();
     }
-    public delegate void OnQueueChanged(Queue<Pod> queue);
+    private void callOnQueueChanged()
+    {
+        if (onQueueChanged != null)
+        {
+            List<Pod> pods = new List<Pod>();
+            pods.AddRange(queue.ToList());
+            workers.ConvertAll(w => w.constructPod)
+                .ForEach(pod =>
+                {
+                    if (pod != null && !pods.Contains(pod))
+                    {
+                        pods.Add(pod);
+                    }
+                });
+            onQueueChanged(pods);
+        }
+    }
+    public delegate void OnQueueChanged(List<Pod> queue);
     public event OnQueueChanged onQueueChanged;
 
     private void Awake()
     {
-        planetManager.onPodsListChanged += updateQueueList;
+        planetManager.onPodsListChanged += updateQueueWorkerList;
     }
 
     // Update is called once per frame
@@ -36,13 +53,13 @@ public class QueueManager : MonoBehaviour
                 {
                     planetManager.Resources -= pod.podType.progressRequired;
                     queue.Dequeue();
-                    onQueueChanged?.Invoke(queue);
+                    callOnQueueChanged();
                 }
             }
         }
     }
 
-    void updateQueueList(List<Pod> pods)
+    void updateQueueWorkerList(List<Pod> pods)
     {
         int queueCount = planetManager.CoreCount;
         while (queueCount > workers.Count)

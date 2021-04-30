@@ -46,14 +46,6 @@ public class EdgeManager : MonoBehaviour
         calculateEdges();
     }
 
-    private void addPod(Queue<Pod> pods)
-    {
-        pods.ToList()
-            .FindAll(pod => !this.pods.Contains(pod))
-            .ForEach(pod => this.pods.Add(pod));
-        calculateEdges();
-    }
-
     void calculateEdges()
     {
         List<Vector2> posList = pods.ConvertAll(pod => pod.pos);

@@ -8,7 +8,7 @@ public class QueueManagerEffects : MonoBehaviour
     public QueueManager queueManager;
     public GameObject constructingPrefab;
 
-    List<GameObject> constructs = new List<GameObject>();
+    List<ConstructingEffect> constructs = new List<ConstructingEffect>();
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class QueueManagerEffects : MonoBehaviour
         queueManager.onQueueChanged += updateDisplay;
     }
 
-    void updateDisplay(Queue<Pod> pods)
+    void updateDisplay(List<Pod> pods)
     {
         constructs.ForEach(con => Destroy(con));
         constructs.Clear();
@@ -24,7 +24,7 @@ public class QueueManagerEffects : MonoBehaviour
         {
             if (pod.Completed)
             {
-                //don't process completed pods
+                //don't process pods that have been completed
                 continue;
             }
             GameObject construct = Instantiate(
@@ -41,7 +41,7 @@ public class QueueManagerEffects : MonoBehaviour
                 .color = color;
             effect.fillSR
                 .color = color;
-            constructs.Add(construct);
+            constructs.Add(effect);
         }
     }
 }
