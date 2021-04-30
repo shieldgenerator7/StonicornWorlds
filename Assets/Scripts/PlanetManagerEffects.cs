@@ -16,7 +16,7 @@ public class PlanetManagerEffects : MonoBehaviour
     void Awake()
     {
         planetManager.podsListChanged += updateDisplay;
-        planetManager.onPodTypeChanged += updateEdgeColors;
+        planetManager.onPodTypeChanged += updateEdgeTypes;
         edgeManager.onEdgeListChanged += updateAddDisplay;
     }
 
@@ -53,12 +53,19 @@ public class PlanetManagerEffects : MonoBehaviour
                 );
             addPods.Add(addPod);
         });
-        updateEdgeColors(planetManager.PodType);
+        updateEdgeTypes(planetManager.PodType);
     }
 
-    void updateEdgeColors(PodType podType)
+    void updateEdgeTypes(PodType podType)
     {
         Color color = podType.podPrefab.GetComponent<SpriteRenderer>().color;
-        addPods.ForEach(add => add.GetComponent<SpriteRenderer>().color = color);
+        addPods.ForEach(add =>
+        {
+            add.SetActive(planetManager.canBuildAtPosition(
+                podType,
+                add.transform.position
+                ));
+            add.GetComponent<SpriteRenderer>().color = color;
+        });
     }
 }

@@ -27,13 +27,14 @@ public class EdgeManager : MonoBehaviour
             Vector2 clickedUI = edges.FirstOrDefault(
                 edge => planetManager.checkAddPodUI(pos, edge)
                 );
-            if (clickedUI != Vector2.zero)
+            if (clickedUI != Vector2.zero
+                && planetManager.canBuildAtPosition(planetManager.PodType, pos))
             {
                 Pod pod = new Pod(
                     clickedUI,
                     planetManager.PodType
                     );
-                queueManager.addToQueue(pod);
+                planetManager.addPod(pod);
             }
         }
     }

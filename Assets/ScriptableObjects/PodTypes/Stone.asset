@@ -15,3 +15,4 @@ MonoBehaviour:
   typeName: Stone
   podPrefab: {fileID: 7875099125704197678, guid: 60515f72d85949a4881c532120f51676, type: 3}
   progressRequired: 75
+  allowedNeighbors: []

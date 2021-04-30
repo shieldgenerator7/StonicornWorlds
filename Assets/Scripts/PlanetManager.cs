@@ -88,4 +88,17 @@ public class PlanetManager : MonoBehaviour
             );
         return (pos - ground).normalized;
     }
+
+    public bool canBuildAtPosition(PodType podType, Vector2 pos)
+    {
+        List<PodType> neighborTypes = getNeighbors(pos)
+            .ConvertAll(pod => pod.podType);
+        return podType.areAllNeighborsAllowed(neighborTypes);
+    }
+
+    public List<Pod> getNeighbors(Vector2 pos)
+    {
+        float radius = 1;
+        return pods.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
+    }
 }
