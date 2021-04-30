@@ -38,8 +38,8 @@ public class PlanetManager : MonoBehaviour
 
     public float ResourceCap => CoreCount * resourceCapPerCore;
 
-    public int CoreCount =>
-        pods.FindAll(pod => pod.podType == corePodType && pod.Completed).Count;
+    private int coreCount = 0;
+    public int CoreCount => coreCount;
 
     List<Pod> pods = new List<Pod>();
     public delegate void OnPodsListChanged(List<Pod> list);
@@ -62,6 +62,9 @@ public class PlanetManager : MonoBehaviour
         if (!pods.Contains(pod))
         {
             pods.Add(pod);
+            coreCount = pods.FindAll(pod =>
+                pod.podType == corePodType && pod.Completed
+                ).Count;
         }
         //Call list changed even if the pod is already in the list
         onPodsListChanged?.Invoke(pods);
