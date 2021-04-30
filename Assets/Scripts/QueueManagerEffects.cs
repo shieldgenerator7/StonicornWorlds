@@ -18,7 +18,7 @@ public class QueueManagerEffects : MonoBehaviour
 
     void updateDisplay(List<Pod> pods)
     {
-        constructs.ForEach(con => Destroy(con));
+        constructs.ForEach(con => Destroy(con.gameObject));
         constructs.Clear();
         foreach (Pod pod in pods)
         {

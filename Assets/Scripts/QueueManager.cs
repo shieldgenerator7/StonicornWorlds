@@ -13,7 +13,14 @@ public class QueueManager : MonoBehaviour
 
     public void addToQueue(Pod pod)
     {
-        queue.Remove(pod);
+        if (queue.Contains(pod))
+        {
+            queue.Remove(pod);
+        }
+        else
+        {
+            workers.ForEach(w => w.callBack());
+        }
         queue.Add(pod);
         callOnQueueChanged();
     }
@@ -38,14 +45,19 @@ public class QueueManager : MonoBehaviour
             {
                 Pod pod = queue[0];
                 //Try to start pod
-                if (pod.Progress == 0
+                if (!pod.Started
                     && planetManager.Resources >= pod.podType.progressRequired)
                 {
                     planetManager.Resources -= pod.podType.progressRequired;
                     pod.Progress = 0.01f;
                 }
-                //If pod in front of queue has been started,
-                if (pod.Progress > 0)
+                //Try to find a pod that is already in progress
+                if (!pod.Started)
+                {
+                    pod = queue.FirstOrDefault(p => p.Started) ?? queue[0];
+                }
+                //If pod has been started,
+                if (pod.Started)
                 {
                     //Work on it more
                     dispatchWorker(pod);

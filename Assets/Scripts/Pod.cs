@@ -19,6 +19,8 @@ public class Pod
     public delegate void OnProgressChanged(float progress);
     public event OnProgressChanged onProgressChanged;
 
+    public bool Started => progress > 0;
+
     public bool Completed
     {
         get => progress == podType.progressRequired;

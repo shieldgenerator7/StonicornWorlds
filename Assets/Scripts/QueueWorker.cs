@@ -13,13 +13,13 @@ public class QueueWorker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (constructPod)
+        if (Busy)
         {
             constructPod.Progress += constructSpeed * Time.deltaTime;
             if (constructPod.Completed)
             {
                 onPodCompleted?.Invoke(constructPod);
-                constructPod = null;
+                callBack();
             }
         }
     }
@@ -28,19 +28,16 @@ public class QueueWorker : MonoBehaviour
 
     public void dispatch(Pod pod)
     {
-        if (Busy)
-        {
-            FindObjectOfType<QueueManager>().addToQueue(constructPod);
-        }
         constructPod = pod;
+    }
+
+    public void callBack()
+    {
+        constructPod = null;
     }
 
     public void retire()
     {
-        if (Busy)
-        {
-            FindObjectOfType<QueueManager>().addToQueue(constructPod);
-        }
         Destroy(this);
     }
 }
