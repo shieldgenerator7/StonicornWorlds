@@ -6,6 +6,8 @@ public class QueueManager : MonoBehaviour
 {
     public float progressRate = 20;
 
+    public PlanetManager planetManager;
+
     Queue<Pod> queue = new Queue<Pod>();
 
     Pod currentPod;
@@ -28,7 +30,15 @@ public class QueueManager : MonoBehaviour
         }
         if (currentPod)
         {
-            currentPod.Progress += progressRate * Time.deltaTime;
+            float resourceToGive = Mathf.Min(
+                progressRate * Time.deltaTime,
+                planetManager.Resources
+                );
+            if (resourceToGive > 0)
+            {
+                currentPod.Progress += resourceToGive;
+                planetManager.Resources -= resourceToGive;
+            }
             if (currentPod.Completed)
             {
                 onPodCompleted?.Invoke(currentPod);

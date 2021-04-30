@@ -22,8 +22,22 @@ public class PlanetManager : MonoBehaviour
 
     public QueueManager queueManager;
 
-    List<Pod> pods = new List<Pod>();
+    float resources = 700;
+    public float Resources
+    {
+        get => resources;
+        set
+        {
+            resources = Mathf.Clamp(value, 0, ResourceCap);
+            onResourcesChanged?.Invoke(resources);
+        }
+    }
+    public delegate void OnResourcesChanged(float resources);
+    public event OnResourcesChanged onResourcesChanged;
 
+    public float ResourceCap => pods.FindAll(pod => pod.podType == corePodType).Count * 700;
+
+    List<Pod> pods = new List<Pod>();
     public delegate void PodsListChanged(List<Pod> list);
     public event PodsListChanged podsListChanged;
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlanetManagerEffects : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public GameObject addPodPrefab;
 
+    public TMP_Text txtResources;
+
     List<GameObject> goPods = new List<GameObject>();
     List<GameObject> addPods = new List<GameObject>();
 
@@ -17,6 +20,7 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         planetManager.podsListChanged += updateDisplay;
         planetManager.onPodTypeChanged += updateEdgeTypes;
+        planetManager.onResourcesChanged += updateUI;
         edgeManager.onEdgeListChanged += updateAddDisplay;
     }
 
@@ -67,5 +71,10 @@ public class PlanetManagerEffects : MonoBehaviour
                 ));
             add.GetComponent<SpriteRenderer>().color = color;
         });
+    }
+
+    void updateUI(float resources)
+    {
+        txtResources.text = "Resources: " + (int)resources;
     }
 }
