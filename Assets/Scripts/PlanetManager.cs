@@ -49,6 +49,7 @@ public class PlanetManager : MonoBehaviour
         starter.Completed = true;
         addPod(starter);
         queueManager.onPodCompleted += (pod) => addPod(pod);
+        Application.runInBackground = true;
     }
 
     public void addPod(Pod pod)
