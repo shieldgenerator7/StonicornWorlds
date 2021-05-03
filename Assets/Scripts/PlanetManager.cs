@@ -75,6 +75,13 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
+    public void convertPod(Pod newPod)
+    {
+        Pod oldPod = pods.Find(p => p.pos == newPod.pos);
+        pods.Remove(oldPod);
+        addPod(newPod);
+    }
+
     public List<Vector2> getAdjacentPositions(Vector2 pos)
     {
         List<Vector2> dirs = new List<Vector2>()

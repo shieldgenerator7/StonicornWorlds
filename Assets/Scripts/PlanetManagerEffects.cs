@@ -9,11 +9,13 @@ public class PlanetManagerEffects : MonoBehaviour
     public EdgeManager edgeManager;
 
     public GameObject addPodPrefab;
+    public GameObject convertPodPrefab;
 
     public TMP_Text txtResources;
 
     List<GameObject> goPods = new List<GameObject>();
     List<GameObject> addPods = new List<GameObject>();
+    List<GameObject> convertPods = new List<GameObject>();
 
     // Start is called before the first frame update
     void Awake()
@@ -22,6 +24,7 @@ public class PlanetManagerEffects : MonoBehaviour
         planetManager.onPodTypeChanged += updateEdgeTypes;
         planetManager.onResourcesChanged += updateUI;
         edgeManager.onEdgeListChanged += updateAddDisplay;
+        edgeManager.onConvertEdgeListChanged += updateConvertDisplay;
     }
 
     public void updateDisplay(List<Pod> pods)
@@ -71,6 +74,32 @@ public class PlanetManagerEffects : MonoBehaviour
                 ));
             add.GetComponent<SpriteRenderer>().color = color;
         });
+        convertPods.ForEach(convert =>
+        {
+            convert.SetActive(planetManager.canBuildAtPosition(
+                podType,
+                convert.transform.position
+                ));
+            convert.GetComponent<SpriteRenderer>().color = color;
+        });
+    }
+
+    void updateConvertDisplay(List<Vector2> convertEdges)
+    {
+        //Update convert pod UI
+        convertPods.ForEach(go => Destroy(go));
+        convertPods.Clear();
+        convertEdges.ForEach(edge =>
+        {
+            GameObject convertPod = Instantiate(
+                convertPodPrefab,
+                edge,
+                Quaternion.identity,
+                transform
+                );
+            convertPods.Add(convertPod);
+        });
+        updateEdgeTypes(planetManager.PodType);
     }
 
     void updateUI(float resources)

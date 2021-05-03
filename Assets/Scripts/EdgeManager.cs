@@ -10,12 +10,14 @@ public class EdgeManager : MonoBehaviour
 
     List<Pod> pods = new List<Pod>();
     List<Vector2> edges;
+    List<Vector2> convertEdges;
 
     // Start is called before the first frame update
     void Awake()
     {
         planetManager.onPodsListChanged += addPod;
-        queueManager.onQueueChanged += addPod;
+        //queueManager.onQueueChanged += addPod;
+        planetManager.onPodTypeChanged += calculcateConvertEdges;
     }
 
     // Update is called once per frame
@@ -36,13 +38,29 @@ public class EdgeManager : MonoBehaviour
                     );
                 planetManager.addPod(pod);
             }
+            else
+            {
+                clickedUI = convertEdges.FirstOrDefault(
+                    convertEdge => planetManager.checkAddPodUI(pos, convertEdge)
+                );
+                if (clickedUI != Vector2.zero
+                && planetManager.canBuildAtPosition(planetManager.PodType, pos))
+                {
+                    Pod pod = new Pod(
+                        clickedUI,
+                        planetManager.PodType
+                        );
+                    planetManager.convertPod(pod);
+                }
+            }
         }
     }
 
     private void addPod(List<Pod> pods)
     {
-        pods.FindAll(pod => !this.pods.Contains(pod))
-            .ForEach(pod => this.pods.Add(pod));
+        this.pods = pods;
+        //pods.FindAll(pod => !this.pods.Contains(pod))
+        //    .ForEach(pod => this.pods.Add(pod));
         calculateEdges();
     }
 
@@ -63,7 +81,17 @@ public class EdgeManager : MonoBehaviour
             }
         }
         onEdgeListChanged?.Invoke(edges);
+        calculcateConvertEdges(planetManager.PodType);
     }
-    public delegate void OnEdgeListChanged(List<Vector2> edges);
-    public event OnEdgeListChanged onEdgeListChanged;
+    public delegate void OnPositionListChanged(List<Vector2> edges);
+    public event OnPositionListChanged onEdgeListChanged;
+
+    void calculcateConvertEdges(PodType podType)
+    {
+        convertEdges = pods
+            .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
+            .ConvertAll(pod => pod.pos);
+        onConvertEdgeListChanged?.Invoke(convertEdges);
+    }
+    public event OnPositionListChanged onConvertEdgeListChanged;
 }

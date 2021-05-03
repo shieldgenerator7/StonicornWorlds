@@ -11,6 +11,7 @@ public class PodType : ScriptableObject
     public float progressRequired = 100;
     public List<PodType> allowedNeighbors;
     public List<PodType> requiredNeighbors;
+    public List<PodType> constructFromTypes;//a list of pod types that can be converted to this type
 
     public bool areAllNeighborsAllowed(List<PodType> podTypes)
     {

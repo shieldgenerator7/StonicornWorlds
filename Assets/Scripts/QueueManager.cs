@@ -76,6 +76,7 @@ public class QueueManager : MonoBehaviour
 
     void updateQueueWorkerList(List<Pod> pods)
     {
+        queue.RemoveAll(p => !pods.Contains(p));
         int queueCount = planetManager.CoreCount;
         while (queueCount > workers.Count)
         {
@@ -89,6 +90,9 @@ public class QueueManager : MonoBehaviour
             worker.retire();
             workers.Remove(worker);
         }
+        //If a job is canceled mid-construction, call back that worker
+        workers.FindAll(w => !queue.Contains(w.constructPod))
+            .ForEach(w => w.callBack());
     }
 
     bool AnyWorkersFree => workers.Any(w => !w.Busy);

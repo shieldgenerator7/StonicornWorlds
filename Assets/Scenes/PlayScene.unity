@@ -836,6 +836,7 @@ MonoBehaviour:
   planetManager: {fileID: 752787612}
   edgeManager: {fileID: 752787615}
   addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
+  convertPodPrefab: {fileID: 8438424779451882234, guid: c8e27c85676f17b4db08c04dea457928, type: 3}
   txtResources: {fileID: 1131049490}
 --- !u!114 &752787615
 MonoBehaviour:
