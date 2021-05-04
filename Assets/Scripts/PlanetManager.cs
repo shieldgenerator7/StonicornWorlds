@@ -123,8 +123,21 @@ public class PlanetManager : MonoBehaviour
     {
         List<PodType> neighborTypes = getNeighbors(pos)
             .ConvertAll(pod => pod.podType);
+        PodType curPodType = null;
+        Pod curPod = getPodAtPosition(pos);
+        if (curPod)
+        {
+            curPodType = curPod.podType;
+        }
         return podType.areAllNeighborsAllowed(neighborTypes)
-            && podType.isRequiredNeighborPresent(neighborTypes);
+            && podType.isRequiredNeighborPresent(neighborTypes)
+            && podType.canConvertFrom(curPodType);
+    }
+
+    public Pod getPodAtPosition(Vector2 pos)
+    {
+        float radius = 0.5f;
+        return pods.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 
     public List<Pod> getNeighbors(Vector2 pos)

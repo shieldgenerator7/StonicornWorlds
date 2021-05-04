@@ -12,6 +12,7 @@ public class PodType : ScriptableObject
     public List<PodType> allowedNeighbors;
     public List<PodType> requiredNeighbors;
     public List<PodType> constructFromTypes;//a list of pod types that can be converted to this type
+    public bool requireConvert = false;//true: adding to an empty space is disallowed
 
     public bool areAllNeighborsAllowed(List<PodType> podTypes)
     {
@@ -40,6 +41,29 @@ public class PodType : ScriptableObject
         else
         {
             return podTypes.Any(podType => requiredNeighbors.Contains(podType));
+        }
+    }
+
+    public bool canConvertFrom(PodType podType)
+    {
+        if (podType)
+        {
+            return constructFromTypes.Contains(podType);
+        }
+        else
+        {
+            if (constructFromTypes.Count == 0)
+            {
+                return true;
+            }
+            else if (requireConvert)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
