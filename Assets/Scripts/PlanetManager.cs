@@ -129,15 +129,22 @@ public class PlanetManager : MonoBehaviour
         PodNeighborhood neighborhood = new PodNeighborhood();
         Vector2 gpos = groundPos(pos);
         Vector2 dir = gpos - pos;
+        float angleUnit = Mathf.PI / 3;
         neighborhood.ground = getPodAtPosition(gpos);
-        neighborhood.groundLeft = getPodAtPosition(pos + rotateDirection(dir, -90));
-        neighborhood.groundRight = getPodAtPosition(pos + rotateDirection(dir, 90));
+        neighborhood.groundLeft = getPodAtPosition(pos + rotateDirection(dir, -angleUnit));
+        neighborhood.groundRight = getPodAtPosition(pos + rotateDirection(dir, angleUnit));
         neighborhood.ceiling = getPodAtPosition(pos - dir);
-        neighborhood.ceilingLeft = getPodAtPosition(pos + rotateDirection(-dir, 90));
-        neighborhood.ceilingRight = getPodAtPosition(pos + rotateDirection(-dir, -90));
+        neighborhood.ceilingLeft = getPodAtPosition(pos + rotateDirection(-dir, angleUnit));
+        neighborhood.ceilingRight = getPodAtPosition(pos + rotateDirection(-dir, -angleUnit));
         return neighborhood;
     }
 
+    /// <summary>
+    /// Returns the given vector rotated by the given angle in radians
+    /// </summary>
+    /// <param name="dir">The vector to rotate</param>
+    /// <param name="angle">The angle of rotation in radians</param>
+    /// <returns></returns>
     public Vector2 rotateDirection(Vector2 dir, float angle)
     {
         //2020-05-03: written with help from https://stackoverflow.com/a/14609567/2336212
@@ -145,7 +152,7 @@ public class PlanetManager : MonoBehaviour
         float cos = Mathf.Cos(angle);
         return new Vector2(
             (dir.x * cos) - (dir.y * sin),
-            (dir.x * sin) - (dir.y * cos)
+            (dir.x * sin) + (dir.y * cos)
             ); ;
     }
 
