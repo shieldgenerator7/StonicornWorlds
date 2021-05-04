@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Snow
   m_EditorClassIdentifier: 
   typeName: Snow
+  preview: {fileID: 21300000, guid: 991052c62bae99145be4081a961e5757, type: 3}
+  uiColor: {r: 1, g: 1, b: 1, a: 1}
   podPrefab: {fileID: 7875099125704197678, guid: 87e5925dc6027d34eac177dc72763ca6, type: 3}
   progressRequired: 37
   allowedNeighbors:
@@ -30,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000}
   constructFromTypes:
   - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+  requireConvert: 0

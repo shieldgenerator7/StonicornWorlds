@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Core
   m_EditorClassIdentifier: 
   typeName: Core
+  preview: {fileID: 21300000, guid: 4354f514ee914ae40b32faba8f660f7d, type: 3}
+  uiColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 1}
   podPrefab: {fileID: 3152663368555482380, guid: 8a0f68026373c79439fec6cc146242f5, type: 3}
   progressRequired: 500
   allowedNeighbors:

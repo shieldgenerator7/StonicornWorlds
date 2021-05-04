@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Lava
   m_EditorClassIdentifier: 
   typeName: Lava
+  preview: {fileID: 21300000, guid: 2e1e0473b54ee7847ab793075f1346d2, type: 3}
+  uiColor: {r: 1, g: 0.1254902, b: 0.1254902, a: 1}
   podPrefab: {fileID: 7875099125704197678, guid: 191825d130a16e44696dd926dced7770, type: 3}
   progressRequired: 100
   allowedNeighbors:
@@ -26,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   constructFromTypes:
   - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+  requireConvert: 0
