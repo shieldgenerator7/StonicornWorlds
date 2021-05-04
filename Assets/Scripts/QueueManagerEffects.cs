@@ -36,7 +36,7 @@ public class QueueManagerEffects : MonoBehaviour
             construct.transform.up = planetManager.upDir(construct.transform.position);
             ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
             effect.pod = pod;
-            Color color = pod.podType.podPrefab.GetComponent<SpriteRenderer>().color;
+            Color color = pod.podType.uiColor;
             construct.GetComponent<SpriteRenderer>()
                 .color = color;
             effect.fillSR

@@ -7,12 +7,15 @@ using UnityEngine;
 public class PodType : ScriptableObject
 {
     public string typeName = "PodTypeName";
+    public Sprite preview;
+    public Color uiColor = Color.white;
     public GameObject podPrefab;
     public float progressRequired = 100;
     public List<PodType> allowedNeighbors;
     public List<PodType> requiredNeighbors;
     public List<PodType> constructFromTypes;//a list of pod types that can be converted to this type
     public bool requireConvert = false;//true: adding to an empty space is disallowed
+
 
     public bool areAllNeighborsAllowed(List<PodType> podTypes)
     {

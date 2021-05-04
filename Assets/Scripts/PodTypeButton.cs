@@ -12,9 +12,7 @@ public class PodTypeButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRenderer sr = podType.podPrefab.GetComponent<SpriteRenderer>();
-        image.sprite = sr.sprite;
-        image.color = sr.color;
+        image.sprite = podType.preview;
         RectTransform rect = GetComponent<RectTransform>();
         position = rect.position;
     }

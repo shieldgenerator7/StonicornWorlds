@@ -65,7 +65,7 @@ public class PlanetManagerEffects : MonoBehaviour
 
     void updateEdgeTypes(PodType podType)
     {
-        Color color = podType.podPrefab.GetComponent<SpriteRenderer>().color;
+        Color color = podType.uiColor;
         addPods.ForEach(add =>
         {
             add.SetActive(planetManager.canBuildAtPosition(
