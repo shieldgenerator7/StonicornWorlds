@@ -109,15 +109,46 @@ public class PlanetManager : MonoBehaviour
 
     public Vector2 upDir(Vector2 pos)
     {
+        Vector2 ground = groundPos(pos);
+        return (pos - ground).normalized;
+    }
+
+    public Vector2 groundPos(Vector2 pos)
+    {
         Vector2 origin = Vector2.zero;
-        Vector2 ground = getAdjacentPositions(pos).Aggregate(
+        return getAdjacentPositions(pos).Aggregate(
             (best, cur) =>
                 (Vector2.Distance(cur, origin) < Vector2.Distance(best, origin))
                     ? cur
                     : best
             );
-        return (pos - ground).normalized;
     }
+
+    public PodNeighborhood getNeighborhood(Vector2 pos)
+    {
+        PodNeighborhood neighborhood = new PodNeighborhood();
+        Vector2 gpos = groundPos(pos);
+        Vector2 dir = gpos - pos;
+        neighborhood.ground = getPodAtPosition(gpos);
+        neighborhood.groundLeft = getPodAtPosition(pos + rotateDirection(dir, -90));
+        neighborhood.groundRight = getPodAtPosition(pos + rotateDirection(dir, 90));
+        neighborhood.ceiling = getPodAtPosition(pos - dir);
+        neighborhood.ceilingLeft = getPodAtPosition(pos + rotateDirection(-dir, 90));
+        neighborhood.ceilingRight = getPodAtPosition(pos + rotateDirection(-dir, -90));
+        return neighborhood;
+    }
+
+    public Vector2 rotateDirection(Vector2 dir, float angle)
+    {
+        //2020-05-03: written with help from https://stackoverflow.com/a/14609567/2336212
+        float sin = Mathf.Sin(angle);
+        float cos = Mathf.Cos(angle);
+        return new Vector2(
+            (dir.x * cos) - (dir.y * sin),
+            (dir.x * sin) - (dir.y * cos)
+            ); ;
+    }
+
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
