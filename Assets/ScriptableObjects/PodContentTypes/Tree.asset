@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f063df8daa1cd4981a8208d5bae7dd, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: 
+  typeName: Tree
+  preview: {fileID: 21300000, guid: a908adc3aa6309f42b3bf5d77c093e75, type: 3}
+  uiColor: {r: 0.14901961, g: 0.49803922, b: 0, a: 1}
+  podContentPrefab: {fileID: 7875099125704197678, guid: b571537b1cad7f547936d96c446f264d, type: 3}
+  podImplantTypes:
+  - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
+  requiredGround:
+  - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
