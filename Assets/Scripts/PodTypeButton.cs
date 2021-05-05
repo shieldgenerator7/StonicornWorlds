@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PodTypeButton : MonoBehaviour
 {
     public PodType podType;
+    public PodContentType podContentType;
     public Image image;
     Vector2 position;
 
@@ -32,7 +33,14 @@ public class PodTypeButton : MonoBehaviour
 
     public void setPodType()
     {
-        FindObjectOfType<PlanetManager>().PodType = podType;
+        if (podType)
+        {
+            FindObjectOfType<PlanetManager>().PodType = podType;
+        }
+        if (podContentType)
+        {
+            FindObjectOfType<PlanetManager>().PodContentType = podContentType;
+        }
     }
 
 }
