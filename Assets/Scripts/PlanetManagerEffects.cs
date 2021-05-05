@@ -15,6 +15,7 @@ public class PlanetManagerEffects : MonoBehaviour
     public TMP_Text txtResources;
 
     List<GameObject> goPods = new List<GameObject>();
+    List<GameObject> goPodContents = new List<GameObject>();
     List<GameObject> addPods = new List<GameObject>();
     List<GameObject> convertPods = new List<GameObject>();
 
@@ -22,6 +23,7 @@ public class PlanetManagerEffects : MonoBehaviour
     void Awake()
     {
         planetManager.onPodsListChanged += updateDisplay;
+        planetManager.onPodContentsListChanged += updateDisplay;
         planetManager.onPodTypeChanged += updateEdgeTypes;
         planetManager.onPodContentTypeChanged += updatePlantTypes;
         planetManager.onResourcesChanged += updateUI;
@@ -45,6 +47,24 @@ public class PlanetManagerEffects : MonoBehaviour
                     );
                 go.transform.up = planetManager.upDir(go.transform.position);
                 goPods.Add(go);
+            });
+    }
+    public void updateDisplay(List<PodContent> podContents)
+    {
+        //Update pod contents
+        goPodContents.ForEach(go => Destroy(go));
+        goPodContents.Clear();
+        podContents.FindAll(content => content.container.Completed)
+            .ForEach(content =>
+            {
+                GameObject go = Instantiate(
+                    content.contentType.podContentPrefab,
+                    content.container.pos,
+                    Quaternion.identity,
+                    transform
+                    );
+                go.transform.up = planetManager.upDir(go.transform.position);
+                goPodContents.Add(go);
             });
     }
     public void updateAddDisplay(List<Vector2> edges)
