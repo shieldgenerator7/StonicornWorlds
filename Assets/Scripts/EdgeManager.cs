@@ -16,6 +16,7 @@ public class EdgeManager : MonoBehaviour
     void Awake()
     {
         planetManager.onPodsListChanged += addPod;
+        planetManager.onPodContentsListChanged += addPodContent;
         //queueManager.onQueueChanged += addPod;
         planetManager.onPodTypeChanged += calculcateConvertEdges;
         planetManager.onPodContentTypeChanged += calculcatePlantEdges;
@@ -78,6 +79,10 @@ public class EdgeManager : MonoBehaviour
         this.pods = pods;
         //pods.FindAll(pod => !this.pods.Contains(pod))
         //    .ForEach(pod => this.pods.Add(pod));
+        calculateEdges();
+    }
+    private void addPodContent(List<PodContent> podContents)
+    {
         calculateEdges();
     }
 

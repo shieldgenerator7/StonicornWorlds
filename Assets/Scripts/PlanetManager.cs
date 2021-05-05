@@ -94,6 +94,7 @@ public class PlanetManager : MonoBehaviour
         }
         //Call list changed even if the pod is already in the list
         onPodsListChanged?.Invoke(pods);
+        onPodContentsListChanged?.Invoke(podContents);
         //If it's not complete, add it to build queue
         if (!pod.Completed)
         {
