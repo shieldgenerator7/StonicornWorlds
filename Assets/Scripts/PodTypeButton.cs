@@ -12,7 +12,6 @@ public class PodTypeButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        image.sprite = podType.preview;
         RectTransform rect = GetComponent<RectTransform>();
         position = rect.position;
     }
