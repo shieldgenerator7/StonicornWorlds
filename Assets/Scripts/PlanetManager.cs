@@ -207,6 +207,8 @@ public class PlanetManager : MonoBehaviour
 
     public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos)
     {
+        List<PodType> neighborTypes = getNeighbors(pos)
+               .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
         Pod curPod = getPodAtPosition(pos);
         if (curPod)
@@ -221,6 +223,7 @@ public class PlanetManager : MonoBehaviour
         }
         return podContentType.hasRequiredGround(groundPodType)
             && podContentType.canPlantIn(curPodType)
+            && podContentType.isRequiredNeighborPresent(neighborTypes)
             && !(curPod && curPod.podContents.Any(
                 content => content.contentType == podContentType
                 ));

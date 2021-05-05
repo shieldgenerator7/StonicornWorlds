@@ -18,5 +18,6 @@ MonoBehaviour:
   podContentPrefab: {fileID: 7875099125704197678, guid: 12a66332b8c2a1a4d88117b6115d7658, type: 3}
   podImplantTypes:
   - {fileID: 11400000, guid: 4295c0e1813746e4c957bd4c324784a3, type: 2}
-  requiredGround:
+  requiredGround: []
+  requiredNeighbors:
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
