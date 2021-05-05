@@ -213,7 +213,10 @@ public class PlanetManager : MonoBehaviour
             curPodType = curPod.podType;
         }
         return podContentType.hasRequiredGround(getPodAtPosition(groundPos(pos)).podType)
-            && podContentType.canPlantIn(curPodType);
+            && podContentType.canPlantIn(curPodType)
+            && !(curPod && curPod.podContents.Any(
+                content => content.contentType == podContentType
+                ));
     }
 
     public Pod getPodAtPosition(Vector2 pos)
