@@ -18,6 +18,7 @@ public class EdgeManager : MonoBehaviour
         planetManager.onPodsListChanged += addPod;
         //queueManager.onQueueChanged += addPod;
         planetManager.onPodTypeChanged += calculcateConvertEdges;
+        planetManager.onPodContentTypeChanged += calculcatePlantEdges;
     }
 
     // Update is called once per frame
@@ -43,14 +44,30 @@ public class EdgeManager : MonoBehaviour
                 clickedUI = convertEdges.FirstOrDefault(
                     convertEdge => planetManager.checkAddPodUI(pos, convertEdge)
                 );
-                if (clickedUI != Vector2.zero
-                && planetManager.canBuildAtPosition(planetManager.PodType, pos))
+                if (clickedUI != Vector2.zero)
                 {
-                    Pod pod = new Pod(
-                        clickedUI,
-                        planetManager.PodType
-                        );
-                    planetManager.convertPod(pod);
+                    if (planetManager.PodType)
+                    {
+                        if (planetManager.canBuildAtPosition(planetManager.PodType, pos))
+                        {
+                            Pod pod = new Pod(
+                                clickedUI,
+                                planetManager.PodType
+                                );
+                            planetManager.convertPod(pod);
+                        }
+                    }
+                    else if (planetManager.PodContentType)
+                    {
+                        if (planetManager.canPlantAtPosition(planetManager.PodContentType, pos))
+                        {
+                            PodContent podContent = new PodContent(
+                                planetManager.PodContentType,
+                                planetManager.getPodAtPosition(clickedUI)
+                                );
+                            planetManager.addPodContent(podContent);
+                        }
+                    }
                 }
             }
         }
@@ -88,10 +105,24 @@ public class EdgeManager : MonoBehaviour
 
     void calculcateConvertEdges(PodType podType)
     {
-        convertEdges = pods
-            .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
-            .ConvertAll(pod => pod.pos);
+        if (podType)
+        {
+            convertEdges = pods
+                .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
+                .ConvertAll(pod => pod.pos);
+        }
         onConvertEdgeListChanged?.Invoke(convertEdges);
     }
     public event OnPositionListChanged onConvertEdgeListChanged;
+
+    void calculcatePlantEdges(PodContentType podContentType)
+    {
+        if (podContentType)
+        {
+            convertEdges = pods
+                .FindAll(pod => podContentType.podImplantTypes.Contains(pod.podType))
+                .ConvertAll(pod => pod.pos);
+        }
+        onConvertEdgeListChanged?.Invoke(convertEdges);
+    }
 }

@@ -10,6 +10,7 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public GameObject addPodPrefab;
     public GameObject convertPodPrefab;
+    public GameObject plantPodPrefab;
 
     public TMP_Text txtResources;
 
@@ -22,6 +23,7 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         planetManager.onPodsListChanged += updateDisplay;
         planetManager.onPodTypeChanged += updateEdgeTypes;
+        planetManager.onPodContentTypeChanged += updatePlantTypes;
         planetManager.onResourcesChanged += updateUI;
         edgeManager.onEdgeListChanged += updateAddDisplay;
         edgeManager.onConvertEdgeListChanged += updateConvertDisplay;
@@ -65,23 +67,30 @@ public class PlanetManagerEffects : MonoBehaviour
 
     void updateEdgeTypes(PodType podType)
     {
-        Color color = podType.uiColor;
-        addPods.ForEach(add =>
+        if (podType)
         {
-            add.SetActive(planetManager.canBuildAtPosition(
-                podType,
-                add.transform.position
-                ));
-            add.GetComponent<SpriteRenderer>().color = color;
-        });
-        convertPods.ForEach(convert =>
+            Color color = podType.uiColor;
+            addPods.ForEach(add =>
+            {
+                add.SetActive(planetManager.canBuildAtPosition(
+                    podType,
+                    add.transform.position
+                    ));
+                add.GetComponent<SpriteRenderer>().color = color;
+            });
+            convertPods.ForEach(convert =>
+            {
+                convert.SetActive(planetManager.canBuildAtPosition(
+                    podType,
+                    convert.transform.position
+                    ));
+                convert.GetComponent<SpriteRenderer>().color = color;
+            });
+        }
+        else
         {
-            convert.SetActive(planetManager.canBuildAtPosition(
-                podType,
-                convert.transform.position
-                ));
-            convert.GetComponent<SpriteRenderer>().color = color;
-        });
+            addPods.ForEach(add => add.SetActive(false));
+        }
     }
 
     void updateConvertDisplay(List<Vector2> convertEdges)
@@ -100,6 +109,23 @@ public class PlanetManagerEffects : MonoBehaviour
             convertPods.Add(convertPod);
         });
         updateEdgeTypes(planetManager.PodType);
+        updatePlantTypes(planetManager.PodContentType);
+    }
+
+    void updatePlantTypes(PodContentType podContentType)
+    {
+        if (podContentType)
+        {
+            Color color = podContentType.uiColor;
+            convertPods.ForEach(convert =>
+            {
+                convert.SetActive(planetManager.canPlantAtPosition(
+                    podContentType,
+                    convert.transform.position
+                    ));
+                convert.GetComponent<SpriteRenderer>().color = color;
+            });
+        }
     }
 
     void updateUI(float resources)

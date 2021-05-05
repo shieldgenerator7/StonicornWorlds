@@ -16,10 +16,32 @@ public class PlanetManager : MonoBehaviour
         {
             podType = value;
             onPodTypeChanged?.Invoke(podType);
+            if (podType)
+            {
+                PodContentType = null;
+            }
         }
     }
     public delegate void OnPodTypeChanged(PodType podType);
     public event OnPodTypeChanged onPodTypeChanged;
+
+    [SerializeField]
+    private PodContentType podContentType;
+    public PodContentType PodContentType
+    {
+        get => podContentType;
+        set
+        {
+            podContentType = value;
+            onPodContentTypeChanged?.Invoke(podContentType);
+            if (podContentType)
+            {
+                PodType = null;
+            }
+        }
+    }
+    public delegate void OnPodContentTypeChanged(PodContentType podType);
+    public event OnPodContentTypeChanged onPodContentTypeChanged;
 
     public QueueManager queueManager;
 
@@ -44,6 +66,10 @@ public class PlanetManager : MonoBehaviour
     List<Pod> pods = new List<Pod>();
     public delegate void OnPodsListChanged(List<Pod> list);
     public event OnPodsListChanged onPodsListChanged;
+
+    List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
+    public delegate void OnPodContentsListChanged(List<PodContent> list);
+    public event OnPodContentsListChanged onPodContentsListChanged;
 
 
     // Start is called before the first frame update
@@ -73,6 +99,12 @@ public class PlanetManager : MonoBehaviour
         {
             queueManager.addToQueue(pod);
         }
+    }
+
+    public void addPodContent(PodContent podContent)
+    {
+        podContents.Add(podContent);
+        onPodContentsListChanged?.Invoke(podContents);
     }
 
     public void convertPod(Pod newPod)
@@ -170,6 +202,18 @@ public class PlanetManager : MonoBehaviour
         return podType.areAllNeighborsAllowed(neighborTypes)
             && podType.isRequiredNeighborPresent(neighborTypes)
             && podType.canConvertFrom(curPodType);
+    }
+
+    public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos)
+    {
+        PodType curPodType = null;
+        Pod curPod = getPodAtPosition(pos);
+        if (curPod)
+        {
+            curPodType = curPod.podType;
+        }
+        return podContentType.hasRequiredGround(getPodAtPosition(groundPos(pos)).podType)
+            && podContentType.canPlantIn(curPodType);
     }
 
     public Pod getPodAtPosition(Vector2 pos)
