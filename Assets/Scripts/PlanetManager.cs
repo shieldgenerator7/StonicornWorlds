@@ -157,6 +157,17 @@ public class PlanetManager : MonoBehaviour
             );
     }
 
+    public Pod groundPod(Vector2 pos)
+    {
+        return getPodAtPosition(groundPos(pos));
+    }
+
+    public bool groundPodComplete(Vector2 pos)
+    {
+        Pod gp = groundPod(pos);
+        return !gp || gp.Completed;
+    }
+
     public PodNeighborhood getNeighborhood(Vector2 pos)
     {
         PodNeighborhood neighborhood = new PodNeighborhood();
