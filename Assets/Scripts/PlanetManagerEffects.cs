@@ -54,7 +54,10 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update pod contents
         goPodContents.ForEach(go => Destroy(go));
         goPodContents.Clear();
-        podContents.FindAll(content => content.container.Completed)
+        podContents.FindAll(content =>
+                content.container.Completed
+                && planetManager.groundPodComplete(content.container.pos)
+            )
             .ForEach(content =>
             {
                 GameObject go = Instantiate(
