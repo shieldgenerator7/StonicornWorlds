@@ -6,6 +6,9 @@ public class Pod
 {
     public Vector2 pos;
     public PodType podType;
+
+    public List<PodContent> podContents = new List<PodContent>();
+
     private float progress;
     public float Progress
     {
