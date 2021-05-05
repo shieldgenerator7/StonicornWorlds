@@ -13,6 +13,7 @@ public class PodContentType : ScriptableObject
     public List<PodType> podImplantTypes;
     public List<PodType> requiredGround;
     public List<PodType> requiredNeighbors;
+    public List<PodContentType> requiredContent;
 
     public bool hasRequiredGround(PodType podType)
     {
@@ -36,5 +37,13 @@ public class PodContentType : ScriptableObject
         {
             return podTypes.Any(podType => requiredNeighbors.Contains(podType));
         }
+    }
+
+    public bool hasRequiredContent(Pod curPod)
+    {
+        return requiredContent.Count == 0 ||
+            (curPod && curPod.podContents.Any(
+                content => requiredContent.Contains(content.contentType)
+                ));
     }
 }

@@ -224,6 +224,7 @@ public class PlanetManager : MonoBehaviour
         return podContentType.hasRequiredGround(groundPodType)
             && podContentType.canPlantIn(curPodType)
             && podContentType.isRequiredNeighborPresent(neighborTypes)
+            && podContentType.hasRequiredContent(curPod)
             && !(curPod && curPod.podContents.Any(
                 content => content.contentType == podContentType
                 ));
