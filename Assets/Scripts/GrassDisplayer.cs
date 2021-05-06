@@ -25,7 +25,10 @@ public class GrassDisplayer : MonoBehaviour
     }
     private void OnDestroy()
     {
-        planetManager.onPodsListChanged -= updateNeighborhood;
+        if (planetManager)
+        {
+            planetManager.onPodsListChanged -= updateNeighborhood;
+        }
     }
 
     void updateNeighborhood(List<Pod> pods)
