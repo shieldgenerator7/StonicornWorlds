@@ -36,8 +36,7 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update pods
         goPods.ForEach(go => Destroy(go));
         goPods.Clear();
-        pods.FindAll(pod => pod.Completed)
-            .ForEach(pod =>
+        pods.ForEach(pod =>
             {
                 GameObject go = Instantiate(
                     pod.podType.podPrefab,
@@ -54,10 +53,7 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update pod contents
         goPodContents.ForEach(go => Destroy(go));
         goPodContents.Clear();
-        podContents.FindAll(content =>
-                content.container.Completed
-                && planetManager.groundPodComplete(content.container.pos)
-            )
+        podContents
             .ForEach(content =>
             {
                 GameObject go = Instantiate(

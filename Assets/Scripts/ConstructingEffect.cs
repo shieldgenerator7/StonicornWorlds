@@ -6,24 +6,29 @@ public class ConstructingEffect : MonoBehaviour
 {
     public SpriteRenderer fillSR;
 
-    public Pod pod;
+    private QueueTask task;
 
     // Start is called before the first frame update
-    void Start()
+    public void init(QueueTask task)
     {
-        pod.onProgressChanged += updateDisplay;
-        updateDisplay(pod.Progress);
+        if (this.task)
+        {
+            this.task.onProgressChanged -= updateDisplay;
+        }
+        this.task = task;
+        this.task.onProgressChanged += updateDisplay;
+        updateDisplay(this.task.Percent);
     }
 
     private void OnDestroy()
     {
-        pod.onProgressChanged -= updateDisplay;
+        task.onProgressChanged -= updateDisplay;
     }
 
-    public void updateDisplay(float progress)
+    public void updateDisplay(float percent)
     {
         Vector2 size = fillSR.size;
-        size.y = progress / pod.podType.progressRequired;
+        size.y = percent;
         fillSR.size = size;
     }
 }

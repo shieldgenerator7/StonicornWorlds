@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class QueueWorker : MonoBehaviour
 {
-    public float constructSpeed = 20;
+    public float workSpeed = 20;
 
-    public Pod constructPod { get; private set; }
+    public QueueTask currentTask { get; private set; }
 
-    public bool Busy => constructPod;
+    public bool Busy => currentTask;
 
     // Update is called once per frame
     void Update()
     {
         if (Busy)
         {
-            constructPod.Progress += constructSpeed * Time.deltaTime;
-            if (constructPod.Completed)
+            currentTask.Progress += workSpeed * Time.deltaTime;
+            if (currentTask.Completed)
             {
-                onPodCompleted?.Invoke(constructPod);
+                onTaskCompleted?.Invoke(currentTask);
                 callBack();
             }
         }
     }
-    public delegate void OnPodCompleted(Pod pod);
-    public event OnPodCompleted onPodCompleted;
+    public delegate void OnTaskCompleted(QueueTask task);
+    public event OnTaskCompleted onTaskCompleted;
 
-    public void dispatch(Pod pod)
+    public void dispatch(QueueTask task)
     {
-        constructPod = pod;
+        currentTask = task;
     }
 
     public void callBack()
     {
-        constructPod = null;
+        currentTask = null;
     }
 
     public void retire()

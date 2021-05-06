@@ -76,29 +76,26 @@ public class PlanetManager : MonoBehaviour
     void Start()
     {
         Pod starter = new Pod(Vector2.zero, corePodType);
-        starter.Completed = true;
         addPod(starter);
-        queueManager.onPodCompleted += (pod) => addPod(pod);
+        queueManager.onTaskCompleted += (task) => updatePlanet(task);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }
 
     public void addPod(Pod pod)
     {
-        if (!pods.Contains(pod))
+        if (pods.Contains(pod))
         {
-            pods.Add(pod);
-            coreCount = pods.FindAll(pod =>
-                pod.podType == corePodType && pod.Completed
-                ).Count;
+            Debug.LogError("Planet already contains pod " + pod + "!");
+            return;
         }
-        //Call list changed even if the pod is already in the list
+        pods.Add(pod);
+        coreCount = pods.FindAll(pod =>
+            pod.podType == corePodType
+            ).Count;
         onPodsListChanged?.Invoke(pods);
         onPodContentsListChanged?.Invoke(podContents);
-        //If it's not complete, add it to build queue
-        if (!pod.Completed)
         {
-            queueManager.addToQueue(pod);
         }
     }
 
@@ -113,6 +110,29 @@ public class PlanetManager : MonoBehaviour
         Pod oldPod = pods.Find(p => p.pos == newPod.pos);
         pods.Remove(oldPod);
         addPod(newPod);
+    }
+
+    public void updatePlanet(QueueTask task)
+    {
+        switch (task.type)
+        {
+            case QueueTask.Type.CONSTRUCT:
+                addPod(new Pod(task.pos, (PodType)task.taskObject));
+                break;
+            case QueueTask.Type.CONVERT:
+                convertPod(new Pod(task.pos, (PodType)task.taskObject));
+                break;
+            case QueueTask.Type.DESTRUCT:
+                pods.Remove(getPodAtPosition(task.pos));
+                break;
+            case QueueTask.Type.PLANT:
+                addPodContent(
+                    new PodContent(
+                        (PodContentType)task.taskObject,
+                        getPodAtPosition(task.pos)
+                    ));
+                break;
+        }
     }
 
     public List<Vector2> getAdjacentPositions(Vector2 pos)
@@ -160,12 +180,6 @@ public class PlanetManager : MonoBehaviour
     public Pod groundPod(Vector2 pos)
     {
         return getPodAtPosition(groundPos(pos));
-    }
-
-    public bool groundPodComplete(Vector2 pos)
-    {
-        Pod gp = groundPod(pos);
-        return !gp || gp.Completed;
     }
 
     public PodNeighborhood getNeighborhood(Vector2 pos)

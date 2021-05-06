@@ -7,28 +7,26 @@ public class QueueManager : MonoBehaviour
 {
     public PlanetManager planetManager;
 
-    List<Pod> queue = new List<Pod>();
+    List<QueueTask> queue = new List<QueueTask>();
 
     List<QueueWorker> workers = new List<QueueWorker>();
 
-    public void addToQueue(Pod pod)
+    public void addToQueue(QueueTask task)
     {
-        if (queue.Contains(pod))
+        if (queue.Contains(task))
         {
-            queue.Remove(pod);
+            Debug.LogError("Task already in queue");
+            return;
         }
-        else
-        {
-            workers.ForEach(w => w.callBack());
-        }
-        queue.Add(pod);
+        workers.ForEach(w => w.callBack());
+        queue.Add(task);
         callOnQueueChanged();
     }
     private void callOnQueueChanged()
     {
         onQueueChanged?.Invoke(queue);
     }
-    public delegate void OnQueueChanged(List<Pod> queue);
+    public delegate void OnQueueChanged(List<QueueTask> queue);
     public event OnQueueChanged onQueueChanged;
 
     private void Awake()
@@ -43,27 +41,27 @@ public class QueueManager : MonoBehaviour
         {
             while (AnyWorkersFree)
             {
-                Pod pod = queue[0];
-                //Try to start pod
-                if (!pod.Started
-                    && planetManager.Resources >= pod.podType.progressRequired)
+                QueueTask task = queue[0];
+                //Try to start task
+                if (!task.Started
+                    && planetManager.Resources >= task.startCost)
                 {
-                    planetManager.Resources -= pod.podType.progressRequired;
-                    pod.Progress = 0.01f;
+                    planetManager.Resources -= task.startCost;
+                    task.Progress = 0.01f;
                 }
-                //Try to find a pod that is already in progress
-                if (!pod.Started)
+                //Try to find a task that is already in progress
+                if (!task.Started)
                 {
-                    pod = queue.FirstOrDefault(p => p.Started) ?? queue[0];
+                    task = queue.FirstOrDefault(p => p.Started) ?? queue[0];
                 }
-                //If pod has been started,
-                if (pod.Started)
+                //If task has been started,
+                if (task.Started)
                 {
                     //Work on it more
-                    dispatchWorker(pod);
+                    dispatchWorker(task);
                     //Move pod to end of list
-                    queue.Remove(pod);
-                    queue.Add(pod);
+                    queue.Remove(task);
+                    queue.Add(task);
                 }
                 //Else stop, can't do anything
                 else
@@ -76,12 +74,11 @@ public class QueueManager : MonoBehaviour
 
     void updateQueueWorkerList(List<Pod> pods)
     {
-        queue.RemoveAll(p => !pods.Contains(p));
         int queueCount = planetManager.CoreCount;
         while (queueCount > workers.Count)
         {
             QueueWorker worker = gameObject.AddComponent<QueueWorker>();
-            worker.onPodCompleted += podCompleted;
+            worker.onTaskCompleted += taskCompleted;
             workers.Add(worker);
         }
         while (queueCount < workers.Count)
@@ -90,25 +87,22 @@ public class QueueManager : MonoBehaviour
             worker.retire();
             workers.Remove(worker);
         }
-        //If a job is canceled mid-construction, call back that worker
-        workers.FindAll(w => !queue.Contains(w.constructPod))
-            .ForEach(w => w.callBack());
     }
 
     bool AnyWorkersFree => workers.Any(w => !w.Busy);
 
-    void dispatchWorker(Pod pod)
+    void dispatchWorker(QueueTask task)
     {
         QueueWorker worker = workers.First(w => !w.Busy);
-        worker.dispatch(pod);
+        worker.dispatch(task);
     }
 
-    void podCompleted(Pod pod)
+    void taskCompleted(QueueTask task)
     {
-        queue.Remove(pod);
+        queue.Remove(task);
         callOnQueueChanged();
-        onPodCompleted?.Invoke(pod);
+        onTaskCompleted?.Invoke(task);
     }
-    public delegate void PodEvent(Pod pod);
-    public event PodEvent onPodCompleted;
+    public delegate void TaskEvent(QueueTask task);
+    public event TaskEvent onTaskCompleted;
 }

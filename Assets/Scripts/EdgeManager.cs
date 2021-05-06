@@ -34,11 +34,13 @@ public class EdgeManager : MonoBehaviour
             if (clickedUI != Vector2.zero
                 && planetManager.canBuildAtPosition(planetManager.PodType, pos))
             {
-                Pod pod = new Pod(
-                    clickedUI,
-                    planetManager.PodType
+                queueManager.addToQueue(
+                    new QueueTask(
+                        planetManager.PodType,
+                        clickedUI,
+                        QueueTask.Type.CONSTRUCT
+                        )
                     );
-                planetManager.addPod(pod);
             }
             else
             {
@@ -51,22 +53,26 @@ public class EdgeManager : MonoBehaviour
                     {
                         if (planetManager.canBuildAtPosition(planetManager.PodType, pos))
                         {
-                            Pod pod = new Pod(
-                                clickedUI,
-                                planetManager.PodType
+                            queueManager.addToQueue(
+                                new QueueTask(
+                                    planetManager.PodType,
+                                    clickedUI,
+                                    QueueTask.Type.CONVERT
+                                    )
                                 );
-                            planetManager.convertPod(pod);
                         }
                     }
                     else if (planetManager.PodContentType)
                     {
                         if (planetManager.canPlantAtPosition(planetManager.PodContentType, pos))
                         {
-                            PodContent podContent = new PodContent(
-                                planetManager.PodContentType,
-                                planetManager.getPodAtPosition(clickedUI)
+                            queueManager.addToQueue(
+                                new QueueTask(
+                                    planetManager.PodContentType,
+                                    clickedUI,
+                                    QueueTask.Type.PLANT
+                                    )
                                 );
-                            planetManager.addPodContent(podContent);
                         }
                     }
                 }

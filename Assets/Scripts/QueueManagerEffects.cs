@@ -16,27 +16,35 @@ public class QueueManagerEffects : MonoBehaviour
         queueManager.onQueueChanged += updateDisplay;
     }
 
-    void updateDisplay(List<Pod> pods)
+    void updateDisplay(List<QueueTask> tasks)
     {
         constructs.ForEach(con => Destroy(con.gameObject));
         constructs.Clear();
-        foreach (Pod pod in pods)
+        foreach (QueueTask task in tasks)
         {
-            if (pod.Completed)
+            if (task.Completed)
             {
                 //don't process pods that have been completed
                 continue;
             }
             GameObject construct = Instantiate(
                 constructingPrefab,
-                pod.pos,
+                task.pos,
                 Quaternion.identity,
                 transform
                 );
             construct.transform.up = planetManager.upDir(construct.transform.position);
             ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
-            effect.pod = pod;
-            Color color = pod.podType.uiColor;
+            effect.init(task);
+            Color color = Color.white;
+            if (task.taskObject is PodType pt)
+            {
+                color = pt.uiColor;
+            }
+            else if (task.taskObject is PodContentType pct)
+            {
+                color = pct.uiColor;
+            }
             construct.GetComponent<SpriteRenderer>()
                 .color = color;
             effect.fillSR
