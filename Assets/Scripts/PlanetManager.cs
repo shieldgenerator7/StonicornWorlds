@@ -64,6 +64,8 @@ public class PlanetManager : MonoBehaviour
     public int CoreCount => coreCount;
 
     List<Pod> pods = new List<Pod>();
+    List<Pod> futureState = new List<Pod>();
+    public List<Pod> Pods => pods;
     public delegate void OnPodsListChanged(List<Pod> list);
     public event OnPodsListChanged onPodsListChanged;
 
@@ -78,6 +80,7 @@ public class PlanetManager : MonoBehaviour
         Pod starter = new Pod(Vector2.zero, corePodType);
         addPod(starter);
         queueManager.onTaskCompleted += (task) => updatePlanet(task);
+        queueManager.onQueueChanged += (tasks) => futureState = queueManager.getFutureState(pods);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }
@@ -93,6 +96,7 @@ public class PlanetManager : MonoBehaviour
         coreCount = pods.FindAll(pod =>
             pod.podType == corePodType
             ).Count;
+        futureState = queueManager.getFutureState(pods);
         onPodsListChanged?.Invoke(pods);
         onPodContentsListChanged?.Invoke(podContents);
     }
@@ -256,12 +260,12 @@ public class PlanetManager : MonoBehaviour
     public Pod getPodAtPosition(Vector2 pos)
     {
         float radius = 0.5f;
-        return pods.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
+        return futureState.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 
     public List<Pod> getNeighbors(Vector2 pos)
     {
         float radius = 1;
-        return pods.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
+        return futureState.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 }

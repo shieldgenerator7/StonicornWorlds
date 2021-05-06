@@ -17,7 +17,7 @@ public class EdgeManager : MonoBehaviour
     {
         planetManager.onPodsListChanged += addPod;
         planetManager.onPodContentsListChanged += addPodContent;
-        //queueManager.onQueueChanged += addPod;
+        queueManager.onQueueChanged += queueUpdated;
         planetManager.onPodTypeChanged += calculcateConvertEdges;
         planetManager.onPodContentTypeChanged += calculcatePlantEdges;
     }
@@ -41,6 +41,7 @@ public class EdgeManager : MonoBehaviour
                         QueueTask.Type.CONSTRUCT
                         )
                     );
+                queueUpdated(null);
             }
             else
             {
@@ -60,6 +61,7 @@ public class EdgeManager : MonoBehaviour
                                     QueueTask.Type.CONVERT
                                     )
                                 );
+                            queueUpdated(null);
                         }
                     }
                     else if (planetManager.PodContentType)
@@ -79,10 +81,13 @@ public class EdgeManager : MonoBehaviour
             }
         }
     }
-
+    public void queueUpdated(List<QueueTask> tasks)
+    {
+        addPod(planetManager.Pods);
+    }
     private void addPod(List<Pod> pods)
     {
-        this.pods = pods;
+        this.pods = queueManager.getFutureState(pods);
         //pods.FindAll(pod => !this.pods.Contains(pod))
         //    .ForEach(pod => this.pods.Add(pod));
         calculateEdges();
