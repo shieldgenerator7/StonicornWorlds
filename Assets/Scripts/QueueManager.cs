@@ -113,6 +113,14 @@ public class QueueManager : MonoBehaviour
             .ForEach(task =>
             pods.Add(new Pod(task.pos, (PodType)task.taskObject))
         );
+        queue.FindAll(task => task.type == QueueTask.Type.CONVERT)
+            .ForEach(task =>
+            {
+                Pod oldPod = pods.FirstOrDefault(pod => pod.pos == task.pos);
+                pods.Remove(oldPod);
+                pods.Add(new Pod(task.pos, (PodType)task.taskObject));
+            }
+        );
         return pods;
     }
 }
