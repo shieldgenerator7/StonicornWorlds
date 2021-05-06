@@ -25,10 +25,10 @@ public class QueueTask
         set
         {
             progress = Mathf.Min(value, progressRequired);
-            onProgressChanged?.Invoke(progress);
+            onProgressChanged?.Invoke(Percent);
         }
     }
-    public delegate void OnProgressChanged(float progress);
+    public delegate void OnProgressChanged(float percent);
     public event OnProgressChanged onProgressChanged;
 
     private float progressRequired;
