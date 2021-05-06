@@ -95,8 +95,6 @@ public class PlanetManager : MonoBehaviour
             ).Count;
         onPodsListChanged?.Invoke(pods);
         onPodContentsListChanged?.Invoke(podContents);
-        {
-        }
     }
 
     public void addPodContent(PodContent podContent)
