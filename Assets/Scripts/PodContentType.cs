@@ -10,6 +10,7 @@ public class PodContentType : ScriptableObject
     public Sprite preview;
     public Color uiColor = Color.white;
     public GameObject podContentPrefab;
+    public float progressRequired = 100;
     public List<PodType> podImplantTypes;
     public List<PodType> requiredGround;
     public List<PodType> requiredNeighbors;

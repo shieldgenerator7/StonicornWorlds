@@ -38,13 +38,21 @@ public class QueueTask
 
     public bool Started => progress > 0;
 
-    public bool Completed=> progress == progressRequired;
+    public bool Completed => progress == progressRequired;
 
     public QueueTask(ScriptableObject taskObject, Vector2 pos, Type type)
     {
         this.taskObject = taskObject;
         this.pos = pos;
         this.type = type;
+        if (taskObject is PodType pt)
+        {
+            this.progressRequired = pt.progressRequired;
+        }
+        else if (taskObject is PodContentType pct)
+        {
+            this.progressRequired = pct.progressRequired;
+        }
     }
 
     public static implicit operator bool(QueueTask qt)
