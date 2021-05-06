@@ -14,7 +14,7 @@ public class QueueTask
         PLANT
     }
     public Type type { get; private set; }
-    public float startCost => 100;
+    public float startCost => progressRequired;
 
     public Vector2 pos { get; private set; }
 
