@@ -7,7 +7,6 @@ public class Planet : MonoBehaviour
 {
     public float size = 0.5f;
     public float newSize = 0.5f;
-    float SQRT_3 = Mathf.Sqrt(3);
     public Vector2 testVector;
     private Vector2 prevTestVector;
     public Vector3Int testVector3;
@@ -43,6 +42,7 @@ public class Planet : MonoBehaviour
             );
         }
     }
+    float SQRT_3 = Mathf.Sqrt(3.0f);
 
     private HexagonGrid<Pod> grid;
     private HexagonGrid<Pod> futureGrid;
@@ -97,16 +97,16 @@ public class Planet : MonoBehaviour
     private Vector2 gridToWorld(Vector3Int hexpos)
     {
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
-        float x = size * (3 * hexpos.x / 2);
-        float y = size * SQRT_3 * (hexpos.x / 2 + hexpos.z);
+        float x = size * (3.0f * hexpos.x / 2.0f);
+        float y = size * SQRT_3 * (hexpos.x / 2.0f + hexpos.z);
         return new Vector2(x, y) + (Vector2)transform.position;
     }
     private Vector3Int worldToGrid(Vector2 pos)
     {
         pos -= (Vector2)transform.position;
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#pixel-to-hex
-        float q = (2 * pos.x) / (size * 3);
-        float r = (-1 * pos.x + SQRT_3 * pos.y) / (size * 3);
+        float q = (2.0f * pos.x) / (size * 3.0f);
+        float r = (-1 * pos.x + SQRT_3 * pos.y) / (size * 3.0f);
         float s = -(q + r);
 
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#rounding
