@@ -149,6 +149,10 @@ public class PlanetManager : MonoBehaviour
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
+        if (!podType)
+        {
+            return false;
+        }
         List<PodType> neighborTypes = getFutureNeighbors(pos)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;

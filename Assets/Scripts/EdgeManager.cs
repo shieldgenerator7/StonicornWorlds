@@ -31,6 +31,7 @@ public class EdgeManager : MonoBehaviour
                 edge => planetManager.checkAddPodUI(pos, edge)
                 );
             if (clickedUI != Vector2.zero
+                && planetManager.PodType
                 && planetManager.canBuildAtPosition(planetManager.PodType, pos))
             {
                 queueManager.addToQueue(
