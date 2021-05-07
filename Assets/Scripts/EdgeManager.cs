@@ -8,7 +8,6 @@ public class EdgeManager : MonoBehaviour
     public PlanetManager planetManager;
     public QueueManager queueManager;
 
-    List<Pod> pods = new List<Pod>();
     List<Vector2> edges;
     List<Vector2> convertEdges;
 
@@ -83,13 +82,10 @@ public class EdgeManager : MonoBehaviour
     }
     public void queueUpdated(List<QueueTask> tasks)
     {
-        addPod(planetManager.Pods);
+        calculateEdges();
     }
     private void addPod(List<Pod> pods)
     {
-        this.pods = queueManager.getFutureState(pods);
-        //pods.FindAll(pod => !this.pods.Contains(pod))
-        //    .ForEach(pod => this.pods.Add(pod));
         calculateEdges();
     }
     private void addPodContent(List<PodContent> podContents)
@@ -110,7 +106,7 @@ public class EdgeManager : MonoBehaviour
     {
         if (podType)
         {
-            convertEdges = pods
+            convertEdges = planetManager.planet.Pods
                 .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
                 .ConvertAll(pod => pod.pos);
         }
@@ -122,7 +118,7 @@ public class EdgeManager : MonoBehaviour
     {
         if (podContentType)
         {
-            convertEdges = pods
+            convertEdges = planetManager.planet.Pods
                 .FindAll(pod => podContentType.podImplantTypes.Contains(pod.podType))
                 .ConvertAll(pod => pod.pos);
         }

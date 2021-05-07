@@ -105,22 +105,4 @@ public class QueueManager : MonoBehaviour
     }
     public delegate void TaskEvent(QueueTask task);
     public event TaskEvent onTaskCompleted;
-
-    public List<Pod> getFutureState(List<Pod> pods)
-    {
-        pods = new List<Pod>(pods);
-        queue.FindAll(task => task.type == QueueTask.Type.CONSTRUCT)
-            .ForEach(task =>
-            pods.Add(new Pod(task.pos, (PodType)task.taskObject))
-        );
-        queue.FindAll(task => task.type == QueueTask.Type.CONVERT)
-            .ForEach(task =>
-            {
-                Pod oldPod = pods.FirstOrDefault(pod => pod.pos == task.pos);
-                pods.Remove(oldPod);
-                pods.Add(new Pod(task.pos, (PodType)task.taskObject));
-            }
-        );
-        return pods;
-    }
 }

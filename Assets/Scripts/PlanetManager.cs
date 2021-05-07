@@ -64,7 +64,7 @@ public class PlanetManager : MonoBehaviour
     public int CoreCount => coreCount;
 
     public Planet planet;
-    List<Pod> futureState = new List<Pod>();
+    public Planet futurePlanet { get; set; }
     public List<Pod> Pods => planet.Pods;
     public delegate void OnPodsListChanged(List<Pod> list);
     public event OnPodsListChanged onPodsListChanged;
@@ -77,10 +77,14 @@ public class PlanetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        planet = new Planet();
+        planet.position = Vector2.zero;
+        futurePlanet = planet;
         Pod starter = new Pod(Vector2.zero, corePodType);
         addPod(starter);
+        calculateFutureState(new List<QueueTask>());
         queueManager.onTaskCompleted += (task) => updatePlanet(task);
-        queueManager.onQueueChanged += (tasks) => futureState = queueManager.getFutureState(Pods);
+        queueManager.onQueueChanged += (tasks) => calculateFutureState(tasks);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }
@@ -92,7 +96,6 @@ public class PlanetManager : MonoBehaviour
         coreCount = pods.FindAll(pod =>
             pod.podType == corePodType
             ).Count;
-        futureState = queueManager.getFutureState(pods);
         onPodsListChanged?.Invoke(pods);
         onPodContentsListChanged?.Invoke(podContents);
     }
@@ -126,7 +129,7 @@ public class PlanetManager : MonoBehaviour
                 addPodContent(
                     new PodContent(
                         (PodContentType)task.taskObject,
-                        getPodAtPosition(task.pos)
+                        planet.getPod(task.pos)
                     ));
                 break;
         }
@@ -146,10 +149,10 @@ public class PlanetManager : MonoBehaviour
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
-        List<PodType> neighborTypes = getNeighbors(pos)
+        List<PodType> neighborTypes = getFutureNeighbors(pos)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = getPodAtPosition(pos);
+        Pod curPod = planet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -161,10 +164,10 @@ public class PlanetManager : MonoBehaviour
 
     public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos)
     {
-        List<PodType> neighborTypes = getNeighbors(pos)
+        List<PodType> neighborTypes = getFutureNeighbors(pos)
                .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = getPodAtPosition(pos);
+        Pod curPod = planet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -184,14 +187,39 @@ public class PlanetManager : MonoBehaviour
                 ));
     }
 
-    public Pod getPodAtPosition(Vector2 pos)
-    {
-        return planet.getPod(pos);
-    }
-
-    public List<Pod> getNeighbors(Vector2 pos)
+    public List<Pod> getFutureNeighbors(Vector2 pos)
     {
         return planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod => pod);
     }
+
+    #region Predict State
+    public void calculateFutureState(List<QueueTask> queue)
+    {
+        futurePlanet = planet.deepCopy();
+        queue.ForEach(task =>
+            {
+                switch (task.type)
+                {
+                    case QueueTask.Type.CONSTRUCT:
+                    case QueueTask.Type.CONVERT:
+                        futurePlanet.addPod(
+                            new Pod(task.pos, (PodType)task.taskObject),
+                            task.pos
+                            );
+                        break;
+                    case QueueTask.Type.PLANT:
+                        Pod pod = futurePlanet.getPod(task.pos);
+                        pod.podContents.Add(
+                            new PodContent((PodContentType)task.taskObject, pod)
+                            );
+                        break;
+                    default:
+                        Debug.LogError("No case for value: " + task.type);
+                        break;
+                }
+            }
+            );
+    }
+    #endregion
 }
