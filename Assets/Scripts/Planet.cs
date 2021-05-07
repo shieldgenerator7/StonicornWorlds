@@ -41,6 +41,9 @@ public class Planet : MonoBehaviour
     public Pod getGroundPod(Vector2 pos)
         => grid.getGround(worldToGrid(pos));
 
+    public Vector2 getGroundPos(Vector2 pos)
+        => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
+
     public Neighborhood getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
 

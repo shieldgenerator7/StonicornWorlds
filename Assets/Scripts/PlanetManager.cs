@@ -132,54 +132,17 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    public List<Vector2> getAdjacentPositions(Vector2 pos)
-    {
-        List<Vector2> dirs = new List<Vector2>()
-        {
-            new Vector2(0, 0.87f),
-            new Vector2(0, -0.87f),
-            new Vector2(0.755f, 0.435f),
-            new Vector2(-0.755f, -0.435f),
-            new Vector2(-0.755f, 0.435f),
-            new Vector2(0.755f, -0.435f),
-        };
-        return dirs.ConvertAll(dir => dir + pos);
-    }
-
     public bool checkAddPodUI(Vector2 pos1, Vector2 pos2)
     {
         float radius = 0.5f;
         return Vector2.Distance(pos1, pos2) <= radius;
     }
 
-    public bool doesListContainPosition(List<Vector2> list, Vector2 pos, float radius)
-    {
-        return list.Any(v => Vector2.Distance(v, pos) <= radius);
-    }
-
     public Vector2 upDir(Vector2 pos)
     {
-        Vector2 ground = groundPos(pos);
+        Vector2 ground = planet.getGroundPos(pos);
         return (pos - ground).normalized;
     }
-
-    public Vector2 groundPos(Vector2 pos)
-    {
-        Vector2 origin = Vector2.zero;
-        return getAdjacentPositions(pos).Aggregate(
-            (best, cur) =>
-                (Vector2.Distance(cur, origin) < Vector2.Distance(best, origin))
-                    ? cur
-                    : best
-            );
-    }
-
-    public Pod groundPod(Vector2 pos)
-    {
-        return getPodAtPosition(groundPos(pos));
-    }
-
-
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
@@ -207,7 +170,7 @@ public class PlanetManager : MonoBehaviour
             curPodType = curPod.podType;
         }
         PodType groundPodType = null;
-        Pod groundPod = getPodAtPosition(groundPos(pos));
+        Pod groundPod = planet.getGroundPod(pos);
         if (groundPod)
         {
             groundPodType = groundPod.podType;
@@ -224,15 +187,11 @@ public class PlanetManager : MonoBehaviour
     public Pod getPodAtPosition(Vector2 pos)
     {
         return planet.getPod(pos);
-        //float radius = 0.5f;
-        //return futureState.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 
     public List<Pod> getNeighbors(Vector2 pos)
     {
         return planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod => pod);
-        //float radius = 1;
-        //return futureState.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 }
