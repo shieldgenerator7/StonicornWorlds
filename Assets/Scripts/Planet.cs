@@ -7,17 +7,52 @@ public class Planet : MonoBehaviour
     private HexagonGrid<Pod> grid;
     private HexagonGrid<Pod> futureGrid;
 
-    public Vector2 gridToWorld(Vector3Int hexpos)
+    #region Write State
+    public delegate void OnStateChanged(Planet p);
+    public event OnStateChanged onStateChanged;
+
+    public void addPod(Pod pod, Vector2 pos)
+    {
+        Vector3Int hexpos = worldToGrid(pos);
+        pod.pos = gridToWorld(hexpos);
+        grid.add(pod, worldToGrid(pos));
+        onStateChanged?.Invoke(this);
+    }
+
+    public void removePod(Vector2 pos)
+    {
+        grid.removeAt(worldToGrid(pos));
+        onStateChanged?.Invoke(this);
+    }
+    #endregion
+
+    #region Read State
+    public Pod getPod(Vector2 pos)
+        => grid.get(worldToGrid(pos));
+
+    public Pod getGroundPod(Vector2 pos)
+        => grid.getGround(worldToGrid(pos));
+
+    public Neighborhood<Pod> getNeighborhood(Vector2 pos)
+        => grid.getNeighborhood(worldToGrid(pos));
+
+    public List<Pod> Pods
+        => grid;
+
+    #endregion
+
+    #region Grid Conversion
+    private Vector2 gridToWorld(Vector3Int hexpos)
     {
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
         float size = 0.5f;
         float x = size * (3 / 2 * hexpos.x);
         float y = size * (Mathf.Sqrt(3) / 2 * hexpos.x + Mathf.Sqrt(3) * hexpos.z);
-        return new Vector2(x, y);
+        return new Vector2(x, y) + (Vector2)transform.position;
     }
-
-    public Vector3Int worldToGrid(Vector2 pos)
+    private Vector3Int worldToGrid(Vector2 pos)
     {
+        pos -= (Vector2)transform.position;
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#pixel-to-hex
         float size = 0.5f;
         float q = (2 / 3 * pos.x) / size;
@@ -47,4 +82,5 @@ public class Planet : MonoBehaviour
         }
         return new Vector3Int(rx, ry, rz);
     }
+    #endregion
 }
