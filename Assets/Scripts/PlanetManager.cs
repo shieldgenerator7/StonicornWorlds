@@ -223,13 +223,16 @@ public class PlanetManager : MonoBehaviour
 
     public Pod getPodAtPosition(Vector2 pos)
     {
-        float radius = 0.5f;
-        return futureState.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
+        return planet.getPod(pos);
+        //float radius = 0.5f;
+        //return futureState.FirstOrDefault(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 
     public List<Pod> getNeighbors(Vector2 pos)
     {
-        float radius = 1;
-        return futureState.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
+        return planet.getNeighborhood(pos).neighbors.ToList()
+            .FindAll(pod => pod);
+        //float radius = 1;
+        //return futureState.FindAll(pod => Vector2.Distance(pod.pos, pos) <= radius);
     }
 }

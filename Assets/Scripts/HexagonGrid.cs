@@ -25,7 +25,7 @@ public class HexagonGrid
     }
 
     public Pod get(Vector3Int pos)
-        => grid[pos];
+        => (grid.ContainsKey(pos)) ? grid[pos] : null;
 
     public Pod getGround(Vector3Int pos)
         => get(HexagonUtility.getGroundPos(pos));
