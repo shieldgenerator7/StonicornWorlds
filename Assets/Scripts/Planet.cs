@@ -97,8 +97,10 @@ public class Planet
 
     public Planet deepCopy()
     {
-        Planet planet = JsonUtility.FromJson<Planet>(JsonUtility.ToJson(this));
-        planet.Pods.ForEach(pod => pod.inflate());
+        Planet planet = new Planet();
+        Pods.ForEach(pod => planet.grid.add(pod, worldToGrid(pod.pos)));
+        //Planet planet = JsonUtility.FromJson<Planet>(JsonUtility.ToJson(this));
+        //planet.Pods.ForEach(pod => pod.inflate());
         return planet;
         //return (Planet)FromBinary(ToBinary(this));
     }

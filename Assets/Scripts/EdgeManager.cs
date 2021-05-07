@@ -95,7 +95,7 @@ public class EdgeManager : MonoBehaviour
 
     void calculateEdges()
     {
-        edges = planetManager.planet.Border;
+        edges = planetManager.futurePlanet.Border;
         onEdgeListChanged?.Invoke(edges);
         calculcateConvertEdges(planetManager.PodType);
     }
@@ -106,7 +106,7 @@ public class EdgeManager : MonoBehaviour
     {
         if (podType)
         {
-            convertEdges = planetManager.planet.Pods
+            convertEdges = planetManager.futurePlanet.Pods
                 .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
                 .ConvertAll(pod => pod.pos);
         }
@@ -118,7 +118,7 @@ public class EdgeManager : MonoBehaviour
     {
         if (podContentType)
         {
-            convertEdges = planetManager.planet.Pods
+            convertEdges = planetManager.futurePlanet.Pods
                 .FindAll(pod => podContentType.podImplantTypes.Contains(pod.podType))
                 .ConvertAll(pod => pod.pos);
         }

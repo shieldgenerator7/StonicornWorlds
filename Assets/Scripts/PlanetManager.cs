@@ -152,7 +152,7 @@ public class PlanetManager : MonoBehaviour
         List<PodType> neighborTypes = getFutureNeighbors(pos)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = planet.getPod(pos);
+        Pod curPod = futurePlanet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -167,13 +167,13 @@ public class PlanetManager : MonoBehaviour
         List<PodType> neighborTypes = getFutureNeighbors(pos)
                .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = planet.getPod(pos);
+        Pod curPod = futurePlanet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
         }
         PodType groundPodType = null;
-        Pod groundPod = planet.getGroundPod(pos);
+        Pod groundPod = futurePlanet.getGroundPod(pos);
         if (groundPod)
         {
             groundPodType = groundPod.podType;
@@ -189,7 +189,7 @@ public class PlanetManager : MonoBehaviour
 
     public List<Pod> getFutureNeighbors(Vector2 pos)
     {
-        return planet.getNeighborhood(pos).neighbors.ToList()
+        return futurePlanet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod => pod);
     }
 
@@ -209,10 +209,10 @@ public class PlanetManager : MonoBehaviour
                             );
                         break;
                     case QueueTask.Type.PLANT:
-                        Pod pod = futurePlanet.getPod(task.pos);
-                        pod.podContents.Add(
-                            new PodContent((PodContentType)task.taskObject, pod)
-                            );
+                        //Pod pod = futurePlanet.getPod(task.pos);
+                        //pod.podContents.Add(
+                        //    new PodContent((PodContentType)task.taskObject, pod)
+                        //    );
                         break;
                     default:
                         Debug.LogError("No case for value: " + task.type);
