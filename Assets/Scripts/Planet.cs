@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    private HexagonGrid<Pod> grid;
-    private HexagonGrid<Pod> futureGrid;
+    private HexagonGrid grid;
+    private HexagonGrid futureGrid;
 
     private void Awake()
     {
-        grid = new HexagonGrid<Pod>();
-        futureGrid = new HexagonGrid<Pod>();
+        grid = new HexagonGrid();
+        futureGrid = new HexagonGrid();
     }
 
     #region Write State
@@ -39,7 +39,7 @@ public class Planet : MonoBehaviour
     public Pod getGroundPod(Vector2 pos)
         => grid.getGround(worldToGrid(pos));
 
-    public Neighborhood<Pod> getNeighborhood(Vector2 pos)
+    public Neighborhood getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
 
     public List<Pod> Pods

@@ -14,7 +14,7 @@ public class GrassDisplayer : MonoBehaviour
     public SpriteRenderer srCRight;
 
     PlanetManager planetManager;
-    Neighborhood<Pod> neighborhood;
+    Neighborhood neighborhood;
 
     // Start is called before the first frame update
     void Start()

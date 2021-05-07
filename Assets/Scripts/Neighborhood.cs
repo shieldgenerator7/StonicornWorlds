@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Neighborhood<T>
+public struct Neighborhood
 {
-    public T ceilingLeft;
-    public T ceiling;
-    public T ceilingRight;
-    public T groundLeft;
-    public T ground;
-    public T groundRight;
-    public T[] neighbors;
+    public Pod ceilingLeft;
+    public Pod ceiling;
+    public Pod ceilingRight;
+    public Pod groundLeft;
+    public Pod ground;
+    public Pod groundRight;
+    public Pod[] neighbors;
 
-    public Neighborhood(HexagonNeighborhood hexnh, HexagonGrid<T> grid)
+    public Neighborhood(HexagonNeighborhood hexnh, HexagonGrid grid)
     {
         ground = grid.get(hexnh.ground);
         groundLeft = grid.get(hexnh.groundLeft);
@@ -20,7 +20,7 @@ public struct Neighborhood<T>
         ceiling = grid.get(hexnh.ceiling);
         ceilingLeft = grid.get(hexnh.ceilingLeft);
         ceilingRight = grid.get(hexnh.ceilingRight);
-        neighbors = new T[]
+        neighbors = new Pod[]
         {
             ground,
             groundLeft,

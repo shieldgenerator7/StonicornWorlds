@@ -5,34 +5,34 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class HexagonGrid<T>
+public class HexagonGrid
 {
     /*
      * 2021-05-06 Developed using recommendations from https://www.redblobgames.com/grids/hexagons/#basics
      * Uses Cube Coordinates, hence the Vector3Int
     */
 
-    Dictionary<Vector3Int, T> grid = new Dictionary<Vector3Int, T>();
+    Dictionary<Vector3Int, Pod> grid = new Dictionary<Vector3Int, Pod>();
 
-    public void add(T t, Vector3Int pos)
+    public void add(Pod pod, Vector3Int pos)
     {
-        grid[pos] = t;
+        grid[pos] = pod;
     }
 
     public void removeAt(Vector3Int pos)
     {
-        grid[pos] = default(T);
+        grid[pos] = null;
     }
 
-    public T get(Vector3Int pos)
+    public Pod get(Vector3Int pos)
         => grid[pos];
 
-    public T getGround(Vector3Int pos)
+    public Pod getGround(Vector3Int pos)
         => get(HexagonUtility.getGroundPos(pos));
 
-    public Neighborhood<T> getNeighborhood(Vector3Int pos)
+    public Neighborhood getNeighborhood(Vector3Int pos)
     {
-        return new Neighborhood<T>(
+        return new Neighborhood(
             HexagonUtility.getNeighborhood(pos),
             this
             );
@@ -41,6 +41,6 @@ public class HexagonGrid<T>
     public List<Vector3Int> getBorder()
         => HexagonUtility.getBorder(grid.Keys.ToList());
 
-    public static implicit operator List<T>(HexagonGrid<T> hg)
+    public static implicit operator List<Pod>(HexagonGrid hg)
         => hg.grid.Values.ToList();
 }
