@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class HexagonUtility
@@ -57,6 +58,28 @@ public static class HexagonUtility
         return neighborhood;
     }
 
+    public static List<Vector3Int> getArea(int maxring)
+    {
+        List<Vector3Int> area = new List<Vector3Int>();
+        for (int q = -maxring; q <= maxring; q++)
+        {
+            for (int r = -maxring; r <= maxring; r++)
+            {
+                int s = -(q + r);
+                area.Add(new Vector3Int(q, s, r));
+            }
+        }
+        return area;
+    }
+
+    public static List<Vector3Int> getBorder(List<Vector3Int> vList)
+        => getArea(maxRing(vList) + 1)
+            .FindAll(v =>
+                !vList.Contains(v)
+                && getNeighborhood(v).neighbors.ToList()
+                    .Any(nv => vList.Contains(nv))
+                );
+
     private static Vector3Int reduceAbs(Vector3Int v)
     {
         v.x = reduceAbs(v.x);
@@ -91,4 +114,10 @@ public static class HexagonUtility
         pos += center;
         return pos;
     }
+
+    public static int maxRing(List<Vector3Int> vList)
+        => vList.Max(v => ring(v));
+
+    public static int ring(Vector3Int v)
+        => Math.Max(Math.Abs(v.x), Math.Max(Math.Abs(v.y), Math.Abs(v.z)));
 }

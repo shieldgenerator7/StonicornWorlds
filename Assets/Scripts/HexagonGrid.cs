@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,7 +27,7 @@ public class HexagonGrid<T>
     public T get(Vector3Int pos)
         => grid[pos];
 
-    public T getGroundPod(Vector3Int pos)
+    public T getGround(Vector3Int pos)
         => get(HexagonUtility.getGroundPos(pos));
 
     public Neighborhood<T> getNeighborhood(Vector3Int pos)
@@ -36,4 +37,10 @@ public class HexagonGrid<T>
             this
             );
     }
+
+    public List<Vector3Int> getBorder()
+        => HexagonUtility.getBorder(grid.Keys.ToList());
+
+    public static implicit operator List<T>(HexagonGrid<T> hg)
+        => hg.grid.Values.ToList();
 }

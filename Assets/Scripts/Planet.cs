@@ -39,6 +39,8 @@ public class Planet : MonoBehaviour
     public List<Pod> Pods
         => grid;
 
+    public List<Vector2> Border
+        => grid.getBorder().ConvertAll(v => gridToWorld(v));
     #endregion
 
     #region Grid Conversion
