@@ -10,6 +10,7 @@ public struct PodNeighborhood
     public Pod groundLeft;
     public Pod ground;
     public Pod groundRight;
+    public Pod[] neighbors;
 
     public override string ToString()
     {
