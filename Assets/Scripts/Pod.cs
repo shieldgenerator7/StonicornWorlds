@@ -5,7 +5,9 @@ using UnityEngine;
 public class Pod
 {
     public Vector2 pos;
+    [System.NonSerialized]
     public PodType podType;
+    public string podTypeName;
 
     public List<PodContent> podContents = new List<PodContent>();
 
@@ -13,6 +15,13 @@ public class Pod
     {
         this.pos = pos;
         this.podType = podType;
+        this.podTypeName = podType.name;
+    }
+
+    public void inflate()
+    {
+        this.podType = Resources.Load<PodType>("PodTypes/" + podTypeName);
+        podContents.ForEach(pc => pc.inflate(this));
     }
 
     public override string ToString()
