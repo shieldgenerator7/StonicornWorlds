@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    private HexagonGrid<Pod> grid;
-    private HexagonGrid<Pod> futureGrid;
+    private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
+    private HexagonGrid<Pod> futureGrid = new HexagonGrid<Pod>();
 
     #region Write State
     public delegate void OnStateChanged(Planet p);
