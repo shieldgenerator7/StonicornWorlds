@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
+    public float size = 0.5f;
+
     private HexagonGrid grid;
     private HexagonGrid futureGrid;
 
@@ -53,7 +55,6 @@ public class Planet : MonoBehaviour
     private Vector2 gridToWorld(Vector3Int hexpos)
     {
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
-        float size = 0.5f;
         float x = size * (3 / 2 * hexpos.x);
         float y = size * (Mathf.Sqrt(3) / 2 * hexpos.x + Mathf.Sqrt(3) * hexpos.z);
         return new Vector2(x, y) + (Vector2)transform.position;
@@ -62,7 +63,6 @@ public class Planet : MonoBehaviour
     {
         pos -= (Vector2)transform.position;
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#pixel-to-hex
-        float size = 0.5f;
         float q = (2 / 3 * pos.x) / size;
         float r = (-1 * pos.x + Mathf.Sqrt(3) * pos.y) / (size * 3);
         float s = -(q + r);
