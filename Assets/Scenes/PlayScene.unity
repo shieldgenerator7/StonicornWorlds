@@ -1031,7 +1031,6 @@ MonoBehaviour:
   podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
   podContentType: {fileID: 0}
   queueManager: {fileID: 1302935092}
-  planet: {fileID: 1192692223}
 --- !u!4 &752787613
 Transform:
   m_ObjectHideFlags: 0
@@ -1062,7 +1061,7 @@ MonoBehaviour:
   edgeManager: {fileID: 752787615}
   addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
   convertPodPrefab: {fileID: 8438424779451882234, guid: c8e27c85676f17b4db08c04dea457928, type: 3}
-  plantPodPrefab: {fileID: 0}
+  plantPodPrefab: {fileID: 8438424779451882234, guid: a2ec63a765b58174f983c7413896fb1f, type: 3}
   txtResources: {fileID: 1131049490}
 --- !u!114 &752787615
 MonoBehaviour:
@@ -1212,50 +1211,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131049488}
   m_CullTransparentMesh: 1
---- !u!1 &1192692222
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1192692224}
-  - component: {fileID: 1192692223}
-  m_Layer: 0
-  m_Name: Planet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1192692223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192692222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d76e3cc9ef8321847ba5bbcc854af75e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0.5
---- !u!4 &1192692224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192692222}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302935091
 GameObject:
   m_ObjectHideFlags: 0

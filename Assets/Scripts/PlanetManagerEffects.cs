@@ -42,7 +42,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     pod.podType.podPrefab,
                     pod.pos,
                     Quaternion.identity,
-                    planetManager.planet.transform
+                    transform
                     );
                 go.transform.up = planetManager.upDir(go.transform.position);
                 goPods.Add(go);
@@ -60,7 +60,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     content.contentType.podContentPrefab,
                     content.container.pos,
                     Quaternion.identity,
-                    planetManager.planet.transform
+                    transform
                     );
                 go.transform.up = planetManager.upDir(go.transform.position);
                 goPodContents.Add(go);
@@ -77,7 +77,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 addPodPrefab,
                 edge,
                 Quaternion.identity,
-                planetManager.planet.transform
+                transform
                 );
             addPods.Add(addPod);
         });
@@ -123,7 +123,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 convertPodPrefab,
                 edge,
                 Quaternion.identity,
-                planetManager.planet.transform
+                transform
                 );
             convertPods.Add(convertPod);
         });

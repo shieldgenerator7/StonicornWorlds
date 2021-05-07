@@ -1,21 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class Planet : MonoBehaviour
+public class Planet
 {
+    public Vector2 position;
     public float size = 0.5f;
+    [NonSerialized]
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
-    private HexagonGrid<Pod> grid;
-    private HexagonGrid<Pod> futureGrid;
-
-    private void Awake()
-    {
-        grid = new HexagonGrid<Pod>();
-        futureGrid = new HexagonGrid<Pod>();
-    }
+    private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
 
     #region Write State
     public delegate void OnStateChanged(Planet p);
@@ -62,11 +60,11 @@ public class Planet : MonoBehaviour
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
         float x = size * (3.0f * hexpos.x / 2.0f);
         float y = size * SQRT_3 * (hexpos.x / 2.0f + hexpos.z);
-        return new Vector2(x, y) + (Vector2)transform.position;
+        return new Vector2(x, y) + position;
     }
     private Vector3Int worldToGrid(Vector2 pos)
     {
-        pos -= (Vector2)transform.position;
+        pos -= position;
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#pixel-to-hex
         float q = (2.0f * pos.x) / (size * 3.0f);
         float r = (-1 * pos.x + SQRT_3 * pos.y) / (size * 3.0f);
@@ -94,6 +92,62 @@ public class Planet : MonoBehaviour
             rz = -rx - ry;
         }
         return new Vector3Int((int)rx, (int)ry, (int)rz);
+    }
+    #endregion
+
+    public Planet deepCopy()
+    {
+        Planet planet = JsonUtility.FromJson<Planet>(JsonUtility.ToJson(this));
+        planet.Pods.ForEach(pod => pod.inflate());
+        return planet;
+        //return (Planet)FromBinary(ToBinary(this));
+    }
+
+    #region deep copy
+    //2021-05-06: copied from https://stackoverflow.com/a/140279/2336212
+    public static Byte[] ToBinary(Planet planet)
+    {
+        MemoryStream ms = null;
+        Byte[] byteArray = null;
+        try
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
+            ms = new MemoryStream();
+            serializer.Serialize(ms, planet);
+            byteArray = ms.ToArray();
+        }
+        catch (Exception unexpected)
+        {
+            Debug.LogError(unexpected.Message);
+            throw;
+        }
+        finally
+        {
+            if (ms != null)
+                ms.Close();
+        }
+        return byteArray;
+    }
+
+    public static object FromBinary(Byte[] buffer)
+    {
+        MemoryStream ms = null;
+        object deserializedObject = null;
+
+        try
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
+            ms = new MemoryStream();
+            ms.Write(buffer, 0, buffer.Length);
+            ms.Position = 0;
+            deserializedObject = serializer.Deserialize(ms);
+        }
+        finally
+        {
+            if (ms != null)
+                ms.Close();
+        }
+        return deserializedObject;
     }
     #endregion
 }
