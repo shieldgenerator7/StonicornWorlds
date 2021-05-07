@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    private HexagonGrid grid;
+    private HexagonGrid<Pod> grid;
+    private HexagonGrid<Pod> futureGrid;
 
     public Vector2 gridToWorld(Vector3Int hexpos)
     {

@@ -184,9 +184,12 @@ public class PlanetManager : MonoBehaviour
         return getPodAtPosition(groundPos(pos));
     }
 
-    public PodNeighborhood getNeighborhood(Vector2 pos)
+    public Neighborhood<Pod> getNeighborhood(Vector2 pos)
     {
-        PodNeighborhood neighborhood = new PodNeighborhood();
+        Neighborhood<Pod> neighborhood = new Neighborhood<Pod>(
+            new HexagonNeighborhood(),
+            null
+            );
         Vector2 gpos = groundPos(pos);
         Vector2 dir = gpos - pos;
         float angleUnit = Mathf.PI / 3;
