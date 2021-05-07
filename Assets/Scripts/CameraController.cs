@@ -15,11 +15,18 @@ public class CameraController : MonoBehaviour
 
     public void autoFrame(List<Vector2> posList)
     {
-        float minX = posList.Min(pos => pos.x);
-        float minY = posList.Min(pos => pos.y);
+        float minX = 0;
+        float minY = 0;
+        float maxX = 0;
+        float maxY = 0;
+        if (posList.Count > 0)
+        {
+            minX = posList.Min(pos => pos.x);
+            minY = posList.Min(pos => pos.y);
+            maxX = posList.Max(pos => pos.x);
+            maxY = posList.Max(pos => pos.y);
+        }
         Vector2 min = new Vector2(minX, minY);
-        float maxX = posList.Max(pos => pos.x);
-        float maxY = posList.Max(pos => pos.y);
         Vector2 max = new Vector2(maxX, maxY);
         List<Vector2> boundList = new List<Vector2>()
         {

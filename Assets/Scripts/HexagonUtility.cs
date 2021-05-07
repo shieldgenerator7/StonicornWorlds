@@ -118,7 +118,7 @@ public static class HexagonUtility
     }
 
     public static int maxRing(List<Vector3Int> vList)
-        => vList.Max(v => ring(v));
+        => (vList.Count == 0) ? -1 : vList.Max(v => ring(v));
 
     public static int ring(Vector3Int v)
         => Math.Max(Math.Abs(v.x), Math.Max(Math.Abs(v.y), Math.Abs(v.z)));
