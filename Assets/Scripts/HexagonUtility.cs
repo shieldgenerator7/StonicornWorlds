@@ -76,8 +76,8 @@ public static class HexagonUtility
         => getArea(maxRing(vList) + 1)
             .FindAll(v =>
                 !vList.Contains(v)
-                && getNeighborhood(v).neighbors.ToList()
-                    .Any(nv => vList.Contains(nv))
+                //&& getNeighborhood(v).neighbors.ToList()
+                //    .Any(nv => vList.Contains(nv))
                 );
 
     private static Vector3Int reduceAbs(Vector3Int v)
