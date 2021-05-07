@@ -58,26 +58,26 @@ public class Planet : MonoBehaviour
     private Vector2 gridToWorld(Vector3Int hexpos)
     {
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#hex-to-pixel-axial
-        float x = size * (3 / 2 * hexpos.x);
-        float y = size * (Mathf.Sqrt(3) / 2 * hexpos.x + Mathf.Sqrt(3) * hexpos.z);
+        float x = size * (3 * hexpos.x / 2);
+        float y = size * (Mathf.Sqrt(3) * hexpos.x / 2 + Mathf.Sqrt(3) * hexpos.z);
         return new Vector2(x, y) + (Vector2)transform.position;
     }
     private Vector3Int worldToGrid(Vector2 pos)
     {
         pos -= (Vector2)transform.position;
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#pixel-to-hex
-        float q = (2 / 3 * pos.x) / size;
+        float q = (2 * pos.x) / (size * 3);
         float r = (-1 * pos.x + Mathf.Sqrt(3) * pos.y) / (size * 3);
         float s = -(q + r);
 
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#rounding
-        int rx = Mathf.RoundToInt(q);
-        var ry = Mathf.RoundToInt(s);
-        var rz = Mathf.RoundToInt(r);
+        float rx = Mathf.Round(q);
+        float ry = Mathf.Round(s);
+        float rz = Mathf.Round(r);
 
-        var x_diff = Mathf.Abs(rx - q);
-        var y_diff = Mathf.Abs(ry - s);
-        var z_diff = Mathf.Abs(rz - r);
+        float x_diff = Mathf.Abs(rx - q);
+        float y_diff = Mathf.Abs(ry - s);
+        float z_diff = Mathf.Abs(rz - r);
 
         if (x_diff > y_diff && x_diff > z_diff)
         {
@@ -91,7 +91,7 @@ public class Planet : MonoBehaviour
         {
             rz = -rx - ry;
         }
-        return new Vector3Int(rx, ry, rz);
+        return new Vector3Int((int)rx, (int)ry, (int)rz);
     }
     #endregion
 }
