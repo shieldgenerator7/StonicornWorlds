@@ -6,42 +6,6 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     public float size = 0.5f;
-    public float newSize = 0.5f;
-    public Vector2 testVector;
-    private Vector2 prevTestVector;
-    public Vector3Int testVector3;
-    private Vector3Int prevTestVector3;
-
-    private void Update()
-    {
-        if (prevTestVector != testVector)
-        {
-            prevTestVector = testVector;
-            Vector3Int inV = worldToGrid(testVector);
-            Vector2 outV = gridToWorld(inV);
-            Vector3Int inV2 = worldToGrid(outV);
-            Vector2 outV2 = gridToWorld(inV2);
-            Debug.Log("TEST 232: " + testVector + " -> " + inV + " -> " + outV
-                + " -> " + inV2 + " -> " + outV2);
-        }
-        if (prevTestVector3 != testVector3)
-        {
-            prevTestVector3 = testVector3;
-            Vector2 inV = gridToWorld(testVector3);
-            Vector3Int outV = worldToGrid(inV);
-            Vector2 inV2 = gridToWorld(outV);
-            Vector3Int outV2 = worldToGrid(inV2);
-            Debug.Log("TEST 323: " + testVector3 + " -> " + inV + " -> " + outV
-                + " -> " + inV2 + " -> " + outV2);
-        }
-        if (newSize != size)
-        {
-            size = newSize;
-            grid.grid.ToList().ForEach(
-                entry => entry.Value.pos = gridToWorld(entry.Key)
-            );
-        }
-    }
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
     private HexagonGrid<Pod> grid;
@@ -51,7 +15,6 @@ public class Planet : MonoBehaviour
     {
         grid = new HexagonGrid<Pod>();
         futureGrid = new HexagonGrid<Pod>();
-        newSize = size;
     }
 
     #region Write State
