@@ -33,7 +33,7 @@ public class GrassDisplayer : MonoBehaviour
 
     void updateNeighborhood(List<Pod> pods)
     {
-        neighborhood = planetManager.getNeighborhood(transform.position);
+        neighborhood = planetManager.planet.getNeighborhood(transform.position);
         srLeft.enabled = validGround(neighborhood.groundLeft);
         srMiddle.enabled = validGround(neighborhood.ground);
         srRight.enabled = validGround(neighborhood.groundRight);

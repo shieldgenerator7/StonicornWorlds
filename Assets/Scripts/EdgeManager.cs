@@ -99,20 +99,7 @@ public class EdgeManager : MonoBehaviour
 
     void calculateEdges()
     {
-        List<Vector2> posList = pods.ConvertAll(pod => pod.pos);
-        edges = new List<Vector2>();
-        foreach (Vector2 pos in posList)
-        {
-            List<Vector2> adjs = planetManager.getAdjacentPositions(pos);
-            foreach (Vector2 adj in adjs)
-            {
-                if (!planetManager.doesListContainPosition(posList, adj, 0.1f)
-                && !planetManager.doesListContainPosition(edges, adj, 0.1f))
-                {
-                    edges.Add(adj);
-                }
-            }
-        }
+        edges = planetManager.planet.Border;
         onEdgeListChanged?.Invoke(edges);
         calculcateConvertEdges(planetManager.PodType);
     }

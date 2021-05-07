@@ -63,9 +63,9 @@ public class PlanetManager : MonoBehaviour
     private int coreCount = 0;
     public int CoreCount => coreCount;
 
-    List<Pod> pods = new List<Pod>();
+    public Planet planet;
     List<Pod> futureState = new List<Pod>();
-    public List<Pod> Pods => pods;
+    public List<Pod> Pods => planet.Pods;
     public delegate void OnPodsListChanged(List<Pod> list);
     public event OnPodsListChanged onPodsListChanged;
 
@@ -80,19 +80,15 @@ public class PlanetManager : MonoBehaviour
         Pod starter = new Pod(Vector2.zero, corePodType);
         addPod(starter);
         queueManager.onTaskCompleted += (task) => updatePlanet(task);
-        queueManager.onQueueChanged += (tasks) => futureState = queueManager.getFutureState(pods);
+        queueManager.onQueueChanged += (tasks) => futureState = queueManager.getFutureState(Pods);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }
 
     public void addPod(Pod pod)
     {
-        if (pods.Contains(pod))
-        {
-            Debug.LogError("Planet already contains pod " + pod + "!");
-            return;
-        }
-        pods.Add(pod);
+        planet.addPod(pod, pod.pos);
+        List<Pod> pods = Pods;
         coreCount = pods.FindAll(pod =>
             pod.podType == corePodType
             ).Count;
@@ -109,8 +105,7 @@ public class PlanetManager : MonoBehaviour
 
     public void convertPod(Pod newPod)
     {
-        Pod oldPod = pods.Find(p => p.pos == newPod.pos);
-        pods.Remove(oldPod);
+        planet.removePod(newPod.pos);
         addPod(newPod);
     }
 
@@ -125,7 +120,7 @@ public class PlanetManager : MonoBehaviour
                 convertPod(new Pod(task.pos, (PodType)task.taskObject));
                 break;
             case QueueTask.Type.DESTRUCT:
-                pods.Remove(getPodAtPosition(task.pos));
+                planet.removePod(task.pos);
                 break;
             case QueueTask.Type.PLANT:
                 addPodContent(
@@ -184,40 +179,6 @@ public class PlanetManager : MonoBehaviour
         return getPodAtPosition(groundPos(pos));
     }
 
-    public Neighborhood<Pod> getNeighborhood(Vector2 pos)
-    {
-        Neighborhood<Pod> neighborhood = new Neighborhood<Pod>(
-            new HexagonNeighborhood(),
-            null
-            );
-        Vector2 gpos = groundPos(pos);
-        Vector2 dir = gpos - pos;
-        float angleUnit = Mathf.PI / 3;
-        neighborhood.ground = getPodAtPosition(gpos);
-        neighborhood.groundLeft = getPodAtPosition(pos + rotateDirection(dir, -angleUnit));
-        neighborhood.groundRight = getPodAtPosition(pos + rotateDirection(dir, angleUnit));
-        neighborhood.ceiling = getPodAtPosition(pos - dir);
-        neighborhood.ceilingLeft = getPodAtPosition(pos + rotateDirection(-dir, angleUnit));
-        neighborhood.ceilingRight = getPodAtPosition(pos + rotateDirection(-dir, -angleUnit));
-        return neighborhood;
-    }
-
-    /// <summary>
-    /// Returns the given vector rotated by the given angle in radians
-    /// </summary>
-    /// <param name="dir">The vector to rotate</param>
-    /// <param name="angle">The angle of rotation in radians</param>
-    /// <returns></returns>
-    public Vector2 rotateDirection(Vector2 dir, float angle)
-    {
-        //2020-05-03: written with help from https://stackoverflow.com/a/14609567/2336212
-        float sin = Mathf.Sin(angle);
-        float cos = Mathf.Cos(angle);
-        return new Vector2(
-            (dir.x * cos) - (dir.y * sin),
-            (dir.x * sin) + (dir.y * cos)
-            ); ;
-    }
 
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
