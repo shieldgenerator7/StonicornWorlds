@@ -44,13 +44,13 @@ public class Planet : MonoBehaviour
         }
     }
 
-    private HexagonGrid grid;
-    private HexagonGrid futureGrid;
+    private HexagonGrid<Pod> grid;
+    private HexagonGrid<Pod> futureGrid;
 
     private void Awake()
     {
-        grid = new HexagonGrid();
-        futureGrid = new HexagonGrid();
+        grid = new HexagonGrid<Pod>();
+        futureGrid = new HexagonGrid<Pod>();
         newSize = size;
     }
 
@@ -83,7 +83,7 @@ public class Planet : MonoBehaviour
     public Vector2 getGroundPos(Vector2 pos)
         => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
 
-    public Neighborhood getNeighborhood(Vector2 pos)
+    public Neighborhood<Pod> getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
 
     public List<Pod> Pods

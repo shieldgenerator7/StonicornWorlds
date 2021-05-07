@@ -5,34 +5,33 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class HexagonGrid
+public class HexagonGrid<T>
 {
     /*
      * 2021-05-06 Developed using recommendations from https://www.redblobgames.com/grids/hexagons/#basics
      * Uses Cube Coordinates, hence the Vector3Int
     */
 
-    Dictionary<Vector3Int, Pod> grid = new Dictionary<Vector3Int, Pod>();
+    Dictionary<Vector3Int, T> grid = new Dictionary<Vector3Int, T>();
 
-    public void add(Pod pod, Vector3Int pos)
+    public void add(T t, Vector3Int pos)
     {
-        grid[pos] = pod;
+        grid[pos] = t;
     }
 
     public void removeAt(Vector3Int pos)
     {
-        grid[pos] = null;
+        grid[pos] = default(T);
     }
+    public T get(Vector3Int pos)
+        => (grid.ContainsKey(pos)) ? grid[pos] : default(T);
 
-    public Pod get(Vector3Int pos)
-        => (grid.ContainsKey(pos)) ? grid[pos] : null;
-
-    public Pod getGround(Vector3Int pos)
+    public T getGround(Vector3Int pos)
         => get(HexagonUtility.getGroundPos(pos));
 
-    public Neighborhood getNeighborhood(Vector3Int pos)
+    public Neighborhood<T> getNeighborhood(Vector3Int pos)
     {
-        return new Neighborhood(
+        return new Neighborhood<T>(
             HexagonUtility.getNeighborhood(pos),
             this
             );
@@ -41,6 +40,6 @@ public class HexagonGrid
     public List<Vector3Int> getBorder()
         => HexagonUtility.getBorder(grid.Keys.ToList());
 
-    public static implicit operator List<Pod>(HexagonGrid hg)
+    public static implicit operator List<T>(HexagonGrid<T> hg)
         => hg.grid.Values.ToList();
 }
