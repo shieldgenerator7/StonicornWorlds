@@ -18,9 +18,9 @@ public class PodContent
         this.container.podContents.Add(this);
     }
 
-    public void inflate(Pod container)
+    public PodContent Clone(Pod clonePod)
     {
-        this.container = container;
-        this.contentType = Resources.Load<PodContentType>("PodContentTypes/" + contentTypeName);
+        PodContent clone = new PodContent(this.contentType, clonePod);
+        return clone;
     }
 }

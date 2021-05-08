@@ -213,10 +213,10 @@ public class PlanetManager : MonoBehaviour
                             );
                         break;
                     case QueueTask.Type.PLANT:
-                        //Pod pod = futurePlanet.getPod(task.pos);
-                        //pod.podContents.Add(
-                        //    new PodContent((PodContentType)task.taskObject, pod)
-                        //    );
+                        Pod pod = futurePlanet.getPod(task.pos);
+                        pod.podContents.Add(
+                            new PodContent((PodContentType)task.taskObject, pod)
+                            );
                         break;
                     default:
                         Debug.LogError("No case for value: " + task.type);

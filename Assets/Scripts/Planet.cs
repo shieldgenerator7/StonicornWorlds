@@ -98,58 +98,8 @@ public class Planet
     public Planet deepCopy()
     {
         Planet planet = new Planet();
-        Pods.ForEach(pod => planet.grid.add(pod, worldToGrid(pod.pos)));
-        //Planet planet = JsonUtility.FromJson<Planet>(JsonUtility.ToJson(this));
-        //planet.Pods.ForEach(pod => pod.inflate());
+        Pods.ConvertAll(pod => pod.Clone())
+            .ForEach(pod => planet.grid.add(pod, worldToGrid(pod.pos)));
         return planet;
-        //return (Planet)FromBinary(ToBinary(this));
     }
-
-    #region deep copy
-    //2021-05-06: copied from https://stackoverflow.com/a/140279/2336212
-    public static Byte[] ToBinary(Planet planet)
-    {
-        MemoryStream ms = null;
-        Byte[] byteArray = null;
-        try
-        {
-            BinaryFormatter serializer = new BinaryFormatter();
-            ms = new MemoryStream();
-            serializer.Serialize(ms, planet);
-            byteArray = ms.ToArray();
-        }
-        catch (Exception unexpected)
-        {
-            Debug.LogError(unexpected.Message);
-            throw;
-        }
-        finally
-        {
-            if (ms != null)
-                ms.Close();
-        }
-        return byteArray;
-    }
-
-    public static object FromBinary(Byte[] buffer)
-    {
-        MemoryStream ms = null;
-        object deserializedObject = null;
-
-        try
-        {
-            BinaryFormatter serializer = new BinaryFormatter();
-            ms = new MemoryStream();
-            ms.Write(buffer, 0, buffer.Length);
-            ms.Position = 0;
-            deserializedObject = serializer.Deserialize(ms);
-        }
-        finally
-        {
-            if (ms != null)
-                ms.Close();
-        }
-        return deserializedObject;
-    }
-    #endregion
 }

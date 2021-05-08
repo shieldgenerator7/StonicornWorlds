@@ -18,10 +18,11 @@ public class Pod
         this.podTypeName = podType.name;
     }
 
-    public void inflate()
+    public Pod Clone()
     {
-        this.podType = Resources.Load<PodType>("PodTypes/" + podTypeName);
-        podContents.ForEach(pc => pc.inflate(this));
+        Pod clone = new Pod(this.pos, this.podType);
+        clone.podContents = podContents.ConvertAll(content => content.Clone(clone));
+        return clone;
     }
 
     public override string ToString()
