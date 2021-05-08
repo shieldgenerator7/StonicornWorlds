@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.28773582
       objectReference: {fileID: 0}
+    - target: {fileID: 5866696849467336152, guid: d61621d29792bbc4080235f73e5bb7cc, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8810947915405303633, guid: d61621d29792bbc4080235f73e5bb7cc, type: 3}
       propertyPath: m_Name
       value: Pod Sky
