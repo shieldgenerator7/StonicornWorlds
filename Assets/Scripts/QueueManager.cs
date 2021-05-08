@@ -22,7 +22,7 @@ public class QueueManager : MonoBehaviour
         queue.Add(task);
         callOnQueueChanged();
     }
-    private void callOnQueueChanged()
+    public void callOnQueueChanged()
     {
         onQueueChanged?.Invoke(queue);
     }
