@@ -8,6 +8,10 @@ public static class HexagonUtility
 {
     public static Vector3Int getGroundPos(Vector3Int pos)
     {
+        if (pos == Vector3Int.zero)
+        {
+            return new Vector3Int(0, -1, 1);
+        }
         Vector3Int groundPos = reduceAbs(pos);
         if (pos.x == 0)
         {

@@ -24,6 +24,7 @@ public class Planet
         Vector3Int hexpos = worldToGrid(pos);
         pod.pos = gridToWorld(hexpos);
         grid.add(pod, worldToGrid(pos));
+        fillSpaceAround(pod.pos);
         onStateChanged?.Invoke(this);
     }
 
@@ -31,6 +32,25 @@ public class Planet
     {
         grid.removeAt(worldToGrid(pos));
         onStateChanged?.Invoke(this);
+    }
+
+    private void fillSpaceAround(Vector2 pos)
+    {
+        Vector3Int hexpos = worldToGrid(pos);
+        List<Vector3Int> emptySpaces = HexagonUtility.getNeighborhood(hexpos).neighbors.ToList()
+            .FindAll(
+                v => grid.get(v) == null
+            );
+        if (emptySpaces.Count > 0)
+        {
+            PodType space = Resources.Load<PodType>("PodTypes/Space");
+            emptySpaces.ForEach(v =>
+                grid.add(
+                    new Pod(gridToWorld(v), space),
+                    v
+                    )
+            );
+        }
     }
     #endregion
 
@@ -51,7 +71,9 @@ public class Planet
         => grid;
 
     public List<Vector2> Border
-        => grid.getBorder().ConvertAll(v => gridToWorld(v));
+        => Pods.FindAll(pod => pod.podType.typeName == "Space")
+        .ConvertAll(pod => pod.pos);
+    //=> grid.getBorder().ConvertAll(v => gridToWorld(v));
     #endregion
 
     #region Grid Conversion
