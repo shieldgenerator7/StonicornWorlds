@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class SkySpreader : MonoBehaviour
 {
+    public float diffusionRate = 5;
+    public float minAmount = 10;//min pressure amount to start diffusing
+
     public PlanetManager planetManager;
     public PodContentType skyPodContentType;
     public PodType waterPodType;
@@ -14,44 +17,87 @@ public class SkySpreader : MonoBehaviour
     void Update()
     {
         bool filledAny = false;
+
+        planetManager.planet.Pods
+            .FindAll(pod => pod.podType == spacePodType
+            && currentPressure(pod) > 0)
+            .ForEach(pod => filledAny = diffuse(pod) || filledAny);
+
         planetManager.planet.Pods.FindAll(pod => pod.podType == waterPodType)
-            .ForEach(pod => filledAny = fillWithAir(pod.pos) || filledAny);
+            .ForEach(pod => filledAny = diffuse(pod) || filledAny);
+
         if (filledAny)
         {
             planetManager.queueManager.callOnQueueChanged();
         }
     }
 
-    bool fillWithAir(Vector2 pos)
+    bool diffuse(Pod pod)
     {
-        bool filledAny = false;
-        List<Pod> spaces = planetManager.planet.getNeighborhood(pos).neighbors.ToList()
-            .FindAll(pod => pod && pod.podType == spacePodType);
-        spaces.FindAll(pod => pod &&
-           pod.podContents.Any(pc => pc.contentType == skyPodContentType)
-           )
-           .ForEach(pod => filledAny = fillWithAirSecondary(pod.pos) || filledAny);
-        spaces.ForEach(pod => filledAny = fillWithAir(pod) || filledAny);
-        return filledAny;
+        float diffuseAmount = 0;
+        if (pod.podType == spacePodType)
+        {
+            diffuseAmount = diffuse(pod.pos, currentPressure(pod));
+            adjustPressure(pod, diffuseAmount);
+        }
+        else if (pod.podType == waterPodType)
+        {
+            diffuseAmount = diffuse(pod.pos, 200);
+        }
+        return diffuseAmount > 0;
     }
-    bool fillWithAirSecondary(Vector2 pos)
+
+    float diffuse(Vector2 pos, float curAmount)
     {
-        bool filledAny = false;
+        if (curAmount < minAmount)
+        {
+            return 0;
+        }
         List<Pod> spaces = planetManager.planet.getNeighborhood(pos).neighbors.ToList()
-            .FindAll(pod => pod && pod.podType == spacePodType);
-        spaces.ForEach(pod => filledAny = fillWithAir(pod) || filledAny);
-        return filledAny;
+            .FindAll(pod =>
+                pod && pod.podType == spacePodType
+                && currentPressure(pod) <= curAmount / 2
+                );
+        spaces.ForEach(pod => fillWithAir(pod));
+        return spaces.Count * diffusionRate * Time.deltaTime;
+    }
+
+    PodContent getSky(Pod pod)
+        => pod.podContents.FirstOrDefault(pc => pc.contentType == skyPodContentType);
+
+    float currentPressure(Pod pod)
+    {
+        PodContent content = getSky(pod);
+        if (content)
+        {
+            return content.Var;
+        }
+        return 0;
+    }
+
+    void adjustPressure(Pod pod, float delta)
+    {
+        PodContent content = getSky(pod);
+        if (content)
+        {
+            content.Var += delta;
+        }
     }
 
     bool fillWithAir(Pod pod)
     {
-        if (!pod.podContents.Any(pc => pc.contentType == skyPodContentType))
+        PodContent content = pod.podContents.FirstOrDefault(
+            pc => pc.contentType == skyPodContentType
+            );
+        if (!content)
         {
-            PodContent pc = new PodContent(skyPodContentType, pod);
-            pod.podContents.Add(pc);
-            planetManager.addPodContent(pc);
+            content = new PodContent(skyPodContentType, pod);
+            pod.podContents.Add(content);
+            planetManager.addPodContent(content);
+            content.Var = 0;
             return true;
         }
+        content.Var += diffusionRate * Time.deltaTime;
         return false;
     }
 }

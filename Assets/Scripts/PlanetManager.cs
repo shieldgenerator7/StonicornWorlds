@@ -97,6 +97,12 @@ public class PlanetManager : MonoBehaviour
             pod.podType == corePodType
             ).Count;
         onPodsListChanged?.Invoke(pods);
+        podContents = new List<PodContent>();
+        pods.ForEach(
+            pod => pod.podContents.ForEach(
+                pc => podContents.Add(pc)
+                )
+            ); ;
         onPodContentsListChanged?.Invoke(podContents);
     }
 
