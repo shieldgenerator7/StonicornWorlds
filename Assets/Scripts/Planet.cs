@@ -67,6 +67,10 @@ public class Planet
     public Neighborhood<Pod> getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
 
+    public List<Vector2> getEmptyNeighborhood(Vector2 pos)
+        => grid.getEmptyNeighborhood(worldToGrid(pos))
+            .ConvertAll(v => gridToWorld(v));
+
     public List<Pod> Pods
         => grid;
 

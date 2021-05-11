@@ -38,7 +38,7 @@ public class SkySpreader : MonoBehaviour
         if (pod.podType == spacePodType)
         {
             diffuseAmount = diffuse(pod.pos, currentPressure(pod));
-            adjustPressure(pod, diffuseAmount);
+            adjustPressure(pod, -diffuseAmount);
         }
         else if (pod.podType == waterPodType)
         {
@@ -53,10 +53,17 @@ public class SkySpreader : MonoBehaviour
         {
             return 0;
         }
+        planetManager.planet.getEmptyNeighborhood(pos)
+            .ForEach(
+                v => planetManager.planet.addPod(
+                    new Pod(v, spacePodType),
+                    v
+                    )
+            );
         List<Pod> spaces = planetManager.planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
                 pod && pod.podType == spacePodType
-                && currentPressure(pod) <= curAmount / 2
+                && currentPressure(pod) < curAmount / 2
                 );
         spaces.ForEach(pod => fillWithAir(pod));
         return spaces.Count * diffusionRate * Time.deltaTime;

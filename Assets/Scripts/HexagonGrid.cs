@@ -37,6 +37,10 @@ public class HexagonGrid<T>
             );
     }
 
+    public List<Vector3Int> getEmptyNeighborhood(Vector3Int pos)
+        => HexagonUtility.getNeighborhood(pos).neighbors.ToList()
+            .FindAll(v => !grid.ContainsKey(v));
+
     public List<Vector3Int> getBorder()
         => HexagonUtility.getBorder(grid.Keys.ToList());
 
