@@ -21,8 +21,7 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         Managers.Planet.planet.onStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
-        Managers.Edge.onEdgeListChanged += updateAddDisplay;
-        Managers.Edge.onConvertEdgeListChanged += updateConvertDisplay;
+        Managers.Edge.onValidPositionListChanged += updateEditDisplay;
     }
 
     public void updateDisplay(Planet p)
@@ -60,7 +59,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 goPodContents.Add(go);
             });
     }
-    public void updateAddDisplay(List<Vector2> edges)
+    public void updateEditDisplay(List<Vector2> edges)
     {
         //Update add pod UI
         addPods.ForEach(go => Destroy(go));

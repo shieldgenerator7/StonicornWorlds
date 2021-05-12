@@ -8,6 +8,6 @@ public class ToolActionButton : ToolButton
 
     public override void activate()
     {
-        Managers.Input.toolAction = toolAction;
+        Managers.Input.ToolAction = toolAction;
     }
 }

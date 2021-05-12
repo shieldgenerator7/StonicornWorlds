@@ -37,7 +37,19 @@ public class InputManager : MonoBehaviour
     public PodType PodType { get; private set; }
     public PodContentType PodContentType { get; private set; }
 
-    public ToolAction toolAction;
+    [SerializeField]
+    private ToolAction toolAction;
+    public ToolAction ToolAction
+    {
+        get => toolAction;
+        set
+        {
+            toolAction = value;
+            onToolActionChanged?.Invoke(toolAction);
+        }
+    }
+    public delegate void OnToolActionChanged(ToolAction toolAction);
+    public event OnToolActionChanged onToolActionChanged;
 
     private bool buttonActivation = false;
 
