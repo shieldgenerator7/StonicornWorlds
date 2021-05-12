@@ -50,7 +50,7 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
+    public List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
 
     void Start()
     {

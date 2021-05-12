@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlantAction : ToolAction
 {
+    public override Color color => Managers.Input.PodContentType.uiColor;
+
     public override void takeAction(List<Vector2> posList)
     {
         posList.FindAll(pos => isActionValidAt(pos))

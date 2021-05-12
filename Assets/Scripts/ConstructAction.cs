@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ConstructAction : ToolAction
 {
+    public override Color color => Managers.Input.PodType.uiColor;
+
     public override void takeAction(List<Vector2> posList)
     {
         posList.FindAll(pos => isActionValidAt(pos))

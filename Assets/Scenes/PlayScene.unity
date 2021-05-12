@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95ef8e5531089143b0aa4f289e47a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preview: {fileID: 21300000, guid: 82f7bb351ba55664fb9a74175ece4f99, type: 3}
 --- !u!4 &207610544
 Transform:
   m_ObjectHideFlags: 0
@@ -951,10 +952,14 @@ PrefabInstance:
     - target: {fileID: 4744040802469672528, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: db1aaa42c09bb73409d188e3c475b64d, type: 3}
+      objectReference: {fileID: 21300000, guid: d5d7d0246b840a14fb68c35cb1ecf4b9, type: 3}
     - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Name
       value: btn Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Pivot.x
@@ -1082,7 +1087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f76a7f4d9e4024f80c5f81137d19fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeManager: {fileID: 752787615}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1169,6 +1173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a48f9ce1004544a9660f877ceb2712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preview: {fileID: 21300000, guid: d5d7d0246b840a14fb68c35cb1ecf4b9, type: 3}
 --- !u!4 &673603989
 Transform:
   m_ObjectHideFlags: 0
@@ -1488,7 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35ce9e699891dc47b31ea5095b80a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
+  editPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
   convertPodPrefab: {fileID: 8438424779451882234, guid: c8e27c85676f17b4db08c04dea457928, type: 3}
   plantPodPrefab: {fileID: 8438424779451882234, guid: a2ec63a765b58174f983c7413896fb1f, type: 3}
   txtResources: {fileID: 1131049490}
@@ -1504,8 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707a2ab29b9a1dd4b8f5c5fae4ac1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edges: []
-  convertEdges: []
+  validPosList: []
 --- !u!114 &752787616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,6 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1151d3d2b7d971e488651eed6cacfc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preview: {fileID: 21300000, guid: db1aaa42c09bb73409d188e3c475b64d, type: 3}
 --- !u!1 &1131049488
 GameObject:
   m_ObjectHideFlags: 0
