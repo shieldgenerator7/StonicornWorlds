@@ -11,7 +11,7 @@ public class ConstructTool : PlanetObjectTypeTool
             edge => Managers.Planet.checkAddPodUI(pos, edge)
             );
         if (clickedUI != Vector2.zero
-            && Managers.Planet.PlanetObjectType is PodType pt
+            && Managers.Input.PlanetObjectType is PodType pt
             && Managers.Planet.canBuildAtPosition(
                 pt,
                 pos

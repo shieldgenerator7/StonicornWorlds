@@ -5,20 +5,7 @@ using UnityEngine;
 
 public class PlanetManager : MonoBehaviour
 {
-    public float resourceCapPerCore = 700;
-    [SerializeField]
-    private PlanetObjectType planetObjectType;
-    public PlanetObjectType PlanetObjectType
-    {
-        get => planetObjectType;
-        set
-        {
-            planetObjectType = value;
-            onPlanetObjectTypeChanged?.Invoke(planetObjectType);
-        }
-    }
-    public delegate void OnPlanetObjectTypeChanged(PlanetObjectType planetObjectType);
-    public event OnPlanetObjectTypeChanged onPlanetObjectTypeChanged;
+    public float resourceCapPerCore = 700;    
 
     float resources;
     public float Resources

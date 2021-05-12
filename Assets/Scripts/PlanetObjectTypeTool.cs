@@ -8,6 +8,6 @@ public abstract class PlanetObjectTypeTool : Tool
 
     public override void activate()
     {
-        Managers.Planet.PlanetObjectType = planetObjectType;
+        Managers.Input.PlanetObjectType = planetObjectType;
     }
 }

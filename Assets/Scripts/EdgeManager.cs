@@ -14,7 +14,7 @@ public class EdgeManager : MonoBehaviour
         Managers.Planet.onPodsListChanged += addPod;
         Managers.Planet.onPodContentsListChanged += addPodContent;
         Managers.Queue.onQueueChanged += queueUpdated;
-        Managers.Planet.onPlanetObjectTypeChanged += calculateConvertEdgesNew;
+        Managers.Input.onPlanetObjectTypeChanged += calculateConvertEdgesNew;
     }
 
     // Update is called once per frame
@@ -95,7 +95,7 @@ public class EdgeManager : MonoBehaviour
     {
         edges = Managers.Planet.futurePlanet.Border;
         onEdgeListChanged?.Invoke(edges);
-        calculateConvertEdgesNew(Managers.Planet.PlanetObjectType);
+        calculateConvertEdgesNew(Managers.Input.PlanetObjectType);
     }
     public delegate void OnPositionListChanged(List<Vector2> edges);
     public event OnPositionListChanged onEdgeListChanged;

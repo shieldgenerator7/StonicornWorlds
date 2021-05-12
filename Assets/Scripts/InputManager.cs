@@ -9,6 +9,31 @@ public class InputManager : MonoBehaviour
     Tool tool;
     public List<Tool> tools;
 
+    [SerializeField]
+    private PlanetObjectType planetObjectType;
+    public PlanetObjectType PlanetObjectType
+    {
+        get => planetObjectType;
+        set
+        {
+            planetObjectType = value;
+            if (planetObjectType is PodType pt)
+            {
+                PodType = pt;
+            }
+            else if (planetObjectType is PodContentType pct)
+            {
+                PodContentType = pct;
+            }
+            onPlanetObjectTypeChanged?.Invoke(planetObjectType);
+        }
+    }
+    public delegate void OnPlanetObjectTypeChanged(PlanetObjectType planetObjectType);
+    public event OnPlanetObjectTypeChanged onPlanetObjectTypeChanged;
+
+    public PodType PodType { get; private set; }
+    public PodContentType PodContentType { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
