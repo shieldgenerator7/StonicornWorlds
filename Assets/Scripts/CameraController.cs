@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     public void autoFrame(List<Vector2> posList)
     {
         //override the posList value
-        posList = Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.pos);
+        posList.AddRange(Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.pos));
         //
         float minX = 0;
         float minY = 0;
