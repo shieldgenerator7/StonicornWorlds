@@ -19,20 +19,18 @@ public class PlanetManagerEffects : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Managers.Planet.onPodsListChanged += updateDisplay;
-        Managers.Planet.onPodContentsListChanged += updateDisplay;
-        Managers.Input.onPlanetObjectTypeChanged += updateEdgeTypesNew;
+        Managers.Planet.planet.onStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onEdgeListChanged += updateAddDisplay;
         Managers.Edge.onConvertEdgeListChanged += updateConvertDisplay;
     }
 
-    public void updateDisplay(List<Pod> pods)
+    public void updateDisplay(Planet p)
     {
         //Update pods
         goPods.ForEach(go => Destroy(go));
         goPods.Clear();
-        pods.ForEach(pod =>
+        p.PodsAll.ForEach(pod =>
             {
                 GameObject go = Instantiate(
                     pod.podType.prefab,

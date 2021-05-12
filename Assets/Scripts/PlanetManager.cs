@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlanetManager : MonoBehaviour
 {
-    public float resourceCapPerCore = 700;    
+    public float resourceCapPerCore = 700;
 
     float resources;
     public float Resources
@@ -23,25 +23,21 @@ public class PlanetManager : MonoBehaviour
     public float ResourceCap => CoreCount * resourceCapPerCore;
 
     private int coreCount = 0;
-    public int CoreCount => coreCount;
+    private int CoreCount => coreCount;
 
     public Planet planet;
     public Planet futurePlanet { get; set; }
 
-    public delegate void OnPodsListChanged(List<Pod> list);
-    public event OnPodsListChanged onPodsListChanged;
-
     List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
-    public delegate void OnPodContentsListChanged(List<PodContent> list);
-    public event OnPodContentsListChanged onPodContentsListChanged;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         planet = new Planet();
         planet.position = Vector2.zero;
         futurePlanet = planet;
+    }
+    void Start()
+    {
         Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
         addPod(starter);
         calculateFutureState(new List<QueueTask>());
@@ -54,22 +50,19 @@ public class PlanetManager : MonoBehaviour
     public void addPod(Pod pod)
     {
         planet.addPod(pod, pod.pos);
-        List<Pod> pods = planet.PodsAll;
         coreCount = planet.Pods(Managers.PodTypeBank.corePodType).Count;
-        onPodsListChanged?.Invoke(pods);
         podContents = new List<PodContent>();
-        pods.ForEach(
+        planet.PodsAll.ForEach(
             pod => pod.podContents.ForEach(
                 pc => podContents.Add(pc)
                 )
-            ); ;
-        onPodContentsListChanged?.Invoke(podContents);
+            );
     }
 
     public void addPodContent(PodContent podContent)
     {
         podContents.Add(podContent);
-        onPodContentsListChanged?.Invoke(podContents);
+        planet.podContentAdded();
     }
 
     public void convertPod(Pod newPod)

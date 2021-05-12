@@ -20,20 +20,20 @@ public class GrassDisplayer : MonoBehaviour
     void Start()
     {
         planetManager = FindObjectOfType<PlanetManager>();
-        planetManager.onPodsListChanged += updateNeighborhood;
-        updateNeighborhood(null);
+        planetManager.planet.onStateChanged += updateNeighborhood;
+        updateNeighborhood(Managers.Planet.planet);
     }
     private void OnDestroy()
     {
         if (planetManager)
         {
-            planetManager.onPodsListChanged -= updateNeighborhood;
+            planetManager.planet.onStateChanged -= updateNeighborhood;
         }
     }
 
-    void updateNeighborhood(List<Pod> pods)
+    void updateNeighborhood(Planet p)
     {
-        neighborhood = planetManager.planet.getNeighborhood(transform.position);
+        neighborhood = p.getNeighborhood(transform.position);
         srLeft.enabled = validGround(neighborhood.groundLeft);
         srMiddle.enabled = validGround(neighborhood.ground);
         srRight.enabled = validGround(neighborhood.groundRight);

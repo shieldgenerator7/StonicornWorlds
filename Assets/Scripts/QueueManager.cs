@@ -29,7 +29,7 @@ public class QueueManager : MonoBehaviour
 
     private void Awake()
     {
-        Managers.Planet.onPodsListChanged += updateQueueWorkerList;
+        Managers.Planet.planet.onStateChanged += updateQueueWorkerList;
     }
 
     // Update is called once per frame
@@ -70,9 +70,9 @@ public class QueueManager : MonoBehaviour
         }
     }
 
-    void updateQueueWorkerList(List<Pod> pods)
+    void updateQueueWorkerList(Planet p)
     {
-        int queueCount = Managers.Planet.CoreCount;
+        int queueCount = p.Pods(Managers.PodTypeBank.corePodType).Count;
         while (queueCount > workers.Count)
         {
             QueueWorker worker = gameObject.AddComponent<QueueWorker>();

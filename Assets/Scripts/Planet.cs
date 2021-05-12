@@ -41,6 +41,11 @@ public class Planet
         onStateChanged?.Invoke(this);
     }
 
+    public void podContentAdded()
+    {
+        onStateChanged?.Invoke(this);
+    }
+
     private void fillSpaceAround(Vector2 pos)
     {
         Vector3Int hexpos = worldToGrid(pos);

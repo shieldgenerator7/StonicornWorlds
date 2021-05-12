@@ -9,7 +9,7 @@ public class ProgressionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Planet.onPodsListChanged += (pods) => checkAllProgression();
+        Managers.Planet.planet.onStateChanged += (p) => checkAllProgression();
         Managers.Planet.onResourcesChanged += (resources) => checkAllProgression();
         checkAllProgression();
     }
