@@ -8,7 +8,7 @@ public class SingleEditTool : Tool
     public override void inputDown(Vector2 pos)
     {
         Managers.Input.ToolAction.takeAction(new List<Vector2>() {
-            Managers.Planet.planet.getHexPos(pos)
+            Managers.Planet.Planet.getHexPos(pos)
         });
     }
 

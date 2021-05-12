@@ -10,16 +10,19 @@ public class EdgeManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Managers.Planet.planet.onStateChanged += (pods) => calculateValidPosList();
+        Managers.Planet.onFuturePlanetSwapped += (fp) => calculateValidPosList();
         Managers.Queue.onQueueChanged += (tasks) => calculateValidPosList();
         Managers.Input.onPlanetObjectTypeChanged += (pot) => calculateValidPosList();
         Managers.Input.onToolActionChanged += (ta) => calculateValidPosList();
-        calculateValidPosList();
+        if (Managers.Planet.FuturePlanet != null)
+        {
+            calculateValidPosList();
+        }
     }
 
     private void calculateValidPosList()
     {
-        validPosList = Managers.Planet.futurePlanet.PodsAll
+        validPosList = Managers.Planet.FuturePlanet.PodsAll
             .ConvertAll(pod => pod.pos)
             .FindAll(pos => Managers.Input.ToolAction.isActionValidAt(pos));
         onValidPositionListChanged?.Invoke(validPosList);

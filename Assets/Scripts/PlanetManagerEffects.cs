@@ -19,7 +19,8 @@ public class PlanetManagerEffects : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Managers.Planet.planet.onStateChanged += updateDisplay;
+        Managers.Planet.onPlanetSwapped +=
+            (planet) => planet.onStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onValidPositionListChanged += updateEditDisplay;
     }

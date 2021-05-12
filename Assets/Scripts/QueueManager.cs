@@ -29,7 +29,8 @@ public class QueueManager : MonoBehaviour
 
     private void Awake()
     {
-        Managers.Planet.planet.onStateChanged += updateQueueWorkerList;
+        Managers.Planet.onPlanetSwapped +=
+           planet => planet.onStateChanged += updateQueueWorkerList;
     }
 
     // Update is called once per frame

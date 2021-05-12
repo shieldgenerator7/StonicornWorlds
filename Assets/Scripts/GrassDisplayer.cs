@@ -20,14 +20,14 @@ public class GrassDisplayer : MonoBehaviour
     void Start()
     {
         planetManager = FindObjectOfType<PlanetManager>();
-        planetManager.planet.onStateChanged += updateNeighborhood;
-        updateNeighborhood(Managers.Planet.planet);
+        planetManager.Planet.onStateChanged += updateNeighborhood;
+        updateNeighborhood(Managers.Planet.Planet);
     }
     private void OnDestroy()
     {
         if (planetManager)
         {
-            planetManager.planet.onStateChanged -= updateNeighborhood;
+            planetManager.Planet.onStateChanged -= updateNeighborhood;
         }
     }
 

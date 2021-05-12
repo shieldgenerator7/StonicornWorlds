@@ -23,11 +23,11 @@ public class SkySpreader : MonoBehaviour
     {
         bool filledAny = false;
 
-        Managers.Planet.planet.Pods(Managers.PodTypeBank.spacePodType)
+        Managers.Planet.Planet.Pods(Managers.PodTypeBank.spacePodType)
             .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
-        Managers.Planet.planet.Pods(waterPodType)
+        Managers.Planet.Planet.Pods(waterPodType)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
         if (filledAny)
@@ -57,14 +57,14 @@ public class SkySpreader : MonoBehaviour
         {
             return 0;
         }
-        Managers.Planet.planet.getEmptyNeighborhood(pos)
+        Managers.Planet.Planet.getEmptyNeighborhood(pos)
             .ForEach(
-                v => Managers.Planet.planet.addPod(
+                v => Managers.Planet.Planet.addPod(
                     new Pod(v, Managers.PodTypeBank.spacePodType),
                     v
                     )
             );
-        List<Pod> spaces = Managers.Planet.planet.getNeighborhood(pos).neighbors.ToList()
+        List<Pod> spaces = Managers.Planet.Planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
                 pod && pod.podType == Managers.PodTypeBank.spacePodType
                 && currentPressure(pod) < curAmount * giveThresholdFactor

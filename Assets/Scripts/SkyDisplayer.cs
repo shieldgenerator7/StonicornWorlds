@@ -13,7 +13,7 @@ public class SkyDisplayer : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        content = FindObjectOfType<PlanetManager>().planet.getPod(transform.position)
+        content = Managers.Planet.Planet.getPod(transform.position)
             .podContents.Find(content => content.contentType == contentType);
         Update();
     }

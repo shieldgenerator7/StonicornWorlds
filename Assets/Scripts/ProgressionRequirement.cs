@@ -12,7 +12,7 @@ public class ProgressionRequirement
 
     public bool checkProgression()
     {
-        if (Managers.Planet.planet.Pods(podType).Count >= count
+        if (Managers.Planet.Planet.Pods(podType).Count >= count
             && Managers.Planet.Resources >= resourceRequirement)
         {
             button.gameObject.SetActive(true);

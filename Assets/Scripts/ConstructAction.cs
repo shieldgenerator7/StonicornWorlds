@@ -11,7 +11,7 @@ public class ConstructAction : ToolAction
     }
 
     public override bool isActionValidAt(Vector2 pos)
-        => !Managers.Planet.futurePlanet.hasPod(pos)
+        => !Managers.Planet.FuturePlanet.hasPod(pos)
         && Managers.Planet.canBuildAtPosition(Managers.Input.PodType, pos);
 
     void takeAction(Vector2 pos)

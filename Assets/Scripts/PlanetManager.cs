@@ -25,19 +25,39 @@ public class PlanetManager : MonoBehaviour
     private int coreCount = 0;
     private int CoreCount => coreCount;
 
-    public Planet planet;
-    public Planet futurePlanet { get; set; }
+    private Planet planet;
+    public Planet Planet
+    {
+        get => planet;
+        set
+        {
+            planet = value;
+            onPlanetSwapped?.Invoke(planet);
+        }
+    }
+    public delegate void OnPlanetSwapped(Planet p);
+    public event OnPlanetSwapped onPlanetSwapped;
+    public event OnPlanetSwapped onFuturePlanetSwapped;
+
+    private Planet futurePlanet;
+    public Planet FuturePlanet
+    {
+        get => futurePlanet;
+        set
+        {
+            futurePlanet = value;
+            onFuturePlanetSwapped?.Invoke(futurePlanet);
+        }
+    }
 
     List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
 
-    void Awake()
-    {
-        planet = new Planet();
-        planet.position = Vector2.zero;
-        futurePlanet = planet;
-    }
     void Start()
     {
+        Planet p = new Planet();
+        p.position = Vector2.zero;
+        this.Planet = p;
+        FuturePlanet = planet;
         Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
         addPod(starter);
         calculateFutureState(new List<QueueTask>());
@@ -159,20 +179,20 @@ public class PlanetManager : MonoBehaviour
     #region Predict State
     public void calculateFutureState(List<QueueTask> queue)
     {
-        futurePlanet = planet.deepCopy();
+        Planet fp = planet.deepCopy();
         queue.ForEach(task =>
             {
                 switch (task.type)
                 {
                     case QueueTask.Type.CONSTRUCT:
                     case QueueTask.Type.CONVERT:
-                        futurePlanet.addPod(
+                        fp.addPod(
                             new Pod(task.pos, (PodType)task.taskObject),
                             task.pos
                             );
                         break;
                     case QueueTask.Type.PLANT:
-                        Pod pod = futurePlanet.getPod(task.pos);
+                        Pod pod = fp.getPod(task.pos);
                         pod.podContents.Add(
                             new PodContent((PodContentType)task.taskObject, pod)
                             );
@@ -183,6 +203,7 @@ public class PlanetManager : MonoBehaviour
                 }
             }
             );
+        FuturePlanet = fp;
     }
     #endregion
 }
