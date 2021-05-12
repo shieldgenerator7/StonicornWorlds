@@ -6,17 +6,19 @@ public class ConvertAction : ToolAction
 {
     public override void takeAction(List<Vector2> posList)
     {
-        if (Managers.Input.PlanetObjectType is PodType pt)
-        {
-            posList.FindAll(pos => Managers.Planet.canBuildAtPosition(pt, pos))
-                .ForEach(pos => takeAction(pos, pt));
-        }
+        posList.FindAll(pos => isActionValidAt(pos))
+            .ForEach(pos => takeAction(pos));
     }
-    private void takeAction(Vector2 pos, PodType pt)
+
+    public override bool isActionValidAt(Vector2 pos)
+        => Managers.Planet.futurePlanet.hasPod(pos)
+        && Managers.Planet.canBuildAtPosition(Managers.Input.PodType, pos);
+
+    private void takeAction(Vector2 pos)
     {
         Managers.Queue.addToQueue(
             new QueueTask(
-                pt,
+                Managers.Input.PodType,
                 pos,
                 QueueTask.Type.CONVERT
                 )

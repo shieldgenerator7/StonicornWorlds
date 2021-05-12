@@ -63,8 +63,17 @@ public class Planet
     #endregion
 
     #region Read State
+    public Vector2 getHexPos(Vector2 pos)
+        => gridToWorld(worldToGrid(pos));
+
     public Pod getPod(Vector2 pos)
         => grid.get(worldToGrid(pos));
+
+    public bool hasPod(Vector2 pos)
+    {
+        Pod pod = getPod(pos);
+        return pod && pod.podType != Managers.PodTypeBank.spacePodType;
+    }
 
     public Pod getGroundPod(Vector2 pos)
         => grid.getGround(worldToGrid(pos));
