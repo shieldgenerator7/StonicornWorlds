@@ -36,7 +36,7 @@ public class PlanetManagerEffects : MonoBehaviour
         pods.ForEach(pod =>
             {
                 GameObject go = Instantiate(
-                    pod.podType.podPrefab,
+                    pod.podType.prefab,
                     pod.pos,
                     Quaternion.identity,
                     transform
@@ -54,7 +54,7 @@ public class PlanetManagerEffects : MonoBehaviour
             .ForEach(content =>
             {
                 GameObject go = Instantiate(
-                    content.contentType.podContentPrefab,
+                    content.contentType.prefab,
                     content.container.pos,
                     Quaternion.identity,
                     transform

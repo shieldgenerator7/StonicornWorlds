@@ -16,13 +16,13 @@ public class PodContentTypeEditor : Editor
             {
                 PodContentType pct = (PodContentType)t;
                 pct.typeName = pct.name;
-                pct.podContentPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                pct.prefab = AssetDatabase.LoadAssetAtPath<GameObject>(
                     "Assets/Prefabs/Pod " + pct.typeName + ".prefab"
                     );
                 pct.preview = AssetDatabase.LoadAssetAtPath<Sprite>(
                     "Assets/Sprites/pod_" + pct.typeName.ToLower() + ".png"
                     );
-                pct.uiColor = pct.podContentPrefab.GetComponent<SpriteRenderer>().color;
+                pct.uiColor = pct.prefab.GetComponent<SpriteRenderer>().color;
                 EditorUtility.SetDirty(pct);
             }
         }

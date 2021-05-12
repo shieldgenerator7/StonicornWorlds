@@ -4,13 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PodType", menuName = "PodType", order = 0)]
-public class PodType : ScriptableObject
+public class PodType : PlanetObjectType
 {
-    public string typeName = "PodTypeName";
-    public Sprite preview;
-    public Color uiColor = Color.white;
-    public GameObject podPrefab;
-    public float progressRequired = 100;
     public List<PodType> allowedNeighbors;
     public List<PodType> requiredNeighbors;
     public List<PodType> constructFromTypes;//a list of pod types that can be converted to this type
