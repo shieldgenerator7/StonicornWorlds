@@ -107,9 +107,12 @@ public class EdgeManager : MonoBehaviour
     {
         if (podType)
         {
-            convertEdges = planetManager.futurePlanet.Pods
-                .FindAll(pod => podType.constructFromTypes.Contains(pod.podType))
-                .ConvertAll(pod => pod.pos);
+            convertEdges = new List<Vector2>();
+            podType.constructFromTypes.ForEach(
+                cpt => convertEdges.AddRange(
+                    planetManager.futurePlanet.Pods(cpt)
+                    .ConvertAll(pod => pod.pos)
+                    ));
         }
         onConvertEdgeListChanged?.Invoke(convertEdges);
     }
@@ -119,9 +122,12 @@ public class EdgeManager : MonoBehaviour
     {
         if (podContentType)
         {
-            convertEdges = planetManager.futurePlanet.Pods
-                .FindAll(pod => podContentType.podImplantTypes.Contains(pod.podType))
-                .ConvertAll(pod => pod.pos);
+            convertEdges = new List<Vector2>();
+            podContentType.podImplantTypes.ForEach(
+                ipt => convertEdges.AddRange(
+                    planetManager.futurePlanet.Pods(ipt)
+                    .ConvertAll(pod => pod.pos)
+                    ));
         }
         onConvertEdgeListChanged?.Invoke(convertEdges);
     }

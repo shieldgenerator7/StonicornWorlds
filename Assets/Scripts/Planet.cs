@@ -14,6 +14,9 @@ public class Planet
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
+    private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
+        pod => pod.podType
+        );
 
     #region Write State
     public delegate void OnStateChanged(Planet p);
@@ -24,13 +27,17 @@ public class Planet
         Vector3Int hexpos = worldToGrid(pos);
         pod.pos = gridToWorld(hexpos);
         grid.add(pod, worldToGrid(pos));
+        podLists.add(pod);
         fillSpaceAround(pod.pos);
         onStateChanged?.Invoke(this);
     }
 
     public void removePod(Vector2 pos)
     {
-        grid.removeAt(worldToGrid(pos));
+        Vector3Int v = worldToGrid(pos);
+        Pod pod = grid.get(v);
+        grid.removeAt(v);
+        podLists.remove(pod);
         onStateChanged?.Invoke(this);
     }
 
@@ -45,10 +52,11 @@ public class Planet
         {
             PodType space = Resources.Load<PodType>("PodTypes/Space");
             emptySpaces.ForEach(v =>
-                grid.add(
-                    new Pod(gridToWorld(v), space),
-                    v
-                    )
+            {
+                Pod pod = new Pod(gridToWorld(v), space);
+                grid.add(pod, v);
+                podLists.add(pod);
+            }
             );
         }
     }
@@ -71,11 +79,14 @@ public class Planet
         => grid.getEmptyNeighborhood(worldToGrid(pos))
             .ConvertAll(v => gridToWorld(v));
 
-    public List<Pod> Pods
+    public List<Pod> PodsAll
         => grid;
 
+    public List<Pod> Pods(PodType podType)
+        => podLists.getList(podType);
+
     public List<Vector2> Border
-        => Pods.FindAll(pod => pod.podType.typeName == "Space")
+        => PodsAll.FindAll(pod => pod.podType.typeName == "Space")
         .ConvertAll(pod => pod.pos);
     //=> grid.getBorder().ConvertAll(v => gridToWorld(v));
     #endregion
@@ -124,8 +135,9 @@ public class Planet
     public Planet deepCopy()
     {
         Planet planet = new Planet();
-        Pods.ConvertAll(pod => pod.Clone())
+        PodsAll.ConvertAll(pod => pod.Clone())
             .ForEach(pod => planet.grid.add(pod, worldToGrid(pod.pos)));
+        planet.PodsAll.ForEach(pod => planet.podLists.add(pod));
         return planet;
     }
 }

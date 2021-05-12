@@ -65,7 +65,7 @@ public class PlanetManager : MonoBehaviour
 
     public Planet planet;
     public Planet futurePlanet { get; set; }
-    public List<Pod> Pods => planet.Pods;
+
     public delegate void OnPodsListChanged(List<Pod> list);
     public event OnPodsListChanged onPodsListChanged;
 
@@ -92,10 +92,8 @@ public class PlanetManager : MonoBehaviour
     public void addPod(Pod pod)
     {
         planet.addPod(pod, pod.pos);
-        List<Pod> pods = Pods;
-        coreCount = pods.FindAll(pod =>
-            pod.podType == corePodType
-            ).Count;
+        List<Pod> pods = planet.PodsAll;
+        coreCount = planet.Pods(corePodType).Count;
         onPodsListChanged?.Invoke(pods);
         podContents = new List<PodContent>();
         pods.ForEach(

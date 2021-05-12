@@ -18,12 +18,11 @@ public class SkySpreader : MonoBehaviour
     {
         bool filledAny = false;
 
-        planetManager.planet.Pods
-            .FindAll(pod => pod.podType == spacePodType
-            && currentPressure(pod) > 0)
+        planetManager.planet.Pods(spacePodType)
+            .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
-        planetManager.planet.Pods.FindAll(pod => pod.podType == waterPodType)
+        planetManager.planet.Pods(waterPodType)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
         if (filledAny)
