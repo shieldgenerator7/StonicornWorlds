@@ -37,6 +37,8 @@ public class InputManager : MonoBehaviour
     public PodType PodType { get; private set; }
     public PodContentType PodContentType { get; private set; }
 
+    public ToolAction toolAction;
+
     private bool buttonActivation = false;
 
     // Start is called before the first frame update

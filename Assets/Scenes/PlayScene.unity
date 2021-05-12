@@ -1566,6 +1566,7 @@ GameObject:
   - component: {fileID: 1624048186}
   - component: {fileID: 1624048185}
   - component: {fileID: 1624048187}
+  - component: {fileID: 1624048188}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1596,6 +1597,7 @@ MonoBehaviour:
   - {fileID: 1570366126}
   - {fileID: 1463224396}
   planetObjectType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+  toolAction: {fileID: 1624048188}
 --- !u!4 &1624048186
 Transform:
   m_ObjectHideFlags: 0
@@ -1620,6 +1622,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0b688d4ec0f77a468741146870ba10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1624048188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624048184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1151d3d2b7d971e488651eed6cacfc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1625964769
