@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public float minOrthoSize = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,9 @@ public class CameraController : MonoBehaviour
 
     public void autoFrame(List<Vector2> posList)
     {
+        //override the posList value
+        posList = Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.pos);
+        //
         float minX = 0;
         float minY = 0;
         float maxX = 0;
@@ -31,7 +36,7 @@ public class CameraController : MonoBehaviour
             min,
             max
         };
-        Camera.main.orthographicSize = 5;
+        Camera.main.orthographicSize = minOrthoSize;
         while (!areVectorsInFrame(boundList, 1))
         {
             Camera.main.orthographicSize += 0.1f;

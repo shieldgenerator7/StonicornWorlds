@@ -1087,6 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f76a7f4d9e4024f80c5f81137d19fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minOrthoSize: 3
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1494,8 +1495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
-  convertPodPrefab: {fileID: 8438424779451882234, guid: c8e27c85676f17b4db08c04dea457928, type: 3}
-  plantPodPrefab: {fileID: 8438424779451882234, guid: a2ec63a765b58174f983c7413896fb1f, type: 3}
   txtResources: {fileID: 1131049490}
 --- !u!114 &752787615
 MonoBehaviour:
