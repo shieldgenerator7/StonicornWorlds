@@ -17,67 +17,6 @@ public class EdgeManager : MonoBehaviour
         Managers.Input.onPlanetObjectTypeChanged += calculateConvertEdgesNew;
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //        Vector2 clickedUI = edges.FirstOrDefault(
-    //            edge => Managers.Planet.checkAddPodUI(pos, edge)
-    //            );
-    //        if (clickedUI != Vector2.zero
-    //            && Managers.Planet.PlanetObjectType is PodType pt
-    //            && Managers.Planet.canBuildAtPosition(pt, pos))
-    //        {
-    //            Managers.Queue.addToQueue(
-    //                new QueueTask(
-    //                    pt,
-    //                    clickedUI,
-    //                    QueueTask.Type.CONSTRUCT
-    //                    )
-    //                );
-    //            queueUpdated(null);
-    //        }
-    //        else
-    //        {
-    //            clickedUI = convertEdges.FirstOrDefault(
-    //                convertEdge => Managers.Planet.checkAddPodUI(pos, convertEdge)
-    //            );
-    //            if (clickedUI != Vector2.zero)
-    //            {
-    //                if (Managers.Planet.PlanetObjectType is PodType pt2)
-    //                {
-    //                    if (Managers.Planet.canBuildAtPosition(pt2, pos))
-    //                    {
-    //                        Managers.Queue.addToQueue(
-    //                            new QueueTask(
-    //                                pt2,
-    //                                clickedUI,
-    //                                QueueTask.Type.CONVERT
-    //                                )
-    //                            );
-    //                        queueUpdated(null);
-    //                    }
-    //                }
-    //                else if (Managers.Planet.PlanetObjectType is PodContentType pct)
-    //                {
-    //                    if (Managers.Planet.canPlantAtPosition(pct, pos))
-    //                    {
-    //                        Managers.Queue.addToQueue(
-    //                            new QueueTask(
-    //                                pct,
-    //                                clickedUI,
-    //                                QueueTask.Type.PLANT
-    //                                )
-    //                            );
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
     public void queueUpdated(List<QueueTask> tasks)
     {
         calculateEdges();
