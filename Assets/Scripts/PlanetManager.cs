@@ -7,40 +7,18 @@ public class PlanetManager : MonoBehaviour
 {
     public float resourceCapPerCore = 700;
     [SerializeField]
-    private PodType podType;
-    public PodType PodType
+    private PlanetObjectType planetObjectType;
+    public PlanetObjectType PlanetObjectType
     {
-        get => podType;
+        get => planetObjectType;
         set
         {
-            podType = value;
-            onPodTypeChanged?.Invoke(podType);
-            if (podType)
-            {
-                PodContentType = null;
-            }
+            planetObjectType = value;
+            onPlanetObjectTypeChanged?.Invoke(planetObjectType);
         }
     }
-    public delegate void OnPodTypeChanged(PodType podType);
-    public event OnPodTypeChanged onPodTypeChanged;
-
-    [SerializeField]
-    private PodContentType podContentType;
-    public PodContentType PodContentType
-    {
-        get => podContentType;
-        set
-        {
-            podContentType = value;
-            onPodContentTypeChanged?.Invoke(podContentType);
-            if (podContentType)
-            {
-                PodType = null;
-            }
-        }
-    }
-    public delegate void OnPodContentTypeChanged(PodContentType podType);
-    public event OnPodContentTypeChanged onPodContentTypeChanged;
+    public delegate void OnPlanetObjectTypeChanged(PlanetObjectType planetObjectType);
+    public event OnPlanetObjectTypeChanged onPlanetObjectTypeChanged;
 
     float resources;
     public float Resources

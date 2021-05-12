@@ -14,8 +14,7 @@ public class EdgeManager : MonoBehaviour
         Managers.Planet.onPodsListChanged += addPod;
         Managers.Planet.onPodContentsListChanged += addPodContent;
         Managers.Queue.onQueueChanged += queueUpdated;
-        Managers.Planet.onPodTypeChanged += calculcateConvertEdges;
-        Managers.Planet.onPodContentTypeChanged += calculcatePlantEdges;
+        Managers.Planet.onPlanetObjectTypeChanged += calculateConvertEdgesNew;
     }
 
     // Update is called once per frame
@@ -28,12 +27,12 @@ public class EdgeManager : MonoBehaviour
                 edge => Managers.Planet.checkAddPodUI(pos, edge)
                 );
             if (clickedUI != Vector2.zero
-                && Managers.Planet.PodType
-                && Managers.Planet.canBuildAtPosition(Managers.Planet.PodType, pos))
+                && Managers.Planet.PlanetObjectType is PodType pt
+                && Managers.Planet.canBuildAtPosition(pt, pos))
             {
                 Managers.Queue.addToQueue(
                     new QueueTask(
-                        Managers.Planet.PodType,
+                        pt,
                         clickedUI,
                         QueueTask.Type.CONSTRUCT
                         )
@@ -47,13 +46,13 @@ public class EdgeManager : MonoBehaviour
                 );
                 if (clickedUI != Vector2.zero)
                 {
-                    if (Managers.Planet.PodType)
+                    if (Managers.Planet.PlanetObjectType is PodType pt2)
                     {
-                        if (Managers.Planet.canBuildAtPosition(Managers.Planet.PodType, pos))
+                        if (Managers.Planet.canBuildAtPosition(pt2, pos))
                         {
                             Managers.Queue.addToQueue(
                                 new QueueTask(
-                                    Managers.Planet.PodType,
+                                    pt2,
                                     clickedUI,
                                     QueueTask.Type.CONVERT
                                     )
@@ -61,13 +60,13 @@ public class EdgeManager : MonoBehaviour
                             queueUpdated(null);
                         }
                     }
-                    else if (Managers.Planet.PodContentType)
+                    else if (Managers.Planet.PlanetObjectType is PodContentType pct)
                     {
-                        if (Managers.Planet.canPlantAtPosition(Managers.Planet.PodContentType, pos))
+                        if (Managers.Planet.canPlantAtPosition(pct, pos))
                         {
                             Managers.Queue.addToQueue(
                                 new QueueTask(
-                                    Managers.Planet.PodContentType,
+                                    pct,
                                     clickedUI,
                                     QueueTask.Type.PLANT
                                     )
@@ -95,12 +94,24 @@ public class EdgeManager : MonoBehaviour
     {
         edges = Managers.Planet.futurePlanet.Border;
         onEdgeListChanged?.Invoke(edges);
-        calculcateConvertEdges(Managers.Planet.PodType);
+        calculateConvertEdgesNew(Managers.Planet.PlanetObjectType);
     }
     public delegate void OnPositionListChanged(List<Vector2> edges);
     public event OnPositionListChanged onEdgeListChanged;
 
-    void calculcateConvertEdges(PodType podType)
+    void calculateConvertEdgesNew(PlanetObjectType pot)
+    {
+        if (pot is PodType pt)
+        {
+            calculateConvertEdges(pt);
+        }
+        else if (pot is PodContentType pct)
+        {
+            calculatePlantEdges(pct);
+        }
+    }
+
+    void calculateConvertEdges(PodType podType)
     {
         if (podType)
         {
@@ -115,7 +126,7 @@ public class EdgeManager : MonoBehaviour
     }
     public event OnPositionListChanged onConvertEdgeListChanged;
 
-    void calculcatePlantEdges(PodContentType podContentType)
+    void calculatePlantEdges(PodContentType podContentType)
     {
         if (podContentType)
         {

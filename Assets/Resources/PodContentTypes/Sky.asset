@@ -15,7 +15,7 @@ MonoBehaviour:
   typeName: Sky
   preview: {fileID: 21300000, guid: 66f3d303b6f5a4642a56f481a1d73a50, type: 3}
   uiColor: {r: 0.28773582, g: 0.837803, b: 1, a: 1}
-  podContentPrefab: {fileID: 7875099125704197678, guid: 3aae089ad7e43834faefa001306a782d, type: 3}
+  prefab: {fileID: 7875099125704197678, guid: 3aae089ad7e43834faefa001306a782d, type: 3}
   progressRequired: 10
   podImplantTypes: []
   requiredGround: []

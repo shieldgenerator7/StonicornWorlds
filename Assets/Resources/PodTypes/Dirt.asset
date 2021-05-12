@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Dirt
   preview: {fileID: 21300000, guid: 0084ef5358fe6d442a294146a3502893, type: 3}
-  uiColor: {r: 0.5294118, g: 0.28235295, b: 0.11372549, a: 1}
-  podPrefab: {fileID: 7875099125704197678, guid: 878c03bf04a70ea4db5df9181505015e, type: 3}
+  uiColor: {r: 0.5283019, g: 0.28184217, b: 0.11213957, a: 1}
+  prefab: {fileID: 7875099125704197678, guid: 878c03bf04a70ea4db5df9181505015e, type: 3}
   progressRequired: 150
   allowedNeighbors:
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}

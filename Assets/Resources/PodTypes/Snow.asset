@@ -15,7 +15,7 @@ MonoBehaviour:
   typeName: Snow
   preview: {fileID: 21300000, guid: 991052c62bae99145be4081a961e5757, type: 3}
   uiColor: {r: 1, g: 1, b: 1, a: 1}
-  podPrefab: {fileID: 7875099125704197678, guid: 87e5925dc6027d34eac177dc72763ca6, type: 3}
+  prefab: {fileID: 7875099125704197678, guid: 87e5925dc6027d34eac177dc72763ca6, type: 3}
   progressRequired: 37
   allowedNeighbors:
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}

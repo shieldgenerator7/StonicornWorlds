@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: Water
   preview: {fileID: 21300000, guid: f7a9df2cfad3f8840a2c598abcf591f6, type: 3}
-  uiColor: {r: 0.17254902, g: 0.48235294, b: 0.93333334, a: 1}
-  podPrefab: {fileID: 7875099125704197678, guid: b72d7904e1c715e4a86763dfdfdd79ab, type: 3}
+  uiColor: {r: 0.17181383, g: 0.48124877, b: 0.9339623, a: 1}
+  prefab: {fileID: 7875099125704197678, guid: b72d7904e1c715e4a86763dfdfdd79ab, type: 3}
   progressRequired: 50
   allowedNeighbors:
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}

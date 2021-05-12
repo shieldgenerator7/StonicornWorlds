@@ -21,8 +21,7 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         Managers.Planet.onPodsListChanged += updateDisplay;
         Managers.Planet.onPodContentsListChanged += updateDisplay;
-        Managers.Planet.onPodTypeChanged += updateEdgeTypes;
-        Managers.Planet.onPodContentTypeChanged += updatePlantTypes;
+        Managers.Planet.onPlanetObjectTypeChanged += updateEdgeTypesNew;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onEdgeListChanged += updateAddDisplay;
         Managers.Edge.onConvertEdgeListChanged += updateConvertDisplay;
@@ -78,7 +77,19 @@ public class PlanetManagerEffects : MonoBehaviour
                 );
             addPods.Add(addPod);
         });
-        updateEdgeTypes(Managers.Planet.PodType);
+        updateEdgeTypesNew(Managers.Planet.PlanetObjectType);
+    }
+
+    void updateEdgeTypesNew(PlanetObjectType pot)
+    {
+        if (pot is PodType pt)
+        {
+            updateEdgeTypes(pt);
+        }
+        else if (pot is PodContentType pct)
+        {
+            updatePlantTypes(pct);
+        }
     }
 
     void updateEdgeTypes(PodType podType)
@@ -124,8 +135,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 );
             convertPods.Add(convertPod);
         });
-        updateEdgeTypes(Managers.Planet.PodType);
-        updatePlantTypes(Managers.Planet.PodContentType);
+        updateEdgeTypesNew(Managers.Planet.PlanetObjectType);
     }
 
     void updatePlantTypes(PodContentType podContentType)
