@@ -7,6 +7,8 @@ public class SkySpreader : MonoBehaviour
 {
     public float diffusionRate = 5;
     public float minAmount = 10;//min pressure amount to start diffusing
+    [Range(0, 1)]
+    public float giveThresholdFactor = 0.5f;
 
     public PodContentType skyPodContentType;
     private PodType waterPodType;
@@ -65,7 +67,7 @@ public class SkySpreader : MonoBehaviour
         List<Pod> spaces = Managers.Planet.planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
                 pod && pod.podType == Managers.PodTypeBank.spacePodType
-                && currentPressure(pod) < curAmount / 2
+                && currentPressure(pod) < curAmount * giveThresholdFactor
                 );
         spaces.ForEach(pod => fillWithAir(pod));
         return spaces.Count * diffusionRate * Time.deltaTime;
