@@ -5,20 +5,17 @@ using UnityEngine;
 
 public class EdgeManager : MonoBehaviour
 {
-    public PlanetManager planetManager;
-    public QueueManager queueManager;
-
     List<Vector2> edges;
     List<Vector2> convertEdges;
 
     // Start is called before the first frame update
     void Awake()
     {
-        planetManager.onPodsListChanged += addPod;
-        planetManager.onPodContentsListChanged += addPodContent;
-        queueManager.onQueueChanged += queueUpdated;
-        planetManager.onPodTypeChanged += calculcateConvertEdges;
-        planetManager.onPodContentTypeChanged += calculcatePlantEdges;
+        Managers.Planet.onPodsListChanged += addPod;
+        Managers.Planet.onPodContentsListChanged += addPodContent;
+        Managers.Queue.onQueueChanged += queueUpdated;
+        Managers.Planet.onPodTypeChanged += calculcateConvertEdges;
+        Managers.Planet.onPodContentTypeChanged += calculcatePlantEdges;
     }
 
     // Update is called once per frame
@@ -28,15 +25,15 @@ public class EdgeManager : MonoBehaviour
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickedUI = edges.FirstOrDefault(
-                edge => planetManager.checkAddPodUI(pos, edge)
+                edge => Managers.Planet.checkAddPodUI(pos, edge)
                 );
             if (clickedUI != Vector2.zero
-                && planetManager.PodType
-                && planetManager.canBuildAtPosition(planetManager.PodType, pos))
+                && Managers.Planet.PodType
+                && Managers.Planet.canBuildAtPosition(Managers.Planet.PodType, pos))
             {
-                queueManager.addToQueue(
+                Managers.Queue.addToQueue(
                     new QueueTask(
-                        planetManager.PodType,
+                        Managers.Planet.PodType,
                         clickedUI,
                         QueueTask.Type.CONSTRUCT
                         )
@@ -46,17 +43,17 @@ public class EdgeManager : MonoBehaviour
             else
             {
                 clickedUI = convertEdges.FirstOrDefault(
-                    convertEdge => planetManager.checkAddPodUI(pos, convertEdge)
+                    convertEdge => Managers.Planet.checkAddPodUI(pos, convertEdge)
                 );
                 if (clickedUI != Vector2.zero)
                 {
-                    if (planetManager.PodType)
+                    if (Managers.Planet.PodType)
                     {
-                        if (planetManager.canBuildAtPosition(planetManager.PodType, pos))
+                        if (Managers.Planet.canBuildAtPosition(Managers.Planet.PodType, pos))
                         {
-                            queueManager.addToQueue(
+                            Managers.Queue.addToQueue(
                                 new QueueTask(
-                                    planetManager.PodType,
+                                    Managers.Planet.PodType,
                                     clickedUI,
                                     QueueTask.Type.CONVERT
                                     )
@@ -64,13 +61,13 @@ public class EdgeManager : MonoBehaviour
                             queueUpdated(null);
                         }
                     }
-                    else if (planetManager.PodContentType)
+                    else if (Managers.Planet.PodContentType)
                     {
-                        if (planetManager.canPlantAtPosition(planetManager.PodContentType, pos))
+                        if (Managers.Planet.canPlantAtPosition(Managers.Planet.PodContentType, pos))
                         {
-                            queueManager.addToQueue(
+                            Managers.Queue.addToQueue(
                                 new QueueTask(
-                                    planetManager.PodContentType,
+                                    Managers.Planet.PodContentType,
                                     clickedUI,
                                     QueueTask.Type.PLANT
                                     )
@@ -96,9 +93,9 @@ public class EdgeManager : MonoBehaviour
 
     void calculateEdges()
     {
-        edges = planetManager.futurePlanet.Border;
+        edges = Managers.Planet.futurePlanet.Border;
         onEdgeListChanged?.Invoke(edges);
-        calculcateConvertEdges(planetManager.PodType);
+        calculcateConvertEdges(Managers.Planet.PodType);
     }
     public delegate void OnPositionListChanged(List<Vector2> edges);
     public event OnPositionListChanged onEdgeListChanged;
@@ -110,7 +107,7 @@ public class EdgeManager : MonoBehaviour
             convertEdges = new List<Vector2>();
             podType.constructFromTypes.ForEach(
                 cpt => convertEdges.AddRange(
-                    planetManager.futurePlanet.Pods(cpt)
+                    Managers.Planet.futurePlanet.Pods(cpt)
                     .ConvertAll(pod => pod.pos)
                     ));
         }
@@ -125,7 +122,7 @@ public class EdgeManager : MonoBehaviour
             convertEdges = new List<Vector2>();
             podContentType.podImplantTypes.ForEach(
                 ipt => convertEdges.AddRange(
-                    planetManager.futurePlanet.Pods(ipt)
+                    Managers.Planet.futurePlanet.Pods(ipt)
                     .ConvertAll(pod => pod.pos)
                     ));
         }

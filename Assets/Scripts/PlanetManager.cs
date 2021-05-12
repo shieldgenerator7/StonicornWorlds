@@ -43,8 +43,6 @@ public class PlanetManager : MonoBehaviour
     public delegate void OnPodContentTypeChanged(PodContentType podType);
     public event OnPodContentTypeChanged onPodContentTypeChanged;
 
-    public QueueManager queueManager;
-
     float resources;
     public float Resources
     {
@@ -83,8 +81,8 @@ public class PlanetManager : MonoBehaviour
         Pod starter = new Pod(Vector2.zero, corePodType);
         addPod(starter);
         calculateFutureState(new List<QueueTask>());
-        queueManager.onTaskCompleted += (task) => updatePlanet(task);
-        queueManager.onQueueChanged += (tasks) => calculateFutureState(tasks);
+        Managers.Queue.onTaskCompleted += (task) => updatePlanet(task);
+        Managers.Queue.onQueueChanged += (tasks) => calculateFutureState(tasks);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }

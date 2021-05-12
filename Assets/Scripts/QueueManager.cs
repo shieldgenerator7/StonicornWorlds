@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class QueueManager : MonoBehaviour
 {
-    public PlanetManager planetManager;
-
     List<QueueTask> queue = new List<QueueTask>();
 
     List<QueueWorker> workers = new List<QueueWorker>();
@@ -31,7 +29,7 @@ public class QueueManager : MonoBehaviour
 
     private void Awake()
     {
-        planetManager.onPodsListChanged += updateQueueWorkerList;
+        Managers.Planet.onPodsListChanged += updateQueueWorkerList;
     }
 
     // Update is called once per frame
@@ -44,9 +42,9 @@ public class QueueManager : MonoBehaviour
                 QueueTask task = queue[0];
                 //Try to start task
                 if (!task.Started
-                    && planetManager.Resources >= task.startCost)
+                    && Managers.Planet.Resources >= task.startCost)
                 {
-                    planetManager.Resources -= task.startCost;
+                    Managers.Planet.Resources -= task.startCost;
                     task.Progress = 0.01f;
                 }
                 //Try to find a task that is already in progress
@@ -74,7 +72,7 @@ public class QueueManager : MonoBehaviour
 
     void updateQueueWorkerList(List<Pod> pods)
     {
-        int queueCount = planetManager.CoreCount;
+        int queueCount = Managers.Planet.CoreCount;
         while (queueCount > workers.Count)
         {
             QueueWorker worker = gameObject.AddComponent<QueueWorker>();

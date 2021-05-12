@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlanetManagerEffects : MonoBehaviour
 {
-    public PlanetManager planetManager;
-    public EdgeManager edgeManager;
-
     public GameObject addPodPrefab;
     public GameObject convertPodPrefab;
     public GameObject plantPodPrefab;
@@ -22,13 +19,13 @@ public class PlanetManagerEffects : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        planetManager.onPodsListChanged += updateDisplay;
-        planetManager.onPodContentsListChanged += updateDisplay;
-        planetManager.onPodTypeChanged += updateEdgeTypes;
-        planetManager.onPodContentTypeChanged += updatePlantTypes;
-        planetManager.onResourcesChanged += updateUI;
-        edgeManager.onEdgeListChanged += updateAddDisplay;
-        edgeManager.onConvertEdgeListChanged += updateConvertDisplay;
+        Managers.Planet.onPodsListChanged += updateDisplay;
+        Managers.Planet.onPodContentsListChanged += updateDisplay;
+        Managers.Planet.onPodTypeChanged += updateEdgeTypes;
+        Managers.Planet.onPodContentTypeChanged += updatePlantTypes;
+        Managers.Planet.onResourcesChanged += updateUI;
+        Managers.Edge.onEdgeListChanged += updateAddDisplay;
+        Managers.Edge.onConvertEdgeListChanged += updateConvertDisplay;
     }
 
     public void updateDisplay(List<Pod> pods)
@@ -44,7 +41,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     Quaternion.identity,
                     transform
                     );
-                go.transform.up = planetManager.upDir(go.transform.position);
+                go.transform.up = Managers.Planet.upDir(go.transform.position);
                 goPods.Add(go);
             });
     }
@@ -62,7 +59,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     Quaternion.identity,
                     transform
                     );
-                go.transform.up = planetManager.upDir(go.transform.position);
+                go.transform.up = Managers.Planet.upDir(go.transform.position);
                 goPodContents.Add(go);
             });
     }
@@ -81,7 +78,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 );
             addPods.Add(addPod);
         });
-        updateEdgeTypes(planetManager.PodType);
+        updateEdgeTypes(Managers.Planet.PodType);
     }
 
     void updateEdgeTypes(PodType podType)
@@ -91,7 +88,7 @@ public class PlanetManagerEffects : MonoBehaviour
             Color color = podType.uiColor;
             addPods.ForEach(add =>
             {
-                add.SetActive(planetManager.canBuildAtPosition(
+                add.SetActive(Managers.Planet.canBuildAtPosition(
                     podType,
                     add.transform.position
                     ));
@@ -99,7 +96,7 @@ public class PlanetManagerEffects : MonoBehaviour
             });
             convertPods.ForEach(convert =>
             {
-                convert.SetActive(planetManager.canBuildAtPosition(
+                convert.SetActive(Managers.Planet.canBuildAtPosition(
                     podType,
                     convert.transform.position
                     ));
@@ -127,8 +124,8 @@ public class PlanetManagerEffects : MonoBehaviour
                 );
             convertPods.Add(convertPod);
         });
-        updateEdgeTypes(planetManager.PodType);
-        updatePlantTypes(planetManager.PodContentType);
+        updateEdgeTypes(Managers.Planet.PodType);
+        updatePlantTypes(Managers.Planet.PodContentType);
     }
 
     void updatePlantTypes(PodContentType podContentType)
@@ -138,7 +135,7 @@ public class PlanetManagerEffects : MonoBehaviour
             Color color = podContentType.uiColor;
             convertPods.ForEach(convert =>
             {
-                convert.SetActive(planetManager.canPlantAtPosition(
+                convert.SetActive(Managers.Planet.canPlantAtPosition(
                     podContentType,
                     convert.transform.position
                     ));
@@ -149,6 +146,6 @@ public class PlanetManagerEffects : MonoBehaviour
 
     void updateUI(float resources)
     {
-        txtResources.text = "Resources: " + (int)resources + " / " + planetManager.ResourceCap;
+        txtResources.text = "Resources: " + (int)resources + " / " + Managers.Planet.ResourceCap;
     }
 }

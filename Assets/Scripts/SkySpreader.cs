@@ -8,7 +8,6 @@ public class SkySpreader : MonoBehaviour
     public float diffusionRate = 5;
     public float minAmount = 10;//min pressure amount to start diffusing
 
-    public PlanetManager planetManager;
     public PodContentType skyPodContentType;
     public PodType waterPodType;
     public PodType spacePodType;
@@ -18,16 +17,16 @@ public class SkySpreader : MonoBehaviour
     {
         bool filledAny = false;
 
-        planetManager.planet.Pods(spacePodType)
+        Managers.Planet.planet.Pods(spacePodType)
             .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
-        planetManager.planet.Pods(waterPodType)
+        Managers.Planet.planet.Pods(waterPodType)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
         if (filledAny)
         {
-            planetManager.queueManager.callOnQueueChanged();
+            Managers.Queue.callOnQueueChanged();
         }
     }
 
@@ -52,14 +51,14 @@ public class SkySpreader : MonoBehaviour
         {
             return 0;
         }
-        planetManager.planet.getEmptyNeighborhood(pos)
+        Managers.Planet.planet.getEmptyNeighborhood(pos)
             .ForEach(
-                v => planetManager.planet.addPod(
+                v => Managers.Planet.planet.addPod(
                     new Pod(v, spacePodType),
                     v
                     )
             );
-        List<Pod> spaces = planetManager.planet.getNeighborhood(pos).neighbors.ToList()
+        List<Pod> spaces = Managers.Planet.planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
                 pod && pod.podType == spacePodType
                 && currentPressure(pod) < curAmount / 2
@@ -99,7 +98,7 @@ public class SkySpreader : MonoBehaviour
         {
             content = new PodContent(skyPodContentType, pod);
             pod.podContents.Add(content);
-            planetManager.addPodContent(content);
+            Managers.Planet.addPodContent(content);
             content.Var = 0;
             return true;
         }

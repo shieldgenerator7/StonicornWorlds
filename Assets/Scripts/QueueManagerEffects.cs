@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class QueueManagerEffects : MonoBehaviour
 {
-    public PlanetManager planetManager;
-    public QueueManager queueManager;
     public GameObject constructingPrefab;
 
     List<ConstructingEffect> constructs = new List<ConstructingEffect>();
@@ -13,7 +11,7 @@ public class QueueManagerEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        queueManager.onQueueChanged += updateDisplay;
+        Managers.Queue.onQueueChanged += updateDisplay;
     }
 
     void updateDisplay(List<QueueTask> tasks)
@@ -33,7 +31,7 @@ public class QueueManagerEffects : MonoBehaviour
                 Quaternion.identity,
                 transform
                 );
-            construct.transform.up = planetManager.upDir(construct.transform.position);
+            construct.transform.up = Managers.Planet.upDir(construct.transform.position);
             ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
             effect.init(task);
             Color color = Color.white;
