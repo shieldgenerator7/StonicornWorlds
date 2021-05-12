@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btn Construct
       objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -995,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Pivot.x
@@ -2210,6 +2214,18 @@ MonoBehaviour:
     count: 20
     resourceRequirement: 0
     button: {fileID: 1346945371}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 0
+    button: {fileID: 388787527}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 0
+    button: {fileID: 1370687902}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 15
+    resourceRequirement: 0
+    button: {fileID: 830939737}
 --- !u!1001 &1672102591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2228,6 +2244,10 @@ PrefabInstance:
     - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Name
       value: btn Convert
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: ef898fa95ed968249bc994cd0cefc1fa, type: 3}
       propertyPath: m_Pivot.x
