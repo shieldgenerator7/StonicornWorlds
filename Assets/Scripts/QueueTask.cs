@@ -14,7 +14,7 @@ public class QueueTask
         PLANT
     }
     public Type type { get; private set; }
-    public float startCost => progressRequired;
+    public float startCost { get; private set; }
 
     public Vector2 pos { get; private set; }
 
@@ -40,18 +40,16 @@ public class QueueTask
 
     public bool Completed => progress == progressRequired;
 
-    public QueueTask(ScriptableObject taskObject, Vector2 pos, Type type)
+    public QueueTask(PlanetObjectType taskObject, Vector2 pos, Type type)
     {
         this.taskObject = taskObject;
         this.pos = pos;
         this.type = type;
-        if (taskObject is PodType pt)
+        this.progressRequired = taskObject.progressRequired;
+        this.startCost = taskObject.startCost;
+        if (this.type == Type.CONVERT)
         {
-            this.progressRequired = pt.progressRequired;
-        }
-        else if (taskObject is PodContentType pct)
-        {
-            this.progressRequired = pct.progressRequired;
+            this.startCost = taskObject.convertCost;
         }
     }
 

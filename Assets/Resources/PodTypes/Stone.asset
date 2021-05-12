@@ -16,6 +16,8 @@ MonoBehaviour:
   preview: {fileID: 21300000, guid: 791bfaf14b72f074e8946674dac773f4, type: 3}
   uiColor: {r: 0.37050554, g: 0.4163307, b: 0.4339623, a: 1}
   prefab: {fileID: 7875099125704197678, guid: 60515f72d85949a4881c532120f51676, type: 3}
+  startCost: 75
+  convertCost: 10
   progressRequired: 75
   allowedNeighbors: []
   requiredNeighbors:

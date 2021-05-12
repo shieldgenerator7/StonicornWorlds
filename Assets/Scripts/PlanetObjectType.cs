@@ -8,5 +8,7 @@ public abstract class PlanetObjectType : ScriptableObject
     public Sprite preview;
     public Color uiColor = Color.white;
     public GameObject prefab;
+    public float startCost = 100;
+    public float convertCost = 25;
     public float progressRequired = 100;
 }
