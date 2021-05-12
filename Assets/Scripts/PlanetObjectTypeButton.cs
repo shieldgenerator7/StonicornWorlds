@@ -16,4 +16,8 @@ public class PlanetObjectTypeButton : ToolButton
             Managers.Input.ToolAction = compatibleToolActions[0];
         }
     }
+
+    protected override bool isActive()
+        => Managers.Input.PlanetObjectType == planetObjectType
+        && compatibleToolActions.Contains(Managers.Input.ToolAction);
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public abstract class ToolButton : MonoBehaviour
 {
     public Image image;
+    public Image activeImage;
     Vector2 position;
 
     // Start is called before the first frame update
@@ -25,5 +26,12 @@ public abstract class ToolButton : MonoBehaviour
         return Vector2.Distance(screenPos, position) <= 50;
     }
 
+    public void checkActive()
+    {
+        activeImage.enabled = isActive();
+    }
+
     public abstract void activate();
+
+    protected abstract bool isActive();
 }

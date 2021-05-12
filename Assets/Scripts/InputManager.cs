@@ -58,6 +58,13 @@ public class InputManager : MonoBehaviour
     {
         tools = FindObjectsOfType<Tool>().ToList();
         //tool.activate();
+        onPlanetObjectTypeChanged += (pot) => checkAllButtons();
+        onToolActionChanged += (ta) => checkAllButtons();
+    }
+
+    void checkAllButtons()
+    {
+        buttons.ForEach(btn => btn.checkActive());
     }
 
     // Update is called once per frame
