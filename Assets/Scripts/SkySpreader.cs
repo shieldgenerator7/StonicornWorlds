@@ -9,15 +9,19 @@ public class SkySpreader : MonoBehaviour
     public float minAmount = 10;//min pressure amount to start diffusing
 
     public PodContentType skyPodContentType;
-    public PodType waterPodType;
-    public PodType spacePodType;
+    private PodType waterPodType;
+
+    private void Start()
+    {
+        waterPodType = Managers.PodTypeBank.getPodType("Water");
+    }
 
     // Update is called once per frame
     void Update()
     {
         bool filledAny = false;
 
-        Managers.Planet.planet.Pods(spacePodType)
+        Managers.Planet.planet.Pods(Managers.PodTypeBank.spacePodType)
             .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
@@ -33,7 +37,7 @@ public class SkySpreader : MonoBehaviour
     bool diffuse(Pod pod)
     {
         float diffuseAmount = 0;
-        if (pod.podType == spacePodType)
+        if (pod.podType == Managers.PodTypeBank.spacePodType)
         {
             diffuseAmount = diffuse(pod.pos, currentPressure(pod));
             adjustPressure(pod, -diffuseAmount);
@@ -54,13 +58,13 @@ public class SkySpreader : MonoBehaviour
         Managers.Planet.planet.getEmptyNeighborhood(pos)
             .ForEach(
                 v => Managers.Planet.planet.addPod(
-                    new Pod(v, spacePodType),
+                    new Pod(v, Managers.PodTypeBank.spacePodType),
                     v
                     )
             );
         List<Pod> spaces = Managers.Planet.planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
-                pod && pod.podType == spacePodType
+                pod && pod.podType == Managers.PodTypeBank.spacePodType
                 && currentPressure(pod) < curAmount / 2
                 );
         spaces.ForEach(pod => fillWithAir(pod));

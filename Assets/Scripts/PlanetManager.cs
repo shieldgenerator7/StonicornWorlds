@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlanetManager : MonoBehaviour
 {
     public float resourceCapPerCore = 700;
-    public PodType corePodType;
     [SerializeField]
     private PodType podType;
     public PodType PodType
@@ -78,7 +77,7 @@ public class PlanetManager : MonoBehaviour
         planet = new Planet();
         planet.position = Vector2.zero;
         futurePlanet = planet;
-        Pod starter = new Pod(Vector2.zero, corePodType);
+        Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
         addPod(starter);
         calculateFutureState(new List<QueueTask>());
         Managers.Queue.onTaskCompleted += (task) => updatePlanet(task);
@@ -91,7 +90,7 @@ public class PlanetManager : MonoBehaviour
     {
         planet.addPod(pod, pod.pos);
         List<Pod> pods = planet.PodsAll;
-        coreCount = planet.Pods(corePodType).Count;
+        coreCount = planet.Pods(Managers.PodTypeBank.corePodType).Count;
         onPodsListChanged?.Invoke(pods);
         podContents = new List<PodContent>();
         pods.ForEach(

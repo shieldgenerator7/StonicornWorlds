@@ -24,7 +24,7 @@ public class PodType : ScriptableObject
             return podTypes.TrueForAll(podType =>
                 podType.allowedNeighbors.Count == 0
                 || podType.allowedNeighbors.Contains(this)
-                || podType.typeName == "Space"
+                || podType == Managers.PodTypeBank.spacePodType
             );
         }
         else
@@ -32,7 +32,7 @@ public class PodType : ScriptableObject
             return podTypes.TrueForAll(podType =>
                 allowedNeighbors.Contains(podType)
                 || podType.allowedNeighbors.Contains(this)
-                || podType.typeName == "Space"
+                || podType == Managers.PodTypeBank.spacePodType
             );
         }
     }
@@ -54,7 +54,7 @@ public class PodType : ScriptableObject
         if (podType)
         {
             return constructFromTypes.Contains(podType)
-                || podType.typeName == "Space";
+                || podType == Managers.PodTypeBank.spacePodType;
         }
         else
         {

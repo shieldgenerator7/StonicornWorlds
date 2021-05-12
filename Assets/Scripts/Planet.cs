@@ -50,7 +50,7 @@ public class Planet
             );
         if (emptySpaces.Count > 0)
         {
-            PodType space = Resources.Load<PodType>("PodTypes/Space");
+            PodType space = Managers.PodTypeBank.spacePodType;
             emptySpaces.ForEach(v =>
             {
                 Pod pod = new Pod(gridToWorld(v), space);
@@ -86,7 +86,7 @@ public class Planet
         => podLists.getList(podType);
 
     public List<Vector2> Border
-        => PodsAll.FindAll(pod => pod.podType.typeName == "Space")
+        => Pods(Managers.PodTypeBank.spacePodType)
         .ConvertAll(pod => pod.pos);
     //=> grid.getBorder().ConvertAll(v => gridToWorld(v));
     #endregion
