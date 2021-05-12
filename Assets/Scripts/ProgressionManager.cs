@@ -11,6 +11,7 @@ public class ProgressionManager : MonoBehaviour
     {
         Managers.Planet.onPodsListChanged += (pods) => checkAllProgression();
         Managers.Planet.onResourcesChanged += (resources) => checkAllProgression();
+        checkAllProgression();
     }
 
     void checkAllProgression()
