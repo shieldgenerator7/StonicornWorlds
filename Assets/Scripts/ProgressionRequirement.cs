@@ -8,7 +8,7 @@ public class ProgressionRequirement
     public PodType podType;
     public int count;
     public float resourceRequirement = 0;
-    public Tool button;
+    public ToolButton button;
 
     public bool checkProgression()
     {

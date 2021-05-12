@@ -5,9 +5,9 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 
-[CustomEditor(typeof(PlanetObjectTypeTool), true)]
+[CustomEditor(typeof(PlanetObjectTypeButton), true)]
 [CanEditMultipleObjects]
-public class PlanetObjectTypeToolEditor : Editor
+public class PlanetObjectTypeButtonEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -16,7 +16,7 @@ public class PlanetObjectTypeToolEditor : Editor
         {
             foreach (Object t in targets)
             {
-                PlanetObjectTypeTool ptb = (PlanetObjectTypeTool)t;
+                PlanetObjectTypeButton ptb = (PlanetObjectTypeButton)t;
                 ptb.image.sprite = ptb.planetObjectType.preview;
                 EditorUtility.SetDirty(ptb);
                 EditorUtility.SetDirty(ptb.image);

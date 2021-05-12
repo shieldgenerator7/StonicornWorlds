@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8264057480850315159}
   - component: {fileID: 4744040802469672528}
   - component: {fileID: 263970680845804194}
-  - component: {fileID: 8310789697568980627}
+  - component: {fileID: 2731958226531293277}
   m_Layer: 5
   m_Name: btnPodType
   m_TagString: Untagged
@@ -133,7 +133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
---- !u!114 &8310789697568980627
+--- !u!114 &2731958226531293277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5002807837987910455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b688d4ec0f77a468741146870ba10e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f1177ddbe8cb844b8c99366be1bc87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4744040802469672528}

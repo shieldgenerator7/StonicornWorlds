@@ -6,8 +6,11 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField]
-    Tool tool;
-    public List<Tool> tools;
+    private Tool tool;
+    private List<Tool> tools;
+
+    [SerializeField]
+    private List<ToolButton> buttons;
 
     [SerializeField]
     private PlanetObjectType planetObjectType;
@@ -34,10 +37,12 @@ public class InputManager : MonoBehaviour
     public PodType PodType { get; private set; }
     public PodContentType PodContentType { get; private set; }
 
+    private bool buttonActivation = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        //tools = FindObjectsOfType<Tool>().ToList();
+        tools = FindObjectsOfType<Tool>().ToList();
         //tool.activate();
     }
 
@@ -50,26 +55,30 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //Check click on Tool
-                Tool nextTool = tools.FirstOrDefault(t => t.checkClick(Input.mousePosition));
-                if (nextTool)
+                ToolButton clickedButton = buttons.FirstOrDefault(b => b.checkClick(Input.mousePosition));
+                if (clickedButton)
                 {
-                    tool = nextTool;
-                    tool.activate();
+                    clickedButton.activate();
+                    buttonActivation = true;
                 }
                 else
                 {
                     tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    buttonActivation = false;
                 }
             }
             //Input Up
-            else if (Input.GetMouseButtonUp(0))
+            else if (!buttonActivation)
             {
-                tool.inputUp(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            }
-            //Input Move
-            else
-            {
-                tool.inputMove(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                if (Input.GetMouseButtonUp(0))
+                {
+                    tool.inputUp(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                }
+                //Input Move
+                else
+                {
+                    tool.inputMove(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                }
             }
         }
     }

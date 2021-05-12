@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlanetObjectTypeTool : Tool
+public class PlanetObjectTypeButton : ToolButton
 {
     public PlanetObjectType planetObjectType;
 

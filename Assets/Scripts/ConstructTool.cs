@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ConstructTool : PlanetObjectTypeTool
+public class ConstructTool : Tool
 {
     public override void inputDown(Vector2 pos)
     {
