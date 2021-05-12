@@ -7,6 +7,7 @@ public class Managers : MonoBehaviour
     public static PlanetManager Planet { get; private set; }
     public static QueueManager Queue { get; private set; }
     public static EdgeManager Edge { get; private set; }
+    public static ProgressionManager Progression { get; private set; }
 
     public static PodTypeBank PodTypeBank { get; private set; }
 
@@ -15,6 +16,7 @@ public class Managers : MonoBehaviour
         Planet = FindObjectOfType<PlanetManager>();
         Queue = FindObjectOfType<QueueManager>();
         Edge = FindObjectOfType<EdgeManager>();
+        Progression = FindObjectOfType<ProgressionManager>();
         PodTypeBank = FindObjectOfType<PodTypeBank>();
     }
 }

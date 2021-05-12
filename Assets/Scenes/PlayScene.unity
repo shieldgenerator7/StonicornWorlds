@@ -136,7 +136,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 2e1e0473b54ee7847ab793075f1346d2, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (1)
+      value: btnPodType Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -303,8 +307,8 @@ RectTransform:
   - {fileID: 84209852}
   - {fileID: 343625880}
   - {fileID: 2033436134}
-  - {fileID: 216937917}
   - {fileID: 2136368066}
+  - {fileID: 216937917}
   - {fileID: 1365521467}
   - {fileID: 714716681}
   m_Father: {fileID: 0}
@@ -394,7 +398,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 0084ef5358fe6d442a294146a3502893, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (4)
+      value: btnPodType Dirt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -406,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -483,6 +491,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
   m_PrefabInstance: {fileID: 216937916}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &273216459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 2033436133}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &343625879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,7 +515,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 791bfaf14b72f074e8946674dac773f4, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (2)
+      value: btnPodType Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -590,6 +613,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
   m_PrefabInstance: {fileID: 343625879}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &395275068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 343625879}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395275067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466491599
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,11 +833,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: a908adc3aa6309f42b3bf5d77c093e75, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (8)
+      value: btnPodType Tree
       objectReference: {fileID: 0}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -905,7 +939,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 4354f514ee914ae40b32faba8f660f7d, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType
+      value: btnPodType Core
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -1083,10 +1121,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffusionRate: 5
+  diffusionRate: 10
   minAmount: 12.5
   giveThresholdFactor: 0.59
   skyPodContentType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+--- !u!114 &788218254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 216937916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131049488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1270,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131049488}
   m_CullTransparentMesh: 1
+--- !u!114 &1178991763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 737170898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1302935091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1338,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   constructingPrefab: {fileID: 3155356770574072560, guid: e367e28746d7d624397fde1907ef6639, type: 3}
+--- !u!114 &1346945371 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 2136368065}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1365521466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1291,11 +1362,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 5dc96efe74fcf1949891be2fe134506b, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (7)
+      value: btnPodType Grass
       objectReference: {fileID: 0}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -1384,6 +1455,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
   m_PrefabInstance: {fileID: 1365521466}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1463224396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 714716680}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1570366126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 1365521466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625964769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1488,7 @@ GameObject:
   - component: {fileID: 1625964771}
   - component: {fileID: 1625964770}
   - component: {fileID: 1625964772}
+  - component: {fileID: 1625964773}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1450,6 +1544,62 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
   - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+--- !u!114 &1625964773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625964769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cc350881f9fcf4baec014a36bfcac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proreqs:
+  - podType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    count: 1
+    resourceRequirement: 0
+    button: {fileID: 1916353399}
+  - podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    count: 6
+    resourceRequirement: 75
+    button: {fileID: 395275068}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 1
+    resourceRequirement: 600
+    button: {fileID: 1178991763}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 50
+    button: {fileID: 273216459}
+  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    count: 10
+    resourceRequirement: 50
+    button: {fileID: 788218254}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 5
+    resourceRequirement: 100
+    button: {fileID: 1570366126}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 10
+    resourceRequirement: 100
+    button: {fileID: 1463224396}
+  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    count: 20
+    resourceRequirement: 0
+    button: {fileID: 1346945371}
+--- !u!114 &1916353399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7890343290983243234, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+  m_PrefabInstance: {fileID: 84209851}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92a4872abf2e8c4c9bb9114a384c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2033436133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1463,7 +1613,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: f7a9df2cfad3f8840a2c598abcf591f6, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (3)
+      value: btnPodType Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -1565,7 +1719,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 991052c62bae99145be4081a961e5757, type: 3}
     - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Name
-      value: btnPodType (5)
+      value: btnPodType Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002807837987910455, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_Pivot.x
@@ -1577,7 +1735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5606746736039207019, guid: eb1ce8a77fc8c8b4a9b1b837b7aa5b36, type: 3}
       propertyPath: m_AnchorMax.x
