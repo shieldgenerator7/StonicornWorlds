@@ -87,7 +87,6 @@ public class PlanetManager : MonoBehaviour
 
     public void convertPod(Pod newPod)
     {
-        planet.removePod(newPod.pos);
         addPod(newPod);
     }
 
