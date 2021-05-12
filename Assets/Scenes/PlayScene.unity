@@ -1121,9 +1121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffusionRate: 10
+  diffusionRate: 1
   minAmount: 12.5
-  giveThresholdFactor: 0.59
+  giveThresholdFactor: 0.5
   skyPodContentType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
 --- !u!114 &788218254 stripped
 MonoBehaviour:
