@@ -17,7 +17,37 @@ public class PlanetObjectTypeButtonEditor : Editor
             foreach (Object t in targets)
             {
                 PlanetObjectTypeButton ptb = (PlanetObjectTypeButton)t;
+                if (!ptb.planetObjectType)
+                {
+                    string typeName = ptb.gameObject.name.Split(' ')[1];
+                    PodType podType = Resources.Load<PodType>("PodTypes/" + typeName);
+                    if (podType)
+                    {
+                        ptb.planetObjectType = podType;
+                    }
+                    else
+                    {
+                        PodContentType podContentType = Resources
+                            .Load<PodContentType>("PodContentTypes/" + typeName);
+                        if (podContentType)
+                        {
+                            ptb.planetObjectType = podContentType;
+                        }
+                    }
+                }
                 ptb.image.sprite = ptb.planetObjectType.preview;
+                if (ptb.compatibleToolActions.Count == 0)
+                {
+                    if (ptb.planetObjectType is PodType pt)
+                    {
+                        ptb.compatibleToolActions.Add(FindObjectOfType<ConstructAction>());
+                        ptb.compatibleToolActions.Add(FindObjectOfType<ConvertAction>());
+                    }
+                    else if (ptb.planetObjectType is PodContentType pct)
+                    {
+                        ptb.compatibleToolActions.Add(FindObjectOfType<PlantAction>());
+                    }
+                }
                 EditorUtility.SetDirty(ptb);
                 EditorUtility.SetDirty(ptb.image);
                 EditorSceneManager.MarkSceneDirty(ptb.gameObject.scene);
