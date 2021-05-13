@@ -74,6 +74,7 @@ public class CustomMenu
         Debug.Log("=== Prebuild tasks starting ===");
         //
         setupInputManager();
+        setupPodTypeBank();
         //
         Debug.Log("=== Prebuild tasks finished ===");
     }
@@ -84,6 +85,14 @@ public class CustomMenu
         inputManager.buttons = FindAll<ToolButton>();
         inputManager.tools = FindAll<Tool>();
         Debug.Log("InputManager setup", inputManager);
+    }
+    [MenuItem("SG7/Build/Prebuild/Setup PodTypeBank")]
+    public static void setupPodTypeBank()
+    {
+        PodTypeBank podTypeBank = GameObject.FindObjectOfType<PodTypeBank>();
+        podTypeBank.allPodTypes = Resources.FindObjectsOfTypeAll<PodType>().ToList();
+        podTypeBank.allPodContentTypes = Resources.FindObjectsOfTypeAll<PodContentType>().ToList();
+        Debug.Log("PodTypeBank setup", podTypeBank);
     }
 
     /// <summary>

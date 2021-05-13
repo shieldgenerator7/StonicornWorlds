@@ -8,6 +8,7 @@ public class PodTypeBank : MonoBehaviour
     public PodType spacePodType;
 
     public List<PodType> allPodTypes;
+    public List<PodContentType> allPodContentTypes;
 
     public PodType getPodType(string podTypeName)
         => allPodTypes.Find(podType => podType.typeName == podTypeName);
