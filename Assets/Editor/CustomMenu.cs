@@ -84,6 +84,7 @@ public class CustomMenu
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
         inputManager.buttons = FindAll<ToolButton>();
         inputManager.tools = FindAll<Tool>();
+        EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup", inputManager);
     }
     [MenuItem("SG7/Build/Prebuild/Setup PodTypeBank")]
@@ -92,6 +93,7 @@ public class CustomMenu
         PodTypeBank podTypeBank = GameObject.FindObjectOfType<PodTypeBank>();
         podTypeBank.allPodTypes = Resources.FindObjectsOfTypeAll<PodType>().ToList();
         podTypeBank.allPodContentTypes = Resources.FindObjectsOfTypeAll<PodContentType>().ToList();
+        EditorUtility.SetDirty(podTypeBank);
         Debug.Log("PodTypeBank setup", podTypeBank);
     }
 
