@@ -1618,6 +1618,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 21300000, guid: 263e476c7ac431440ae26437a665d35e, type: 3}
+--- !u!114 &1186659370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+  m_PrefabInstance: {fileID: 1402086619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523656792df5fba4c8b3a5ed8cf929cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1204566095 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -2285,14 +2296,18 @@ MonoBehaviour:
   tools:
   - {fileID: 1624048187}
   buttons:
-  - {fileID: 5002807837290620646}
-  - {fileID: 2141590758}
-  - {fileID: 807291198}
-  - {fileID: 1204566096}
-  - {fileID: 1665949740}
-  - {fileID: 1102588521}
-  - {fileID: 1300821725}
+  - {fileID: 1186659370}
+  - {fileID: 1555254106}
+  - {fileID: 86797397}
+  - {fileID: 1411579189}
   - {fileID: 711767243}
+  - {fileID: 1300821725}
+  - {fileID: 1102588521}
+  - {fileID: 1665949740}
+  - {fileID: 1204566096}
+  - {fileID: 807291198}
+  - {fileID: 2141590758}
+  - {fileID: 5002807837290620646}
   planetObjectType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
   toolAction: {fileID: 1012292983}
 --- !u!4 &1624048186

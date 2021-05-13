@@ -82,8 +82,8 @@ public class CustomMenu
     public static void setupInputManager()
     {
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
-        inputManager.buttons = FindAll<ToolButton>();
-        inputManager.tools = FindAll<Tool>();
+        inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList();
+        inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup", inputManager);
     }
@@ -96,44 +96,7 @@ public class CustomMenu
         EditorUtility.SetDirty(podTypeBank);
         Debug.Log("PodTypeBank setup", podTypeBank);
     }
-
-    /// <summary>
-    /// 2021-05-13: copied from https://stackoverflow.com/a/61717854/2336212
-    /// </summary>
-    /// <param name="search"></param>
-    /// <returns></returns>
-    public static List<T> FindAll<T>() where T : Component
     {
-        var scene = SceneManager.GetActiveScene();
-        var sceneRoots = scene.GetRootGameObjects();
-
-        List<T> results = new List<T>();
-        foreach (GameObject root in sceneRoots)
-        {
-            T comp = root.GetComponent<T>();
-            if (comp)
-            {
-                results.Add(comp);
-            }
-            results.AddRange(FindRecursive<T>(root));
-        }
-        return results;
-    }
-
-    private static List<T> FindRecursive<T>(GameObject obj) where T : Component
-    {
-        List<T> results = new List<T>();
-        foreach (Transform child in obj.transform)
-        {
-            T comp = child.GetComponent<T>();
-            if (comp)
-            {
-                results.Add(comp);
-            }
-            results.AddRange(FindRecursive<T>(child.gameObject));
-        }
-
-        return results;
     }
     #endregion
 
