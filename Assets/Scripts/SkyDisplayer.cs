@@ -21,8 +21,9 @@ public class SkyDisplayer : MonoBehaviour
     {
         if (!content)
         {
-            content = Managers.Planet.Planet.getPod(transform.position)
-                .podContents.Find(content => content.contentType == contentType);
+            content = Managers.Planet.Planet
+                .getPod(transform.position)
+                .getContent(contentType);
         }
         if (content)
         {

@@ -17,7 +17,7 @@ public class PodContent
         this.contentType = contentType;
         this.contentTypeName = contentType.name;
         this.container = container;
-        this.container.podContents.Add(this);
+        this.container.addContent(this);
     }
 
     public PodContent Clone(Pod clonePod)

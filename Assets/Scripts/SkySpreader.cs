@@ -74,7 +74,7 @@ public class SkySpreader : MonoBehaviour
     }
 
     PodContent getSky(Pod pod)
-        => pod.podContents.FirstOrDefault(pc => pc.contentType == skyPodContentType);
+        => pod.getContent(skyPodContentType);
 
     float currentPressure(Pod pod)
     {
@@ -97,13 +97,11 @@ public class SkySpreader : MonoBehaviour
 
     bool fillWithAir(Pod pod)
     {
-        PodContent content = pod.podContents.FirstOrDefault(
-            pc => pc.contentType == skyPodContentType
-            );
+        PodContent content = getSky(pod);
         if (!content)
         {
             content = new PodContent(skyPodContentType, pod);
-            pod.podContents.Add(content);
+            pod.addContent(content);
             Managers.Planet.addPodContent(content);
             content.Var = 0;
             return true;

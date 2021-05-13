@@ -38,8 +38,8 @@ public class PodContentType : PlanetObjectType
     public bool hasRequiredContent(Pod curPod)
     {
         return requiredContent.Count == 0 ||
-            (curPod && curPod.podContents.Any(
-                content => requiredContent.Contains(content.contentType)
+            (curPod && requiredContent.Any(
+                ctntType => curPod.hasContent(ctntType)
                 ));
     }
 }

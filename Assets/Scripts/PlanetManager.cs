@@ -71,10 +71,10 @@ public class PlanetManager : MonoBehaviour
     {
         planet.addPod(pod, pod.pos);
         coreCount = planet.Pods(Managers.PodTypeBank.corePodType).Count;
-        podContents = new List<PodContent>();
+        this.podContents = new List<PodContent>();
         planet.PodsAll.ForEach(
-            pod => pod.podContents.ForEach(
-                pc => podContents.Add(pc)
+            pod => pod.forEachContent(
+                pc => this.podContents.Add(pc)
                 )
             );
     }
@@ -164,9 +164,7 @@ public class PlanetManager : MonoBehaviour
             && podContentType.canPlantIn(curPodType)
             && podContentType.isRequiredNeighborPresent(neighborTypes)
             && podContentType.hasRequiredContent(curPod)
-            && !(curPod && curPod.podContents.Any(
-                content => content.contentType == podContentType
-                ));
+            && !(curPod && curPod.hasContent(podContentType));
     }
 
     public List<Pod> getFutureNeighbors(Vector2 pos)
@@ -192,7 +190,7 @@ public class PlanetManager : MonoBehaviour
                         break;
                     case QueueTask.Type.PLANT:
                         Pod pod = fp.getPod(task.pos);
-                        pod.podContents.Add(
+                        pod.addContent(
                             new PodContent((PodContentType)task.taskObject, pod)
                             );
                         break;

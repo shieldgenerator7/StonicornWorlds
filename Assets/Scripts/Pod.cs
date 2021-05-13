@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Pod
@@ -9,13 +11,35 @@ public class Pod
     public PodType podType;
     public string podTypeName;
 
-    public List<PodContent> podContents = new List<PodContent>();
+    private List<PodContent> podContents = new List<PodContent>();
 
     public Pod(Vector2 pos, PodType podType)
     {
         this.pos = pos;
         this.podType = podType;
         this.podTypeName = podType.name;
+    }
+
+    public void addContent(PodContent content)
+    {
+        if (!podContents.Contains(content))
+        {
+            podContents.Add(content);
+            onPodContentChanged?.Invoke(this);
+        }
+    }
+    public delegate void OnPodContentChanged(Pod p);
+    public event OnPodContentChanged onPodContentChanged;
+
+    public bool hasContent(PodContentType contentType)
+        => podContents.Any(content => content.contentType == contentType);
+
+    public PodContent getContent(PodContentType contentType)
+        => podContents.FirstOrDefault(content => content.contentType == contentType);
+
+    public void forEachContent(Action<PodContent> contentFunc)
+    {
+        podContents.ForEach(content => contentFunc(content));
     }
 
     public Pod Clone()
