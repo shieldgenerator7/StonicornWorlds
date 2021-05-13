@@ -6,6 +6,7 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
     List<QueueTask> queue = new List<QueueTask>();
+    public List<QueueTask> Tasks => queue.ToList();
 
     List<QueueWorker> workers = new List<QueueWorker>();
 
@@ -29,8 +30,7 @@ public class QueueManager : MonoBehaviour
 
     private void Awake()
     {
-        Managers.Planet.onPlanetSwapped +=
-           planet => planet.onStateChanged += updateQueueWorkerList;
+        Managers.Planet.onPlanetStateChanged += updateQueueWorkerList;
     }
 
     // Update is called once per frame

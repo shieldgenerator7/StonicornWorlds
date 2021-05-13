@@ -12,13 +12,11 @@ public class PlanetManagerEffects : MonoBehaviour
     List<GameObject> goPods = new List<GameObject>();
     List<GameObject> goPodContents = new List<GameObject>();
     List<GameObject> editPods = new List<GameObject>();
-    List<GameObject> convertPods = new List<GameObject>();
 
     // Start is called before the first frame update
     void Awake()
     {
-        Managers.Planet.onPlanetSwapped +=
-            (planet) => planet.onStateChanged += updateDisplay;
+        Managers.Planet.onPlanetStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onValidPositionListChanged += updateEditDisplay;
     }

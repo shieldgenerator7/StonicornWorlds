@@ -31,13 +31,23 @@ public class PlanetManager : MonoBehaviour
         get => planet;
         set
         {
+            if (planet != null)
+            {
+                planet.onStateChanged -= planetChanged;
+            }
             planet = value;
-            onPlanetSwapped?.Invoke(planet);
+            planet.onStateChanged += planetChanged;
+            //onPlanetSwapped?.Invoke(planet);
+            onPlanetStateChanged?.Invoke(planet);
         }
     }
-    public delegate void OnPlanetSwapped(Planet p);
-    public event OnPlanetSwapped onPlanetSwapped;
-    public event OnPlanetSwapped onFuturePlanetSwapped;
+    public delegate void OnPlanetStateChanged(Planet p);
+    //public event OnPlanetStateChanged onPlanetSwapped;
+    public event OnPlanetStateChanged onPlanetStateChanged;
+    //public event OnPlanetStateChanged onFuturePlanetSwapped;
+    public event OnPlanetStateChanged onFuturePlanetStateChanged;
+    private void planetChanged(Planet p) => onPlanetStateChanged?.Invoke(p);
+    private void futurePlanetChanged(Planet p) => onFuturePlanetStateChanged?.Invoke(p);
 
     private Planet futurePlanet;
     public Planet FuturePlanet
@@ -45,8 +55,14 @@ public class PlanetManager : MonoBehaviour
         get => futurePlanet;
         set
         {
+            if (futurePlanet != null)
+            {
+                futurePlanet.onStateChanged -= futurePlanetChanged;
+            }
             futurePlanet = value;
-            onFuturePlanetSwapped?.Invoke(futurePlanet);
+            futurePlanet.onStateChanged += futurePlanetChanged;
+            //onFuturePlanetSwapped?.Invoke(futurePlanet);
+            onFuturePlanetStateChanged?.Invoke(futurePlanet);
         }
     }
 
@@ -61,6 +77,7 @@ public class PlanetManager : MonoBehaviour
         calculateFutureState(new List<QueueTask>());
         Managers.Queue.onTaskCompleted += (task) => updatePlanet(task);
         Managers.Queue.onQueueChanged += (tasks) => calculateFutureState(tasks);
+        onPlanetStateChanged += (p) => calculateFutureState(Managers.Queue.Tasks);
         Application.runInBackground = true;
         Resources = ResourceCap;
     }
@@ -96,12 +113,6 @@ public class PlanetManager : MonoBehaviour
                 );
                 break;
         }
-    }
-
-    public bool checkAddPodUI(Vector2 pos1, Vector2 pos2)
-    {
-        float radius = 0.5f;
-        return Vector2.Distance(pos1, pos2) <= radius;
     }
 
     public Vector2 upDir(Vector2 pos)
