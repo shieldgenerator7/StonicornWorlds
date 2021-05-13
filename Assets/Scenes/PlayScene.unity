@@ -1817,6 +1817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btn Magnify
       objectReference: {fileID: 0}
+    - target: {fileID: 2130847798164095153, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
@@ -2468,6 +2472,10 @@ MonoBehaviour:
     count: 15
     resourceRequirement: 0
     button: {fileID: 1555254106}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 25
+    resourceRequirement: 0
+    button: {fileID: 1186659370}
 --- !u!224 &1665949739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}

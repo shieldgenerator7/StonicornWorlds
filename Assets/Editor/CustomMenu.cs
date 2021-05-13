@@ -75,6 +75,7 @@ public class CustomMenu
         //
         setupInputManager();
         setupPodTypeBank();
+        checkProgressionManager();
         //
         Debug.Log("=== Prebuild tasks finished ===");
     }
@@ -85,7 +86,7 @@ public class CustomMenu
         inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList();
         inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
-        Debug.Log("InputManager setup", inputManager);
+        Debug.Log("InputManager setup.", inputManager);
     }
     [MenuItem("SG7/Build/Prebuild/Setup PodTypeBank")]
     public static void setupPodTypeBank()
@@ -94,9 +95,42 @@ public class CustomMenu
         podTypeBank.allPodTypes = Resources.FindObjectsOfTypeAll<PodType>().ToList();
         podTypeBank.allPodContentTypes = Resources.FindObjectsOfTypeAll<PodContentType>().ToList();
         EditorUtility.SetDirty(podTypeBank);
-        Debug.Log("PodTypeBank setup", podTypeBank);
+        Debug.Log("PodTypeBank setup.", podTypeBank);
     }
+    [MenuItem("SG7/Build/Prebuild/Check ProgressionManager")]
+    public static void checkProgressionManager()
     {
+        InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
+        ProgressionManager progressionManager = GameObject.FindObjectOfType<ProgressionManager>();
+        //Check to make sure buttons are registered
+        inputManager.buttons
+            .FindAll(
+            btn => !progressionManager.proreqs.Any(
+                    proreq => proreq.button == btn
+                    )
+            )
+            .ForEach(btn =>
+                Debug.LogError("Button " + btn + " is not registered in ProgressManager!", btn)
+                );
+        //Check to make sure no button is registered twice (or more)
+        progressionManager.proreqs
+            .FindAll(
+            proreq => progressionManager.proreqs.Any(
+                pr => pr != proreq && pr.button == proreq.button
+                )
+            )
+            .ForEach(proreq =>
+                Debug.LogError("Button " + proreq.button
+                + " is registered more than once in ProgressManager!", progressionManager)
+            );
+        //Set active buttons to inactive
+        inputManager.buttons.FindAll(btn => btn.gameObject.activeSelf)
+            .ForEach(btn =>
+            {
+                btn.gameObject.SetActive(false);
+                Debug.LogWarning("Set button inactive: " + btn);
+            });
+        Debug.Log("ProgressionManager checked.", progressionManager);
     }
     #endregion
 
