@@ -14,6 +14,7 @@ public class Planet
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
+    [NonSerialized]
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
@@ -28,6 +29,7 @@ public class Planet
         pod.pos = gridToWorld(hexpos);
         grid.add(pod, worldToGrid(pos));
         podLists.add(pod);
+        pod.onPodContentChanged += podContentAdded;
         fillSpaceAround(pod.pos);
         onStateChanged?.Invoke(this);
     }
@@ -38,10 +40,11 @@ public class Planet
         Pod pod = grid.get(v);
         grid.removeAt(v);
         podLists.remove(pod);
+        pod.onPodContentChanged -= podContentAdded;
         onStateChanged?.Invoke(this);
     }
 
-    public void podContentAdded()
+    private void podContentAdded(Pod p)
     {
         onStateChanged?.Invoke(this);
     }
@@ -61,11 +64,15 @@ public class Planet
                 Pod pod = new Pod(gridToWorld(v), space);
                 grid.add(pod, v);
                 podLists.add(pod);
+                pod.onPodContentChanged += podContentAdded;
             }
             );
         }
     }
     #endregion
+
+    public void forEachPodContent(Action<PodContent> contentFunc)
+        => PodsAll.ForEach(pod => pod.forEachContent(contentFunc));
 
     #region Read State
     public Vector2 getHexPos(Vector2 pos)

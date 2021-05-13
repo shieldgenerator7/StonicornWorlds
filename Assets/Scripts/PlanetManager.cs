@@ -50,8 +50,6 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    public List<PodContent> podContents = new List<PodContent>();//generated from pods' contents variable
-
     void Start()
     {
         Planet p = new Planet();
@@ -71,18 +69,6 @@ public class PlanetManager : MonoBehaviour
     {
         planet.addPod(pod, pod.pos);
         coreCount = planet.Pods(Managers.PodTypeBank.corePodType).Count;
-        this.podContents = new List<PodContent>();
-        planet.PodsAll.ForEach(
-            pod => pod.forEachContent(
-                pc => this.podContents.Add(pc)
-                )
-            );
-    }
-
-    public void addPodContent(PodContent podContent)
-    {
-        podContents.Add(podContent);
-        planet.podContentAdded();
     }
 
     public void convertPod(Pod newPod)
@@ -104,11 +90,10 @@ public class PlanetManager : MonoBehaviour
                 planet.removePod(task.pos);
                 break;
             case QueueTask.Type.PLANT:
-                addPodContent(
-                    new PodContent(
-                        (PodContentType)task.taskObject,
-                        planet.getPod(task.pos)
-                    ));
+                new PodContent(
+                    (PodContentType)task.taskObject,
+                    planet.getPod(task.pos)
+                );
                 break;
         }
     }

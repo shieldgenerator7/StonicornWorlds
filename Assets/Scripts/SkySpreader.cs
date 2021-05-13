@@ -102,7 +102,6 @@ public class SkySpreader : MonoBehaviour
         {
             content = new PodContent(skyPodContentType, pod);
             pod.addContent(content);
-            Managers.Planet.addPodContent(content);
             content.Var = 0;
             return true;
         }

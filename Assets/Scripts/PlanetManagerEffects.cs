@@ -42,8 +42,8 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update pod contents
         goPodContents.ForEach(go => Destroy(go));
         goPodContents.Clear();
-        Managers.Planet.podContents
-            .ForEach(content =>
+        Managers.Planet.Planet.forEachPodContent(
+            content =>
             {
                 GameObject go = Instantiate(
                     content.contentType.prefab,
