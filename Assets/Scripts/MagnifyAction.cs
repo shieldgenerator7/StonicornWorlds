@@ -11,8 +11,17 @@ public class MagnifyAction : ToolAction
 
     public override void takeAction(List<Vector2> posList)
     {
-        Vector2 center = posList.Aggregate((sum, v) => sum + v) / posList.Count;
-        FindObjectOfType<CameraController>().Locked = true;
-        FindObjectOfType<CameraController>().autoFrame(center, posList);
+        //If any of the positions are on the planet
+        if (posList.Any(v => Managers.Planet.Planet.getPod(v)))
+        {
+            Vector2 center = posList.Aggregate((sum, v) => sum + v) / posList.Count;
+            FindObjectOfType<CameraController>().Locked = true;
+            FindObjectOfType<CameraController>().autoFrame(center, posList);
+        }
+        else
+        {
+            FindObjectOfType<CameraController>().Locked = false;
+            FindObjectOfType<CameraController>().autoFrame(posList);
+        }
     }
 }
