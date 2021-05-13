@@ -7,10 +7,9 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField]
     private Tool tool;
-    private List<Tool> tools;
 
-    [SerializeField]
-    private List<ToolButton> buttons;
+    public List<Tool> tools;
+    public List<ToolButton> buttons;
 
     [SerializeField]
     private PlanetObjectType planetObjectType;
@@ -56,7 +55,6 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tools = FindObjectsOfType<Tool>().ToList();
         //tool.activate();
         onPlanetObjectTypeChanged += (pot) => checkAllButtons();
         onToolActionChanged += (ta) => checkAllButtons();

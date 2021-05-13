@@ -13,7 +13,8 @@ using System.Reflection;
 
 public class CustomMenu
 {
-    const int FIRST_LEVEL_INDEX = 4;
+
+    #region Editor Menu
 
 
     //Find Missing Scripts
@@ -64,6 +65,68 @@ public class CustomMenu
             FindInGO(childT.gameObject);
         }
     }
+    #endregion
+
+    #region Prebuild Submenu
+    [MenuItem("SG7/Build/Prebuild/Run All Prebuild Tasks &w")]
+    public static void runAllPrebuildTasks()
+    {
+        Debug.Log("=== Prebuild tasks starting ===");
+        //
+        setupInputManager();
+        //
+        Debug.Log("=== Prebuild tasks finished ===");
+    }
+    [MenuItem("SG7/Build/Prebuild/Setup InputManager")]
+    public static void setupInputManager()
+    {
+        InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
+        inputManager.buttons = FindAll<ToolButton>();
+        inputManager.tools = FindAll<Tool>();
+        Debug.Log("InputManager setup", inputManager);
+    }
+
+    /// <summary>
+    /// 2021-05-13: copied from https://stackoverflow.com/a/61717854/2336212
+    /// </summary>
+    /// <param name="search"></param>
+    /// <returns></returns>
+    public static List<T> FindAll<T>() where T : Component
+    {
+        var scene = SceneManager.GetActiveScene();
+        var sceneRoots = scene.GetRootGameObjects();
+
+        List<T> results = new List<T>();
+        foreach (GameObject root in sceneRoots)
+        {
+            T comp = root.GetComponent<T>();
+            if (comp)
+            {
+                results.Add(comp);
+            }
+            results.AddRange(FindRecursive<T>(root));
+        }
+        return results;
+    }
+
+    private static List<T> FindRecursive<T>(GameObject obj) where T : Component
+    {
+        List<T> results = new List<T>();
+        foreach (Transform child in obj.transform)
+        {
+            T comp = child.GetComponent<T>();
+            if (comp)
+            {
+                results.Add(comp);
+            }
+            results.AddRange(FindRecursive<T>(child.gameObject));
+        }
+
+        return results;
+    }
+    #endregion
+
+    #region Build / Run Menu
 
     [MenuItem("SG7/Build/Build Windows %w")]
     public static void buildWindows()
@@ -172,6 +235,9 @@ public class CustomMenu
         string buildName = defaultPath + "/" + PlayerSettings.productName + "." + extension;
         return buildName;
     }
+    #endregion
+
+    #region Session / Upgrade Menu
 
     [MenuItem("SG7/Session/Begin Session")]
     public static void beginSession()
@@ -196,4 +262,5 @@ public class CustomMenu
     {
         AssetDatabase.ForceReserializeAssets();
     }
+    #endregion
 }
