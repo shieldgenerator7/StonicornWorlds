@@ -30,6 +30,7 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateCursor(Vector2 pos)
     {
+        cursorObject.SetActive(Managers.Edge.validPosList.Contains(pos));
         cursorObject.transform.position = pos;
     }
 
