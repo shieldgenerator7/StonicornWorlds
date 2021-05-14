@@ -78,7 +78,6 @@ public class PlanetManager : MonoBehaviour
         Managers.Queue.onTaskCompleted += (task) => updatePlanet(task);
         Managers.Queue.onQueueChanged += (tasks) => calculateFutureState(tasks);
         onPlanetStateChanged += (p) => calculateFutureState(Managers.Queue.Tasks);
-        Application.runInBackground = true;
         Resources = ResourceCap;
     }
 
