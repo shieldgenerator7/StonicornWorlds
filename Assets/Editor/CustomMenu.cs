@@ -128,7 +128,7 @@ public class CustomMenu
             .ForEach(btn =>
             {
                 btn.gameObject.SetActive(false);
-                Debug.LogWarning("Set button inactive: " + btn);
+                Debug.LogWarning("Set button inactive: " + btn, btn);
             });
         Debug.Log("ProgressionManager checked.", progressionManager);
     }
