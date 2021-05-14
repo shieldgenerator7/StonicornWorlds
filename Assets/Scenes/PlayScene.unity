@@ -1007,6 +1007,7 @@ GameObject:
   - component: {fileID: 752787612}
   - component: {fileID: 752787614}
   - component: {fileID: 752787615}
+  - component: {fileID: 752787622}
   - component: {fileID: 752787616}
   - component: {fileID: 752787617}
   - component: {fileID: 752787621}
@@ -1175,6 +1176,20 @@ MonoBehaviour:
   gasType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
   plantHealthDelta: 1
   gasPressureDelta: -1
+--- !u!114 &752787622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0555ddef4bc1141a9a80ed715c1acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generatorPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+  generateRate: 1
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
