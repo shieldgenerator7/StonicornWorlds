@@ -149,6 +149,7 @@ MonoBehaviour:
   image: {fileID: 4744040802469672528}
   activeImage: {fileID: 5063199945250858044}
   toolAction: {fileID: 0}
+  compatibleObjectTypes: []
 --- !u!1 &6443571650144872923
 GameObject:
   m_ObjectHideFlags: 0
