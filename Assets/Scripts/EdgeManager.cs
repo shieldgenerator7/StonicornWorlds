@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EdgeManager : MonoBehaviour
 {
-    public List<Vector2> validPosList;
+    private List<Vector2> validPosList;
+    public List<Vector2> ValidPosList => validPosList.ToList();
 
     // Start is called before the first frame update
     void Awake()
@@ -43,7 +44,7 @@ public class EdgeManager : MonoBehaviour
         validPosList = Managers.Planet.FuturePlanet.PodsAll
             .ConvertAll(pod => pod.pos)
             .FindAll(pos => Managers.Input.ToolAction.isActionValidAt(pos));
-        onValidPositionListChanged?.Invoke(validPosList);
+        onValidPositionListChanged?.Invoke(ValidPosList);
     }
     public delegate void OnValidPositionListChanged(List<Vector2> posList);
     public event OnValidPositionListChanged onValidPositionListChanged;

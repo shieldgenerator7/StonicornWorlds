@@ -25,14 +25,14 @@ public class PlanetManagerEffects : MonoBehaviour
 
     private void Start()
     {
-        updateEditDisplay(Managers.Edge.validPosList);
+        updateEditDisplay(Managers.Edge.ValidPosList);
     }
 
     public void updateCursor(Vector2 pos)
     {
         cursorObject.SetActive(
             pos != Vector2.one * -1 &&
-            Managers.Edge.validPosList.Contains(pos)
+            Managers.Edge.ValidPosList.Contains(pos)
             );
         cursorObject.transform.position = pos;
     }
