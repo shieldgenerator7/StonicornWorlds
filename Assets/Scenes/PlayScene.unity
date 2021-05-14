@@ -346,6 +346,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
@@ -764,6 +768,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 673603988}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -821,6 +829,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -1075,7 +1087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707a2ab29b9a1dd4b8f5c5fae4ac1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validPosList: []
 --- !u!114 &752787616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,6 +1369,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 207610543}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -1415,6 +1430,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -1930,6 +1949,10 @@ PrefabInstance:
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1168859926}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
 --- !u!224 &1402086620 stripped
@@ -1960,6 +1983,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -2081,6 +2108,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -2285,6 +2316,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -2645,6 +2680,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
@@ -2781,6 +2820,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: planetObjectType
       value: 
@@ -3018,6 +3061,10 @@ PrefabInstance:
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1012292983}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: checkRadius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.size
       value: 7

@@ -8,6 +8,7 @@ public abstract class ToolButton : MonoBehaviour
     public Image image;
     public Image activeImage;
     public Image mouseOverImage;
+    public float checkRadius = 50;
     Vector2 position;
     private bool activeButton = false;
 
@@ -25,14 +26,14 @@ public abstract class ToolButton : MonoBehaviour
 
     public bool checkMouseOver(Vector2 screenPos)
     {
-        bool mo = !activeButton && checkClick(screenPos);
+        bool mo = checkClick(screenPos);
         mouseOverImage.enabled = mo;
         return mo;
     }
 
     public bool checkClick(Vector2 screenPos)
     {
-        return Vector2.Distance(screenPos, position) <= 50;
+        return !activeButton && Vector2.Distance(screenPos, position) <= checkRadius;
     }
 
     public void checkActive()
