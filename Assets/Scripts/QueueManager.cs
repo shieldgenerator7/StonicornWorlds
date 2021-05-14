@@ -40,7 +40,10 @@ public class QueueManager : MonoBehaviour
         {
             while (AnyWorkersFree)
             {
-                QueueTask task = queue[0];
+                //Try to find task not being worked on
+                QueueTask task = queue.FirstOrDefault(
+                    task => !workers.Any(w => w.currentTask == task)
+                    ) ?? queue[0];
                 //Try to start task
                 if (!task.Started
                     && Managers.Planet.Resources >= task.startCost)
@@ -58,9 +61,6 @@ public class QueueManager : MonoBehaviour
                 {
                     //Work on it more
                     dispatchWorker(task);
-                    //Move pod to end of list
-                    queue.Remove(task);
-                    queue.Add(task);
                 }
                 //Else stop, can't do anything
                 else
