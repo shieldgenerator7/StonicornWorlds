@@ -2662,7 +2662,7 @@ MonoBehaviour:
     button: {fileID: 2141590758}
   - podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
     count: 6
-    resourceRequirement: 75
+    resourceRequirement: 0
     button: {fileID: 807291198}
   - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
     count: 1
@@ -2670,19 +2670,19 @@ MonoBehaviour:
     button: {fileID: 5002807837290620646}
   - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
     count: 9
-    resourceRequirement: 50
+    resourceRequirement: 0
     button: {fileID: 1204566096}
   - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
     count: 10
-    resourceRequirement: 50
+    resourceRequirement: 0
     button: {fileID: 1665949740}
   - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
     count: 5
-    resourceRequirement: 100
+    resourceRequirement: 0
     button: {fileID: 1300821725}
   - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
     count: 10
-    resourceRequirement: 100
+    resourceRequirement: 0
     button: {fileID: 711767243}
   - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
     count: 20
