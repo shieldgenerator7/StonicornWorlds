@@ -65,7 +65,7 @@ public class InputManager : MonoBehaviour
         onToolActionChanged += (ta) => checkAllButtons();
     }
 
-    void checkAllButtons()
+    public void checkAllButtons()
     {
         buttons.ForEach(btn => btn.checkActive());
     }

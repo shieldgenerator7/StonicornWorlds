@@ -20,6 +20,7 @@ public class ProgressionManager : MonoBehaviour
         {
             if (proreqs[i].checkProgression())
             {
+                Managers.Input.checkAllButtons();
                 proreqs.RemoveAt(i);
             }
         }
