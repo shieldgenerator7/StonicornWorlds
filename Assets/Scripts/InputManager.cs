@@ -52,6 +52,11 @@ public class InputManager : MonoBehaviour
 
     private bool buttonActivation = false;
 
+    private void Awake()
+    {
+        PlanetObjectType = planetObjectType;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

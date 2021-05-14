@@ -20,6 +20,24 @@ public class EdgeManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (Managers.Planet.FuturePlanet != null)
+        {
+            calculateValidPosList();
+        }
+    }
+
+    int i = 0;
+    private void Update()
+    {
+        if (i < 5)
+        {
+            i++;
+            Start();
+        }
+    }
+
     private void calculateValidPosList()
     {
         validPosList = Managers.Planet.FuturePlanet.PodsAll

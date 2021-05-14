@@ -21,6 +21,11 @@ public class PlanetManagerEffects : MonoBehaviour
         Managers.Edge.onValidPositionListChanged += updateEditDisplay;
     }
 
+    private void Start()
+    {
+        updateEditDisplay(Managers.Edge.validPosList);
+    }
+
     public void updateDisplay(Planet p)
     {
         //Update pods
