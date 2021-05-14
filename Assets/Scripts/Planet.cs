@@ -93,6 +93,9 @@ public class Planet
     public Vector2 getGroundPos(Vector2 pos)
         => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
 
+    public Vector2 getUpDirection(Vector2 pos)
+        => (getHexPos(pos) - getGroundPos(pos)).normalized;
+
     public Neighborhood<Pod> getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
 

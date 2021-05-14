@@ -115,12 +115,6 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    public Vector2 upDir(Vector2 pos)
-    {
-        Vector2 ground = planet.getGroundPos(pos);
-        return (pos - ground).normalized;
-    }
-
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
         if (!podType)

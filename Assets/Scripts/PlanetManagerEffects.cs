@@ -34,7 +34,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     Quaternion.identity,
                     transform
                     );
-                go.transform.up = Managers.Planet.upDir(go.transform.position);
+                go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
                 goPods.Add(go);
             });
         //Update pod contents
@@ -49,7 +49,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     Quaternion.identity,
                     transform
                     );
-                go.transform.up = Managers.Planet.upDir(go.transform.position);
+                go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
                 goPodContents.Add(go);
             });
     }

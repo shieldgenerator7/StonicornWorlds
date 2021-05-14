@@ -31,7 +31,7 @@ public class QueueManagerEffects : MonoBehaviour
                 Quaternion.identity,
                 transform
                 );
-            construct.transform.up = Managers.Planet.upDir(construct.transform.position);
+            construct.transform.up = Managers.Planet.Planet.getUpDirection(construct.transform.position);
             ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
             effect.init(task);
             Color color = Color.white;
