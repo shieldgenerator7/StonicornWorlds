@@ -35,6 +35,7 @@ public class CameraController : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, 0, -180);
             }
+            onRotationChanged?.Invoke(transform.up);
         }
         if (transform.position != Position)
         {
@@ -45,6 +46,8 @@ public class CameraController : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, ZoomLevel, deltaTime);
         }
     }
+    public delegate void OnRotationChanged(Vector2 up);
+    public event OnRotationChanged onRotationChanged;
 
     public void autoFrame(List<Vector2> posList)
     {

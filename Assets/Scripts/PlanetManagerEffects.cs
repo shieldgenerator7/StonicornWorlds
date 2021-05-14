@@ -20,6 +20,7 @@ public class PlanetManagerEffects : MonoBehaviour
         Managers.Planet.onPlanetStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onValidPositionListChanged += updateEditDisplay;
+        Managers.Camera.onRotationChanged += updateEditDisplay;
         Managers.Input.onMouseOverMoved += updateCursor;
     }
 
@@ -74,6 +75,9 @@ public class PlanetManagerEffects : MonoBehaviour
         //Update edit pod UI
         editPods.ForEach(go => Destroy(go));
         editPods.Clear();
+        Color color = Managers.Input.ToolAction.color;
+        Vector2 up = Managers.Camera.transform.up;
+        Sprite preview = Managers.Input.ToolAction.preview;
         posList.ForEach(edge =>
         {
             GameObject editPod = Instantiate(
@@ -82,11 +86,19 @@ public class PlanetManagerEffects : MonoBehaviour
                 Quaternion.identity,
                 transform
                 );
-            SpriteRenderer sr = editPod.GetComponent<SpriteRenderer>();
-            sr.sprite = Managers.Input.ToolAction.preview;
-            sr.color = Managers.Input.ToolAction.color;
+            editPod.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = editPod.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            sr.sprite = preview;
+            sr.color = color;
+            sr.transform.up = up;
             editPods.Add(editPod);
         });
+    }
+    public void updateEditDisplay(Vector2 up)
+    {
+        editPods.ForEach(go =>
+            go.transform.GetChild(0).up = up
+        );
     }
 
     void updateUI(float resources)
