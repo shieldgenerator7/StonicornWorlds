@@ -260,6 +260,11 @@ public class CustomMenu
         }
         string newVersion = split[0] + "." + newNum;
         PlayerSettings.bundleVersion = newVersion;
+        //Build Info Displayer
+        BuildInfoDisplayer bid = GameObject.FindObjectOfType<BuildInfoDisplayer>();
+        bid.updateBuildInfoTexts();
+        EditorUtility.SetDirty(bid);
+        EditorSceneManager.MarkSceneDirty(bid.gameObject.scene);
         //Save and Log
         EditorSceneManager.SaveOpenScenes();
         Debug.LogWarning("Updated build version number from " + oldVersion + " to " + newVersion);
