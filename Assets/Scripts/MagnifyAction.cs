@@ -7,21 +7,22 @@ public class MagnifyAction : ToolAction
 {
     public override Color color => Color.white;
 
-    public override bool isActionValidAt(Vector2 pos) => true;
+    public override bool isActionValidAt(Vector2 pos)
+        => Managers.Planet.Planet.hasPod(pos);
 
     public override void takeAction(List<Vector2> posList)
     {
         //If any of the positions are on the planet
-        if (posList.Any(v => Managers.Planet.Planet.getPod(v)))
+        if (posList.Any(v => isActionValidAt(v)))
         {
             Vector2 center = posList.Aggregate((sum, v) => sum + v) / posList.Count;
-            FindObjectOfType<CameraController>().Locked = true;
-            FindObjectOfType<CameraController>().autoFrame(center, posList);
+            Managers.Camera.Locked = true;
+            Managers.Camera.autoFrame(center, posList);
         }
         else
         {
-            FindObjectOfType<CameraController>().Locked = false;
-            FindObjectOfType<CameraController>().autoFrame(posList);
+            Managers.Camera.Locked = false;
+            Managers.Camera.autoFrame(posList);
         }
     }
 }
