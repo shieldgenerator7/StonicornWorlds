@@ -22,7 +22,6 @@ public class PlantGasInteraction : MonoBehaviour
 
     void interact(PodContent plant, PodContent gas)
     {
-        float oldVal = plant.Var;
         plant.Var = Mathf.Clamp(
             plant.Var + (plantHealthDelta * Time.deltaTime),
             0.0f,
@@ -33,5 +32,9 @@ public class PlantGasInteraction : MonoBehaviour
             plant.container.removeContent(plant);
         }
         gas.Var += gasPressureDelta * Time.deltaTime;
+        if (gas.Var <= 0)
+        {
+            gas.container.removeContent(gas);
+        }
     }
 }
