@@ -74,7 +74,9 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //Check click on Tool
-                ToolButton clickedButton = buttons.FirstOrDefault(b => b.checkClick(Input.mousePosition));
+                ToolButton clickedButton = buttons
+                    .FindAll(b => b.gameObject.activeSelf)
+                    .FirstOrDefault(b => b.checkClick(Input.mousePosition));
                 if (clickedButton)
                 {
                     clickedButton.activate();

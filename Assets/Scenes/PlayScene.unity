@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d25c88ef918d9d459a6ab3d1f92d313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 21300000, guid: 263e476c7ac431440ae26437a665d35e, type: 3}
+  preview: {fileID: 21300000, guid: 1695ddc42b38127419ae93bfe4e5c912, type: 3}
 --- !u!114 &1186659370 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
@@ -1812,7 +1812,7 @@ PrefabInstance:
     - target: {fileID: 1813250844281816534, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 263e476c7ac431440ae26437a665d35e, type: 3}
+      objectReference: {fileID: 21300000, guid: 1695ddc42b38127419ae93bfe4e5c912, type: 3}
     - target: {fileID: 2130847798164095153, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Name
       value: btn Magnify
@@ -1825,50 +1825,6 @@ PrefabInstance:
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1168859926}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: compatibleObjectTypes.Array.data[9]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
 --- !u!224 &1402086620 stripped
@@ -2300,16 +2256,16 @@ MonoBehaviour:
   tools:
   - {fileID: 1624048187}
   buttons:
-  - {fileID: 1186659370}
-  - {fileID: 1555254106}
   - {fileID: 86797397}
-  - {fileID: 1411579189}
   - {fileID: 711767243}
-  - {fileID: 1300821725}
-  - {fileID: 1102588521}
-  - {fileID: 1665949740}
-  - {fileID: 1204566096}
   - {fileID: 807291198}
+  - {fileID: 1102588521}
+  - {fileID: 1186659370}
+  - {fileID: 1204566096}
+  - {fileID: 1300821725}
+  - {fileID: 1411579189}
+  - {fileID: 1555254106}
+  - {fileID: 1665949740}
   - {fileID: 2141590758}
   - {fileID: 5002807837290620646}
   planetObjectType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
@@ -2404,9 +2360,9 @@ MonoBehaviour:
   corePodType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   spacePodType: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
   allPodTypes:
+  - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   - {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-  - {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   - {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
   - {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
@@ -2908,11 +2864,11 @@ PrefabInstance:
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+      objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibleObjectTypes.Array.data[9]
       value: 
