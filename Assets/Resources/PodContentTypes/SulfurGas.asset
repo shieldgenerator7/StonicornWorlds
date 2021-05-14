@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f063df8daa1cd4981a8208d5bae7dd, type: 3}
+  m_Name: SulfurGas
+  m_EditorClassIdentifier: 
+  typeName: SulfuricGas
+  preview: {fileID: 21300000, guid: 2e1e0473b54ee7847ab793075f1346d2, type: 3}
+  uiColor: {r: 0.745, g: 0.09349019, b: 0.09349019, a: 1}
+  prefab: {fileID: 7875099125704197678, guid: 504c2d31cb69a1740bfbee1379eb6526, type: 3}
+  startCost: 10
+  convertCost: 10
+  progressRequired: 10
+  podImplantTypes: []
+  requiredGround: []
+  requiredNeighbors: []
+  requiredContent: []

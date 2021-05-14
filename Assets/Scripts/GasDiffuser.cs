@@ -7,16 +7,12 @@ public class GasDiffuser : MonoBehaviour
 {
     public float diffusionRate = 5;
     public float minAmount = 10;//min pressure amount to start diffusing
+    public float emitterPressure = 200;
     [Range(0, 1)]
     public float giveThresholdFactor = 0.5f;
 
-    public PodContentType skyPodContentType;
-    private PodType waterPodType;
-
-    private void Start()
-    {
-        waterPodType = Managers.PodTypeBank.getPodType("Water");
-    }
+    public PodContentType gasPodContentType;
+    public PodType emitterPodType;
 
     // Update is called once per frame
     void Update()
@@ -27,7 +23,7 @@ public class GasDiffuser : MonoBehaviour
             .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
-        Managers.Planet.Planet.Pods(waterPodType)
+        Managers.Planet.Planet.Pods(emitterPodType)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
         if (filledAny)
@@ -44,9 +40,9 @@ public class GasDiffuser : MonoBehaviour
             diffuseAmount = diffuse(pod.pos, currentPressure(pod));
             adjustPressure(pod, -diffuseAmount);
         }
-        else if (pod.podType == waterPodType)
+        else if (pod.podType == emitterPodType)
         {
-            diffuseAmount = diffuse(pod.pos, 200);
+            diffuseAmount = diffuse(pod.pos, emitterPressure);
         }
         return diffuseAmount > 0;
     }
@@ -69,16 +65,16 @@ public class GasDiffuser : MonoBehaviour
                 pod && pod.podType == Managers.PodTypeBank.spacePodType
                 && currentPressure(pod) < curAmount * giveThresholdFactor
                 );
-        spaces.ForEach(pod => fillWithAir(pod));
+        spaces.ForEach(pod => fillWithGas(pod));
         return spaces.Count * diffusionRate * Time.deltaTime;
     }
 
-    PodContent getSky(Pod pod)
-        => pod.getContent(skyPodContentType);
+    PodContent getGas(Pod pod)
+        => pod.getContent(gasPodContentType);
 
     float currentPressure(Pod pod)
     {
-        PodContent content = getSky(pod);
+        PodContent content = getGas(pod);
         if (content)
         {
             return content.Var;
@@ -88,19 +84,19 @@ public class GasDiffuser : MonoBehaviour
 
     void adjustPressure(Pod pod, float delta)
     {
-        PodContent content = getSky(pod);
+        PodContent content = getGas(pod);
         if (content)
         {
             content.Var += delta;
         }
     }
 
-    bool fillWithAir(Pod pod)
+    bool fillWithGas(Pod pod)
     {
-        PodContent content = getSky(pod);
+        PodContent content = getGas(pod);
         if (!content)
         {
-            content = new PodContent(skyPodContentType, pod);
+            content = new PodContent(gasPodContentType, pod);
             pod.addContent(content);
             content.Var = 0;
             return true;
