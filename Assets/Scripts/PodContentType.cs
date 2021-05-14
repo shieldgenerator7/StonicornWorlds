@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PodContentType", menuName = "PodContentType", order = 1)]
 public class PodContentType : PlanetObjectType
 {
+    public float initialVarValue = 0;
     public List<PodType> podImplantTypes;
     public List<PodType> requiredGround;
     public List<PodType> requiredNeighbors;

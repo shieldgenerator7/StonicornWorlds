@@ -1009,6 +1009,10 @@ GameObject:
   - component: {fileID: 752787615}
   - component: {fileID: 752787616}
   - component: {fileID: 752787617}
+  - component: {fileID: 752787621}
+  - component: {fileID: 752787620}
+  - component: {fileID: 752787619}
+  - component: {fileID: 752787618}
   m_Layer: 0
   m_Name: PlanetManager
   m_TagString: Untagged
@@ -1100,12 +1104,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffusionRate: 1
+  diffusionRate: 0.5
   minAmount: 12.5
   emitterPressure: 200
   giveThresholdFactor: 0.5
   gasPodContentType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
   emitterPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+--- !u!114 &752787618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b973f850aa0bb44b0887aec5f9291f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+  gasType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+  plantHealthDelta: -4
+  gasPressureDelta: -1
+--- !u!114 &752787619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b973f850aa0bb44b0887aec5f9291f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+  gasType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+  plantHealthDelta: 1
+  gasPressureDelta: 2
+--- !u!114 &752787620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b973f850aa0bb44b0887aec5f9291f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+  gasType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+  plantHealthDelta: -4
+  gasPressureDelta: -5
+--- !u!114 &752787621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b973f850aa0bb44b0887aec5f9291f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantType: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+  gasType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+  plantHealthDelta: 1
+  gasPressureDelta: -1
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -2392,6 +2460,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
   - {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
   - {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+  - {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
 --- !u!114 &1625964773
 MonoBehaviour:
   m_ObjectHideFlags: 0

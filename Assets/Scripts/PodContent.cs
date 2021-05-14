@@ -18,6 +18,7 @@ public class PodContent
         this.contentTypeName = contentType.name;
         this.container = container;
         this.container.addContent(this);
+        this.Var = this.contentType.initialVarValue;
     }
 
     public PodContent Clone(Pod clonePod)

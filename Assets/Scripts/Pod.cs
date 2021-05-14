@@ -31,8 +31,20 @@ public class Pod
     public delegate void OnPodContentChanged(Pod p);
     public event OnPodContentChanged onPodContentChanged;
 
+    public void removeContent(PodContent content)
+    {
+        podContents.Remove(content);
+        onPodContentChanged?.Invoke(this);
+    }
+
     public bool hasContent(PodContentType contentType)
         => podContents.Any(content => content.contentType == contentType);
+
+    public bool hasContentAny(List<PodContentType> contentTypes)
+        => contentTypes.Any(ct => hasContent(ct));
+
+    public bool hasContentAll(List<PodContentType> contentTypes)
+        => contentTypes.TrueForAll(ct => hasContent(ct));
 
     public PodContent getContent(PodContentType contentType)
         => podContents.FirstOrDefault(content => content.contentType == contentType);

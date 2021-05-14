@@ -19,6 +19,7 @@ MonoBehaviour:
   startCost: 10
   convertCost: 10
   progressRequired: 10
+  initialVarValue: 0
   podImplantTypes: []
   requiredGround: []
   requiredNeighbors: []
