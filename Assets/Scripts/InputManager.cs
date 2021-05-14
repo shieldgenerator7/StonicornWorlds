@@ -50,6 +50,22 @@ public class InputManager : MonoBehaviour
     public delegate void OnToolActionChanged(ToolAction toolAction);
     public event OnToolActionChanged onToolActionChanged;
 
+    private Vector2 mouseOverHex;
+    public Vector2 MouseOver
+    {
+        get => mouseOverHex;
+        set
+        {
+            if (mouseOverHex != value)
+            {
+                mouseOverHex = value;
+                onMouseOverMoved?.Invoke(mouseOverHex);
+            }
+        }
+    }
+    public delegate void OnMouseOverMoved(Vector2 pos);
+    public event OnMouseOverMoved onMouseOverMoved;
+
     private bool buttonActivation = false;
 
     private void Awake()
@@ -73,6 +89,9 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MouseOver = Managers.Planet.Planet.getHexPos(
+            Camera.main.ScreenToWorldPoint(Input.mousePosition)
+            );
         if (Input.GetMouseButton(0))
         {
             //Input Down

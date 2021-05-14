@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlanetManagerEffects : MonoBehaviour
 {
     public GameObject editPodPrefab;
+    public GameObject cursorObject;
 
     public TMP_Text txtResources;
 
@@ -19,11 +20,17 @@ public class PlanetManagerEffects : MonoBehaviour
         Managers.Planet.onPlanetStateChanged += updateDisplay;
         Managers.Planet.onResourcesChanged += updateUI;
         Managers.Edge.onValidPositionListChanged += updateEditDisplay;
+        Managers.Input.onMouseOverMoved += updateCursor;
     }
 
     private void Start()
     {
         updateEditDisplay(Managers.Edge.validPosList);
+    }
+
+    public void updateCursor(Vector2 pos)
+    {
+        cursorObject.transform.position = pos;
     }
 
     public void updateDisplay(Planet p)
