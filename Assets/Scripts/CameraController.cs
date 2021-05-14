@@ -11,11 +11,39 @@ public class CameraController : MonoBehaviour
 
     public bool Locked = false;
 
+    private Vector3 Up;
+    private Vector3 Position;
+    private float ZoomLevel;
+
     // Start is called before the first frame update
     void Start()
     {
         Managers.Edge.onValidPositionListChanged += autoFrame;
         camOffset = transform.position - Vector3.zero;
+    }
+
+    private void LateUpdate()
+    {
+        float deltaTime = 3 * Time.unscaledDeltaTime;
+        //Rotate Transform
+        if (transform.up != Up)
+        {
+            //2021-05-13: copied from Stonicorn.CameraController
+            transform.up = Vector3.Lerp(transform.up, Up, deltaTime);
+            //Fix special case where screen goes black when Camera goes upside down
+            if (transform.rotation.eulerAngles.y != 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, -180);
+            }
+        }
+        if (transform.position != Position)
+        {
+            transform.position = Vector3.Lerp(transform.position, Position, deltaTime);
+        }
+        if (Camera.main.orthographicSize != ZoomLevel)
+        {
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, ZoomLevel, deltaTime);
+        }
     }
 
     public void autoFrame(List<Vector2> posList)
@@ -35,14 +63,13 @@ public class CameraController : MonoBehaviour
         {
             posList.Add(Vector2.zero);
         }
-        transform.position = ((Vector3)center) + camOffset;
+        Position = ((Vector3)center) + camOffset;
         if (center != Vector2.zero)
         {
-            Vector2 upDir = Managers.Planet.Planet.getUpDirection((Vector2)transform.position);
-            transform.up = upDir;
+            Up = Managers.Planet.Planet.getUpDirection((Vector2)transform.position);
         }
         float maxDist = posList.Max(pos => Vector2.Distance(pos, center));
-        Camera.main.orthographicSize = Mathf.Max(
+        ZoomLevel = Mathf.Max(
             minOrthoSize,
             (maxDist * 3.0f / 2.555f) + 0.5f
             );
