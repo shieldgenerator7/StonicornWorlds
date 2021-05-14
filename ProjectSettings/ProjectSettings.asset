@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Fawn Dawn Studios
   productName: Stonicorn Worlds
-  defaultCursor: {fileID: 2800000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
-  cursorHotspot: {x: 0.5, y: 0.5}
+  defaultCursor: {fileID: 2800000, guid: f29e9c690b739dc49a2877d446bc5038, type: 3}
+  cursorHotspot: {x: 275, y: 275}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
