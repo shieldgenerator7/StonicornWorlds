@@ -9,6 +9,7 @@ public abstract class ToolButton : MonoBehaviour
     public Image activeImage;
     public Image mouseOverImage;
     Vector2 position;
+    private bool activeButton = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public abstract class ToolButton : MonoBehaviour
 
     public bool checkMouseOver(Vector2 screenPos)
     {
-        bool mo = checkClick(screenPos);
+        bool mo = !activeButton && checkClick(screenPos);
         mouseOverImage.enabled = mo;
         return mo;
     }
@@ -36,7 +37,8 @@ public abstract class ToolButton : MonoBehaviour
 
     public void checkActive()
     {
-        activeImage.enabled = isActive();
+        activeButton = isActive();
+        activeImage.enabled = activeButton;
     }
 
     public abstract void activate();
