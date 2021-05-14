@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 5203398217049043473}
   activeImage: {fileID: 6886012767628169426}
+  mouseOverImage: {fileID: 8209601127224814842}
   planetObjectType: {fileID: 0}
   compatibleToolActions: []
 --- !u!1001 &3292899521508442231
@@ -140,6 +141,17 @@ MonoBehaviour:
 --- !u!114 &6886012767628169426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8224332183659647141, guid: 04881d4cd9b897c48aa661fbe135ba3d, type: 3}
+  m_PrefabInstance: {fileID: 3292899521508442231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8209601127224814842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6655447312240815245, guid: 04881d4cd9b897c48aa661fbe135ba3d, type: 3}
   m_PrefabInstance: {fileID: 3292899521508442231}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

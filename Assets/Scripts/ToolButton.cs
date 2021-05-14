@@ -7,6 +7,7 @@ public abstract class ToolButton : MonoBehaviour
 {
     public Image image;
     public Image activeImage;
+    public Image mouseOverImage;
     Vector2 position;
 
     // Start is called before the first frame update
@@ -19,6 +20,13 @@ public abstract class ToolButton : MonoBehaviour
     {
         RectTransform rect = GetComponent<RectTransform>();
         position = rect.position;
+    }
+
+    public bool checkMouseOver(Vector2 screenPos)
+    {
+        bool mo = checkClick(screenPos);
+        mouseOverImage.enabled = mo;
+        return mo;
     }
 
     public bool checkClick(Vector2 screenPos)

@@ -89,9 +89,21 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MouseOver = Managers.Planet.Planet.getHexPos(
-            Camera.main.ScreenToWorldPoint(Input.mousePosition)
+        //Mouse Over
+        List<ToolButton> mobs = buttons
+            .FindAll(btn => btn.checkMouseOver(Input.mousePosition));
+        if (mobs.Count > 0)
+        {
+            MouseOver = Vector2.one * -1;
+        }
+        else
+        {
+            MouseOver = Managers.Planet.Planet.getHexPos(
+                Camera.main.ScreenToWorldPoint(Input.mousePosition)
             );
+        }
+
+        //Mouse Click
         if (Input.GetMouseButton(0))
         {
             //Input Down
