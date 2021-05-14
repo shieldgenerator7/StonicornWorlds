@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,39 +31,20 @@ public class CameraController : MonoBehaviour
     }
     public void autoFrame(Vector2 center, List<Vector2> posList)
     {
-        float minX = 0;
-        float minY = 0;
-        float maxX = 0;
-        float maxY = 0;
-        if (posList.Count > 0)
+        if (posList.Count == 0)
         {
-            minX = posList.Min(pos => pos.x);
-            minY = posList.Min(pos => pos.y);
-            maxX = posList.Max(pos => pos.x);
-            maxY = posList.Max(pos => pos.y);
+            posList.Add(Vector2.zero);
         }
-        Vector2 min = new Vector2(minX, minY);
-        Vector2 max = new Vector2(maxX, maxY);
-        List<Vector2> boundList = new List<Vector2>()
-        {
-            min,
-            max
-        };
         transform.position = ((Vector3)center) + camOffset;
-        Camera.main.orthographicSize = minOrthoSize;
-        while (!areVectorsInFrame(boundList, 1))
+        if (center != Vector2.zero)
         {
-            Camera.main.orthographicSize += 0.1f;
+            Vector2 upDir = Managers.Planet.Planet.getUpDirection((Vector2)transform.position);
+            transform.up = upDir;
         }
-    }
-
-    public bool areVectorsInFrame(List<Vector2> vectors, float buffer)
-    {
-        Bounds b = new Bounds();
-        b.min = (Vector2)Camera.main.ViewportToWorldPoint(Vector2.zero);
-        b.min += (Vector3)Vector2.one * buffer;
-        b.max = (Vector2)Camera.main.ViewportToWorldPoint(Vector2.one);
-        b.max -= (Vector3)Vector2.one * buffer;
-        return vectors.TrueForAll(v => b.Contains(v));
+        float maxDist = posList.Max(pos => Vector2.Distance(pos, center));
+        Camera.main.orthographicSize = Mathf.Max(
+            minOrthoSize,
+            (maxDist * 3.0f / 2.555f) + 0.5f
+            );
     }
 }
