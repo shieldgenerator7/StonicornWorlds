@@ -10,6 +10,7 @@ public class Managers : MonoBehaviour
     public static EdgeManager Edge { get; private set; }
     public static InputManager Input { get; private set; }
     public static ProgressionManager Progression { get; private set; }
+    public static FileManager File { get; private set; }
 
     public static PodTypeBank PodTypeBank { get; private set; }
 
@@ -21,6 +22,7 @@ public class Managers : MonoBehaviour
         Edge = FindObjectOfType<EdgeManager>();
         Input = FindObjectOfType<InputManager>();
         Progression = FindObjectOfType<ProgressionManager>();
+        File = FindObjectOfType<FileManager>();
         PodTypeBank = FindObjectOfType<PodTypeBank>();
     }
 }

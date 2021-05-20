@@ -68,13 +68,21 @@ public class PlanetManager : MonoBehaviour
 
     void Start()
     {
-        Planet p = new Planet();
-        p.position = Vector2.zero;
-        this.Planet = p;
-        FuturePlanet = planet;
-        Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
-        addPod(starter);
-        calculateFutureState(new List<QueueTask>());
+        if (planet == null)
+        {
+            Planet p = new Planet();
+            p.position = Vector2.zero;
+            this.Planet = p;
+            FuturePlanet = planet;
+            Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
+            addPod(starter);
+            calculateFutureState(new List<QueueTask>());
+        }
+        else
+        {
+            planetChanged(planet);
+            calculateFutureState(new List<QueueTask>());
+        }
         Managers.Queue.onTaskCompleted += (task) => updatePlanet(task);
         Managers.Queue.onQueueChanged += (tasks) => calculateFutureState(tasks);
         onPlanetStateChanged += (p) => calculateFutureState(Managers.Queue.Tasks);

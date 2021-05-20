@@ -6,6 +6,7 @@
 Assets/AssetStoreTools*
 Logs/
 TextMesh Pro/
+Plugins/
 
 # Visual Studio cache directory
 .vs/

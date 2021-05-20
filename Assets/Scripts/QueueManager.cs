@@ -104,4 +104,10 @@ public class QueueManager : MonoBehaviour
     }
     public delegate void TaskEvent(QueueTask task);
     public event TaskEvent onTaskCompleted;
+
+    public void loadTasks(List<QueueTask> tasks)
+    {
+        queue = tasks;
+        callOnQueueChanged();
+    }
 }
