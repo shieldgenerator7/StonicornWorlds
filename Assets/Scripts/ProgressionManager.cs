@@ -10,21 +10,25 @@ public class ProgressionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Planet.Planet.onStateChanged += (p) => checkAllProgression();
-        Managers.Planet.onResourcesChanged += (resources) => checkAllProgression();
         checkAllProgression();
     }
 
-    void checkAllProgression()
+    public void checkAllProgression()
     {
+        bool anyProgressed = false;
         for (int i = proreqs.Count - 1; i >= 0; i--)
         {
             if (proreqs[i].checkProgression())
             {
-                Managers.Input.updateToolBoxes();
-                Managers.Input.checkAllButtons();
                 proreqs.RemoveAt(i);
+                anyProgressed = true;
             }
         }
+        if (anyProgressed)
+        {
+            onProgressionChanged?.Invoke();
+        }
     }
+    public delegate void OnProgressionChanged();
+    public event OnProgressionChanged onProgressionChanged;
 }

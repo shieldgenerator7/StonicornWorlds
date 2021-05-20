@@ -14,7 +14,7 @@ public class Managers : MonoBehaviour
 
     public static PodTypeBank PodTypeBank { get; private set; }
 
-    void Awake()
+    public static void init()
     {
         Planet = FindObjectOfType<PlanetManager>();
         Camera = FindObjectOfType<CameraController>();

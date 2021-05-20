@@ -28,11 +28,6 @@ public class QueueManager : MonoBehaviour
     public delegate void OnQueueChanged(List<QueueTask> queue);
     public event OnQueueChanged onQueueChanged;
 
-    private void Awake()
-    {
-        Managers.Planet.onPlanetStateChanged += updateQueueWorkerList;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -71,7 +66,7 @@ public class QueueManager : MonoBehaviour
         }
     }
 
-    void updateQueueWorkerList(Planet p)
+    public void updateQueueWorkerList(Planet p)
     {
         int queueCount = p.Pods(Managers.PodTypeBank.corePodType).Count;
         while (queueCount > workers.Count)

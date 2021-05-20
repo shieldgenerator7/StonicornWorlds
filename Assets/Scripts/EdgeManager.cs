@@ -8,19 +8,6 @@ public class EdgeManager : MonoBehaviour
     private List<Vector2> validPosList;
     public List<Vector2> ValidPosList => validPosList.ToList();
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        Managers.Planet.onFuturePlanetStateChanged += (fp) => calculateValidPosList();
-        Managers.Queue.onQueueChanged += (tasks) => calculateValidPosList();
-        Managers.Input.onPlanetObjectTypeChanged += (pot) => calculateValidPosList();
-        Managers.Input.onToolActionChanged += (ta) => calculateValidPosList();
-        if (Managers.Planet.FuturePlanet != null)
-        {
-            calculateValidPosList();
-        }
-    }
-
     private void Start()
     {
         if (Managers.Planet.FuturePlanet != null)
@@ -39,12 +26,15 @@ public class EdgeManager : MonoBehaviour
         }
     }
 
-    private void calculateValidPosList()
+    public void calculateValidPosList()
     {
-        validPosList = Managers.Planet.FuturePlanet.PodsAll
-            .ConvertAll(pod => pod.pos)
-            .FindAll(pos => Managers.Input.ToolAction.isActionValidAt(pos));
-        onValidPositionListChanged?.Invoke(ValidPosList);
+        if (Managers.Planet.FuturePlanet != null)
+        {
+            validPosList = Managers.Planet.FuturePlanet.PodsAll
+                .ConvertAll(pod => pod.pos)
+                .FindAll(pos => Managers.Input.ToolAction.isActionValidAt(pos));
+            onValidPositionListChanged?.Invoke(ValidPosList);
+        }
     }
     public delegate void OnValidPositionListChanged(List<Vector2> posList);
     public event OnValidPositionListChanged onValidPositionListChanged;

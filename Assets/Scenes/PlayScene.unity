@@ -2928,8 +2928,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1625964771}
   - component: {fileID: 1625964770}
+  - component: {fileID: 1625964775}
   - component: {fileID: 1625964772}
   - component: {fileID: 1625964773}
+  - component: {fileID: 1625964774}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3051,6 +3053,31 @@ MonoBehaviour:
     count: 25
     resourceRequirement: 0
     button: {fileID: 1186659370}
+--- !u!114 &1625964774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625964769}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd1e1d9555a870469a38bfd1285015d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: planet1.wrld
+--- !u!114 &1625964775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625964769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e74f0f97dc19849a631d4c5410dbcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1665949739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}

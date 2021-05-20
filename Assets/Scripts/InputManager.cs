@@ -78,8 +78,6 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         //tool.activate();
-        onPlanetObjectTypeChanged += (pot) => checkAllButtons();
-        onToolActionChanged += (ta) => checkAllButtons();
     }
 
     public void updateToolBoxes()

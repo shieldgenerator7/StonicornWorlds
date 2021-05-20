@@ -18,7 +18,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.Edge.onValidPositionListChanged += autoFrame;
         camOffset = transform.position - Vector3.zero;
     }
 
