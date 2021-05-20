@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
@@ -20,6 +21,8 @@ public class ProgressionManager : MonoBehaviour
         {
             if (proreqs[i].checkProgression())
             {
+                FindObjectsOfType<ToolBox>().ToList()
+                    .ForEach(tb => tb.organize());
                 Managers.Input.checkAllButtons();
                 proreqs.RemoveAt(i);
             }

@@ -15,10 +15,17 @@ public abstract class ToolButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setPosition();
+        updatePosition();
     }
 
-    public void setPosition()
+    public void setPosition(float x, float y)
+    {
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.position = new Vector2(x, y);
+        updatePosition();
+    }
+
+    public void updatePosition()
     {
         RectTransform rect = GetComponent<RectTransform>();
         position = rect.position;
