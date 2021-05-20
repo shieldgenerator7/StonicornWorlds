@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ToolBox : ToolButton
 {
-    public int indexY = 0;
     public List<ToolButton> buttons;
     public float spacing = 100;
 
+    public bool Enabled => buttons.Any(btn => btn.gameObject.activeSelf);
+
     public bool ShowSelf => false;
 
-    public void organize()
-    {
-        organize(indexY);
-    }
     /// <summary>
     /// Arranges the buttons in their positions.
     /// </summary>
@@ -25,7 +23,8 @@ public class ToolBox : ToolButton
         float y = spacing / 2 + (indexY * spacing);
         float y2 = spacing / 2 + y;
         int indexX = 0;
-        if (ShowSelf)
+        bool showSelf = ShowSelf;
+        if (showSelf)
         {
             setPosition(
                 spacingX * indexX + offsetX,
@@ -33,10 +32,7 @@ public class ToolBox : ToolButton
                 );
             indexX++;
         }
-        else
-        {
-            setPosition(-spacing, -spacing);
-        }
+        gameObject.SetActive(showSelf);
         buttons.FindAll(b => b.gameObject.activeSelf)
             .ForEach(btn =>
             {

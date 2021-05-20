@@ -16,7 +16,6 @@ MonoBehaviour:
   activeImage: {fileID: 133673031445212421}
   mouseOverImage: {fileID: 3433065025135104301}
   checkRadius: 50
-  index: 0
   buttons: []
   spacing: 100
 --- !u!1001 &8356521888512474528

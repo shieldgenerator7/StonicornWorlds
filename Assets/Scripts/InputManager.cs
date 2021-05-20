@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     private Tool tool;
 
     public List<Tool> tools;
+    public List<ToolBox> toolBoxes;
     public List<ToolButton> buttons;
 
     [SerializeField]
@@ -79,6 +80,18 @@ public class InputManager : MonoBehaviour
         //tool.activate();
         onPlanetObjectTypeChanged += (pot) => checkAllButtons();
         onToolActionChanged += (ta) => checkAllButtons();
+    }
+
+    public void updateToolBoxes()
+    {
+        toolBoxes.ForEach(btn => btn.gameObject.SetActive(false));
+        int index = 0;
+        toolBoxes.FindAll(tb => tb.Enabled)
+            .ForEach(tb =>
+            {
+                tb.organize(index);
+                index++;
+            });
     }
 
     public void checkAllButtons()

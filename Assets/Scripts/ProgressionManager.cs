@@ -21,8 +21,7 @@ public class ProgressionManager : MonoBehaviour
         {
             if (proreqs[i].checkProgression())
             {
-                FindObjectsOfType<ToolBox>().ToList()
-                    .ForEach(tb => tb.organize());
+                Managers.Input.updateToolBoxes();
                 Managers.Input.checkAllButtons();
                 proreqs.RemoveAt(i);
             }
