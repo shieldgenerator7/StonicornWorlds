@@ -4,29 +4,47 @@ using UnityEngine;
 
 public class ToolBox : ToolButton
 {
-    public int index = 0;
+    public int indexY = 0;
     public List<ToolButton> buttons;
     public float spacing = 100;
 
+    public bool ShowSelf => false;
+
     public void organize()
     {
-        organize(index);
+        organize(indexY);
     }
     /// <summary>
     /// Arranges the buttons in their positions.
     /// </summary>
-    /// <param name="index">The index of this toolbox, starting from 0 at the bottom left</param>
-    public void organize(int index)
+    /// <param name="indexY">The index of this toolbox, starting from 0 at the bottom left</param>
+    public void organize(int indexY)
     {
-        float x = spacing / 2;
-        float y = spacing / 2 + (index * spacing);
-        setPosition(x, y);
-        x += spacing;
+        float offsetX = spacing / 2;
+        float spacingX = 7 * spacing / 8;
+        float y = spacing / 2 + (indexY * spacing);
+        float y2 = spacing / 2 + y;
+        int indexX = 0;
+        if (ShowSelf)
+        {
+            setPosition(
+                spacingX * indexX + offsetX,
+                (indexX % 2 == 0) ? y : y2
+                );
+            indexX++;
+        }
+        else
+        {
+            setPosition(-spacing, -spacing);
+        }
         buttons.FindAll(b => b.gameObject.activeSelf)
             .ForEach(btn =>
             {
-                btn.setPosition(x, y);
-                x += spacing;
+                btn.setPosition(
+                    spacingX * indexX + offsetX,
+                    (indexX % 2 == 0) ? y : y2
+                    );
+                indexX++;
             });
     }
 
