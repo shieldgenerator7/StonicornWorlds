@@ -7,8 +7,7 @@ public class ProgressionManager : MonoBehaviour
 {
     public List<ProgressionRequirement> proreqs;
 
-    // Start is called before the first frame update
-    void Start()
+    public void setup()
     {
         checkAllProgression();
     }

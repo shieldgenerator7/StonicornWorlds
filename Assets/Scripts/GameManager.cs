@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     {
         Managers.init();
         registerDelegates();
+        setup();
     }
 
     // Update is called once per frame
@@ -58,6 +59,16 @@ public class GameManager : MonoBehaviour
     {
         Managers.Input.updateToolBoxes();
         Managers.Input.checkAllButtons();
+    }
+    #endregion
+
+    #region Setup
+    void setup()
+    {
+        Managers.File.setup();
+        Managers.Planet.setup();
+        Managers.Input.setup();
+        Managers.Progression.setup();
     }
     #endregion
 }

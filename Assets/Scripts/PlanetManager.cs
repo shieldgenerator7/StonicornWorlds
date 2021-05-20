@@ -66,7 +66,7 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void setup()
     {
         if (planet == null)
         {

@@ -69,15 +69,9 @@ public class InputManager : MonoBehaviour
 
     private bool buttonActivation = false;
 
-    private void Awake()
+    public void setup()
     {
         PlanetObjectType = planetObjectType;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //tool.activate();
     }
 
     public void updateToolBoxes()

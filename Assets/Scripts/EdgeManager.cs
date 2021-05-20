@@ -8,23 +8,7 @@ public class EdgeManager : MonoBehaviour
     private List<Vector2> validPosList;
     public List<Vector2> ValidPosList => validPosList.ToList();
 
-    private void Start()
     {
-        if (Managers.Planet.FuturePlanet != null)
-        {
-            calculateValidPosList();
-        }
-    }
-
-    int i = 0;
-    private void Update()
-    {
-        if (i < 5)
-        {
-            i++;
-            Start();
-        }
-    }
 
     public void calculateValidPosList()
     {

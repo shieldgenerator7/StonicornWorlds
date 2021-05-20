@@ -7,8 +7,7 @@ public class FileManager : MonoBehaviour
 {
     public string fileName = "planet1.wrld";
 
-    // Start is called before the first frame update
-    void Start()
+    public void setup()
     {
         LoadFile();
     }
