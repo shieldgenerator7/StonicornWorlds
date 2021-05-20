@@ -71,7 +71,14 @@ public class InputManager : MonoBehaviour
 
     public void setup()
     {
-        PlanetObjectType = planetObjectType;
+        if (planetObjectType is PodType pt)
+        {
+            PodType = pt;
+        }
+        else if (planetObjectType is PodContentType pct)
+        {
+            PodContentType = pct;
+        }
     }
 
     public void updateToolBoxes()

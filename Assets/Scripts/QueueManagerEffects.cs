@@ -8,13 +8,7 @@ public class QueueManagerEffects : MonoBehaviour
 
     List<ConstructingEffect> constructs = new List<ConstructingEffect>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Managers.Queue.onQueueChanged += updateDisplay;
-    }
-
-    void updateDisplay(List<QueueTask> tasks)
+    public void updateDisplay(List<QueueTask> tasks)
     {
         constructs.ForEach(con => Destroy(con.gameObject));
         constructs.Clear();

@@ -14,21 +14,6 @@ public class PlanetManagerEffects : MonoBehaviour
     List<GameObject> goPodContents = new List<GameObject>();
     List<GameObject> editPods = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        Managers.Planet.onPlanetStateChanged += updateDisplay;
-        Managers.Planet.onResourcesChanged += updateUI;
-        Managers.Edge.onValidPositionListChanged += updateEditDisplay;
-        Managers.Camera.onRotationChanged += updateEditDisplay;
-        Managers.Input.onMouseOverMoved += updateCursor;
-    }
-
-    private void Start()
-    {
-        updateEditDisplay(Managers.Edge.ValidPosList);
-    }
-
     public void updateCursor(Vector2 pos)
     {
         cursorObject.SetActive(
@@ -101,7 +86,7 @@ public class PlanetManagerEffects : MonoBehaviour
         );
     }
 
-    void updateUI(float resources)
+    public void updateUI(float resources)
     {
         txtResources.text = "Resources: " + (int)resources + " / " + Managers.Planet.ResourceCap;
     }

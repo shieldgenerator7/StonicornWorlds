@@ -11,6 +11,8 @@ public class Managers : MonoBehaviour
     public static EdgeManager Edge { get; private set; }
     public static InputManager Input { get; private set; }
     public static ProgressionManager Progression { get; private set; }
+    public static PlanetManagerEffects PlanetEffects { get; private set; }
+    public static QueueManagerEffects QueueEffects { get; private set; }
 
     public static PodTypeBank PodTypeBank { get; private set; }
 
@@ -23,6 +25,8 @@ public class Managers : MonoBehaviour
         Edge = FindObjectOfType<EdgeManager>();
         Input = FindObjectOfType<InputManager>();
         Progression = FindObjectOfType<ProgressionManager>();
+        PlanetEffects = FindObjectOfType<PlanetManagerEffects>();
+        QueueEffects = FindObjectOfType<QueueManagerEffects>();
         PodTypeBank = FindObjectOfType<PodTypeBank>();
     }
 }
