@@ -18,6 +18,10 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
+    public void init()
+    {
+        PodsAll.ForEach(p => podLists.add(p));
+    }
 
     #region Write State
     public delegate void OnStateChanged(Planet p);
