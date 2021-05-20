@@ -33,8 +33,7 @@ public class GameManager : MonoBehaviour
         Managers.Queue.onQueueChanged += Managers.Planet.calculateFutureState;
         Managers.Queue.onQueueChanged += Managers.QueueEffects.updateDisplay;
         //Edge
-        Managers.Edge.onValidPositionListChanged += Managers.Camera.autoFrame;
-        Managers.Edge.onValidPositionListChanged += Managers.PlanetEffects.updateEditDisplay;
+        Managers.Edge.onValidPositionListChanged += onValidPositionListChanged;
         //Input
         Managers.Input.onPlanetObjectTypeChanged += onInputPlanetObjectTypeChanged;
         Managers.Input.onToolActionChanged += onInputToolActionChanged;
@@ -62,6 +61,12 @@ public class GameManager : MonoBehaviour
         Managers.Input.checkAllButtons();
     }
 
+    void onValidPositionListChanged(List<Vector2> edges)
+    {
+        Managers.PlanetEffects.updateEditDisplay(edges);
+        Managers.Camera.autoFrame(edges);
+    }
+
     void onProgressChanged()
     {
         Managers.Input.updateToolBoxes();
@@ -72,12 +77,12 @@ public class GameManager : MonoBehaviour
     #region Setup
     void setup()
     {
+        Managers.Camera.setup();
         Managers.Input.setup();
         //Managers.File.setup();
         Managers.Planet.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();
-        Managers.PlanetEffects.updateEditDisplay(Managers.Edge.ValidPosList);
     }
     #endregion
 }

@@ -15,8 +15,7 @@ public class CameraController : MonoBehaviour
     private Vector3 Position;
     private float ZoomLevel;
 
-    // Start is called before the first frame update
-    void Start()
+    public void setup()
     {
         camOffset = transform.position - Vector3.zero;
     }
