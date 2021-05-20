@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
-        Managers.Planet.onFuturePlanetStateChanged += (fp) => Managers.Edge.calculateValidPosList();
+        Managers.Planet.onFuturePlanetStateChanged += Managers.Edge.calculateValidPosList;
         Managers.Planet.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
@@ -46,12 +46,12 @@ public class GameManager : MonoBehaviour
 
     void onInputPlanetObjectTypeChanged(PlanetObjectType pot)
     {
-        Managers.Edge.calculateValidPosList();
+        Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Input.checkAllButtons();
     }
     void onInputToolActionChanged(ToolAction ta)
     {
-        Managers.Edge.calculateValidPosList();
+        Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Input.checkAllButtons();
     }
 
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         Managers.File.setup();
         Managers.Planet.setup();
         Managers.Input.setup();
+        Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();
     }
     #endregion
