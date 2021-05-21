@@ -23,7 +23,19 @@ public class ConstantBank : MonoBehaviour
     public void updateScreenConstants(int width, int height)
     {
         buttonCheckRadius = originalCheckRadius;
-        buttonSpacing = originalSpacing * width / desiredWidth;
+        int dim;
+        int desiredDim;
+        if (width > height)
+        {
+            dim = width;
+            desiredDim = desiredWidth;
+        }
+        else
+        {
+            dim = height;
+            desiredDim = desiredHeight;
+        }
+        buttonSpacing = originalSpacing * dim / desiredDim;
     }
 
     [Header("PodTypes")]
