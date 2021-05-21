@@ -18,9 +18,13 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
-    public void init()
+    public void init(List<Pod> pods)
     {
-        PodsAll.ForEach(p => podLists.add(p));
+        pods.ForEach(p =>
+        {
+            grid.add(p, worldToGrid(p.pos));
+            podLists.add(p);
+        });
     }
 
     #region Write State

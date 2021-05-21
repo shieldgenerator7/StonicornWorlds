@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ES3Types
@@ -17,7 +18,7 @@ namespace ES3Types
             var instance = (Planet)obj;
 
             writer.WriteProperty("position", instance.position, ES3Type_Vector2.Instance);
-            writer.WritePrivateField("grid", instance);
+            writer.WriteProperty("pods", instance.PodsAll);
         }
 
         protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -31,15 +32,14 @@ namespace ES3Types
                     case "position":
                         instance.position = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
                         break;
-                    case "grid":
-                        reader.SetPrivateField("grid", reader.Read<HexagonGrid<Pod>>(), instance);
+                    case "pods":
+                        instance.init(reader.Read<List<Pod>>("pods"));
                         break;
                     default:
                         reader.Skip();
                         break;
                 }
             }
-            instance.init();
         }
 
         protected override object ReadObject<T>(ES3Reader reader)

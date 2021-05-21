@@ -13,6 +13,8 @@ public class Pod
 
     private List<PodContent> podContents = new List<PodContent>();
 
+    public Pod() { }
+
     public Pod(Vector2 pos, PodType podType)
     {
         this.pos = pos;
