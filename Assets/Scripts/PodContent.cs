@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PodContent
+public class PodContent : PlanetObject
 {
-    [System.NonSerialized]
-    public PodContentType contentType;
-    public string contentTypeName;
+    public PodContentType contentType => objectType as PodContentType;
+
     [System.NonSerialized]
     public Pod container;
     private Dictionary<string, float> variables = new Dictionary<string, float>();
 
-    public PodContent(PodContentType contentType, Pod container)
+    public PodContent(PodContentType contentType, Pod container) : base(contentType)
     {
-        this.contentType = contentType;
-        this.contentTypeName = contentType.name;
         this.container = container;
         this.container.addContent(this);
         this.Var = this.contentType.initialVarValue;

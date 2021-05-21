@@ -4,22 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Pod
+public class Pod : PlanetObject
 {
+    public PodType podType => objectType as PodType;
+
     public Vector2 pos;
-    [System.NonSerialized]
-    public PodType podType;
-    public string podTypeName;
 
     private List<PodContent> podContents = new List<PodContent>();
 
-    public Pod() { }
-
-    public Pod(Vector2 pos, PodType podType)
+    public Pod(Vector2 pos, PodType podType) : base(podType)
     {
         this.pos = pos;
-        this.podType = podType;
-        this.podTypeName = podType.name;
     }
 
     public void addContent(PodContent content)
@@ -67,7 +62,4 @@ public class Pod
     {
         return "" + podType.name + " Pod";
     }
-
-    public static implicit operator bool(Pod p)
-        => p != null;
 }
