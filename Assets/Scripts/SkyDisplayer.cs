@@ -13,23 +13,25 @@ public class SkyDisplayer : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        Update();
+        content = Managers.Planet.Planet
+            .getPod(transform.position)
+            .getContent(contentType);
+        content.onVarChanged += updateDisplay;
+        updateDisplay(content.Var);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        if (!content)
-        {
-            content = Managers.Planet.Planet
-                .getPod(transform.position)
-                .getContent(contentType);
-        }
         if (content)
         {
-            Color color = sr.color;
-            color.a = content.Var / 100;
-            sr.color = color;
+            content.onVarChanged -= updateDisplay;
         }
+    }
+
+    void updateDisplay(float val)
+    {
+        Color color = sr.color;
+        color.a = val / 100;
+        sr.color = color;
     }
 }

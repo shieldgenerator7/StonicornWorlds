@@ -47,8 +47,14 @@ public class PodContent
     public float Var
     {
         get => getVar("var");
-        set => setVar("var", value);
+        set
+        {
+            setVar("var", value);
+            onVarChanged?.Invoke(value);
+        }
     }
+    public delegate void OnVarChanged(float val);
+    public event OnVarChanged onVarChanged;
 
     public static implicit operator bool(PodContent pc)
         => pc != null;
