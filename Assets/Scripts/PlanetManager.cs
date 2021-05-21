@@ -74,7 +74,7 @@ public class PlanetManager : MonoBehaviour
             p.position = Vector2.zero;
             this.Planet = p;
             FuturePlanet = planet;
-            Pod starter = new Pod(Vector2.zero, Managers.PodTypeBank.corePodType);
+            Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
             calculateFutureState(new List<QueueTask>());
         }
@@ -89,7 +89,7 @@ public class PlanetManager : MonoBehaviour
     public void addPod(Pod pod)
     {
         planet.addPod(pod, pod.pos);
-        coreCount = planet.Pods(Managers.PodTypeBank.corePodType).Count;
+        coreCount = planet.Pods(Managers.Constants.corePodType).Count;
     }
 
     public void convertPod(Pod newPod)

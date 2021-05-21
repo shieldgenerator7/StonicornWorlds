@@ -30,8 +30,8 @@ public class ToolActionButtonEditor : Editor
                 tab.image.sprite = tab.toolAction.preview;
                 if (tab.compatibleObjectTypes.Count == 0)
                 {
-                    tab.compatibleObjectTypes.AddRange(FindObjectOfType<PodTypeBank>().allPodTypes);
-                    tab.compatibleObjectTypes.AddRange(FindObjectOfType<PodTypeBank>().allPodContentTypes);
+                    tab.compatibleObjectTypes.AddRange(FindObjectOfType<ConstantBank>().allPodTypes);
+                    tab.compatibleObjectTypes.AddRange(FindObjectOfType<ConstantBank>().allPodContentTypes);
                 }
                 EditorUtility.SetDirty(tab);
                 EditorUtility.SetDirty(tab.image);

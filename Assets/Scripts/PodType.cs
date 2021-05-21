@@ -19,7 +19,7 @@ public class PodType : PlanetObjectType
             return podTypes.TrueForAll(podType =>
                 podType.allowedNeighbors.Count == 0
                 || podType.allowedNeighbors.Contains(this)
-                || podType == Managers.PodTypeBank.spacePodType
+                || podType == Managers.Constants.spacePodType
             );
         }
         else
@@ -27,7 +27,7 @@ public class PodType : PlanetObjectType
             return podTypes.TrueForAll(podType =>
                 allowedNeighbors.Contains(podType)
                 || podType.allowedNeighbors.Contains(this)
-                || podType == Managers.PodTypeBank.spacePodType
+                || podType == Managers.Constants.spacePodType
             );
         }
     }
@@ -49,7 +49,7 @@ public class PodType : PlanetObjectType
         if (podType)
         {
             return constructFromTypes.Contains(podType)
-                || podType == Managers.PodTypeBank.spacePodType;
+                || podType == Managers.Constants.spacePodType;
         }
         else
         {

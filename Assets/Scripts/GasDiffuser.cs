@@ -19,7 +19,7 @@ public class GasDiffuser : MonoBehaviour
     {
         bool filledAny = false;
 
-        Managers.Planet.Planet.Pods(Managers.PodTypeBank.spacePodType)
+        Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
             .FindAll(pod => currentPressure(pod) >= minAmount)
             .ForEach(pod => filledAny = diffuse(pod) || filledAny);
 
@@ -35,7 +35,7 @@ public class GasDiffuser : MonoBehaviour
     bool diffuse(Pod pod)
     {
         float diffuseAmount = 0;
-        if (pod.podType == Managers.PodTypeBank.spacePodType)
+        if (pod.podType == Managers.Constants.spacePodType)
         {
             diffuseAmount = diffuse(pod.pos, currentPressure(pod));
             adjustPressure(pod, -diffuseAmount);
@@ -56,13 +56,13 @@ public class GasDiffuser : MonoBehaviour
         Managers.Planet.Planet.getEmptyNeighborhood(pos)
             .ForEach(
                 v => Managers.Planet.Planet.addPod(
-                    new Pod(v, Managers.PodTypeBank.spacePodType),
+                    new Pod(v, Managers.Constants.spacePodType),
                     v
                     )
             );
         List<Pod> spaces = Managers.Planet.Planet.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod =>
-                pod && pod.podType == Managers.PodTypeBank.spacePodType
+                pod && pod.podType == Managers.Constants.spacePodType
                 && currentPressure(pod) < curAmount * giveThresholdFactor
                 );
         spaces.ForEach(pod => fillWithGas(pod));

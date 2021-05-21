@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PodTypeBank : MonoBehaviour
+public class ConstantBank : MonoBehaviour
 {
     public PodType corePodType;
     public PodType spacePodType;

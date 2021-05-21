@@ -13,7 +13,7 @@ public class PlantGasInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<Pod> interactPods = Managers.Planet.Planet.Pods(Managers.PodTypeBank.spacePodType)
+        List<Pod> interactPods = Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
             .FindAll(pod => pod.hasContent(plantType) && pod.hasContent(gasType));
         interactPods.ForEach(
             pod => interact(pod.getContent(plantType), pod.getContent(gasType))

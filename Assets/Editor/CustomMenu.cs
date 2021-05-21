@@ -91,7 +91,7 @@ public class CustomMenu
     [MenuItem("SG7/Build/Prebuild/Setup PodTypeBank")]
     public static void setupPodTypeBank()
     {
-        PodTypeBank podTypeBank = GameObject.FindObjectOfType<PodTypeBank>();
+        ConstantBank podTypeBank = GameObject.FindObjectOfType<ConstantBank>();
         podTypeBank.allPodTypes = Resources.FindObjectsOfTypeAll<PodType>().ToList();
         podTypeBank.allPodContentTypes = Resources.FindObjectsOfTypeAll<PodContentType>().ToList();
         EditorUtility.SetDirty(podTypeBank);

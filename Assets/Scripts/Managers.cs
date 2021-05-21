@@ -14,7 +14,7 @@ public class Managers : MonoBehaviour
     public static PlanetManagerEffects PlanetEffects { get; private set; }
     public static QueueManagerEffects QueueEffects { get; private set; }
 
-    public static PodTypeBank PodTypeBank { get; private set; }
+    public static ConstantBank Constants { get; private set; }
 
     public static void init()
     {
@@ -27,6 +27,6 @@ public class Managers : MonoBehaviour
         Progression = FindObjectOfType<ProgressionManager>();
         PlanetEffects = FindObjectOfType<PlanetManagerEffects>();
         QueueEffects = FindObjectOfType<QueueManagerEffects>();
-        PodTypeBank = FindObjectOfType<PodTypeBank>();
+        Constants = FindObjectOfType<ConstantBank>();
     }
 }

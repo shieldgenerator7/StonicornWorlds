@@ -68,7 +68,7 @@ public class QueueManager : MonoBehaviour
 
     public void updateQueueWorkerList(Planet p)
     {
-        int queueCount = p.Pods(Managers.PodTypeBank.corePodType).Count;
+        int queueCount = p.Pods(Managers.Constants.corePodType).Count;
         while (queueCount > workers.Count)
         {
             QueueWorker worker = gameObject.AddComponent<QueueWorker>();

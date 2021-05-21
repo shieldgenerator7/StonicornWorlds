@@ -39,7 +39,7 @@ namespace ES3Types
                         break;
                 }
             }
-            instance.podType = Managers.PodTypeBank.getPodType(instance.podTypeName);
+            instance.podType = Managers.Constants.getPodType(instance.podTypeName);
         }
 
         protected override object ReadObject<T>(ES3Reader reader)
