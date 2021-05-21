@@ -6,7 +6,6 @@ using UnityEngine;
 public class ToolBox : ToolButton
 {
     public List<ToolButton> buttons;
-    public float spacing = 100;
 
     public bool Enabled => buttons.Any(btn => btn.gameObject.activeSelf);
 
@@ -18,6 +17,7 @@ public class ToolBox : ToolButton
     /// <param name="indexY">The index of this toolbox, starting from 0 at the bottom left</param>
     public void organize(int indexY)
     {
+        float spacing = Managers.Constants.buttonSpacing;
         float offsetX = spacing / 2;
         float spacingX = 7 * spacing / 8;
         float y = spacing / 2 + (indexY * spacing);

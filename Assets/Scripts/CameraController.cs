@@ -15,9 +15,13 @@ public class CameraController : MonoBehaviour
     private Vector3 Position;
     private float ZoomLevel;
 
+    private int pixelWidth;
+    private int pixelHeight;
+
     public void setup()
     {
         camOffset = transform.position - Vector3.zero;
+        checkScreenSize();
     }
 
     private void LateUpdate()
@@ -43,9 +47,24 @@ public class CameraController : MonoBehaviour
         {
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, ZoomLevel, deltaTime);
         }
+        checkScreenSize();
     }
     public delegate void OnRotationChanged(Vector2 up);
     public event OnRotationChanged onRotationChanged;
+
+    void checkScreenSize()
+    {
+        int spw = Camera.main.scaledPixelWidth;
+        int sph = Camera.main.scaledPixelHeight;
+        if (pixelWidth != spw || pixelHeight != sph)
+        {
+            pixelWidth = spw;
+            pixelHeight = sph;
+            onScreenSizeChanged?.Invoke(pixelWidth, pixelHeight);
+        }
+    }
+    public delegate void OnScreenSizeChanged(int width, int height);
+    public event OnScreenSizeChanged onScreenSizeChanged;
 
     public void autoFrame(List<Vector2> posList)
     {

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private bool screenChangedLastFrame = false;
+
     void Awake()
     {
         Managers.init();
@@ -15,7 +17,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (screenChangedLastFrame)
+        {
+            screenChangedLastFrame = false;
+            Managers.Input.updateToolBoxes();
+        }
     }
 
     #region Delegates
@@ -28,6 +34,7 @@ public class GameManager : MonoBehaviour
         Managers.Planet.onResourcesChanged += Managers.PlanetEffects.updateUI;
         //Camera
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
+        Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
         Managers.Queue.onQueueChanged += Managers.Planet.calculateFutureState;
@@ -48,6 +55,12 @@ public class GameManager : MonoBehaviour
         Managers.Queue.updateQueueWorkerList(p);
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
+    }
+
+    void onScreenSizeChanged(int width, int height)
+    {
+        Managers.Constants.updateScreenConstants(width, height);
+        screenChangedLastFrame = true;
     }
 
     void onInputPlanetObjectTypeChanged(PlanetObjectType pot)
@@ -77,6 +90,7 @@ public class GameManager : MonoBehaviour
     #region Setup
     void setup()
     {
+        Managers.Constants.setup();
         Managers.Camera.setup();
         Managers.Input.setup();
         //Managers.File.setup();

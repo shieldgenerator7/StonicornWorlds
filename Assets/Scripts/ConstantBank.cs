@@ -4,6 +4,29 @@ using UnityEngine;
 
 public class ConstantBank : MonoBehaviour
 {
+    [Header("Buttons")]
+    [SerializeField]
+    private int desiredWidth = 1920;
+    [SerializeField]
+    private int desiredHeight = 1080;
+    public float buttonCheckRadius = 50;
+    public float buttonSpacing = 100;
+    private float originalCheckRadius;
+    private float originalSpacing;
+
+    public void setup()
+    {
+        originalCheckRadius = buttonCheckRadius;
+        originalSpacing = buttonSpacing;
+    }
+
+    public void updateScreenConstants(int width, int height)
+    {
+        buttonCheckRadius = originalCheckRadius;
+        buttonSpacing = originalSpacing * width / desiredWidth;
+    }
+
+    [Header("PodTypes")]
     public PodType corePodType;
     public PodType spacePodType;
 
