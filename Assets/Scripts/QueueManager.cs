@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class QueueManager : MonoBehaviour
 {
+    public float defaultWorkRate = 20;
+
     List<QueueTask> queue = new List<QueueTask>();
     public List<QueueTask> Tasks => queue.ToList();
 
@@ -73,6 +75,7 @@ public class QueueManager : MonoBehaviour
         {
             QueueWorker worker = gameObject.AddComponent<QueueWorker>();
             worker.onTaskCompleted += taskCompleted;
+            worker.workSpeed = defaultWorkRate;
             workers.Add(worker);
         }
         while (queueCount < workers.Count)
