@@ -15,7 +15,6 @@ MonoBehaviour:
   image: {fileID: 7891775795150619609}
   activeImage: {fileID: 1049287267443255061}
   mouseOverImage: {fileID: 2373825468116900669}
-  checkRadius: 50
   toolAction: {fileID: 0}
   compatibleObjectTypes: []
 --- !u!1 &8281248786636973499

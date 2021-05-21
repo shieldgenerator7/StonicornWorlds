@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4744040802469672528}
   activeImage: {fileID: 6228496725002818707}
+  mouseOverImage: {fileID: 0}
   planetObjectType: {fileID: 0}
   compatibleToolActions: []
 --- !u!1 &6092141966065417532

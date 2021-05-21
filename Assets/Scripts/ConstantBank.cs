@@ -22,7 +22,6 @@ public class ConstantBank : MonoBehaviour
 
     public void updateScreenConstants(int width, int height)
     {
-        buttonCheckRadius = originalCheckRadius;
         int dim;
         int desiredDim;
         if (width > height)
@@ -35,6 +34,7 @@ public class ConstantBank : MonoBehaviour
             dim = height;
             desiredDim = desiredHeight;
         }
+        buttonCheckRadius = originalCheckRadius * dim / desiredDim;
         buttonSpacing = originalSpacing * dim / desiredDim;
     }
 

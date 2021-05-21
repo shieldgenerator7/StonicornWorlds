@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4744040802469672528}
   activeImage: {fileID: 5063199945250858044}
+  mouseOverImage: {fileID: 0}
   toolAction: {fileID: 0}
   compatibleObjectTypes: []
 --- !u!1 &6443571650144872923

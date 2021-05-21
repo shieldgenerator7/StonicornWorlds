@@ -8,7 +8,6 @@ public abstract class ToolButton : MonoBehaviour
     public Image image;
     public Image activeImage;
     public Image mouseOverImage;
-    public float checkRadius = 50;
     Vector2 position;
     private bool activeButton = false;
 
@@ -40,7 +39,8 @@ public abstract class ToolButton : MonoBehaviour
 
     public bool checkClick(Vector2 screenPos)
     {
-        return !activeButton && Vector2.Distance(screenPos, position) <= checkRadius;
+        return !activeButton
+            && Vector2.Distance(screenPos, position) <= Managers.Constants.buttonCheckRadius;
     }
 
     public void checkActive()
