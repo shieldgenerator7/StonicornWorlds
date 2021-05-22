@@ -8,11 +8,18 @@ using UnityEngine;
 public class BuildInfoDisplayer : MonoBehaviour
 {
     public TMP_Text txtBuildVersion;
+    public List<string> buildMessages;
 
-    public void updateBuildInfoTexts()
+    private void Start()
     {
-        txtBuildVersion.text = "STONICORN WORLDS " + PlayerSettings.bundleVersion
-            + "\n[no save]";
+        updateBuildInfoTexts();
+    }
+
+    void updateBuildInfoTexts()
+    {
+        string text = Application.productName.ToUpper() + " " + Application.version;
+        buildMessages.ForEach(m => text += "\n[" + m + "]");
+        txtBuildVersion.text = text;
     }
 }
 #endif
