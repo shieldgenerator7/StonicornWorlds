@@ -32,11 +32,12 @@ public class GameManager : MonoBehaviour
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
         Managers.Planet.onFuturePlanetStateChanged += Managers.Edge.calculateValidPosList;
-        Managers.Planet.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
-        Managers.Planet.onResourcesChanged += Managers.PlanetEffects.updateUI;
         //Camera
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
+        //Resources
+        Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
+        Managers.Resources.onResourcesChanged += Managers.PlanetEffects.updateUI;
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
         Managers.Queue.onQueueChanged += Managers.Planet.calculateFutureState;
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
         Managers.Camera.setup();
         Managers.Input.setup();
         Managers.Planet.setup();
+        Managers.Resources.setup();
         Managers.File.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();

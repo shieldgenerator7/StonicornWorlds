@@ -5,25 +5,8 @@ using UnityEngine;
 
 public class PlanetManager : Manager
 {
-    public float resourceCapPerCore = 700;
-
-    float resources;
-    public float Resources
-    {
-        get => resources;
-        set
-        {
-            resources = Mathf.Clamp(value, 0, ResourceCap);
-            onResourcesChanged?.Invoke(resources);
-        }
-    }
-    public delegate void OnResourcesChanged(float resources);
-    public event OnResourcesChanged onResourcesChanged;
-
-    public float ResourceCap => CoreCount * resourceCapPerCore;
-
     private int coreCount = 0;
-    private int CoreCount => coreCount;
+    public int CoreCount => coreCount;
 
     private Planet planet;
     public Planet Planet
@@ -84,7 +67,6 @@ public class PlanetManager : Manager
             planetChanged(planet);
             calculateFutureState(new List<QueueTask>());
         }
-        Resources = ResourceCap;
     }
 
     public void addPod(Pod pod)

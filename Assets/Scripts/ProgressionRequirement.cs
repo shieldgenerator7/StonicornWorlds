@@ -17,7 +17,7 @@ public class ProgressionRequirement
             ? Managers.Planet.Planet.Pods(podType).Count >= count
             : Managers.Planet.Planet.PodsAll.Count >= count;
         if (podTypeCheck
-            && Managers.Planet.Resources >= resourceRequirement
+            && Managers.Resources.Resources >= resourceRequirement
             && (!requireSaveFile || ES3.FileExists(Managers.File.fileName)))
         {
             button.gameObject.SetActive(true);

@@ -7,6 +7,7 @@ public class Managers : MonoBehaviour
     public static FileManager File { get; private set; }
     public static PlanetManager Planet { get; private set; }
     public static CameraController Camera { get; private set; }
+    public static ResourceManager Resources { get; private set; }
     public static QueueManager Queue { get; private set; }
     public static EdgeManager Edge { get; private set; }
     public static InputManager Input { get; private set; }
@@ -21,6 +22,7 @@ public class Managers : MonoBehaviour
         File = FindObjectOfType<FileManager>();
         Planet = FindObjectOfType<PlanetManager>();
         Camera = FindObjectOfType<CameraController>();
+        Resources = FindObjectOfType<ResourceManager>();
         Queue = FindObjectOfType<QueueManager>();
         Edge = FindObjectOfType<EdgeManager>();
         Input = FindObjectOfType<InputManager>();

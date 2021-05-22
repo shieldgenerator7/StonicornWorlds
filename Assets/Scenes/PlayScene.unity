@@ -1213,6 +1213,7 @@ GameObject:
   - component: {fileID: 752787613}
   - component: {fileID: 752787612}
   - component: {fileID: 752787614}
+  - component: {fileID: 752787623}
   - component: {fileID: 752787615}
   - component: {fileID: 752787622}
   - component: {fileID: 752787616}
@@ -1240,7 +1241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fde001c0a2a81438c2e02362415808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceCapPerCore: 600
 --- !u!4 &752787613
 Transform:
   m_ObjectHideFlags: 0
@@ -1396,6 +1396,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generatorPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
   generateRate: 1
+--- !u!114 &752787623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d920846806925494782ab857c2ee4602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceCapPerCore: 600
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -3256,6 +3269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: planet1.wrld
+  saveOnExit: 1
 --- !u!114 &1625964775
 MonoBehaviour:
   m_ObjectHideFlags: 0

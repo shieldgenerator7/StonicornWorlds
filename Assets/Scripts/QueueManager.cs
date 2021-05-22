@@ -43,9 +43,9 @@ public class QueueManager : Manager
                     ) ?? queue[0];
                 //Try to start task
                 if (!task.Started
-                    && Managers.Planet.Resources >= task.StartCost)
+                    && Managers.Resources.Resources >= task.StartCost)
                 {
-                    Managers.Planet.Resources -= task.StartCost;
+                    Managers.Resources.Resources -= task.StartCost;
                     task.Progress = 0.01f;
                 }
                 //Try to find a task that is already in progress

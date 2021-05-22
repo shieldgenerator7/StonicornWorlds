@@ -17,7 +17,7 @@ public class ResourceGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Managers.Planet.Resources += count * generateRate * Time.deltaTime;
+        Managers.Resources.Resources += count * generateRate * Time.deltaTime;
     }
 
     void updateCount(Planet planet)
