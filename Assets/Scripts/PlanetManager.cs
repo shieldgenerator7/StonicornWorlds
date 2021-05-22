@@ -37,6 +37,7 @@ public class PlanetManager : MonoBehaviour
             }
             planet = value;
             planet.onStateChanged += planetChanged;
+            coreCount = planet.Pods(Managers.Constants.corePodType).Count;
             //onPlanetSwapped?.Invoke(planet);
             onPlanetStateChanged?.Invoke(planet);
         }

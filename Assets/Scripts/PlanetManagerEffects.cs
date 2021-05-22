@@ -53,6 +53,11 @@ public class PlanetManagerEffects : MonoBehaviour
                             transform
                             );
                         go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                        SkyDisplayer sky = go.GetComponent<SkyDisplayer>();
+                        if (sky)
+                        {
+                            sky.setup(content);
+                        }
                         displayObjects.Add(content, go);
                     }
                 });

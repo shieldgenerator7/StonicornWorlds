@@ -10,12 +10,9 @@ public class SkyDisplayer : MonoBehaviour
     private SpriteRenderer sr;
 
     // Start is called before the first frame update
-    void Start()
+    public void setup(PodContent content)
     {
         sr = GetComponent<SpriteRenderer>();
-        content = Managers.Planet.Planet
-            .getPod(transform.position)
-            .getContent(contentType);
         content.onVarChanged += updateDisplay;
         updateDisplay(content.Var);
     }
