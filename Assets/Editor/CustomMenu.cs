@@ -110,7 +110,9 @@ public class CustomMenu
     public static void setupInputManager()
     {
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
-        inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList();
+        inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList()
+            .FindAll(btn => !(btn is ToolBox));
+        //inputManager.toolBoxes = GameObject.FindObjectsOfType<ToolBox>(true).ToList();
         inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup.", inputManager);
