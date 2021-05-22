@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
 public class PodContent : PlanetObject
 {
     public PodContentType contentType => objectType as PodContentType;
@@ -16,13 +17,6 @@ public class PodContent : PlanetObject
         this.container = container;
         this.container.addContent(this);
         this.Var = this.contentType.initialVarValue;
-    }
-
-    public PodContent Clone(Pod clonePod)
-    {
-        PodContent clone = new PodContent(this.contentType, clonePod);
-        clone.variables = new Dictionary<string, float>(this.variables);
-        return clone;
     }
 
     public float getVar(string varName)
@@ -52,7 +46,4 @@ public class PodContent : PlanetObject
     }
     public delegate void OnVarChanged(float val);
     public event OnVarChanged onVarChanged;
-
-    public static implicit operator bool(PodContent pc)
-        => pc != null;
 }

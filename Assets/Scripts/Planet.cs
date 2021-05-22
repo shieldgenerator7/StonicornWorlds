@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+[System.Serializable]
 public class Planet
 {
     public Vector2 position;
@@ -13,6 +14,7 @@ public class Planet
     [NonSerialized]
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
+    [SerializeField]
     private List<Pod> pods = new List<Pod>();
     [NonSerialized]
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
@@ -20,12 +22,13 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
-    public void init(List<Pod> pods)
+    public void init()
     {
-        pods.ForEach(p =>
+        this.pods.ForEach(p =>
         {
-            pods.Add(p);
-            grid.add(worldToGrid(p.worldPos), p);
+            p.worldPos = gridToWorld(p.gridPos);
+            p.inflate();
+            grid.add(p.gridPos, p);
             podLists.add(p);
         });
     }
@@ -169,9 +172,9 @@ public class Planet
 
     public Planet deepCopy()
     {
-        Planet planet = new Planet();
-        planet.init(PodsAll.ConvertAll(pod => pod.Clone()));
-        planet.PodsAll.ForEach(pod => planet.podLists.add(pod));
+        string json = JsonUtility.ToJson(this);
+        Planet planet = JsonUtility.FromJson<Planet>(json);
+        planet.init();
         return planet;
     }
 }

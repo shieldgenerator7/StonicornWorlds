@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
 public class Pod : PlanetObject
 {
     public PodType podType => objectType as PodType;
@@ -55,11 +56,18 @@ public class Pod : PlanetObject
         podContents.ForEach(content => contentFunc(content));
     }
 
-    public Pod Clone()
+    public override void inflate()
     {
-        Pod clone = new Pod(this.worldPos, this.podType);
-        clone.podContents = podContents.ConvertAll(content => content.Clone(clone));
-        return clone;
+        base.inflate();
+        if (podContents == null)
+        {
+            podContents = new List<PodContent>();
+        }
+        podContents.ForEach(pc =>
+        {
+            pc.inflate();
+            pc.container = this;
+        });
     }
 
     public override string ToString()
