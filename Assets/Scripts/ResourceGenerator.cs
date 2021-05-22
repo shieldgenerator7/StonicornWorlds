@@ -11,6 +11,7 @@ public class ResourceGenerator : MonoBehaviour
     private void Start()
     {
         Managers.Planet.onPlanetStateChanged += updateCount;
+        updateCount(Managers.Planet.Planet);
     }
 
     // Update is called once per frame
