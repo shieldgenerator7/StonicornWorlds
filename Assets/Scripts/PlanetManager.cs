@@ -88,7 +88,7 @@ public class PlanetManager : MonoBehaviour
 
     public void addPod(Pod pod)
     {
-        planet.addPod(pod, pod.pos);
+        planet.addPod(pod, pod.worldPos);
         coreCount = planet.Pods(Managers.Constants.corePodType).Count;
     }
 

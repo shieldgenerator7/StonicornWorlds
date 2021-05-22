@@ -8,13 +8,15 @@ public class Pod : PlanetObject
 {
     public PodType podType => objectType as PodType;
 
-    public Vector2 pos;
+    [NonSerialized]
+    public Vector2 worldPos;
+    public Vector3Int gridPos;
 
     private List<PodContent> podContents = new List<PodContent>();
 
     public Pod(Vector2 pos, PodType podType) : base(podType)
     {
-        this.pos = pos;
+        this.worldPos = pos;
     }
 
     public void addContent(PodContent content)
@@ -55,7 +57,7 @@ public class Pod : PlanetObject
 
     public Pod Clone()
     {
-        Pod clone = new Pod(this.pos, this.podType);
+        Pod clone = new Pod(this.worldPos, this.podType);
         clone.podContents = podContents.ConvertAll(content => content.Clone(clone));
         return clone;
     }

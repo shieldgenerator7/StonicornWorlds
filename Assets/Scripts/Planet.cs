@@ -22,7 +22,7 @@ public class Planet
     {
         pods.ForEach(p =>
         {
-            grid.add(p, worldToGrid(p.pos));
+            grid.add(worldToGrid(p.worldPos), p);
             podLists.add(p);
         });
     }
@@ -33,12 +33,12 @@ public class Planet
 
     public void addPod(Pod pod, Vector2 pos)
     {
-        Vector3Int hexpos = worldToGrid(pos);
-        pod.pos = gridToWorld(hexpos);
-        grid.add(pod, worldToGrid(pos));
+        pod.gridPos = worldToGrid(pos);
+        pod.worldPos = gridToWorld(pod.gridPos);
+        grid.add(pod.gridPos, pod);
         podLists.add(pod);
         pod.onPodContentChanged += podContentAdded;
-        fillSpaceAround(pod.pos);
+        fillSpaceAround(pod.worldPos);
         onStateChanged?.Invoke(this);
     }
 
@@ -70,7 +70,8 @@ public class Planet
             emptySpaces.ForEach(v =>
             {
                 Pod pod = new Pod(gridToWorld(v), space);
-                grid.add(pod, v);
+                pod.gridPos = v;
+                grid.add(v, pod);
                 podLists.add(pod);
                 pod.onPodContentChanged += podContentAdded;
             }
@@ -78,9 +79,6 @@ public class Planet
         }
     }
     #endregion
-
-    public void forEachPodContent(Action<PodContent> contentFunc)
-        => PodsAll.ForEach(pod => pod.forEachContent(contentFunc));
 
     #region Read State
     public Vector2 getHexPos(Vector2 pos)
@@ -119,7 +117,7 @@ public class Planet
 
     public List<Vector2> Border
         => Pods(Managers.Constants.spacePodType)
-        .ConvertAll(pod => pod.pos);
+        .ConvertAll(pod => pod.worldPos);
     //=> grid.getBorder().ConvertAll(v => gridToWorld(v));
     #endregion
 

@@ -11,7 +11,7 @@ public class EdgeManager : MonoBehaviour
     public void calculateValidPosList(Planet p)
     {
         validPosList = p.PodsAll
-            .ConvertAll(pod => pod.pos)
+            .ConvertAll(pod => pod.worldPos)
             .FindAll(pos => Managers.Input.ToolAction.isActionValidAt(pos));
         onValidPositionListChanged?.Invoke(ValidPosList);
     }

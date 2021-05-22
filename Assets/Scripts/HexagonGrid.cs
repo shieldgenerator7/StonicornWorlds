@@ -14,7 +14,7 @@ public class HexagonGrid<T>
 
     Dictionary<Vector3Int, T> grid = new Dictionary<Vector3Int, T>();
 
-    public void add(T t, Vector3Int pos)
+    public void add(Vector3Int pos, T t)
     {
         grid[pos] = t;
     }

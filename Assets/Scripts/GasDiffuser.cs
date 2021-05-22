@@ -37,12 +37,12 @@ public class GasDiffuser : MonoBehaviour
         float diffuseAmount = 0;
         if (pod.podType == Managers.Constants.spacePodType)
         {
-            diffuseAmount = diffuse(pod.pos, currentPressure(pod));
+            diffuseAmount = diffuse(pod.worldPos, currentPressure(pod));
             adjustPressure(pod, -diffuseAmount);
         }
         else if (pod.podType == emitterPodType)
         {
-            diffuseAmount = diffuse(pod.pos, emitterPressure);
+            diffuseAmount = diffuse(pod.worldPos, emitterPressure);
         }
         return diffuseAmount > 0;
     }

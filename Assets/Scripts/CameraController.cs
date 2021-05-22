@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
             return;
         }
         //override the posList value
-        posList.AddRange(Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.pos));
+        posList.AddRange(Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.worldPos));
         //
         autoFrame(Vector2.zero, posList);
     }

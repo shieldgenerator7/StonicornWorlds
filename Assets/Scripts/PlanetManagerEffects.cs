@@ -34,7 +34,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 {
                     GameObject go = Instantiate(
                         pod.podType.prefab,
-                        pod.pos,
+                        pod.worldPos,
                         Quaternion.identity,
                         transform
                         );
@@ -48,7 +48,7 @@ public class PlanetManagerEffects : MonoBehaviour
                     {
                         GameObject go = Instantiate(
                             content.contentType.prefab,
-                            content.container.pos,
+                            content.container.worldPos,
                             Quaternion.identity,
                             transform
                             );
