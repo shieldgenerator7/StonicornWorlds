@@ -65,6 +65,33 @@ public class CustomMenu
             FindInGO(childT.gameObject);
         }
     }
+
+    [MenuItem("SG7/Editor/Print Planet JSON")]
+    private static void printPlanetJSON()
+    {
+        if (Application.isPlaying)
+        {
+            string json = JsonUtility.ToJson(Managers.Planet.Planet);
+            Debug.Log("json: " + json);
+        }
+        else
+        {
+            Debug.LogError("Enter play mode to Print Planet JSON");
+        }
+    }
+    [MenuItem("SG7/Editor/Print Planet Copy JSON")]
+    private static void printPlanetCopyJSON()
+    {
+        if (Application.isPlaying)
+        {
+            string json = JsonUtility.ToJson(Managers.Planet.Planet.deepCopy());
+            Debug.Log("json copy: " + json);
+        }
+        else
+        {
+            Debug.LogError("Enter play mode to Print Planet Copy JSON");
+        }
+    }
     #endregion
 
     #region Prebuild Submenu
