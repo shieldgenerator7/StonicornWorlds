@@ -19,8 +19,9 @@ public class FileManager : MonoBehaviour
     void SaveFile()
     {
         Debug.Log("SAVE");
+        Managers.Planet.Planet.tasks = Managers.Queue.Tasks;
         ES3.Save<string>("planet", JsonUtility.ToJson(Managers.Planet.Planet), fileName);
-        //ES3.Save<List<QueueTask>>("tasks", Managers.Queue.Tasks, fileName);
+        ES3.Save<float>("resources", Managers.Planet.Resources, fileName);
         Debug.Log("SAVED");
     }
 
@@ -29,12 +30,17 @@ public class FileManager : MonoBehaviour
         Debug.Log("LOAD");
         if (ES3.FileExists(fileName))
         {
+            //Planet
             Planet planet = JsonUtility.FromJson<Planet>(
                 ES3.Load<string>("planet", fileName)
                 );
             planet.init();
             Managers.Planet.Planet = planet;
-            //Managers.Queue.loadTasks(ES3.Load<List<QueueTask>>("tasks", fileName));
+            //Tasks
+            Managers.Queue.loadTasks(Managers.Planet.Planet.tasks);
+            //Resources
+            float resources = ES3.Load<float>("resources", fileName);
+            Managers.Planet.Resources = resources;
             Debug.Log("LOADED");
         }
     }

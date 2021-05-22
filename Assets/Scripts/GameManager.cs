@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour
         Managers.Constants.setup();
         Managers.Camera.setup();
         Managers.Input.setup();
-        Managers.File.setup();
         Managers.Planet.setup();
+        Managers.File.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();
     }

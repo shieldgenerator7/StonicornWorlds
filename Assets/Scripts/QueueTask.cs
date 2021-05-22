@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class QueueTask
 {
     public PlanetObjectType taskObject { get; private set; }
@@ -20,6 +22,7 @@ public class QueueTask
 
     public Vector2 pos;
 
+    [SerializeField]
     private float progress;
     public float Progress
     {
@@ -46,6 +49,11 @@ public class QueueTask
         this.taskObjectName = taskObject.typeName;
         this.pos = pos;
         this.type = type;
+    }
+
+    public void inflate()
+    {
+        this.taskObject = Managers.Constants.getType(this.taskObjectName);
     }
 
     public static implicit operator bool(QueueTask qt)

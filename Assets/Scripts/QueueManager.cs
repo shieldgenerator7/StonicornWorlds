@@ -106,6 +106,7 @@ public class QueueManager : MonoBehaviour
     public void loadTasks(List<QueueTask> tasks)
     {
         queue = tasks;
+        tasks.ForEach(t => t.inflate());
         callOnQueueChanged();
     }
 }
