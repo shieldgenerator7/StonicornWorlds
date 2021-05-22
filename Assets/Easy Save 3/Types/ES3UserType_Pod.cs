@@ -17,7 +17,7 @@ namespace ES3Types
             var instance = (Pod)obj;
 
             writer.WriteProperty("pos", instance.pos, ES3Type_Vector2.Instance);
-            writer.WriteProperty("podTypeName", instance.podTypeName, ES3Type_string.Instance);
+            writer.WriteProperty("podTypeName", instance.typeName, ES3Type_string.Instance);
         }
 
         protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -29,22 +29,24 @@ namespace ES3Types
                 {
 
                     case "pos":
+                        // /!\ NRE here? obj is probably being passed in as null
+                        // (check ReadObject() method below)
                         instance.pos = reader.Read<UnityEngine.Vector2>(ES3Type_Vector2.Instance);
                         break;
                     case "podTypeName":
-                        instance.podTypeName = reader.Read<System.String>(ES3Type_string.Instance);
+                        instance.typeName = reader.Read<System.String>(ES3Type_string.Instance);
                         break;
                     default:
                         reader.Skip();
                         break;
                 }
             }
-            instance.podType = Managers.Constants.getPodType(instance.podTypeName);
+            instance.objectType = Managers.Constants.getPodType(instance.typeName);
         }
 
         protected override object ReadObject<T>(ES3Reader reader)
         {
-            var instance = new Pod();
+            Pod instance = null;// new Pod();
             ReadObject<T>(reader, instance);
             return instance;
         }
