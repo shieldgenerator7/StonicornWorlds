@@ -13,6 +13,8 @@ public class Planet
     [NonSerialized]
     float SQRT_3 = Mathf.Sqrt(3.0f);
 
+    private List<Pod> pods = new List<Pod>();
+    [NonSerialized]
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
     [NonSerialized]
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
@@ -22,6 +24,7 @@ public class Planet
     {
         pods.ForEach(p =>
         {
+            pods.Add(p);
             grid.add(worldToGrid(p.worldPos), p);
             podLists.add(p);
         });
@@ -35,6 +38,7 @@ public class Planet
     {
         pod.gridPos = worldToGrid(pos);
         pod.worldPos = gridToWorld(pod.gridPos);
+        pods.Add(pod);
         grid.add(pod.gridPos, pod);
         podLists.add(pod);
         pod.onPodContentChanged += podContentAdded;
@@ -71,6 +75,7 @@ public class Planet
             {
                 Pod pod = new Pod(gridToWorld(v), space);
                 pod.gridPos = v;
+                pods.Add(pod);
                 grid.add(v, pod);
                 podLists.add(pod);
                 pod.onPodContentChanged += podContentAdded;
@@ -110,7 +115,7 @@ public class Planet
             .ConvertAll(v => gridToWorld(v));
 
     public List<Pod> PodsAll
-        => grid;
+        => pods.ToList();
 
     public List<Pod> Pods(PodType podType)
         => podLists.getList(podType);
@@ -165,8 +170,7 @@ public class Planet
     public Planet deepCopy()
     {
         Planet planet = new Planet();
-        PodsAll.ConvertAll(pod => pod.Clone())
-            .ForEach(pod => planet.grid.add(pod, worldToGrid(pod.pos)));
+        planet.init(PodsAll.ConvertAll(pod => pod.Clone()));
         planet.PodsAll.ForEach(pod => planet.podLists.add(pod));
         return planet;
     }
