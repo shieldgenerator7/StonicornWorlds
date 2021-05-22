@@ -45,6 +45,17 @@ public class ConstantBank : MonoBehaviour
     public List<PodType> allPodTypes;
     public List<PodContentType> allPodContentTypes;
 
-    public PodType getPodType(string podTypeName)
-        => allPodTypes.Find(podType => podType.typeName == podTypeName);
+    public PlanetObjectType getType(string typeName)
+    {
+        PlanetObjectType pot = getPodType(typeName);
+        if (!pot)
+        {
+            pot = getPodContentType(typeName);
+        }
+        return pot;
+    }
+    public PodType getPodType(string typeName)
+        => allPodTypes.Find(podType => podType.typeName == typeName);
+    public PodContentType getPodContentType(string typeName)
+        => allPodContentTypes.Find(pct => pct.typeName == typeName);
 }

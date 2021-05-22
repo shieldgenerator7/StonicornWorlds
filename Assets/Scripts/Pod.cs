@@ -13,6 +13,7 @@ public class Pod : PlanetObject
     public Vector2 worldPos;
     public Vector3Int gridPos;
 
+    [SerializeField]
     private List<PodContent> podContents = new List<PodContent>();
 
     public Pod(Vector2 pos, PodType podType) : base(podType)

@@ -154,11 +154,21 @@ public class PlanetManager : MonoBehaviour
         {
             groundPodType = groundPod.podType;
         }
-        return podContentType.hasRequiredGround(groundPodType)
-            && podContentType.canPlantIn(curPodType)
-            && podContentType.isRequiredNeighborPresent(neighborTypes)
-            && podContentType.hasRequiredContent(curPod)
-            && !(curPod && curPod.hasContent(podContentType));
+        List<bool> gates = new List<bool>();
+        gates.Add(podContentType.hasRequiredGround(groundPodType));
+        gates.Add(podContentType.canPlantIn(curPodType));
+        gates.Add(podContentType.isRequiredNeighborPresent(neighborTypes));
+        gates.Add(podContentType.hasRequiredContent(curPod));
+        gates.Add(!(curPod && curPod.hasContent(podContentType)));
+        string message = "gates: ";
+        gates.ForEach(b => message += b + ", ");
+        Debug.Log(message);
+        return gates.All(b => b);
+        //return podContentType.hasRequiredGround(groundPodType)
+        //    && podContentType.canPlantIn(curPodType)
+        //    && podContentType.isRequiredNeighborPresent(neighborTypes)
+        //    && podContentType.hasRequiredContent(curPod)
+        //    && !(curPod && curPod.hasContent(podContentType));
     }
 
     public List<Pod> getFutureNeighbors(Vector2 pos)

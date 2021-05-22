@@ -10,7 +10,6 @@ public class PodContent : PlanetObject
 
     [System.NonSerialized]
     public Pod container;
-    private Dictionary<string, float> variables = new Dictionary<string, float>();
 
     public PodContent(PodContentType contentType, Pod container) : base(contentType)
     {
@@ -19,29 +18,19 @@ public class PodContent : PlanetObject
         this.Var = this.contentType.initialVarValue;
     }
 
-    public float getVar(string varName)
-    {
-        if (!variables.ContainsKey(varName))
-        {
-            variables[varName] = 0;
-        }
-        return variables[varName];
-    }
-    public void setVar(string varName, float val)
-    {
-        variables[varName] = val;
-    }
 
     /// <summary>
     /// Used when there's only one variable
     /// </summary>
+    [SerializeField]
+    private float variable;
     public float Var
     {
-        get => getVar("var");
+        get => variable;
         set
         {
-            setVar("var", value);
-            onVarChanged?.Invoke(value);
+            variable = value;
+            onVarChanged?.Invoke(variable);
         }
     }
     public delegate void OnVarChanged(float val);

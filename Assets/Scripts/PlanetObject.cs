@@ -16,7 +16,7 @@ public abstract class PlanetObject
 
     public virtual void inflate()
     {
-        this.objectType = Managers.Constants.getPodType(this.typeName);
+        this.objectType = Managers.Constants.getType(this.typeName);
     }
 
     public static implicit operator bool(PlanetObject po)
