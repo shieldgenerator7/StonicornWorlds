@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public CanvasScaler canvasScaler;
 
     private bool screenChangedLastFrame = false;
 
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     void onScreenSizeChanged(int width, int height)
     {
+        canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
         Managers.Constants.updateScreenConstants(width, height);
         screenChangedLastFrame = true;
     }
