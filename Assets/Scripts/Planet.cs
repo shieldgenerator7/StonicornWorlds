@@ -30,7 +30,7 @@ public class Planet
             p.worldPos = gridToWorld(p.gridPos);
             p.inflate();
             grid.add(p.gridPos, p);
-            podLists.add(p);
+            podLists.Add(p);
         });
     }
 
@@ -45,7 +45,7 @@ public class Planet
         pods.Add(pod);
         Pod oldPod = grid.get(pod.gridPos);
         grid.add(pod.gridPos, pod);
-        podLists.add(pod);
+        podLists.Add(pod);
         if (oldPod)
         {
             pods.Remove(oldPod);
@@ -61,7 +61,7 @@ public class Planet
         Vector3Int v = worldToGrid(pos);
         Pod pod = grid.get(v);
         grid.removeAt(v);
-        podLists.remove(pod);
+        podLists.Remove(pod);
         pod.onPodContentChanged -= podContentAdded;
         onStateChanged?.Invoke(this);
     }
@@ -87,7 +87,7 @@ public class Planet
                 pod.gridPos = v;
                 pods.Add(pod);
                 grid.add(v, pod);
-                podLists.add(pod);
+                podLists.Add(pod);
                 pod.onPodContentChanged += podContentAdded;
             }
             );
@@ -128,7 +128,7 @@ public class Planet
         => pods.ToList();
 
     public List<Pod> Pods(PodType podType)
-        => podLists.getList(podType);
+        => podLists.GetList(podType);
 
     public List<Vector2> Border
         => Pods(Managers.Constants.spacePodType)

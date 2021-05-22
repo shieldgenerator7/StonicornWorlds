@@ -13,21 +13,21 @@ public class GroupedList<T, K>
     public delegate T GroupFunction(K val);
     private GroupFunction groupFunction;
 
-    public void add(K val)
+    public void Add(K val)
     {
         getList(val).Add(val);
     }
-    public void remove(K val)
+    public void Remove(K val)
     {
         getList(val).Remove(val);
     }
     private List<K> getList(K val)
     {
         T key = groupFunction(val);
-        return getList(key);
+        return GetList(key);
     }
 
-    public List<K> getList(T key)
+    public List<K> GetList(T key)
     {
         if (!list.ContainsKey(key))
         {
