@@ -2185,7 +2185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtBuildVersion: {fileID: 1392496581}
   buildMessages:
-  - buggy save
   - potential flashing
 --- !u!1001 &1402086619
 PrefabInstance:
