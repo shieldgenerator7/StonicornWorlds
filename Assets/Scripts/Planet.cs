@@ -43,8 +43,14 @@ public class Planet
         pod.gridPos = worldToGrid(pos);
         pod.worldPos = gridToWorld(pod.gridPos);
         pods.Add(pod);
+        Pod oldPod = grid.get(pod.gridPos);
         grid.add(pod.gridPos, pod);
         podLists.add(pod);
+        if (oldPod)
+        {
+            pods.Remove(oldPod);
+            podLists.remove(oldPod);
+        }
         pod.onPodContentChanged += podContentAdded;
         fillSpaceAround(pod.worldPos);
         onStateChanged?.Invoke(this);
