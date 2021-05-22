@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class FileManager : MonoBehaviour
+public class FileManager : Manager
 {
     public string fileName = "";
 
     public bool saveOnExit = true;
 
-    public void setup()
+    public override void setup()
     {
         LoadFile();
     }

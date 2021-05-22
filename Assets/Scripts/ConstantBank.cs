@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstantBank : MonoBehaviour
+public class ConstantBank : Manager
 {
     [Header("Buttons")]
     [SerializeField]
@@ -14,7 +14,7 @@ public class ConstantBank : MonoBehaviour
     private float originalCheckRadius;
     private float originalSpacing;
 
-    public void setup()
+    public override void setup()
     {
         originalCheckRadius = buttonCheckRadius;
         originalSpacing = buttonSpacing;

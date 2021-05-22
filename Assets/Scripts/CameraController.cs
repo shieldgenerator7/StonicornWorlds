@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : Manager
 {
     public float minOrthoSize = 5;
     private Vector3 camOffset;
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     private int pixelWidth;
     private int pixelHeight;
 
-    public void setup()
+    public override void setup()
     {
         camOffset = transform.position - Vector3.zero;
         checkScreenSize();

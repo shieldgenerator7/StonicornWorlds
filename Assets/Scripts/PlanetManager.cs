@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlanetManager : MonoBehaviour
+public class PlanetManager : Manager
 {
     public float resourceCapPerCore = 700;
 
@@ -67,7 +67,7 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    public void setup()
+    public override void setup()
     {
         if (planet == null)
         {

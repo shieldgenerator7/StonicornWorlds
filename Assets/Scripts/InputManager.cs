@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : Manager
 {
     [SerializeField]
     private Tool tool;
@@ -69,7 +69,7 @@ public class InputManager : MonoBehaviour
 
     private bool buttonActivation = false;
 
-    public void setup()
+    public override void setup()
     {
         if (planetObjectType is PodType pt)
         {

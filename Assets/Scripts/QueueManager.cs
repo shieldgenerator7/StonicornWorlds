@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QueueManager : MonoBehaviour
+public class QueueManager : Manager
 {
     public float defaultWorkRate = 20;
 
@@ -108,5 +108,10 @@ public class QueueManager : MonoBehaviour
         queue = tasks;
         tasks.ForEach(t => t.inflate());
         callOnQueueChanged();
+    }
+
+    public override void setup()
+    {
+        throw new System.NotImplementedException();
     }
 }

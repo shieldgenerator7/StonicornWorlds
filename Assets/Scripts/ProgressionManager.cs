@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ProgressionManager : MonoBehaviour
+public class ProgressionManager : Manager
 {
     public List<ProgressionRequirement> proreqs;
 
-    public void setup()
+    public override void setup()
     {
         checkAllProgression();
     }
