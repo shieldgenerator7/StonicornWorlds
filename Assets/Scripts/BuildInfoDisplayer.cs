@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 public class BuildInfoDisplayer : MonoBehaviour
 {
     public TMP_Text txtBuildVersion;
@@ -22,4 +20,3 @@ public class BuildInfoDisplayer : MonoBehaviour
         txtBuildVersion.text = text;
     }
 }
-#endif
