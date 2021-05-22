@@ -7,23 +7,28 @@ public class FileManager : MonoBehaviour
 {
     public string fileName = "";
 
+    public bool saveOnExit = true;
+
     public void setup()
     {
         LoadFile();
     }
     private void OnDestroy()
     {
-        SaveFile();
+        if (saveOnExit)
+        {
+            SaveFile();
+        }
     }
 
-    void SaveFile()
+    public void SaveFile()
     {
         Managers.Planet.Planet.tasks = Managers.Queue.Tasks;
         ES3.Save<string>("planet", JsonUtility.ToJson(Managers.Planet.Planet), fileName);
         ES3.Save<float>("resources", Managers.Planet.Resources, fileName);
     }
 
-    void LoadFile()
+    public void LoadFile()
     {
         if (ES3.FileExists(fileName))
         {

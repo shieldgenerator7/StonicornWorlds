@@ -8,12 +8,17 @@ public class ProgressionRequirement
     public PodType podType;
     public int count;
     public float resourceRequirement = 0;
+    public bool requireSaveFile = false;
     public ToolButton button;
 
     public bool checkProgression()
     {
-        if (Managers.Planet.Planet.Pods(podType).Count >= count
-            && Managers.Planet.Resources >= resourceRequirement)
+        bool podTypeCheck = (podType)
+            ? Managers.Planet.Planet.Pods(podType).Count >= count
+            : Managers.Planet.Planet.PodsAll.Count >= count;
+        if (podTypeCheck
+            && Managers.Planet.Resources >= resourceRequirement
+            && (!requireSaveFile || ES3.FileExists(Managers.File.fileName)))
         {
             button.gameObject.SetActive(true);
             return true;
