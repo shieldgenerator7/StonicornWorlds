@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -10,9 +11,9 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public TMP_Text txtResources;
 
-    List<GameObject> goPods = new List<GameObject>();
-    List<GameObject> goPodContents = new List<GameObject>();
     List<GameObject> editPods = new List<GameObject>();
+
+    Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
 
     public void updateCursor(Vector2 pos)
     {
@@ -23,37 +24,61 @@ public class PlanetManagerEffects : MonoBehaviour
         cursorObject.transform.position = pos;
     }
 
-    public void updateDisplay(Planet p)
+    public void updateDisplay(Planet planet)
     {
-        //Update pods
-        goPods.ForEach(go => Destroy(go));
-        goPods.Clear();
-        p.PodsAll.ForEach(pod =>
+        //Check for added pods
+        List<Pod> podsAll = planet.PodsAll;
+        podsAll.ForEach(pod =>
             {
-                GameObject go = Instantiate(
-                    pod.podType.prefab,
-                    pod.pos,
-                    Quaternion.identity,
-                    transform
-                    );
-                go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
-                goPods.Add(go);
+                if (!displayObjects.ContainsKey(pod))
+                {
+                    GameObject go = Instantiate(
+                        pod.podType.prefab,
+                        pod.pos,
+                        Quaternion.identity,
+                        transform
+                        );
+                    go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                    displayObjects.Add(pod, go);
+                }
+                //Check for added pod contents
+                pod.forEachContent(content =>
+                {
+                    if (!displayObjects.ContainsKey(content))
+                    {
+                        GameObject go = Instantiate(
+                            content.contentType.prefab,
+                            content.container.pos,
+                            Quaternion.identity,
+                            transform
+                            );
+                        go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                        displayObjects.Add(content, go);
+                    }
+                });
             });
-        //Update pod contents
-        goPodContents.ForEach(go => Destroy(go));
-        goPodContents.Clear();
-        Managers.Planet.Planet.forEachPodContent(
-            content =>
+        //Check for removed planet objects
+        foreach (PlanetObject po in displayObjects.Keys.ToList())
+        {
+            //Removed Pods
+            if (po is Pod p)
             {
-                GameObject go = Instantiate(
-                    content.contentType.prefab,
-                    content.container.pos,
-                    Quaternion.identity,
-                    transform
-                    );
-                go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
-                goPodContents.Add(go);
-            });
+                if (!podsAll.Contains(p))
+                {
+                    Destroy(displayObjects[p]);
+                    displayObjects.Remove(p);
+                }
+            }
+            //Removed PodContents
+            else if (po is PodContent pc)
+            {
+                if (!pc.container.hasContent(pc))
+                {
+                    Destroy(displayObjects[pc]);
+                    displayObjects.Remove(pc);
+                }
+            }
+        }
     }
     public void updateEditDisplay(List<Vector2> posList)
     {

@@ -36,6 +36,8 @@ public class Pod : PlanetObject
 
     public bool hasContent(PodContentType contentType)
         => podContents.Any(content => content.contentType == contentType);
+    public bool hasContent(PodContent content)
+        => podContents.Contains(content);
 
     public bool hasContentAny(List<PodContentType> contentTypes)
         => contentTypes.Any(ct => hasContent(ct));
