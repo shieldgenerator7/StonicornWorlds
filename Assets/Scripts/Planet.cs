@@ -49,7 +49,7 @@ public class Planet
         if (oldPod)
         {
             pods.Remove(oldPod);
-            podLists.remove(oldPod);
+            podLists.Remove(oldPod);
         }
         pod.onPodContentChanged += podContentAdded;
         fillSpaceAround(pod.worldPos);
