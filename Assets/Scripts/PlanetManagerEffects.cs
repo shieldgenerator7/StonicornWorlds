@@ -9,8 +9,6 @@ public class PlanetManagerEffects : MonoBehaviour
     public GameObject editPodPrefab;
     public GameObject cursorObject;
 
-    public TMP_Text txtResources;
-
     List<GameObject> editPods = new List<GameObject>();
 
     Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
@@ -114,10 +112,5 @@ public class PlanetManagerEffects : MonoBehaviour
         editPods.ForEach(go =>
             go.transform.GetChild(0).up = up
         );
-    }
-
-    public void updateUI(float resources)
-    {
-        txtResources.text = "Resources: " + (int)resources + " / " + Managers.Resources.MagmaCap;
     }
 }

@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
         //Resources
         Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
-        Managers.Resources.onResourcesChanged += Managers.PlanetEffects.updateUI;
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
         Managers.Queue.onQueueChanged += Managers.Planet.calculateFutureState;
