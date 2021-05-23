@@ -1408,7 +1408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d920846806925494782ab857c2ee4602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceCapPerCore: 600
+  magmaCapPerCore: 700
+  magmaContentType: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}

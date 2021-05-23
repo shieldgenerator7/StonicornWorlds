@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         Managers.Planet.calculateFutureState(Managers.Queue.Tasks);
         Managers.Queue.updateQueueWorkerList(p);
+        Managers.Resources.updateResourceCaps(p);
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
     }
@@ -98,8 +99,8 @@ public class GameManager : MonoBehaviour
         Managers.Camera.setup();
         Managers.Input.setup();
         Managers.Planet.setup();
-        Managers.Resources.setup();
         Managers.File.setup();
+        Managers.Resources.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();
     }

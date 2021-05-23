@@ -128,7 +128,13 @@ public class Planet
         => pods.ToList();
 
     public List<Pod> Pods(PodType podType)
-        => podLists.GetList(podType);
+    {
+        if (!podType)
+        {
+            Debug.LogError("podType is null!: " + podType);
+        }
+        return podLists.GetList(podType);
+    }
 
     public List<Vector2> Border
         => Pods(Managers.Constants.spacePodType)

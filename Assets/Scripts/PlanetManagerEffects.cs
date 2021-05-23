@@ -118,6 +118,6 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateUI(float resources)
     {
-        txtResources.text = "Resources: " + (int)resources + " / " + Managers.Resources.ResourceCap;
+        txtResources.text = "Resources: " + (int)resources + " / " + Managers.Resources.MagmaCap;
     }
 }

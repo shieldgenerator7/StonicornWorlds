@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlanetManager : Manager
 {
-    private int coreCount = 0;
-    public int CoreCount => coreCount;
-
     private Planet planet;
     public Planet Planet
     {
@@ -20,7 +17,6 @@ public class PlanetManager : Manager
             }
             planet = value;
             planet.onStateChanged += planetChanged;
-            coreCount = planet.Pods(Managers.Constants.corePodType).Count;
             //onPlanetSwapped?.Invoke(planet);
             onPlanetStateChanged?.Invoke(planet);
         }
@@ -72,7 +68,6 @@ public class PlanetManager : Manager
     public void addPod(Pod pod)
     {
         planet.addPod(pod, pod.worldPos);
-        coreCount = planet.Pods(Managers.Constants.corePodType).Count;
     }
 
     public void convertPod(Pod newPod)
