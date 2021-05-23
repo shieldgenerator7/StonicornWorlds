@@ -27,4 +27,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
   requiredNeighbors: []
   constructFromTypes: []
+  includedContentTypes:
+  - {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
   requireConvert: 0

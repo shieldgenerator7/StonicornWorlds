@@ -9,6 +9,7 @@ public class PodType : PlanetObjectType
     public List<PodType> allowedNeighbors;
     public List<PodType> requiredNeighbors;
     public List<PodType> constructFromTypes;//a list of pod types that can be converted to this type
+    public List<PodContentType> includedContentTypes;//list of content to put inside it automatically when it gets created
     public bool requireConvert = false;//true: adding to an empty space is disallowed
 
 

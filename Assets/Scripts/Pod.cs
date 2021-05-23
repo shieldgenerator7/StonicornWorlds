@@ -19,6 +19,13 @@ public class Pod : PlanetObject
     public Pod(Vector2 pos, PodType podType) : base(podType)
     {
         this.worldPos = pos;
+        podType.includedContentTypes.ForEach(
+            contentType =>
+            {
+                PodContent content = new PodContent(contentType, this);
+                addContent(content);
+            }
+            );
     }
 
     public void addContent(PodContent content)
