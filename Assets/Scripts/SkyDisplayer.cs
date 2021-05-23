@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkyDisplayer : MonoBehaviour
+public class SkyDisplayer : PodContentDisplayer
 {
     public PodContentType contentType;
 
@@ -10,7 +10,7 @@ public class SkyDisplayer : MonoBehaviour
     private SpriteRenderer sr;
 
     // Start is called before the first frame update
-    public void setup(PodContent content)
+    public override void setup(PodContent content)
     {
         sr = GetComponent<SpriteRenderer>();
         content.onVarChanged += updateDisplay;
