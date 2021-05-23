@@ -13,7 +13,7 @@ public class MagmaContainerDisplayer : PodContentDisplayer
         originalPosList = srs.ConvertAll(sr => (Vector2)sr.transform.position);
         for (int i = 0; i < srs.Count; i++)
         {
-            Vector2 dir = Managers.Planet.Planet.position - originalPosList[i];
+            Vector2 dir = (Managers.Planet.Planet.position - originalPosList[i]).normalized;
             srs[i].transform.up = -dir;
             srs[i].transform.position = originalPosList[i] + (dir * circleRadius);
         }
