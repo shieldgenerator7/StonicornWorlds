@@ -92,6 +92,22 @@ public class CustomMenu
             Debug.LogError("Enter play mode to Print Planet Copy JSON");
         }
     }
+
+    [MenuItem("SG7/Editor/Enter Fast Mode %.")]
+    private static void enterFastMode()
+    {
+        if (Application.isPlaying)
+        {
+            GameObject.FindObjectOfType<ResourceGenerator>().generateRate = 200;
+            Managers.Queue.defaultWorkRate = 200;
+            GameObject.FindObjectsOfType<QueueWorker>().ToList()
+                .ForEach(qw => qw.workSpeed = 200);
+        }
+        else
+        {
+            Debug.LogError("Enter play mode to Enter Fast Mode");
+        }
+    }
     #endregion
 
     #region Prebuild Submenu
