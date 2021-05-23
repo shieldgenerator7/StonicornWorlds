@@ -115,7 +115,14 @@ public class Planet
         => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
 
     public Vector2 getUpDirection(Vector2 pos)
-        => (getHexPos(pos) - getGroundPos(pos)).normalized;
+    {
+        Vector2 hexPos = getHexPos(pos);
+        if (hexPos == Vector2.zero)
+        {
+            return Vector2.up;
+        }
+        return (hexPos - getGroundPos(pos)).normalized;
+    }
 
     public Neighborhood<Pod> getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
