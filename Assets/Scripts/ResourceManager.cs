@@ -27,7 +27,7 @@ public class ResourceManager : Manager
                 {
                     magmaContents.ForEach(magma => magma.Var = magmaCapPerCore);
                 }
-                else
+                else if (newAmount < oldAmount)
                 {
                     float diff = newAmount - oldAmount;
                     int i = magmaContents.Count - 1;
@@ -41,6 +41,22 @@ public class ResourceManager : Manager
                             );
                         diff -= magmaContents[i].Var - oldVarVal;
                         i--;
+                    }
+                }
+                else if (newAmount > oldAmount)
+                {
+                    float diff = newAmount - oldAmount;
+                    int i = 0;
+                    while (!Mathf.Approximately(diff, 0))
+                    {
+                        float oldVarVal = magmaContents[i].Var;
+                        magmaContents[i].Var = Mathf.Clamp(
+                            oldVarVal + diff,
+                            0,
+                            magmaCapPerCore
+                            );
+                        diff -= magmaContents[i].Var - oldVarVal;
+                        i++;
                     }
                 }
                 onResourcesChanged?.Invoke(newAmount);
