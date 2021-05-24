@@ -68,8 +68,11 @@ public class PlanetManagerEffects : MonoBehaviour
             {
                 if (!podsAll.Contains(p))
                 {
-                    Destroy(displayObjects[p]);
-                    displayObjects.Remove(p);
+                    p.forEachContent(pc =>
+                    {
+                        removeDisplayObject(pc);
+                    });
+                    removeDisplayObject(p);
                 }
             }
             //Removed PodContents
@@ -77,11 +80,15 @@ public class PlanetManagerEffects : MonoBehaviour
             {
                 if (!pc.container.hasContent(pc))
                 {
-                    Destroy(displayObjects[pc]);
-                    displayObjects.Remove(pc);
+                    removeDisplayObject(pc);
                 }
             }
         }
+    }
+    private void removeDisplayObject(PlanetObject po)
+    {
+        Destroy(displayObjects[po]);
+        displayObjects.Remove(po);
     }
     public void updateEditDisplay(List<Vector2> posList)
     {
