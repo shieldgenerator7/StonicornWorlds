@@ -13,28 +13,32 @@ public static class HexagonUtility
             return new Vector3Int(0, -1, 1);
         }
         Vector3Int groundPos = reduceAbs(pos);
-        if (pos.x == 0)
+        //if original pos has a zero coordinate
+        if (pos.x == 0 || pos.y == 0 || pos.z == 0)
+        {
+            //all good, no changes needed
+        }
+        //if ground pos has a zero coordinate
+        else if (groundPos.x == 0)
         {
             groundPos.x = pos.x;
         }
-        else if (pos.y == 0)
+        else if (groundPos.y == 0)
         {
             groundPos.y = pos.y;
         }
-        else if (pos.z == 0)
+        else if (groundPos.z == 0)
         {
             groundPos.z = pos.z;
         }
+        //else check coordinate sign alignment
+        else if (Math.Sign(pos.x) == Mathf.Sign(pos.y))
+        {
+            groundPos.y = pos.y;
+        }
         else
         {
-            if (Math.Sign(pos.x) == Mathf.Sign(pos.y))
-            {
-                groundPos.y = pos.y;
-            }
-            else
-            {
-                groundPos.z = pos.z;
-            }
+            groundPos.z = pos.z;
         }
         return groundPos;
     }
