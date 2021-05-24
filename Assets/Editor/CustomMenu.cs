@@ -93,7 +93,7 @@ public class CustomMenu
         }
     }
 
-    [MenuItem("SG7/Editor/Slow Down %,")]
+    [MenuItem("SG7/Editor/Slow Down #,")]
     private static void slowDown()
     {
         if (Application.isPlaying)
@@ -109,7 +109,7 @@ public class CustomMenu
         }
     }
 
-    [MenuItem("SG7/Editor/Speed Up %.")]
+    [MenuItem("SG7/Editor/Speed Up #.")]
     private static void speedUp()
     {
         if (Application.isPlaying)
