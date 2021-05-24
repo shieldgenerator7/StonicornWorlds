@@ -2064,8 +2064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtBuildVersion: {fileID: 1392496581}
-  buildMessages:
-  - potential flashing
+  buildMessages: []
 --- !u!1001 &1402086619
 PrefabInstance:
   m_ObjectHideFlags: 0
