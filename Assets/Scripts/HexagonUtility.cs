@@ -62,6 +62,29 @@ public static class HexagonUtility
         return neighborhood;
     }
 
+    public static List<Vector3Int> getLine(Vector3Int start, Vector3Int end)
+    {
+        //special case: same hex
+        if (start == end)
+        {
+            return new List<Vector3Int>() { start };
+        }
+        //special case: neighboring hex
+        if (cube_distance(start, end) == 1)
+        {
+            return new List<Vector3Int>() { start, end };
+        }
+        //normal case:
+        //2021-05-23: copied from https://www.redblobgames.com/grids/hexagons/#line-drawing
+        int N = cube_distance(start, end);
+        List<Vector3Int> results = new List<Vector3Int>();
+        for (int i = 0; i <= N; i++)
+        {
+            results.Add(cube_lerp(start, end, 1.0f / N * i));
+        }
+        return results;
+    }
+
     public static List<Vector3Int> getArea(int maxring)
     {
         List<Vector3Int> area = new List<Vector3Int>();
@@ -127,6 +150,11 @@ public static class HexagonUtility
     public static int ring(Vector3Int v)
         => Math.Max(Math.Abs(v.x), Math.Max(Math.Abs(v.y), Math.Abs(v.z)));
 
+    #region Math Operations
+    //2021-05-23: copied from https://www.redblobgames.com/grids/hexagons/#distances
+    public static int cube_distance(Vector3Int a, Vector3Int b)
+        => (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
+
     public static Vector3Int round(float x, float y, float z)
     {
         //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#rounding
@@ -152,4 +180,15 @@ public static class HexagonUtility
         }
         return new Vector3Int((int)rx, (int)ry, (int)rz);
     }
+
+    //2021-05-23: copied from https://www.redblobgames.com/grids/hexagons/#line-drawing
+    private static float lerp(int a, int b, float t)
+        => a + ((b - a) * t);
+
+    private static Vector3Int cube_lerp(Vector3Int a, Vector3Int b, float t)
+        => round(lerp(a.x, b.x, t),
+                lerp(a.y, b.y, t),
+                lerp(a.z, b.z, t));
+
+    #endregion
 }

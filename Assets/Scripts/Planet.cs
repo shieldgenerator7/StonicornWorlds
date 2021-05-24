@@ -99,6 +99,14 @@ public class Planet
     public Vector2 getHexPos(Vector2 pos)
         => gridToWorld(worldToGrid(pos));
 
+    public List<Vector2> getHexPosBetween(Vector2 start, Vector2 end)
+    {
+        Vector3Int startHex = worldToGrid(start);
+        Vector3Int endHex = worldToGrid(end);
+        return HexagonUtility.getLine(startHex, endHex)
+            .ConvertAll(v => gridToWorld(v));
+    }
+
     public Pod getPod(Vector2 pos)
         => grid.get(worldToGrid(pos));
 

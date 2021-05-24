@@ -115,8 +115,9 @@ public class InputManager : Manager
             );
         }
 
+        bool mouseButtonUp = Input.GetMouseButtonUp(0);
         //Mouse Click
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || mouseButtonUp)
         {
             //Input Down
             if (Input.GetMouseButtonDown(0))
@@ -127,11 +128,13 @@ public class InputManager : Manager
                     .FirstOrDefault(b => b.checkClick(Input.mousePosition));
                 if (clickedButton)
                 {
+                    //Click on Button
                     clickedButton.activate();
                     buttonActivation = true;
                 }
                 else
                 {
+                    //Click in world with Tool
                     tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                     buttonActivation = false;
                 }
@@ -139,7 +142,7 @@ public class InputManager : Manager
             //Input Up
             else if (!buttonActivation)
             {
-                if (Input.GetMouseButtonUp(0))
+                if (mouseButtonUp)
                 {
                     tool.inputUp(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
