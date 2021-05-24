@@ -25,7 +25,6 @@ public class FileManager : Manager
     {
         Managers.Planet.Planet.tasks = Managers.Queue.Tasks;
         ES3.Save<string>("planet", JsonUtility.ToJson(Managers.Planet.Planet), fileName);
-        ES3.Save<float>("resources", Managers.Resources.Resources, fileName);
     }
 
     public void LoadFile()
@@ -40,9 +39,6 @@ public class FileManager : Manager
             Managers.Planet.Planet = planet;
             //Tasks
             Managers.Queue.loadTasks(Managers.Planet.Planet.tasks);
-            //Resources
-            float resources = ES3.Load<float>("resources", fileName);
-            Managers.Resources.Resources = resources;
         }
     }
 }
