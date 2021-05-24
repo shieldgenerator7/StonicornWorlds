@@ -93,19 +93,35 @@ public class CustomMenu
         }
     }
 
-    [MenuItem("SG7/Editor/Enter Fast Mode %.")]
-    private static void enterFastMode()
+    [MenuItem("SG7/Editor/Slow Down %,")]
+    private static void slowDown()
     {
         if (Application.isPlaying)
         {
-            GameObject.FindObjectOfType<ResourceGenerator>().generateRate = 200;
-            Managers.Queue.defaultWorkRate = 200;
+            GameObject.FindObjectOfType<ResourceGenerator>().generateRate /= 2;
+            Managers.Queue.defaultWorkRate /= 2;
             GameObject.FindObjectsOfType<QueueWorker>().ToList()
-                .ForEach(qw => qw.workSpeed = 200);
+                .ForEach(qw => qw.workSpeed /= 2);
         }
         else
         {
-            Debug.LogError("Enter play mode to Enter Fast Mode");
+            Debug.LogError("Enter play mode to Slow Down");
+        }
+    }
+
+    [MenuItem("SG7/Editor/Speed Up %.")]
+    private static void speedUp()
+    {
+        if (Application.isPlaying)
+        {
+            GameObject.FindObjectOfType<ResourceGenerator>().generateRate *= 2;
+            Managers.Queue.defaultWorkRate *= 2;
+            GameObject.FindObjectsOfType<QueueWorker>().ToList()
+                .ForEach(qw => qw.workSpeed *= 2);
+        }
+        else
+        {
+            Debug.LogError("Enter play mode to Speed Up");
         }
     }
     #endregion
