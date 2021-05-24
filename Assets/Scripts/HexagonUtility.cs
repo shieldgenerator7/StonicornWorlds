@@ -126,4 +126,30 @@ public static class HexagonUtility
 
     public static int ring(Vector3Int v)
         => Math.Max(Math.Abs(v.x), Math.Max(Math.Abs(v.y), Math.Abs(v.z)));
+
+    public static Vector3Int round(float x, float y, float z)
+    {
+        //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#rounding
+        float rx = Mathf.Round(x);
+        float ry = Mathf.Round(y);
+        float rz = Mathf.Round(z);
+
+        float x_diff = Mathf.Abs(rx - x);
+        float y_diff = Mathf.Abs(ry - y);
+        float z_diff = Mathf.Abs(rz - z);
+
+        if (x_diff > y_diff && x_diff > z_diff)
+        {
+            rx = -ry - rz;
+        }
+        else if (y_diff > z_diff)
+        {
+            ry = -rx - rz;
+        }
+        else
+        {
+            rz = -rx - ry;
+        }
+        return new Vector3Int((int)rx, (int)ry, (int)rz);
+    }
 }

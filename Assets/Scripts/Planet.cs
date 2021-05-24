@@ -165,28 +165,7 @@ public class Planet
         float r = (-1 * pos.x + SQRT_3 * pos.y) / (size * 3.0f);
         float s = -(q + r);
 
-        //2021-05-06: copied from https://www.redblobgames.com/grids/hexagons/#rounding
-        float rx = Mathf.Round(q);
-        float ry = Mathf.Round(s);
-        float rz = Mathf.Round(r);
-
-        float x_diff = Mathf.Abs(rx - q);
-        float y_diff = Mathf.Abs(ry - s);
-        float z_diff = Mathf.Abs(rz - r);
-
-        if (x_diff > y_diff && x_diff > z_diff)
-        {
-            rx = -ry - rz;
-        }
-        else if (y_diff > z_diff)
-        {
-            ry = -rx - rz;
-        }
-        else
-        {
-            rz = -rx - ry;
-        }
-        return new Vector3Int((int)rx, (int)ry, (int)rz);
+        return HexagonUtility.round(q, s, r);
     }
     #endregion
 
