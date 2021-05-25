@@ -13,9 +13,9 @@ public class ProgressionRequirement
 
     public bool checkProgression()
     {
-        bool podTypeCheck = (podType)
+        bool podTypeCheck = (podType != null)
             ? Managers.Planet.Planet.Pods(podType).Count >= count
-            : Managers.Planet.Planet.PodsAll.Count >= count;
+            : Managers.Planet.Planet.PodsNotEmpty.Count >= count;
         if (podTypeCheck
             && Managers.Resources.Resources >= resourceRequirement
             && (!requireSaveFile || ES3.FileExists(Managers.File.fileName)))

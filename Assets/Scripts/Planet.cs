@@ -151,6 +151,18 @@ public class Planet
         return podLists.GetList(podType);
     }
 
+    public List<Pod> PodsNotEmpty
+        => PodsNot(Managers.Constants.spacePodType);
+
+    public List<Pod> PodsNot(PodType podType)
+    {
+        if (!podType)
+        {
+            Debug.LogError("podType is null!: " + podType);
+        }
+        return pods.FindAll(pod => pod.podType != podType);
+    }
+
     public List<Vector2> Border
         => Pods(Managers.Constants.spacePodType)
         .ConvertAll(pod => pod.worldPos);
