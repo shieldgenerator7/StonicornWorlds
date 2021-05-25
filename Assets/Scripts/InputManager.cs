@@ -135,6 +135,7 @@ public class InputManager : Manager
                 {
                     //Click in world with Tool
                     tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    updateSelectList();
                     buttonActivation = false;
                 }
             }
@@ -151,6 +152,15 @@ public class InputManager : Manager
                     tool.inputMove(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
+            updateSelectList();
+        }
+    }
+
+    private void updateSelectList()
+    {
+        if (tool is SelectTool st)
+        {
+            Managers.PlanetEffects.updateSelect(st.SelectList);
         }
     }
 }

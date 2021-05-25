@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class SelectTool : Tool
 {
     private List<Vector2> selectList = new List<Vector2>();
+    public List<Vector2> SelectList => selectList.ToList();
 
     private Vector2 startPos;
     private Vector2 endPos;

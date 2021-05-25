@@ -8,6 +8,7 @@ public class PlanetManagerEffects : MonoBehaviour
 {
     public GameObject editPodPrefab;
     public GameObject cursorObject;
+    public List<GameObject> selectObjects = new List<GameObject>();
 
     List<GameObject> editPods = new List<GameObject>();
 
@@ -20,6 +21,27 @@ public class PlanetManagerEffects : MonoBehaviour
             Managers.Edge.ValidPosList.Contains(pos)
             );
         cursorObject.transform.position = pos;
+    }
+
+    public void updateSelect(List<Vector2> posList)
+    {
+        selectObjects.ForEach(go => go.SetActive(false));
+        if (posList.Count == 0)
+        {
+            return;
+        }
+        while (selectObjects.Count < posList.Count)
+        {
+            GameObject select = Instantiate(cursorObject);
+            select.SetActive(false);
+            select.transform.localScale *= 0.9f;
+            selectObjects.Add(select);
+        }
+        for (int i = 0; i < posList.Count; i++)
+        {
+            selectObjects[i].SetActive(true);
+            selectObjects[i].transform.position = posList[i];
+        }
     }
 
     public void updateDisplay(Planet planet)
