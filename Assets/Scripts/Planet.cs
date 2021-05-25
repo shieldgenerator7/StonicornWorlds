@@ -107,6 +107,12 @@ public class Planet
             .ConvertAll(v => gridToWorld(v));
     }
 
+    public List<Vector2> getHexPosRing(Vector2 sample)
+    {
+        return HexagonUtility.getRing(HexagonUtility.ring(worldToGrid(sample)))
+           .ConvertAll(v => gridToWorld(v));
+    }
+
     public Pod getPod(Vector2 pos)
         => grid.get(worldToGrid(pos));
 

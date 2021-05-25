@@ -89,6 +89,23 @@ public static class HexagonUtility
         return results;
     }
 
+    public static List<Vector3Int> getRing(int ringIndex)
+    {
+        List<Vector3Int> ring = new List<Vector3Int>();
+        for (int q = -ringIndex; q <= ringIndex; q++)
+        {
+            for (int r = -ringIndex; r <= ringIndex; r++)
+            {
+                int s = -(q + r);
+                if (Mathf.Max(Mathf.Abs(q), Mathf.Abs(s), Mathf.Abs(r)) == ringIndex)
+                {
+                    ring.Add(new Vector3Int(q, s, r));
+                }
+            }
+        }
+        return ring;
+    }
+
     public static List<Vector3Int> getArea(int maxring)
     {
         List<Vector3Int> area = new List<Vector3Int>();
