@@ -144,7 +144,9 @@ public class CustomMenu
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
         inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList()
             .FindAll(btn => !(btn is ToolBox));
-        //inputManager.toolBoxes = GameObject.FindObjectsOfType<ToolBox>(true).ToList();
+        GameObject.FindObjectsOfType<ToolBox>(true).ToList()
+            .FindAll(tb => !inputManager.toolBoxes.Contains(tb))
+            .ForEach(tb => Debug.LogError("Tool " + tb + " is not listed in InputManager!", tb));
         inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup.", inputManager);
