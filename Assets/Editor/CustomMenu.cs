@@ -326,6 +326,15 @@ public class CustomMenu
         Debug.LogWarning("Updated build version number from " + oldVersion + " to " + newVersion);
     }
 
+    [MenuItem("SG7/Session/Finish Session")]
+    public static void finishSession()
+    {
+        Debug.Log("=== Finishing session ===");
+        runAllPrebuildTasks();
+        EditorSceneManager.SaveOpenScenes();
+        buildWindows();
+    }
+
     [MenuItem("SG7/Upgrade/Force save all assets")]
     public static void forceSaveAllAssets()
     {
