@@ -5,9 +5,6 @@ using UnityEngine;
 
 public abstract class SelectTool : Tool
 {
-    private List<Vector2> selectList = new List<Vector2>();
-    public List<Vector2> SelectList => selectList.ToList();
-
     private Vector2 startPos;
     private Vector2 endPos;
 
@@ -15,24 +12,19 @@ public abstract class SelectTool : Tool
     {
         startPos = pos;
         endPos = pos;
-        updateSelectList();
+        Managers.Input.SelectList = getSelectList(startPos, endPos);
     }
 
     public override void inputMove(Vector2 pos)
     {
         endPos = pos;
-        updateSelectList();
+        Managers.Input.SelectList = getSelectList(startPos, endPos);
     }
 
     public override void inputUp(Vector2 pos)
     {
-        Managers.Input.ToolAction.takeAction(selectList);
-        selectList.Clear();
-    }
-
-    private void updateSelectList()
-    {
-        selectList = getSelectList(startPos, endPos);
+        Managers.Input.ToolAction.takeAction(Managers.Input.SelectList);
+        Managers.Input.SelectList = new List<Vector2>();
     }
 
     protected abstract List<Vector2> getSelectList(Vector2 start, Vector2 end);

@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         Managers.Input.onPlanetObjectTypeChanged += onInputPlanetObjectTypeChanged;
         Managers.Input.onToolActionChanged += onInputToolActionChanged;
         Managers.Input.onMouseOverMoved += Managers.PlanetEffects.updateCursor;
+        Managers.Input.onSelectListChanged += Managers.PlanetEffects.updateSelect;
         //Progression
         Managers.Progression.onProgressionChanged += onProgressChanged;
     }

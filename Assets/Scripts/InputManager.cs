@@ -66,6 +66,22 @@ public class InputManager : Manager
     public delegate void OnMouseOverMoved(Vector2 pos);
     public event OnMouseOverMoved onMouseOverMoved;
 
+    private List<Vector2> selectList;
+    public List<Vector2> SelectList
+    {
+        get => selectList;
+        set
+        {
+            if (value != selectList)
+            {
+                selectList = value;
+                onSelectListChanged?.Invoke(selectList);
+            }
+        }
+    }
+    public delegate void OnSelectListChanged(List<Vector2> selectList);
+    public event OnSelectListChanged onSelectListChanged;
+
     private bool buttonActivation = false;
 
     public override void setup()
@@ -135,7 +151,6 @@ public class InputManager : Manager
                 {
                     //Click in world with Tool
                     tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    updateSelectList();
                     buttonActivation = false;
                 }
             }
@@ -152,15 +167,6 @@ public class InputManager : Manager
                     tool.inputMove(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
-            updateSelectList();
-        }
-    }
-
-    private void updateSelectList()
-    {
-        if (tool is SelectTool st)
-        {
-            Managers.PlanetEffects.updateSelect(st.SelectList);
         }
     }
 }
