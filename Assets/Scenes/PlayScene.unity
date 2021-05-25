@@ -1681,6 +1681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
   cursorObject: {fileID: 1466314831}
+  selectObjects: []
 --- !u!114 &752787615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1708,7 +1709,8 @@ MonoBehaviour:
   diffusionRate: 1
   minAmount: 12.5
   emitterPressure: 200
-  giveThresholdFactor: 0.5
+  giveThresholdFactorUp: 0.5
+  giveThresholdFactorDown: 1
   gasPodContentType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
   emitterPodType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
 --- !u!114 &752787617
@@ -1726,7 +1728,8 @@ MonoBehaviour:
   diffusionRate: 0.5
   minAmount: 12.5
   emitterPressure: 200
-  giveThresholdFactor: 0.5
+  giveThresholdFactorUp: 0.5
+  giveThresholdFactorDown: 1
   gasPodContentType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
   emitterPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
 --- !u!114 &752787618
