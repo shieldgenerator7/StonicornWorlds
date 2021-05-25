@@ -11,6 +11,8 @@ public struct Neighborhood<T>
     public T ground;
     public T groundRight;
     public T[] neighbors;
+    public T[] upsides;
+    public T[] downsides;
 
     public Neighborhood(HexagonNeighborhood hexnh, HexagonGrid<T> grid)
     {
@@ -28,6 +30,16 @@ public struct Neighborhood<T>
             ceiling,
             ceilingLeft,
             ceilingRight,
+        };
+        upsides = new T[]
+        {
+            ceilingLeft,
+            ceilingRight,
+        };
+        downsides = new T[]
+        {
+            groundLeft,
+            groundRight,
         };
     }
 

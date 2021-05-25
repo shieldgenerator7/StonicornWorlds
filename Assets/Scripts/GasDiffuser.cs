@@ -9,7 +9,9 @@ public class GasDiffuser : MonoBehaviour
     public float minAmount = 10;//min pressure amount to start diffusing
     public float emitterPressure = 200;
     [Range(0, 1)]
-    public float giveThresholdFactor = 0.5f;
+    public float giveThresholdFactorUp = 0.5f;
+    [Range(0, 1)]
+    public float giveThresholdFactorDown = 1.0f;
 
     public PodContentType gasPodContentType;
     public PodType emitterPodType;
@@ -60,14 +62,45 @@ public class GasDiffuser : MonoBehaviour
                     v
                     )
             );
-        List<Pod> spaces = Managers.Planet.Planet.getNeighborhood(pos).neighbors.ToList()
-            .FindAll(pod =>
-                pod && pod.podType == Managers.Constants.spacePodType
-                && currentPressure(pod) < curAmount * giveThresholdFactor
-                );
+        Neighborhood<Pod> neighborhood = Managers.Planet.Planet.getNeighborhood(pos);
+        List<Pod> spaces = new List<Pod>();
+        float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
+        float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
+        if (canDiffuse(
+                neighborhood.ceiling,
+                curAmount,
+                giveThresholdFactorUp
+                ))
+        {
+            spaces.Add(neighborhood.ceiling);
+        }
+        spaces.AddRange(neighborhood.upsides.ToList()
+            .FindAll(pod => canDiffuse(
+                pod,
+                curAmount,
+                ((giveThresholdFactorUp - giveThresholdFactorDown) * 2 / 3) + giveThresholdFactorDown
+                )));
+        if (canDiffuse(
+                neighborhood.ground,
+                curAmount,
+                giveThresholdFactorDown
+                ))
+        {
+            spaces.Add(neighborhood.ground);
+        }
+        spaces.AddRange(neighborhood.downsides.ToList()
+            .FindAll(pod => canDiffuse(
+                pod,
+                curAmount,
+                ((giveThresholdFactorUp - giveThresholdFactorDown) * 1 / 3) + giveThresholdFactorDown
+                )));
         spaces.ForEach(pod => fillWithGas(pod));
         return spaces.Count * diffusionRate * Time.deltaTime;
     }
+
+    bool canDiffuse(Pod pod, float curAmount, float threshold)
+        => pod && pod.podType == Managers.Constants.spacePodType
+        && currentPressure(pod) < curAmount * threshold;
 
     PodContent getGas(Pod pod)
         => pod.getContent(gasPodContentType);
