@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class InputManager : Manager
 {
-    [SerializeField]
-    private Tool tool;
+    public Tool tool;
 
     public List<Tool> tools;
     public List<ToolBox> toolBoxes;
