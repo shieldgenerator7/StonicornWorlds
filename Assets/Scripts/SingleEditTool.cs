@@ -3,20 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SingleEditTool : Tool
+public class SingleEditTool : SelectTool
 {
-    public override void inputDown(Vector2 pos)
-    {
-        Managers.Input.ToolAction.takeAction(new List<Vector2>() {
-            Managers.Planet.Planet.getHexPos(pos)
-        });
-    }
-
-    public override void inputMove(Vector2 pos)
-    {
-    }
-
-    public override void inputUp(Vector2 pos)
-    {
-    }
+    protected override List<Vector2> getSelectList(Vector2 start, Vector2 end)
+        => new List<Vector2>() { Managers.Planet.Planet.getHexPos(end) };
 }
