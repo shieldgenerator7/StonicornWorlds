@@ -3306,8 +3306,8 @@ MonoBehaviour:
     resourceRequirement: 0
     requireSaveFile: 0
     button: {fileID: 807291198}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 1
+  - podType: {fileID: 0}
+    count: 7
     resourceRequirement: 600
     requireSaveFile: 0
     button: {fileID: 5002807837290620646}
@@ -3351,8 +3351,8 @@ MonoBehaviour:
     resourceRequirement: 0
     requireSaveFile: 0
     button: {fileID: 1555254106}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 25
+  - podType: {fileID: 0}
+    count: 57
     resourceRequirement: 0
     requireSaveFile: 0
     button: {fileID: 1186659370}
