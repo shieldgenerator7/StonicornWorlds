@@ -91,7 +91,10 @@ public class QueueManager : Manager
 
     void taskCompleted(QueueTask task)
     {
+        int index = queue.IndexOf(task);
         queue.Remove(task);
+        workers.FindAll(w => w.queueTaskIndex >= index)
+            .ForEach(w => w.queueTaskIndex = -1);
         callOnQueueChanged();
         onTaskCompleted?.Invoke(task);
     }
