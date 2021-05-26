@@ -7,8 +7,7 @@ public class QueueManager : Manager
 {
     public float defaultWorkRate = 20;
 
-    List<QueueTask> queue = new List<QueueTask>();
-    public List<QueueTask> Tasks => queue.ToList();
+    public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
     List<QueueWorker> workers = new List<QueueWorker>();
 
@@ -103,15 +102,8 @@ public class QueueManager : Manager
     public delegate void TaskEvent(QueueTask task);
     public event TaskEvent onTaskCompleted;
 
-    public void loadTasks(List<QueueTask> tasks)
-    {
-        queue = tasks;
-        tasks.ForEach(t => t.inflate());
-        callOnQueueChanged();
-    }
-
     public override void setup()
     {
-        throw new System.NotImplementedException();
+        callOnQueueChanged();
     }
 }

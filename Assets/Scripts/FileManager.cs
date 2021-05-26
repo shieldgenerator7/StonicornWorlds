@@ -23,7 +23,6 @@ public class FileManager : Manager
 
     public void SaveFile()
     {
-        Managers.Planet.Planet.tasks = Managers.Queue.Tasks;
         ES3.Save<string>("player", JsonUtility.ToJson(Managers.Player.Player), fileName);
     }
 
@@ -40,8 +39,6 @@ public class FileManager : Manager
                     );
                 player.inflate();
                 Managers.Player.Player = player;
-                //Tasks
-                Managers.Queue.loadTasks(Managers.Planet.Planet.tasks);
             }
             //0.019 File Format
             else
@@ -50,11 +47,9 @@ public class FileManager : Manager
                 Planet planet = JsonUtility.FromJson<Planet>(
                     ES3.Load<string>("planet", fileName)
                     );
-                planet.init();
+                planet.inflate();
                 Managers.Player.Player.planets.Add(planet);
                 Managers.Planet.Planet = planet;
-                //Tasks
-                Managers.Queue.loadTasks(Managers.Planet.Planet.tasks);
             }
         }
     }

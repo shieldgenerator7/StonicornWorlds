@@ -138,10 +138,10 @@ public class PlanetManager : Manager
     }
 
     #region Predict State
-    public void calculateFutureState(List<QueueTask> queue)
+    public void calculateFutureState()
     {
         Planet fp = planet.deepCopy();
-        queue.ForEach(task =>
+        planet.tasks.ForEach(task =>
             {
                 switch (task.type)
                 {

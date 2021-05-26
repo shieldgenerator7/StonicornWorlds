@@ -29,6 +29,6 @@ public class Player
 
     public void inflate()
     {
-        planets.ForEach(planet => planet.init());
+        planets.ForEach(planet => planet.inflate());
     }
 }

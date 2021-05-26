@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
-        Managers.Queue.onQueueChanged += Managers.Planet.calculateFutureState;
+        Managers.Queue.onQueueChanged += (q) => Managers.Planet.calculateFutureState();
         Managers.Queue.onQueueChanged += Managers.QueueEffects.updateDisplay;
         //Edge
         Managers.Edge.onValidPositionListChanged += onValidPositionListChanged;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     void onPlanetStateChanged(Planet p)
     {
-        Managers.Planet.calculateFutureState(Managers.Queue.Tasks);
+        Managers.Planet.calculateFutureState();
         Managers.Queue.updateQueueWorkerList(p);
         Managers.Resources.updateResourceCaps(p);
         Managers.Progression.checkAllProgression();
@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         Managers.Player.setup();
         Managers.Planet.setup();
         Managers.File.setup();
+        Managers.Queue.setup();
         Managers.Resources.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();

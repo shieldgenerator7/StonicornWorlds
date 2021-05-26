@@ -16,14 +16,14 @@ public class Planet
 
     [SerializeField]
     private List<Pod> pods = new List<Pod>();
-    public List<QueueTask> tasks;
+    public List<QueueTask> tasks = new List<QueueTask>();
     [NonSerialized]
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
     [NonSerialized]
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
-    public void init()
+    public void inflate()
     {
         this.pods.ForEach(p =>
         {
@@ -32,6 +32,7 @@ public class Planet
             grid.add(p.gridPos, p);
             podLists.Add(p);
         });
+        this.tasks.ForEach(t => t.inflate());
     }
 
     #region Write State
@@ -199,7 +200,7 @@ public class Planet
     {
         string json = JsonUtility.ToJson(this);
         Planet planet = JsonUtility.FromJson<Planet>(json);
-        planet.init();
+        planet.inflate();
         return planet;
     }
 }
