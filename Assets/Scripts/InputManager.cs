@@ -171,5 +171,10 @@ public class InputManager : Manager
                 }
             }
         }
+        //Input Idle
+        else
+        {
+            tool.inputIdle(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
     }
 }

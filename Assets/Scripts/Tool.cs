@@ -9,4 +9,6 @@ public abstract class Tool : MonoBehaviour
     public abstract void inputMove(Vector2 pos);
 
     public abstract void inputUp(Vector2 pos);
+
+    public abstract void inputIdle(Vector2 pos);
 }
