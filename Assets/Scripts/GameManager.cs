@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviour
     {
         Managers.Input.updateToolBoxes();
         Managers.Input.checkAllButtons();
+        Managers.Player.Player.buttonNames = Managers.Input.buttons
+            .FindAll(btn => btn.gameObject.activeSelf)
+            .ConvertAll(btn => btn.gameObject.name);
     }
     #endregion
 

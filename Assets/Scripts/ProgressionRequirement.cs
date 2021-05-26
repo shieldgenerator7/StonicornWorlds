@@ -13,6 +13,11 @@ public class ProgressionRequirement
 
     public bool checkProgression()
     {
+        if (Managers.Player.Player.buttonNames.Contains(button.gameObject.name))
+        {
+            button.gameObject.SetActive(true);
+            return true;
+        }
         bool podTypeCheck = (podType != null)
             ? Managers.Planet.Planet.Pods(podType).Count >= count
             : Managers.Planet.Planet.PodsNotEmpty.Count >= count;
