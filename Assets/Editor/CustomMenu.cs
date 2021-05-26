@@ -100,8 +100,8 @@ public class CustomMenu
         {
             GameObject.FindObjectOfType<ResourceGenerator>().generateRate /= 2;
             Managers.Queue.defaultWorkRate /= 2;
-            GameObject.FindObjectsOfType<QueueWorker>().ToList()
-                .ForEach(qw => qw.workSpeed /= 2);
+            Managers.Queue.workers
+                .ForEach(qw => qw.workRate /= 2);
         }
         else
         {
@@ -116,8 +116,8 @@ public class CustomMenu
         {
             GameObject.FindObjectOfType<ResourceGenerator>().generateRate *= 2;
             Managers.Queue.defaultWorkRate *= 2;
-            GameObject.FindObjectsOfType<QueueWorker>().ToList()
-                .ForEach(qw => qw.workSpeed *= 2);
+            Managers.Queue.workers
+                .ForEach(qw => qw.workRate *= 2);
         }
         else
         {
