@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour
     #region Delegates
     private void registerDelegates()
     {
+        Application.quitting += onQuitting;
         //Player
-        Managers.Player.onPlayerChanged += (p) => Managers.Planet.Planet = p.LastViewedPlanet;
+        Managers.Player.onPlayerChanged += onPlayerChanged;
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
         Managers.Planet.onFuturePlanetStateChanged += Managers.Edge.calculateValidPosList;
@@ -52,6 +53,14 @@ public class GameManager : MonoBehaviour
         Managers.Input.onSelectListChanged += Managers.PlanetEffects.updateSelect;
         //Progression
         Managers.Progression.onProgressionChanged += onProgressChanged;
+    }
+
+    void onPlayerChanged(Player p)
+    {
+        Managers.Planet.Planet = p.LastViewedPlanet;
+        Managers.Input.buttons
+            .FindAll(btn => p.lastActiveButtonNames.Contains(btn.gameObject.name))
+            .ForEach(btn => btn.activate());
     }
 
     void onPlanetStateChanged(Planet p)
@@ -110,6 +119,17 @@ public class GameManager : MonoBehaviour
         Managers.Resources.setup();
         Managers.Edge.calculateValidPosList(Managers.Planet.FuturePlanet);
         Managers.Progression.setup();
+    }
+    #endregion
+
+    #region Destroy
+    void onQuitting()
+    {
+        Managers.Player.prepareForSave();
+        if (Managers.File.saveOnExit)
+        {
+            Managers.File.SaveFile();
+        }
     }
     #endregion
 }

@@ -27,4 +27,13 @@ public class PlayerManager : Manager
             Player = player;
         }
     }
+
+    public void prepareForSave()
+    {
+        player.buttonNames = Managers.Input.buttons
+             .FindAll(btn => btn.gameObject.activeSelf)
+             .ConvertAll(btn => btn.gameObject.name);
+        player.lastActiveButtonNames = Managers.Input.ActiveButtons
+            .ConvertAll(btn => btn.gameObject.name);
+    }
 }

@@ -49,6 +49,8 @@ public abstract class ToolButton : MonoBehaviour
         activeImage.enabled = activeButton;
     }
 
+    public bool Active => activeButton;
+
     public abstract void activate();
 
     protected abstract bool isActive();

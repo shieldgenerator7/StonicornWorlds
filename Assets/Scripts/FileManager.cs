@@ -13,16 +13,10 @@ public class FileManager : Manager
     {
         LoadFile();
     }
-    private void OnDestroy()
-    {
-        if (saveOnExit)
-        {
-            SaveFile();
-        }
-    }
 
     public void SaveFile()
     {
+        Managers.Player.prepareForSave();
         ES3.Save<string>("player", JsonUtility.ToJson(Managers.Player.Player), fileName);
     }
 

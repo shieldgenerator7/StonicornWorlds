@@ -113,6 +113,9 @@ public class InputManager : Manager
         buttons.ForEach(btn => btn.checkActive());
     }
 
+    public List<ToolButton> ActiveButtons
+        => buttons.FindAll(btn => btn.Active);
+
     // Update is called once per frame
     void Update()
     {
