@@ -109,8 +109,15 @@ public class PlanetManagerEffects : MonoBehaviour
     }
     private void removeDisplayObject(PlanetObject po)
     {
-        Destroy(displayObjects[po]);
-        displayObjects.Remove(po);
+        try
+        {
+            Destroy(displayObjects[po]);
+            displayObjects.Remove(po);
+        }
+        catch (KeyNotFoundException)
+        {
+            Debug.LogError("Key not found: " + po);
+        }
     }
     public void updateEditDisplay(List<Vector2> posList)
     {

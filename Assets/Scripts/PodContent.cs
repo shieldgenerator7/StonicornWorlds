@@ -35,4 +35,9 @@ public class PodContent : PlanetObject
     }
     public delegate void OnVarChanged(float val);
     public event OnVarChanged onVarChanged;
+
+    public override string ToString()
+    {
+        return "" + typeName + " PodContent";
+    }
 }

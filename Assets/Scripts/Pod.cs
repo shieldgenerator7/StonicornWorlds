@@ -80,6 +80,6 @@ public class Pod : PlanetObject
 
     public override string ToString()
     {
-        return "" + podType.name + " Pod";
+        return "" + typeName + " Pod";
     }
 }
