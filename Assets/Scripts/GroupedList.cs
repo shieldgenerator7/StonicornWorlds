@@ -17,6 +17,11 @@ public class GroupedList<T, K>
     {
         getList(val).Add(val);
     }
+
+    public void AddAll(List<K> vals)
+    {
+        vals.ForEach(val => Add(val));
+    }
     public void Remove(K val)
     {
         getList(val).Remove(val);
