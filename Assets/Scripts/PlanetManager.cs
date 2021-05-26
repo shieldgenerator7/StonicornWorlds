@@ -48,20 +48,12 @@ public class PlanetManager : Manager
 
     public override void setup()
     {
-        if (planet == null || planet.PodsAll.Count == 0)
+        if (planet.PodsAll.Count == 0)
         {
-            Planet p = new Planet();
-            p.position = Vector2.zero;
-            this.Planet = p;
+            planet.position = Vector2.zero;
             FuturePlanet = planet;
             Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
-            calculateFutureState(new List<QueueTask>());
-        }
-        else
-        {
-            planetChanged(planet);
-            calculateFutureState(new List<QueueTask>());
         }
     }
 

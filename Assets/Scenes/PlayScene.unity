@@ -3454,6 +3454,7 @@ GameObject:
   - component: {fileID: 1625964771}
   - component: {fileID: 1625964770}
   - component: {fileID: 1625964775}
+  - component: {fileID: 1625964776}
   - component: {fileID: 1625964772}
   - component: {fileID: 1625964773}
   - component: {fileID: 1625964774}
@@ -3642,6 +3643,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasScaler: {fileID: 95723308}
+--- !u!114 &1625964776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625964769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5206bf6bd2e95f4290d13ce46091329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1641698979
 GameObject:
   m_ObjectHideFlags: 0
