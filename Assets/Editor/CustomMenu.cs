@@ -130,6 +130,7 @@ public class CustomMenu
     [MenuItem("SG7/Build/Prebuild/Run All Prebuild Tasks &w")]
     public static void runAllPrebuildTasks()
     {
+        ClearLogConsole();
         Debug.Log("=== Prebuild tasks starting ===");
         //
         setupInputManager();
@@ -147,6 +148,9 @@ public class CustomMenu
         GameObject.FindObjectsOfType<ToolBox>(true).ToList()
             .FindAll(tb => !inputManager.toolBoxes.Contains(tb))
             .ForEach(tb => Debug.LogError("Tool " + tb + " is not listed in InputManager!", tb));
+        inputManager.buttons
+            .FindAll(btn => !inputManager.toolBoxes.Any(tb => tb.buttons.Contains(btn)))
+            .ForEach(btn => Debug.LogError("Button " + btn + " is not listed in any registered ToolBox!", btn));
         inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup.", inputManager);
@@ -194,6 +198,15 @@ public class CustomMenu
                 Debug.LogWarning("Set button inactive: " + btn, btn);
             });
         Debug.Log("ProgressionManager checked.", progressionManager);
+    }
+
+    //2021-05-25: copied from http://answers.unity.com/answers/1318322/view.html
+    public static void ClearLogConsole()
+    {
+        Assembly assembly = Assembly.GetAssembly(typeof(SceneView));
+        Type logEntries = assembly.GetType("UnityEditor.LogEntries");
+        MethodInfo clearConsoleMethod = logEntries.GetMethod("Clear");
+        clearConsoleMethod.Invoke(new object(), null);
     }
     #endregion
 
