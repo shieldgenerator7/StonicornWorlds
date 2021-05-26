@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     #region Delegates
     private void registerDelegates()
     {
+        //Player
+        Managers.Player.onPlayerChanged += (p) => Managers.Planet.Planet = p.LastViewedPlanet;
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
         Managers.Planet.onFuturePlanetStateChanged += Managers.Edge.calculateValidPosList;
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
         Managers.Constants.setup();
         Managers.Camera.setup();
         Managers.Input.setup();
+        Managers.Player.setup();
         Managers.Planet.setup();
         Managers.File.setup();
         Managers.Resources.setup();

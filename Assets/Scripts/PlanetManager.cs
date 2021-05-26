@@ -48,7 +48,7 @@ public class PlanetManager : Manager
 
     public override void setup()
     {
-        if (planet == null)
+        if (planet == null || planet.PodsAll.Count == 0)
         {
             Planet p = new Planet();
             p.position = Vector2.zero;

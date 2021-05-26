@@ -5,6 +5,7 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     public static FileManager File { get; private set; }
+    public static PlayerManager Player { get; private set; }
     public static PlanetManager Planet { get; private set; }
     public static CameraController Camera { get; private set; }
     public static ResourceManager Resources { get; private set; }
@@ -20,6 +21,7 @@ public class Managers : MonoBehaviour
     public static void init()
     {
         File = FindObjectOfType<FileManager>();
+        Player = FindObjectOfType<PlayerManager>();
         Planet = FindObjectOfType<PlanetManager>();
         Camera = FindObjectOfType<CameraController>();
         Resources = FindObjectOfType<ResourceManager>();
