@@ -18,7 +18,7 @@ public class QueueManager : Manager
             Debug.LogError("Task already in queue");
             return;
         }
-        workers.ForEach(w => w.queueTaskIndex = -1);
+        workers.ForEach(w => w.locationOfInterest = Vector2.zero);
         queue.Add(task);
         callOnQueueChanged();
     }
@@ -39,8 +39,9 @@ public class QueueManager : Manager
                 //Try to find task not being worked on
                 QueueTask task = queue.FirstOrDefault(
                     task => !workers.Any(
-                        w => w.queueTaskIndex >= 0 && queue[w.queueTaskIndex] == task
-                        )) ?? queue[0];
+                        w => w.locationOfInterest == task.pos
+                        ))
+                    ?? queue[0];
                 //Try to start task
                 if (!task.Started
                     && Managers.Resources.Resources >= task.StartCost)
@@ -65,36 +66,36 @@ public class QueueManager : Manager
                     break;
                 }
             }
-            workers.FindAll(w => w.queueTaskIndex >= 0)
+            workers.FindAll(w => !isWorkerFree(w) && w.isAtLocationOfInterest)
                 .ForEach(
                 w =>
                 {
-                    QueueTask currentTask = queue[w.queueTaskIndex];
+                    QueueTask currentTask = queue.Find(task => task.pos == w.locationOfInterest);
                     currentTask.Progress += w.workRate * Time.deltaTime;
                     if (currentTask.Completed)
                     {
                         taskCompleted(currentTask);
-                        w.queueTaskIndex = -1;
+                        w.locationOfInterest = Vector2.zero;
                     }
                 });
         }
     }
 
-    bool AnyWorkersFree => workers.Any(w => w.queueTaskIndex == -1);
+    bool AnyWorkersFree => workers.Any(w => isWorkerFree(w));
+
+    bool isWorkerFree(Stonicorn worker) => worker.locationOfInterest == Vector2.zero;
 
     void dispatchWorker(QueueTask task)
     {
-        Stonicorn worker = workers.First(w => w.queueTaskIndex == -1);
-        worker.queueTaskIndex = queue.IndexOf(task);
-        worker.position = Managers.Planet.Planet.getCeilingPos(task.pos);
+        Stonicorn worker = workers.First(w => isWorkerFree(w));
+        worker.locationOfInterest = task.pos;
     }
 
     void taskCompleted(QueueTask task)
     {
-        int index = queue.IndexOf(task);
         queue.Remove(task);
-        workers.FindAll(w => w.queueTaskIndex >= index)
-            .ForEach(w => w.queueTaskIndex = -1);
+        workers.FindAll(w => w.locationOfInterest == task.pos)
+            .ForEach(w => w.locationOfInterest = Vector2.zero);
         callOnQueueChanged();
         onTaskCompleted?.Invoke(task);
     }

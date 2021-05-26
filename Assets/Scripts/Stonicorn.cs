@@ -8,6 +8,10 @@ public class Stonicorn
     public Color bodyColor = Color.white;
     public Color hairColor = Color.white;
     public Vector2 position;
-    public int queueTaskIndex = -1;
+    public Vector2 locationOfInterest;
     public float workRate = 20;
+    public float moveSpeed = 2;
+
+    public bool isAtLocationOfInterest
+        => Vector2.Distance(position, locationOfInterest) <= 1.0f;
 }
