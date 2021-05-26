@@ -9,7 +9,7 @@ public class QueueManager : Manager
 
     public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
-    List<Stonicorn> workers => Managers.Planet.Planet.residents;
+    public List<Stonicorn> workers => Managers.Planet.Planet.residents;
 
     public void addToQueue(QueueTask task)
     {

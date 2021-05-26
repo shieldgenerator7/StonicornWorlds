@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class Planet
@@ -68,6 +69,8 @@ public class Planet
         if (pod.podType == Managers.Constants.corePodType)
         {
             Stonicorn stonicorn = new Stonicorn();
+            stonicorn.bodyColor = Managers.Constants.bodyColors[Random.Range(0, Managers.Constants.bodyColors.Count)];
+            stonicorn.hairColor = Managers.Constants.hairColors[Random.Range(0, Managers.Constants.hairColors.Count)];
             stonicorn.position = pod.worldPos;
             residents.Add(stonicorn);
         }
