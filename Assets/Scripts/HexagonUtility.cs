@@ -43,6 +43,9 @@ public static class HexagonUtility
         return groundPos;
     }
 
+    public static Vector3Int getCeilingPos(Vector3Int pos)
+        => reflect(getGroundPos(pos), pos);
+
     public static HexagonNeighborhood getNeighborhood(Vector3Int pos)
     {
         HexagonNeighborhood neighborhood = new HexagonNeighborhood();

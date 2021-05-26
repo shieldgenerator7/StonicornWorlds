@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
     void onPlanetStateChanged(Planet p)
     {
         Managers.Planet.calculateFutureState();
-        Managers.Queue.updateQueueWorkerList(p);
         Managers.Resources.updateResourceCaps(p);
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);

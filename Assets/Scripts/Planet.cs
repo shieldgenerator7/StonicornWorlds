@@ -23,6 +23,9 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
+
+    public List<Stonicorn> residents = new List<Stonicorn>();
+
     public void inflate()
     {
         this.pods.ForEach(p =>
@@ -33,6 +36,13 @@ public class Planet
             podLists.Add(p);
         });
         this.tasks.ForEach(t => t.inflate());
+        //0.020 save backwards compatibility
+        if (residents == null)
+        {
+            residents = new List<Stonicorn>();
+            Managers.Planet.Planet.Pods(Managers.Constants.corePodType)
+                .ForEach(pod => residents.Add(new Stonicorn()));
+        }
     }
 
     #region Write State
@@ -54,6 +64,14 @@ public class Planet
         }
         pod.onPodContentChanged += podContentAdded;
         fillSpaceAround(pod.worldPos);
+        //Stonicorn
+        if (pod.podType == Managers.Constants.corePodType)
+        {
+            Stonicorn stonicorn = new Stonicorn();
+            stonicorn.position = pod.worldPos;
+            residents.Add(stonicorn);
+        }
+        //Call Delegate
         onStateChanged?.Invoke(this);
     }
 
@@ -128,6 +146,9 @@ public class Planet
 
     public Vector2 getGroundPos(Vector2 pos)
         => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
+
+    public Vector2 getCeilingPos(Vector2 pos)
+        => gridToWorld(HexagonUtility.getCeilingPos(worldToGrid(pos)));
 
     public Vector2 getUpDirection(Vector2 pos)
     {

@@ -9,7 +9,7 @@ public class QueueManager : Manager
 
     public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
-    List<QueueWorker> workers = new List<QueueWorker>();
+    List<Stonicorn> workers => Managers.Planet.Planet.residents;
 
     public void addToQueue(QueueTask task)
     {
@@ -18,7 +18,7 @@ public class QueueManager : Manager
             Debug.LogError("Task already in queue");
             return;
         }
-        workers.ForEach(w => w.callBack());
+        workers.ForEach(w => w.queueTaskIndex = -1);
         queue.Add(task);
         callOnQueueChanged();
     }
@@ -38,8 +38,9 @@ public class QueueManager : Manager
             {
                 //Try to find task not being worked on
                 QueueTask task = queue.FirstOrDefault(
-                    task => !workers.Any(w => w.currentTask == task)
-                    ) ?? queue[0];
+                    task => !workers.Any(
+                        w => w.queueTaskIndex >= 0 && queue[w.queueTaskIndex] == task
+                        )) ?? queue[0];
                 //Try to start task
                 if (!task.Started
                     && Managers.Resources.Resources >= task.StartCost)
@@ -64,33 +65,28 @@ public class QueueManager : Manager
                     break;
                 }
             }
+            workers.FindAll(w => w.queueTaskIndex >= 0)
+                .ForEach(
+                w =>
+                {
+                    QueueTask currentTask = queue[w.queueTaskIndex];
+                    currentTask.Progress += w.workRate * Time.deltaTime;
+                    if (currentTask.Completed)
+                    {
+                        taskCompleted(currentTask);
+                        w.queueTaskIndex = -1;
+                    }
+                });
         }
     }
 
-    public void updateQueueWorkerList(Planet p)
-    {
-        int queueCount = p.Pods(Managers.Constants.corePodType).Count;
-        while (queueCount > workers.Count)
-        {
-            QueueWorker worker = gameObject.AddComponent<QueueWorker>();
-            worker.onTaskCompleted += taskCompleted;
-            worker.workSpeed = defaultWorkRate;
-            workers.Add(worker);
-        }
-        while (queueCount < workers.Count)
-        {
-            QueueWorker worker = workers[0];
-            worker.retire();
-            workers.Remove(worker);
-        }
-    }
-
-    bool AnyWorkersFree => workers.Any(w => !w.Busy);
+    bool AnyWorkersFree => workers.Any(w => w.queueTaskIndex == -1);
 
     void dispatchWorker(QueueTask task)
     {
-        QueueWorker worker = workers.First(w => !w.Busy);
-        worker.dispatch(task);
+        Stonicorn worker = workers.First(w => w.queueTaskIndex == -1);
+        worker.queueTaskIndex = queue.IndexOf(task);
+        worker.position = Managers.Planet.Planet.getCeilingPos(task.pos);
     }
 
     void taskCompleted(QueueTask task)

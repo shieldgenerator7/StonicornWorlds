@@ -7,12 +7,14 @@ using UnityEngine;
 public class PlanetManagerEffects : MonoBehaviour
 {
     public GameObject editPodPrefab;
+    public GameObject stonicornPrefab;
     public GameObject cursorObject;
-    public List<GameObject> selectObjects = new List<GameObject>();
 
     List<GameObject> editPods = new List<GameObject>();
+    List<GameObject> selectObjects = new List<GameObject>();
 
     Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
+    Dictionary<Stonicorn, GameObject> stonicorns = new Dictionary<Stonicorn, GameObject>();
 
     public void updateCursor(Vector2 pos)
     {
@@ -104,6 +106,29 @@ public class PlanetManagerEffects : MonoBehaviour
                 {
                     removeDisplayObject(pc);
                 }
+            }
+        }
+        //Check for added stonicorns
+        planet.residents.FindAll(stncrn => !stonicorns.ContainsKey(stncrn))
+            .ForEach(stncrn =>
+            {
+                GameObject go = Instantiate(
+                    stonicornPrefab,
+                    Vector2.zero,
+                    Quaternion.identity,
+                    transform
+                    );
+                go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                go.GetComponent<StonicornController>().stonicorn = stncrn;
+                stonicorns.Add(stncrn, go);
+            });
+        //Check for removed stonicorns
+        foreach (Stonicorn stncrn in stonicorns.Keys.ToList())
+        {
+            if (!planet.residents.Contains(stncrn))
+            {
+                Destroy(stonicorns[stncrn]);
+                stonicorns.Remove(stncrn);
             }
         }
     }

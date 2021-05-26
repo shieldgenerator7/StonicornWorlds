@@ -1724,8 +1724,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editPodPrefab: {fileID: 8438424779451882234, guid: 1bf26da3a98aa6241bc1b409aff000c5, type: 3}
+  stonicornPrefab: {fileID: 5606281556777864197, guid: 2abab47615b591741acff43d615468f0, type: 3}
   cursorObject: {fileID: 1466314831}
-  selectObjects: []
 --- !u!114 &752787615
 MonoBehaviour:
   m_ObjectHideFlags: 0
