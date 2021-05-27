@@ -29,7 +29,7 @@ public class QueueManager : Manager
     public bool isTaskAvailable(QueueTask task)
     {
         //Resources
-        if (Managers.Resources.Resources < task.StartCost)
+        if (task.Started || Managers.Resources.Resources < task.StartCost)
         {
             return false;
         }
@@ -70,10 +70,10 @@ public class QueueManager : Manager
     /// <returns>true if completed, false if not completed or not started</returns>
     public bool workOnTask(QueueTask task, float workRate)
     {
-        //if (task == null)
-        //{
-        //    return false;
-        //}
+        if (task == null)
+        {
+            return false;
+        }
         if (!task.Started)
         {
             if (Managers.Resources.Resources >= task.StartCost)
