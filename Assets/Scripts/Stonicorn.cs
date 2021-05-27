@@ -7,10 +7,16 @@ public class Stonicorn
 {
     public Color bodyColor = Color.white;
     public Color hairColor = Color.white;
+    public Vector2 homePosition;
     public Vector2 position;
     public Vector2 locationOfInterest;
     public float workRate = 20;
     public float moveSpeed = 2;
+
+    public bool atHomeOrGoing
+        => locationOfInterest == homePosition;
+
+    public void goHome() => locationOfInterest = homePosition;
 
     public bool isAtLocationOfInterest
         => Vector2.Distance(position, locationOfInterest) <= 1.0f;

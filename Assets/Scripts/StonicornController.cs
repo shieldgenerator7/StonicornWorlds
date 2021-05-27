@@ -29,8 +29,9 @@ public class StonicornController : MonoBehaviour
         }
         transform.position = stonicorn.position;
         transform.up = Managers.Planet.Planet.getUpDirection(stonicorn.position);
-        ui_work.gameObject.SetActive(stonicorn.isAtLocationOfInterest);
-        if (stonicorn.isAtLocationOfInterest)
+        bool atWorkSite = !stonicorn.atHomeOrGoing && stonicorn.isAtLocationOfInterest;
+        ui_work.gameObject.SetActive(atWorkSite);
+        if (atWorkSite)
         {
             ui_work.transform.up = (stonicorn.locationOfInterest - stonicorn.position);
             Vector3 scale = ui_work.transform.localScale;
@@ -41,7 +42,11 @@ public class StonicornController : MonoBehaviour
 
     void moveToLocationOfInterest()
     {
-        Vector2 aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
+        Vector2 aboveLoI = stonicorn.locationOfInterest;
+        if (!stonicorn.atHomeOrGoing)
+        {
+            aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
+        }
         if (Vector2.Distance(stonicorn.position, aboveLoI) > 1.0f)
         {
             stonicorn.position +=

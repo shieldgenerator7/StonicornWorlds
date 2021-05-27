@@ -18,7 +18,7 @@ public class QueueManager : Manager
             Debug.LogError("Task already in queue");
             return;
         }
-        workers.ForEach(w => w.locationOfInterest = Vector2.zero);
+        workers.ForEach(w => w.goHome());
         queue.Add(task);
         callOnQueueChanged();
     }
@@ -70,12 +70,19 @@ public class QueueManager : Manager
                 .ForEach(
                 w =>
                 {
-                    QueueTask currentTask = queue.Find(task => task.pos == w.locationOfInterest);
-                    currentTask.Progress += w.workRate * Time.deltaTime;
-                    if (currentTask.Completed)
+                    QueueTask currentTask = queue.FirstOrDefault(task => task.pos == w.locationOfInterest);
+                    if (currentTask)
                     {
-                        taskCompleted(currentTask);
-                        w.locationOfInterest = Vector2.zero;
+                        currentTask.Progress += w.workRate * Time.deltaTime;
+                        if (currentTask.Completed)
+                        {
+                            taskCompleted(currentTask);
+                            w.goHome();
+                        }
+                    }
+                    else
+                    {
+                        w.goHome();
                     }
                 });
         }
@@ -83,7 +90,7 @@ public class QueueManager : Manager
 
     bool AnyWorkersFree => workers.Any(w => isWorkerFree(w));
 
-    bool isWorkerFree(Stonicorn worker) => worker.locationOfInterest == Vector2.zero;
+    bool isWorkerFree(Stonicorn worker) => worker.atHomeOrGoing;
 
     void dispatchWorker(QueueTask task)
     {
@@ -95,7 +102,7 @@ public class QueueManager : Manager
     {
         queue.Remove(task);
         workers.FindAll(w => w.locationOfInterest == task.pos)
-            .ForEach(w => w.locationOfInterest = Vector2.zero);
+            .ForEach(w => w.goHome());
         callOnQueueChanged();
         onTaskCompleted?.Invoke(task);
     }

@@ -71,7 +71,8 @@ public class Planet
             Stonicorn stonicorn = new Stonicorn();
             stonicorn.bodyColor = Managers.Constants.bodyColors[Random.Range(0, Managers.Constants.bodyColors.Count)];
             stonicorn.hairColor = Managers.Constants.hairColors[Random.Range(0, Managers.Constants.hairColors.Count)];
-            stonicorn.position = pod.worldPos;
+            stonicorn.homePosition = pod.worldPos;
+            stonicorn.position = stonicorn.homePosition;
             residents.Add(stonicorn);
         }
         //Call Delegate
