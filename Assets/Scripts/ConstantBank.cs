@@ -38,10 +38,6 @@ public class ConstantBank : Manager
         buttonSpacing = originalSpacing * dim / desiredDim;
     }
 
-    [Header("Stonicorns")]
-    public List<Color> bodyColors;
-    public List<Color> hairColors;
-
     [Header("PodTypes")]
     public PodType corePodType;
     public PodType spacePodType;

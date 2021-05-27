@@ -3668,6 +3668,7 @@ GameObject:
   - component: {fileID: 1625964775}
   - component: {fileID: 1625964776}
   - component: {fileID: 1625964772}
+  - component: {fileID: 1625964777}
   - component: {fileID: 1625964773}
   - component: {fileID: 1625964774}
   m_Layer: 0
@@ -3719,16 +3720,6 @@ MonoBehaviour:
   desiredHeight: 1080
   buttonCheckRadius: 50
   buttonSpacing: 100
-  bodyColors:
-  - {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
-  - {r: 0, g: 0.5803922, b: 1, a: 1}
-  - {r: 1, g: 0.9083599, b: 0.574, a: 1}
-  - {r: 0.72451955, g: 0.5896226, b: 1, a: 1}
-  hairColors:
-  - {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 1}
-  - {r: 0.29803923, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.47357982, b: 0.1462264, a: 1}
-  - {r: 0.30566567, g: 0.14509803, b: 1, a: 1}
   corePodType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   spacePodType: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
   allPodTypes:
@@ -3882,6 +3873,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5206bf6bd2e95f4290d13ce46091329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1625964777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625964769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0627df47adf41645b13d96dc904b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyColors:
+  - {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
+  - {r: 0, g: 0.5803922, b: 1, a: 1}
+  - {r: 1, g: 0.9083599, b: 0.574, a: 1}
+  - {r: 0.72451955, g: 0.5896226, b: 1, a: 1}
+  hairColors:
+  - {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 1}
+  - {r: 0.29803923, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.47357982, b: 0.1462264, a: 1}
+  - {r: 0.30566567, g: 0.14509803, b: 1, a: 1}
 --- !u!1 &1641698979
 GameObject:
   m_ObjectHideFlags: 0

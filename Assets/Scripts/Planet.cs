@@ -42,7 +42,9 @@ public class Planet
         {
             residents = new List<Stonicorn>();
             Managers.Planet.Planet.Pods(Managers.Constants.corePodType)
-                .ForEach(pod => residents.Add(new Stonicorn()));
+                .ForEach(pod => residents.Add(
+                    GameObject.FindObjectOfType<StonicornGenerator>().generate()
+                    ));
         }
         //Inflat residents
         residents.ForEach(t => t.inflate());
@@ -70,9 +72,7 @@ public class Planet
         //Stonicorn
         if (pod.podType == Managers.Constants.corePodType)
         {
-            Stonicorn stonicorn = new Stonicorn();
-            stonicorn.bodyColor = Managers.Constants.bodyColors[Random.Range(0, Managers.Constants.bodyColors.Count)];
-            stonicorn.hairColor = Managers.Constants.hairColors[Random.Range(0, Managers.Constants.hairColors.Count)];
+            Stonicorn stonicorn = GameObject.FindObjectOfType<StonicornGenerator>().generate();
             stonicorn.homePosition = pod.worldPos;
             stonicorn.position = stonicorn.homePosition;
             residents.Add(stonicorn);
