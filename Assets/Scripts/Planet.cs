@@ -75,6 +75,7 @@ public class Planet
             Stonicorn stonicorn = GameObject.FindObjectOfType<StonicornGenerator>().generate();
             stonicorn.homePosition = pod.worldPos;
             stonicorn.position = stonicorn.homePosition;
+            stonicorn.locationOfInterest = stonicorn.homePosition;
             residents.Add(stonicorn);
         }
         //Call Delegate
