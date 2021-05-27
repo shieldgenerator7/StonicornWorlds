@@ -18,6 +18,9 @@ public class StonicornGenerator : MonoBehaviour
     public float minRestCap = 1000;
     public float maxRestCap = 1000;
 
+    [Header("Personal Data")]
+    public List<string> names;
+
     [Header("Profiles")]
     public List<Stonicorn> profiles;
 
@@ -32,6 +35,10 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         stonicorn.restSpeed = Random.Range(minRestRate, maxRestRate);
         stonicorn.maxRest = Random.Range(minRestCap, maxRestCap);
+        //Personal Data
+        string firstName = names[Random.Range(0, names.Count)];
+        string lastName = names[Random.Range(0, names.Count)];
+        stonicorn.name = firstName + " " + lastName;
         //
         return stonicorn;
     }

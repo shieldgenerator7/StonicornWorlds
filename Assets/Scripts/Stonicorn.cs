@@ -14,6 +14,7 @@ public class Stonicorn
     public float maxRest = 1000;
     public float restSpeed = 40;
     //Personal Data
+    public string name;
     public Vector2 homePosition;
     //Runtime Vars
     public Vector2 position;
