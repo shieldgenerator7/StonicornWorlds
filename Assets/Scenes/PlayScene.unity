@@ -3895,6 +3895,14 @@ MonoBehaviour:
   - {r: 0.29803923, g: 1, b: 0, a: 1}
   - {r: 1, g: 0.47357982, b: 0.1462264, a: 1}
   - {r: 0.30566567, g: 0.14509803, b: 1, a: 1}
+  minWorkRate: 2
+  maxWorkRate: 30
+  minMoveSpeed: 0.2
+  maxMoveSpeed: 3
+  minRestRate: 4
+  maxRestRate: 60
+  minRestCap: 100
+  maxRestCap: 1500
 --- !u!1 &1641698979
 GameObject:
   m_ObjectHideFlags: 0

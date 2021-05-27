@@ -5,17 +5,21 @@ using UnityEngine;
 [System.Serializable]
 public class Stonicorn
 {
+    //Appearance
     public Color bodyColor = Color.white;
     public Color hairColor = Color.white;
-    public Vector2 homePosition;
-    public Vector2 position;
-    public Vector2 locationOfInterest;
+    //Stats
     public float workRate = 20;
     public float moveSpeed = 2;
-    public float rest = 500;
     public float maxRest = 1000;
-    public bool resting = true;
     public float restSpeed = 40;
+    //Personal Data
+    public Vector2 homePosition;
+    //Runtime Vars
+    public Vector2 position;
+    public Vector2 locationOfInterest;
+    public float rest = 500;
+    public bool resting = true;
 
     [System.NonSerialized]
     public QueueTask task;
