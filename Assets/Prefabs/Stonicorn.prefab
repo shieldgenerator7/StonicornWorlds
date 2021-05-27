@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5606281556777864198}
   - component: {fileID: -6425059161415797697}
+  - component: {fileID: 1939388258390965799}
   m_Layer: 0
   m_Name: Stonicorn
   m_TagString: Untagged
@@ -217,10 +218,39 @@ MonoBehaviour:
   stonicorn:
     bodyColor: {r: 1, g: 1, b: 1, a: 1}
     hairColor: {r: 1, g: 1, b: 1, a: 1}
+    homePosition: {x: 0, y: 0}
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
     workRate: 20
     moveSpeed: 2
+    rest: 500
+    maxRest: 1000
+    resting: 1
+    restSpeed: 40
+--- !u!114 &1939388258390965799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606281556777864197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b071f24a3ada9848a3135cfdfa15aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stonicorn:
+    bodyColor: {r: 1, g: 1, b: 1, a: 1}
+    hairColor: {r: 1, g: 1, b: 1, a: 1}
+    homePosition: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    locationOfInterest: {x: 0, y: 0}
+    workRate: 20
+    moveSpeed: 2
+    rest: 500
+    maxRest: 1000
+    resting: 1
+    restSpeed: 40
   bodySR: {fileID: 5606281556685499231}
   hairSR: {fileID: 5606281556637797395}
   ui_work: {fileID: 1828720895694824219}
