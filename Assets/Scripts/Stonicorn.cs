@@ -12,9 +12,9 @@ public class Stonicorn
     public Vector2 locationOfInterest;
     public float workRate = 20;
     public float moveSpeed = 2;
-    public float rest = 1000;
+    public float rest = 500;
     public float maxRest = 1000;
-    public bool resting = false;
+    public bool resting = true;
     public float restSpeed = 40;
 
     [System.NonSerialized]

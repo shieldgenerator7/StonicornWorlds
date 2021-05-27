@@ -31,10 +31,17 @@ public class StonicornController : MonoBehaviour
                 stonicorn.resting = false;
             }
         }
-        if (!stonicorn.resting && stonicorn.task == null)
+        if (!stonicorn.resting)
         {
-            stonicorn.task = Managers.Queue.getClosestTask(stonicorn.position);
-            if (stonicorn.task)
+            if (stonicorn.task == null)
+            {
+                stonicorn.task = Managers.Queue.getClosestTask(stonicorn.position);
+                if (stonicorn.task)
+                {
+                    stonicorn.locationOfInterest = stonicorn.task.pos;
+                }
+            }
+            else if (stonicorn.locationOfInterest != stonicorn.task.pos)
             {
                 stonicorn.locationOfInterest = stonicorn.task.pos;
             }
