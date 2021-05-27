@@ -23,7 +23,15 @@ public class StonicornController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stonicorn.task == null)
+        if (stonicorn.atHome)
+        {
+            stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
+            if (stonicorn.Rest == stonicorn.maxRest)
+            {
+                stonicorn.resting = false;
+            }
+        }
+        if (!stonicorn.resting && stonicorn.task == null)
         {
             stonicorn.task = Managers.Queue.getClosestTask(stonicorn.position);
             if (stonicorn.task)
@@ -49,12 +57,18 @@ public class StonicornController : MonoBehaviour
             }
             else
             {
+                stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
                 //Effects
                 ui_work.transform.up = (stonicorn.locationOfInterest - stonicorn.position);
                 Vector3 scale = ui_work.transform.localScale;
                 scale.y = (stonicorn.locationOfInterest - stonicorn.position).magnitude;
                 ui_work.transform.localScale = scale;
                 ui_work.gameObject.SetActive(true);
+            }
+            if (stonicorn.Rest == 0)
+            {
+                stonicorn.resting = true;
+                stonicorn.goHome();
             }
         }
         else
@@ -83,6 +97,10 @@ public class StonicornController : MonoBehaviour
                 aboveLoI,
                 Time.deltaTime * stonicorn.moveSpeed
                 );
+        }
+        if (Vector2.Distance(stonicorn.position, aboveLoI) <= 0.01f)
+        {
+            stonicorn.position = aboveLoI;
         }
     }
 }
