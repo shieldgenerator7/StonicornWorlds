@@ -10,14 +10,10 @@ public class StonicornGenerator : MonoBehaviour
     public List<Color> eyeColors;
 
     [Header("Stats")]
-    public float minWorkRate = 20;
-    public float maxWorkRate = 20;
-    public float minMoveSpeed = 2;
-    public float maxMoveSpeed = 2;
-    public float minRestRate = 40;
-    public float maxRestRate = 40;
-    public float minRestCap = 1000;
-    public float maxRestCap = 1000;
+    public ValueGenerator workRateGen;
+    public ValueGenerator moveSpeedGen;
+    public ValueGenerator restRateGen;
+    public ValueGenerator restCapGen;
 
     [Header("Personal Data")]
     public List<string> names;
@@ -33,10 +29,10 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.hairColor = hairColors[Random.Range(0, hairColors.Count)];
         stonicorn.eyeColor = eyeColors[Random.Range(0, eyeColors.Count)];
         //Stats
-        stonicorn.workRate = Random.Range(minWorkRate, maxWorkRate);
-        stonicorn.moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
-        stonicorn.restSpeed = Random.Range(minRestRate, maxRestRate);
-        stonicorn.maxRest = Random.Range(minRestCap, maxRestCap);
+        stonicorn.workRate = workRateGen.generate();
+        stonicorn.moveSpeed = moveSpeedGen.generate();
+        stonicorn.restSpeed = restRateGen.generate();
+        stonicorn.maxRest = restCapGen.generate();
         //Personal Data
         string firstName = names[Random.Range(0, names.Count)];
         string lastName = names[Random.Range(0, names.Count)];

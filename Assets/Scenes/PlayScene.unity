@@ -1868,6 +1868,183 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magmaCapPerCore: 600
   magmaContentType: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
+--- !u!1 &774442317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774442318}
+  - component: {fileID: 774442319}
+  m_Layer: 0
+  m_Name: Stonicorn Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &774442318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774442317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1625964771}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &774442319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774442317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0627df47adf41645b13d96dc904b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyColors:
+  - {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
+  - {r: 0, g: 0.5803922, b: 1, a: 1}
+  - {r: 1, g: 0.9083599, b: 0.574, a: 1}
+  - {r: 0.72451955, g: 0.5896226, b: 1, a: 1}
+  - {r: 0.19624422, g: 0.8490566, b: 0.8490566, a: 1}
+  - {r: 0.8867924, g: 0.6767292, b: 0.3722855, a: 1}
+  - {r: 0.46499166, g: 0.990566, b: 0.3504361, a: 1}
+  hairColors:
+  - {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 1}
+  - {r: 0.19963002, g: 0.6698113, b: 0, a: 1}
+  - {r: 0.8018868, g: 0.38570935, b: 0.12482201, a: 1}
+  - {r: 0.30566567, g: 0.14509803, b: 1, a: 1}
+  - {r: 0.5528631, g: 0.5943396, b: 0, a: 1}
+  - {r: 0.3823549, g: 0.024029896, b: 0.5660378, a: 1}
+  - {r: 0.6698113, g: 0.2748754, b: 0.5835976, a: 1}
+  - {r: 0.23309009, g: 0.509434, b: 0.49144033, a: 1}
+  - {r: 0.2099537, g: 0.12246352, b: 0.6037736, a: 1}
+  eyeColors:
+  - {r: 0.5613208, g: 1, b: 0.80424523, a: 1}
+  - {r: 0.4999555, g: 0.860183, b: 0.990566, a: 1}
+  - {r: 0.9811321, g: 0.96797675, b: 0.49519405, a: 1}
+  - {r: 1, g: 0.5990566, b: 0.6933445, a: 1}
+  - {r: 1, g: 0.68021953, b: 0.4009434, a: 1}
+  - {r: 0.7409754, g: 0.4669811, b: 1, a: 1}
+  workRateGen:
+    min: 2
+    max: 40
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  moveSpeedGen:
+    min: 0.2
+    max: 4
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  restRateGen:
+    min: 4
+    max: 80
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  restCapGen:
+    min: 100
+    max: 2000
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  names:
+  - Twilight
+  - Rainbow
+  - Pinkie
+  - Apple
+  - Rare
+  - Flutter
+  - Sparkle
+  - Dash
+  - Pie
+  - Jack
+  - Itty
+  - Shy
+  - Bitty
+  - Bon
+  - Lyra
+  - Octavia
+  - Heart
+  - String
+  - Melody
+  - Derpy
+  - Hooves
+  - Note
+  - Shining
+  - Worthy
+  - Merky
+  - Cadance
+  - Sunset
+  - Starlight
+  - Shimmer
+  - Glimmer
+  - Trixie
+  - Bloom
+  - Sweetie
+  - Cheer
+  - Scoot
+  - Belle
+  - Big
+  - Granny
+  - Mac
+  - Smith
+  - Cake
+  - Pumpkin
+  - Pound
+  - Lighting
+  - Spit
+  - Dust
+  - Fire
+  - Thunder
+  - Flitter
+  - Lane
+  - Foot
+  - Zephyr
+  - Cozy
+  - Breeze
+  - Glow
+  - Sand
+  - Spike
+  - Ember
+  - Bar
+  - Pip
+  - Button
+  - Squeak
+  - Mash
+  - Maud
+  - Briar
+  - Hat
+  - Rose
+  - Tree
+  - Wheel
+  - Hugger
+  profiles:
+  - bodyColor: {r: 0, g: 0, b: 0, a: 0}
+    hairColor: {r: 0, g: 0, b: 0, a: 0}
+    eyeColor: {r: 0, g: 0, b: 0, a: 1}
+    workRate: 20
+    moveSpeed: 2
+    maxRest: 1000
+    restSpeed: 40
+    name: 
+    homePosition: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    locationOfInterest: {x: 0, y: 0}
+    rest: 0
+    resting: 0
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -2569,7 +2746,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1625964771}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1302935094
 MonoBehaviour:
@@ -3668,7 +3845,6 @@ GameObject:
   - component: {fileID: 1625964775}
   - component: {fileID: 1625964776}
   - component: {fileID: 1625964772}
-  - component: {fileID: 1625964777}
   - component: {fileID: 1625964773}
   - component: {fileID: 1625964774}
   m_Layer: 0
@@ -3703,6 +3879,7 @@ Transform:
   m_Children:
   - {fileID: 1624048186}
   - {fileID: 752787613}
+  - {fileID: 774442318}
   - {fileID: 1302935093}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -3876,136 +4053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5206bf6bd2e95f4290d13ce46091329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1625964777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625964769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0627df47adf41645b13d96dc904b30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyColors:
-  - {r: 0.72156864, g: 0.72156864, b: 0.72156864, a: 1}
-  - {r: 0, g: 0.5803922, b: 1, a: 1}
-  - {r: 1, g: 0.9083599, b: 0.574, a: 1}
-  - {r: 0.72451955, g: 0.5896226, b: 1, a: 1}
-  - {r: 0.19624422, g: 0.8490566, b: 0.8490566, a: 1}
-  - {r: 0.8867924, g: 0.6767292, b: 0.3722855, a: 1}
-  - {r: 0.46499166, g: 0.990566, b: 0.3504361, a: 1}
-  hairColors:
-  - {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 1}
-  - {r: 0.19963002, g: 0.6698113, b: 0, a: 1}
-  - {r: 0.8018868, g: 0.38570935, b: 0.12482201, a: 1}
-  - {r: 0.30566567, g: 0.14509803, b: 1, a: 1}
-  - {r: 0.5528631, g: 0.5943396, b: 0, a: 1}
-  - {r: 0.3823549, g: 0.024029896, b: 0.5660378, a: 1}
-  - {r: 0.6698113, g: 0.2748754, b: 0.5835976, a: 1}
-  - {r: 0.23309009, g: 0.509434, b: 0.49144033, a: 1}
-  - {r: 0.2099537, g: 0.12246352, b: 0.6037736, a: 1}
-  eyeColors:
-  - {r: 0.5613208, g: 1, b: 0.80424523, a: 1}
-  - {r: 0.4999555, g: 0.860183, b: 0.990566, a: 1}
-  - {r: 0.9811321, g: 0.96797675, b: 0.49519405, a: 1}
-  - {r: 1, g: 0.5990566, b: 0.6933445, a: 1}
-  - {r: 1, g: 0.68021953, b: 0.4009434, a: 1}
-  - {r: 0.7409754, g: 0.4669811, b: 1, a: 1}
-  minWorkRate: 2
-  maxWorkRate: 30
-  minMoveSpeed: 0.2
-  maxMoveSpeed: 3
-  minRestRate: 4
-  maxRestRate: 60
-  minRestCap: 100
-  maxRestCap: 1500
-  names:
-  - Twilight
-  - Rainbow
-  - Pinkie
-  - Apple
-  - Rare
-  - Flutter
-  - Sparkle
-  - Dash
-  - Pie
-  - Jack
-  - Itty
-  - Shy
-  - Bitty
-  - Bon
-  - Lyra
-  - Octavia
-  - Heart
-  - String
-  - Melody
-  - Derpy
-  - Hooves
-  - Note
-  - Shining
-  - Worthy
-  - Merky
-  - Cadance
-  - Sunset
-  - Starlight
-  - Shimmer
-  - Glimmer
-  - Trixie
-  - Bloom
-  - Sweetie
-  - Cheer
-  - Scoot
-  - Belle
-  - Big
-  - Granny
-  - Mac
-  - Smith
-  - Cake
-  - Pumpkin
-  - Pound
-  - Lighting
-  - Spit
-  - Dust
-  - Fire
-  - Thunder
-  - Flitter
-  - Lane
-  - Foot
-  - Zephyr
-  - Cozy
-  - Breeze
-  - Glow
-  - Sand
-  - Spike
-  - Ember
-  - Bar
-  - Pip
-  - Button
-  - Squeak
-  - Mash
-  - Maud
-  - Briar
-  - Hat
-  - Rose
-  - Tree
-  - Wheel
-  - Hugger
-  profiles:
-  - bodyColor: {r: 0, g: 0, b: 0, a: 0}
-    hairColor: {r: 0, g: 0, b: 0, a: 0}
-    eyeColor: {r: 0, g: 0, b: 0, a: 1}
-    workRate: 20
-    moveSpeed: 2
-    maxRest: 1000
-    restSpeed: 40
-    name: 
-    homePosition: {x: 0, y: 0}
-    position: {x: 0, y: 0}
-    locationOfInterest: {x: 0, y: 0}
-    rest: 0
-    resting: 0
 --- !u!1 &1641698979
 GameObject:
   m_ObjectHideFlags: 0
