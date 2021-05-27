@@ -11,6 +11,8 @@ public class StonicornDisplayer : MonoBehaviour
     private SpriteRenderer hairSR;
     [SerializeField]
     private SpriteRenderer ui_work;
+    [SerializeField]
+    private SpriteRenderer ui_sleep;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +25,10 @@ public class StonicornDisplayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //Position
         transform.position = stonicorn.position;
         transform.up = Managers.Planet.Planet.getUpDirection(stonicorn.position);
+        //Working
         if (stonicorn.isAtLocationOfInterest && !stonicorn.atHomeOrGoing)
         {
             //Effects
@@ -38,5 +42,7 @@ public class StonicornDisplayer : MonoBehaviour
         {
             ui_work.gameObject.SetActive(false);
         }
+        //Sleeping
+        ui_sleep.gameObject.SetActive(stonicorn.position == stonicorn.homePosition);
     }
 }
