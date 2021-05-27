@@ -18,6 +18,9 @@ public class StonicornGenerator : MonoBehaviour
     public float minRestCap = 1000;
     public float maxRestCap = 1000;
 
+    [Header("Profiles")]
+    public List<Stonicorn> profiles;
+
     public Stonicorn generate()
     {
         Stonicorn stonicorn = new Stonicorn();
@@ -26,10 +29,19 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.hairColor = hairColors[Random.Range(0, hairColors.Count)];
         //Stats
         stonicorn.workRate = Random.Range(minWorkRate, maxWorkRate);
-        stonicorn.moveSpeed = Random.Range(minMoveSpeed , maxMoveSpeed);
+        stonicorn.moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         stonicorn.restSpeed = Random.Range(minRestRate, maxRestRate);
         stonicorn.maxRest = Random.Range(minRestCap, maxRestCap);
         //
         return stonicorn;
+    }
+
+    public void statsFromProfile(Stonicorn stonicorn, int profileIndex)
+    {
+        Stonicorn model = profiles[profileIndex];
+        stonicorn.workRate = model.workRate;
+        stonicorn.moveSpeed = model.moveSpeed;
+        stonicorn.restSpeed = model.restSpeed;
+        stonicorn.maxRest = model.maxRest;
     }
 }

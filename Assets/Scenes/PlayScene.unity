@@ -3903,6 +3903,18 @@ MonoBehaviour:
   maxRestRate: 60
   minRestCap: 100
   maxRestCap: 1500
+  profiles:
+  - bodyColor: {r: 0, g: 0, b: 0, a: 0}
+    hairColor: {r: 0, g: 0, b: 0, a: 0}
+    workRate: 20
+    moveSpeed: 2
+    maxRest: 1000
+    restSpeed: 40
+    homePosition: {x: 0, y: 0}
+    position: {x: 0, y: 0}
+    locationOfInterest: {x: 0, y: 0}
+    rest: 0
+    resting: 0
 --- !u!1 &1641698979
 GameObject:
   m_ObjectHideFlags: 0
