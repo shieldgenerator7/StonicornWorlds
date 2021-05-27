@@ -74,6 +74,11 @@ public class QueueManager : Manager
         {
             return false;
         }
+        if (task.Completed)
+        {
+            //don't work on a task that's already completed
+            return true;
+        }
         if (!task.Started)
         {
             if (Managers.Resources.Resources >= task.StartCost)
