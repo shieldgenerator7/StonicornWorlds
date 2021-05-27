@@ -7,6 +7,7 @@ public class StonicornGenerator : MonoBehaviour
     [Header("Appearance")]
     public List<Color> bodyColors;
     public List<Color> hairColors;
+    public List<Color> eyeColors;
 
     [Header("Stats")]
     public float minWorkRate = 20;
@@ -30,6 +31,7 @@ public class StonicornGenerator : MonoBehaviour
         //Appearance
         stonicorn.bodyColor = bodyColors[Random.Range(0, bodyColors.Count)];
         stonicorn.hairColor = hairColors[Random.Range(0, hairColors.Count)];
+        stonicorn.eyeColor = eyeColors[Random.Range(0, eyeColors.Count)];
         //Stats
         stonicorn.workRate = Random.Range(minWorkRate, maxWorkRate);
         stonicorn.moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);

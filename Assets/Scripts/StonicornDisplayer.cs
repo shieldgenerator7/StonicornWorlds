@@ -10,6 +10,8 @@ public class StonicornDisplayer : MonoBehaviour
     [SerializeField]
     private SpriteRenderer hairSR;
     [SerializeField]
+    private SpriteRenderer eyeSR;
+    [SerializeField]
     private SpriteRenderer ui_work;
     [SerializeField]
     private SpriteRenderer ui_sleep;
@@ -19,7 +21,8 @@ public class StonicornDisplayer : MonoBehaviour
     {
         bodySR.color = stonicorn.bodyColor;
         hairSR.color = stonicorn.hairColor;
-        ui_work.color = stonicorn.hairColor;
+        eyeSR.color = stonicorn.hairColor;
+        ui_work.color = stonicorn.eyeColor;
     }
 
     // Update is called once per frame

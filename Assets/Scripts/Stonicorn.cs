@@ -7,7 +7,8 @@ public class Stonicorn
 {
     //Appearance
     public Color bodyColor = Color.white;
-    public Color hairColor = Color.white;
+    public Color hairColor = Color.gray;
+    public Color eyeColor = Color.black;
     //Stats
     public float workRate = 20;
     public float moveSpeed = 2;
@@ -51,5 +52,10 @@ public class Stonicorn
         task = (atHomeOrGoing)
             ? null
             : Managers.Queue.getClosestTask(locationOfInterest);
+        //backwards compatibility
+        if (eyeColor == Color.black)
+        {
+            eyeColor = hairColor;
+        }
     }
 }
