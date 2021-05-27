@@ -44,6 +44,8 @@ public class Planet
             Managers.Planet.Planet.Pods(Managers.Constants.corePodType)
                 .ForEach(pod => residents.Add(new Stonicorn()));
         }
+        //Inflat residents
+        residents.ForEach(t => t.inflate());
     }
 
     #region Write State

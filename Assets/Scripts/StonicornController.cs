@@ -23,6 +23,14 @@ public class StonicornController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stonicorn.task == null)
+        {
+            stonicorn.task = Managers.Queue.getClosestTask(stonicorn.position);
+            if (stonicorn.task)
+            {
+                stonicorn.locationOfInterest = stonicorn.task.pos;
+            }
+        }
         if (stonicorn.position != stonicorn.locationOfInterest)
         {
             moveToLocationOfInterest();
@@ -33,6 +41,13 @@ public class StonicornController : MonoBehaviour
         ui_work.gameObject.SetActive(atWorkSite);
         if (atWorkSite)
         {
+            //Work
+            bool completed = Managers.Queue.workOnTask(stonicorn, stonicorn.task);
+            if (completed || !stonicorn.task.Started)
+            {
+                stonicorn.goHome();
+            }
+            //Effects
             ui_work.transform.up = (stonicorn.locationOfInterest - stonicorn.position);
             Vector3 scale = ui_work.transform.localScale;
             scale.y = (stonicorn.locationOfInterest - stonicorn.position).magnitude;

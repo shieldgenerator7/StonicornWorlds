@@ -89,16 +89,17 @@ public class PlanetManager : Manager
         }
     }
 
-    public bool canBuildAtPosition(PodType podType, Vector2 pos)
+    public bool canBuildAtPosition(PodType podType, Vector2 pos, bool useFuture = true)
     {
         if (!podType)
         {
             return false;
         }
-        List<PodType> neighborTypes = getFutureNeighbors(pos)
+        Planet canPlanet = (useFuture) ? futurePlanet : planet;
+        List<PodType> neighborTypes = getNeighbors(pos, canPlanet)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = futurePlanet.getPod(pos);
+        Pod curPod = canPlanet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -108,18 +109,19 @@ public class PlanetManager : Manager
             && podType.canConvertFrom(curPodType);
     }
 
-    public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos)
+    public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos, bool useFuture = true)
     {
-        List<PodType> neighborTypes = getFutureNeighbors(pos)
+        Planet canPlanet = (useFuture) ? futurePlanet : planet;
+        List<PodType> neighborTypes = getNeighbors(pos, canPlanet)
                .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = futurePlanet.getPod(pos);
+        Pod curPod = canPlanet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
         }
         PodType groundPodType = null;
-        Pod groundPod = futurePlanet.getGroundPod(pos);
+        Pod groundPod = canPlanet.getGroundPod(pos);
         if (groundPod)
         {
             groundPodType = groundPod.podType;
@@ -131,9 +133,9 @@ public class PlanetManager : Manager
             && !(curPod && curPod.hasContent(podContentType));
     }
 
-    public List<Pod> getFutureNeighbors(Vector2 pos)
+    public List<Pod> getNeighbors(Vector2 pos, Planet p)
     {
-        return futurePlanet.getNeighborhood(pos).neighbors.ToList()
+        return p.getNeighborhood(pos).neighbors.ToList()
             .FindAll(pod => pod);
     }
 

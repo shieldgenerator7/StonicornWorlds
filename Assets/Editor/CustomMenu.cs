@@ -100,7 +100,7 @@ public class CustomMenu
         {
             GameObject.FindObjectOfType<ResourceGenerator>().generateRate /= 2;
             Managers.Queue.defaultWorkRate /= 2;
-            Managers.Queue.workers
+            Managers.Planet.Planet.residents
                 .ForEach(qw => qw.workRate /= 2);
         }
         else
@@ -116,7 +116,7 @@ public class CustomMenu
         {
             GameObject.FindObjectOfType<ResourceGenerator>().generateRate *= 2;
             Managers.Queue.defaultWorkRate *= 2;
-            Managers.Queue.workers
+            Managers.Planet.Planet.residents
                 .ForEach(qw => qw.workRate *= 2);
         }
         else

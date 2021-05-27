@@ -9,8 +9,6 @@ public class QueueManager : Manager
 
     public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
-    public List<Stonicorn> workers => Managers.Planet.Planet.residents;
-
     public void addToQueue(QueueTask task)
     {
         if (queue.Contains(task))
@@ -18,7 +16,6 @@ public class QueueManager : Manager
             Debug.LogError("Task already in queue");
             return;
         }
-        workers.ForEach(w => w.goHome());
         queue.Add(task);
         callOnQueueChanged();
     }
@@ -29,80 +26,74 @@ public class QueueManager : Manager
     public delegate void OnQueueChanged(List<QueueTask> queue);
     public event OnQueueChanged onQueueChanged;
 
-    // Update is called once per frame
-    void Update()
+    public bool isTaskAvailable(QueueTask task)
     {
-        if (queue.Count > 0)
+        //Resources
+        if (Managers.Resources.Resources < task.StartCost)
         {
-            while (AnyWorkersFree)
-            {
-                //Try to find task not being worked on
-                QueueTask task = queue.FirstOrDefault(
-                    task => !workers.Any(
-                        w => w.locationOfInterest == task.pos
-                        ))
-                    ?? queue[0];
-                //Try to start task
-                if (!task.Started
-                    && Managers.Resources.Resources >= task.StartCost)
-                {
-                    Managers.Resources.Resources -= task.StartCost;
-                    task.Progress = 0.01f;
-                }
-                //Try to find a task that is already in progress
-                if (!task.Started)
-                {
-                    task = queue.FirstOrDefault(p => p.Started) ?? queue[0];
-                }
-                //If task has been started,
-                if (task.Started)
-                {
-                    //Work on it more
-                    dispatchWorker(task);
-                }
-                //Else stop, can't do anything
-                else
-                {
-                    break;
-                }
-            }
-            workers.FindAll(w => !isWorkerFree(w) && w.isAtLocationOfInterest)
-                .ForEach(
-                w =>
-                {
-                    QueueTask currentTask = queue.FirstOrDefault(task => task.pos == w.locationOfInterest);
-                    if (currentTask)
-                    {
-                        currentTask.Progress += w.workRate * Time.deltaTime;
-                        if (currentTask.Completed)
-                        {
-                            taskCompleted(currentTask);
-                            w.goHome();
-                        }
-                    }
-                    else
-                    {
-                        w.goHome();
-                    }
-                });
+            return false;
+        }
+        //Context
+        switch (task.type)
+        {
+            case QueueTask.Type.CONSTRUCT:
+            case QueueTask.Type.CONVERT:
+                return Managers.Planet.canBuildAtPosition(
+                    (PodType)task.taskObject,
+                    task.pos,
+                    false
+                    );
+            case QueueTask.Type.PLANT:
+                return Managers.Planet.canPlantAtPosition(
+                    (PodContentType)task.taskObject,
+                    task.pos,
+                    false
+                    );
+            case QueueTask.Type.DESTRUCT:
+                return true;
+            default:
+                Debug.LogError("Unknown task type!: " + task.type);
+                return false;
         }
     }
 
-    bool AnyWorkersFree => workers.Any(w => isWorkerFree(w));
+    public QueueTask getClosestTask(Vector2 pos)
+        => queue.FindAll(task => isTaskAvailable(task))
+            .OrderBy(task => Vector2.Distance(task.pos, pos))
+            .ToList().FirstOrDefault();
 
-    bool isWorkerFree(Stonicorn worker) => worker.atHomeOrGoing;
-
-    void dispatchWorker(QueueTask task)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="worker"></param>
+    /// <param name="task"></param>
+    /// <returns>true if completed, false if not completed or not started</returns>
+    public bool workOnTask(Stonicorn worker, QueueTask task)
     {
-        Stonicorn worker = workers.First(w => isWorkerFree(w));
-        worker.locationOfInterest = task.pos;
+        if (!task.Started)
+        {
+            if (Managers.Resources.Resources >= task.StartCost)
+            {
+                Managers.Resources.Resources -= task.StartCost;
+                task.Progress = 0.01f;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        task.Progress += worker.workRate * Time.deltaTime;
+        if (task.Completed)
+        {
+            taskCompleted(task);
+            return true;
+        }
+        return false;
     }
 
     void taskCompleted(QueueTask task)
     {
         queue.Remove(task);
-        workers.FindAll(w => w.locationOfInterest == task.pos)
-            .ForEach(w => w.goHome());
         callOnQueueChanged();
         onTaskCompleted?.Invoke(task);
     }

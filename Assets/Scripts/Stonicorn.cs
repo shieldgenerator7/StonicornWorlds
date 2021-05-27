@@ -13,11 +13,25 @@ public class Stonicorn
     public float workRate = 20;
     public float moveSpeed = 2;
 
+    [System.NonSerialized]
+    public QueueTask task;
+
     public bool atHomeOrGoing
         => locationOfInterest == homePosition;
 
-    public void goHome() => locationOfInterest = homePosition;
+    public void goHome()
+    {
+        locationOfInterest = homePosition;
+        task = null;
+    }
 
     public bool isAtLocationOfInterest
         => Vector2.Distance(position, locationOfInterest) <= 1.0f;
+
+    public void inflate()
+    {
+        task = (atHomeOrGoing)
+            ? null
+            : Managers.Queue.getClosestTask(locationOfInterest);
+    }
 }
