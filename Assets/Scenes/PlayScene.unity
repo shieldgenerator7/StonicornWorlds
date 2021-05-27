@@ -4028,6 +4028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: planet1.wrld
   saveOnExit: 1
+  loadOnStart: 1
 --- !u!114 &1625964775
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,10 +8,14 @@ public class FileManager : Manager
     public string fileName = "";
 
     public bool saveOnExit = true;
+    public bool loadOnStart = true;
 
     public override void setup()
     {
-        LoadFile();
+        if (loadOnStart)
+        {
+            LoadFile();
+        }
     }
 
     public void SaveFile()
