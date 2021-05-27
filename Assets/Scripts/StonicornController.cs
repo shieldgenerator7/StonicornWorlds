@@ -46,10 +46,10 @@ public class StonicornController : MonoBehaviour
         transform.position = stonicorn.position;
         transform.up = Managers.Planet.Planet.getUpDirection(stonicorn.position);
         bool atWorkSite = !stonicorn.atHomeOrGoing && stonicorn.isAtLocationOfInterest;
-        if (atWorkSite)
+        if (atWorkSite && stonicorn.task != null)
         {
             //Work
-            bool completed = Managers.Queue.workOnTask(stonicorn, stonicorn.task);
+            bool completed = Managers.Queue.workOnTask(stonicorn.task, stonicorn.workRate);
             if (completed || !stonicorn.task.Started)
             {
                 stonicorn.goHome();

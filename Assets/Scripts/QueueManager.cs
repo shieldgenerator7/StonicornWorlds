@@ -68,8 +68,12 @@ public class QueueManager : Manager
     /// <param name="worker"></param>
     /// <param name="task"></param>
     /// <returns>true if completed, false if not completed or not started</returns>
-    public bool workOnTask(Stonicorn worker, QueueTask task)
+    public bool workOnTask(QueueTask task, float workRate)
     {
+        //if (task == null)
+        //{
+        //    return false;
+        //}
         if (!task.Started)
         {
             if (Managers.Resources.Resources >= task.StartCost)
@@ -82,7 +86,7 @@ public class QueueManager : Manager
                 return false;
             }
         }
-        task.Progress += worker.workRate * Time.deltaTime;
+        task.Progress += workRate * Time.deltaTime;
         if (task.Completed)
         {
             taskCompleted(task);
