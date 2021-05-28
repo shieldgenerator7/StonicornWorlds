@@ -72,11 +72,7 @@ public class Planet
         //Stonicorn
         if (pod.podType == Managers.Constants.corePodType)
         {
-            Stonicorn stonicorn = GameObject.FindObjectOfType<StonicornGenerator>().generate();
-            stonicorn.homePosition = pod.worldPos;
-            stonicorn.position = stonicorn.homePosition;
-            stonicorn.locationOfInterest = stonicorn.homePosition;
-            residents.Add(stonicorn);
+            addResident(pod.worldPos);
         }
         //Call Delegate
         onStateChanged?.Invoke(this);
@@ -95,6 +91,18 @@ public class Planet
     private void podContentAdded(Pod p)
     {
         onStateChanged?.Invoke(this);
+    }
+
+    public Stonicorn addResident(Vector2 homePos)
+    {
+        Stonicorn resident = GameObject.FindObjectOfType<StonicornGenerator>().generate();
+        resident.homePosition = homePos;
+        resident.position = resident.homePosition;
+        resident.locationOfInterest = resident.homePosition;
+        resident.rest = 0;
+        residents.Add(resident);
+        onStateChanged?.Invoke(this);
+        return resident;
     }
 
     private void fillSpaceAround(Vector2 pos)
