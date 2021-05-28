@@ -1679,6 +1679,7 @@ GameObject:
   - component: {fileID: 752787620}
   - component: {fileID: 752787619}
   - component: {fileID: 752787618}
+  - component: {fileID: 752787624}
   m_Layer: 0
   m_Name: PlanetManager
   m_TagString: Untagged
@@ -1869,6 +1870,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magmaCapPerCore: 600
   magmaContentType: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
+--- !u!114 &752787624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752787611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90774389b0790554d8e604e0bf8b3000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  houseType: {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
 --- !u!1 &774442317
 GameObject:
   m_ObjectHideFlags: 0
