@@ -37,12 +37,18 @@ public class QueueManager : Manager
         switch (task.type)
         {
             case QueueTask.Type.CONSTRUCT:
-            case QueueTask.Type.CONVERT:
                 return Managers.Planet.canBuildAtPosition(
                     (PodType)task.taskObject,
                     task.pos,
                     false
                     );
+            case QueueTask.Type.CONVERT:
+                return Managers.Planet.Planet.hasPod(task.pos) &&
+                    Managers.Planet.canBuildAtPosition(
+                        (PodType)task.taskObject,
+                        task.pos,
+                        false
+                        );
             case QueueTask.Type.PLANT:
                 return Managers.Planet.canPlantAtPosition(
                     (PodContentType)task.taskObject,
