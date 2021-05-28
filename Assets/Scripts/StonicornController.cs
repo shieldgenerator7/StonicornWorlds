@@ -21,7 +21,10 @@ public class StonicornController : MonoBehaviour
         {
             if (stonicorn.task == null)
             {
-                stonicorn.task = Managers.Queue.getClosestTask(stonicorn.position);
+                stonicorn.task = Managers.Queue.getClosestTask(
+                    stonicorn.position, 
+                    stonicorn.homePosition
+                    );
                 if (stonicorn.task)
                 {
                     stonicorn.locationOfInterest = stonicorn.task.pos;

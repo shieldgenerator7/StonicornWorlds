@@ -31,6 +31,10 @@ public class HouseAssigner : MonoBehaviour
                 if (resident != null)
                 {
                     resident.homePosition = house.container.worldPos;
+                    if (resident.resting)
+                    {
+                        resident.locationOfInterest = resident.homePosition;
+                    }
                 }
             }
             );

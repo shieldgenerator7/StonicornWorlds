@@ -57,10 +57,11 @@ public class QueueManager : Manager
         }
     }
 
-    public QueueTask getClosestTask(Vector2 pos)
+    public QueueTask getClosestTask(Vector2 pos, Vector2 exclude)
         => queue.FindAll(task => isTaskAvailable(task))
-            .OrderBy(task => Vector2.Distance(task.pos, pos))
-            .ToList().FirstOrDefault();
+            .OrderBy(task => Vector2.Distance(task.pos, pos)).ToList()
+            .FindAll(task => task.pos != exclude)
+            .FirstOrDefault();
 
     /// <summary>
     /// 

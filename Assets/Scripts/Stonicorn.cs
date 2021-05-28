@@ -52,7 +52,7 @@ public class Stonicorn
     {
         task = (atHomeOrGoing)
             ? null
-            : Managers.Queue.getClosestTask(locationOfInterest);
+            : Managers.Queue.getClosestTask(locationOfInterest, homePosition);
         //backwards compatibility
         if (eyeColor == Color.black)
         {
