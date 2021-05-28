@@ -46,6 +46,9 @@ public class StonicornDisplayer : MonoBehaviour
             ui_work.gameObject.SetActive(false);
         }
         //Sleeping
-        ui_sleep.gameObject.SetActive(stonicorn.position == stonicorn.homePosition);
+        ui_sleep.gameObject.SetActive(
+            stonicorn.resting &&
+            stonicorn.position == stonicorn.homePosition
+            );
     }
 }
