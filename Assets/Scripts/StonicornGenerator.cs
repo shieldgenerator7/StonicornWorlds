@@ -11,6 +11,7 @@ public class StonicornGenerator : MonoBehaviour
 
     [Header("Stats")]
     public ValueGenerator workRateGen;
+    public ValueGenerator workRangeGen;
     public ValueGenerator moveSpeedGen;
     public ValueGenerator restRateGen;
     public ValueGenerator restCapGen;
@@ -30,6 +31,7 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.eyeColor = eyeColors[Random.Range(0, eyeColors.Count)];
         //Stats
         stonicorn.workRate = workRateGen.generate();
+        stonicorn.workRange = workRangeGen.generate();
         stonicorn.moveSpeed = moveSpeedGen.generate();
         stonicorn.restSpeed = restRateGen.generate();
         stonicorn.maxRest = restCapGen.generate();
@@ -45,6 +47,7 @@ public class StonicornGenerator : MonoBehaviour
     {
         Stonicorn model = profiles[profileIndex];
         stonicorn.workRate = model.workRate;
+        stonicorn.workRange = model.workRange;
         stonicorn.moveSpeed = model.moveSpeed;
         stonicorn.restSpeed = model.restSpeed;
         stonicorn.maxRest = model.maxRest;

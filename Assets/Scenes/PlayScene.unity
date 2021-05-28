@@ -1942,6 +1942,12 @@ MonoBehaviour:
     samples: 5
     decimalPlaces: 2
     choice: 0
+  workRangeGen:
+    min: 0.5
+    max: 2
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
   moveSpeedGen:
     min: 0.2
     max: 4
@@ -2036,6 +2042,7 @@ MonoBehaviour:
     hairColor: {r: 0, g: 0, b: 0, a: 0}
     eyeColor: {r: 0, g: 0, b: 0, a: 1}
     workRate: 20
+    workRange: 1
     moveSpeed: 2
     maxRest: 1000
     restSpeed: 40

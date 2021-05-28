@@ -63,6 +63,12 @@ public class StonicornController : MonoBehaviour
         if (!stonicorn.atHomeOrGoing)
         {
             aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
+            if (stonicorn.workRange != 1)
+            {
+                aboveLoI = stonicorn.locationOfInterest +
+                    ((aboveLoI - stonicorn.locationOfInterest).normalized
+                    * (stonicorn.workRange - 0.1f));
+            }
         }
         if (Vector2.Distance(stonicorn.position, aboveLoI) > 1.0f)
         {

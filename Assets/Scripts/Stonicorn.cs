@@ -11,6 +11,7 @@ public class Stonicorn
     public Color eyeColor = Color.black;
     //Stats
     public float workRate = 20;
+    public float workRange = 1;
     public float moveSpeed = 2;
     public float maxRest = 1000;
     public float restSpeed = 40;
@@ -39,7 +40,7 @@ public class Stonicorn
     }
 
     public bool isAtLocationOfInterest
-        => Vector2.Distance(position, locationOfInterest) <= 1.0f;
+        => Vector2.Distance(position, locationOfInterest) <= workRange;
 
     public float Rest
     {
