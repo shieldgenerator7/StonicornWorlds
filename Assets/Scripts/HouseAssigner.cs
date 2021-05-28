@@ -15,6 +15,25 @@ public class HouseAssigner : MonoBehaviour
 
     void assignUnoccupiedHouses(Planet planet)
     {
+        //Find stonicorns without a house (or core)
+        Managers.Planet.Planet.residents
+            .FindAll(
+                stncrn => Managers.Planet.Planet.getPod(stncrn.homePosition).podType
+                    != Managers.Constants.corePodType
+                )
+            .FindAll(
+                stncrn => Managers.Planet.Planet.getPod(stncrn.homePosition).podType
+                    != Managers.Constants.spacePodType
+                )
+            .ForEach(stncrn =>
+            {
+                stncrn.homePosition = Vector2.zero;
+                if (stncrn.resting)
+                {
+                    stncrn.locationOfInterest = stncrn.homePosition;
+                }
+            });
+        //Find unoccupied houses
         List<PodContent> houses = planet.Pods(Managers.Constants.spacePodType)
             .ConvertAll(pod => pod.getContent(houseType));
         houses.RemoveAll(house => house == null);
