@@ -11,8 +11,18 @@ public class CameraController : Manager
 
     public bool Locked = false;
 
+    public StonicornDisplayer focusObject;
+
     private Vector3 Up;
-    private Vector3 Position;
+    private Vector3 position;
+    private Vector3 Position
+    {
+        get => position;
+        set
+        {
+            position = (Vector3)(Vector2)value + camOffset;
+        }
+    }
     private float ZoomLevel;
 
     private int pixelWidth;
@@ -26,6 +36,11 @@ public class CameraController : Manager
 
     private void LateUpdate()
     {
+        if (focusObject != null)
+        {
+            Up = focusObject.transform.up;
+            Position = focusObject.transform.position;
+        }
         float deltaTime = 3 * Time.unscaledDeltaTime;
         //Rotate Transform
         if (transform.up != Up)
@@ -83,7 +98,7 @@ public class CameraController : Manager
         {
             posList.Add(Vector2.zero);
         }
-        Position = ((Vector3)center) + camOffset;
+        Position = center;
         if (center != Vector2.zero)
         {
             Up = Managers.Planet.Planet.getUpDirection((Vector2)transform.position);
