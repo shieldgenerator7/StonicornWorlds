@@ -10,15 +10,16 @@ public class ToolActionButton : ToolButton
 
     public override void activate()
     {
-        Managers.Input.ToolAction = toolAction;
         if (compatibleObjectTypes.Count > 0 &&
             !compatibleObjectTypes.Contains(Managers.Input.PlanetObjectType))
         {
-            if (compatibleObjectTypes.Contains(Managers.Input.PodType))
+            if (Managers.Input.PodType &&
+                compatibleObjectTypes.Contains(Managers.Input.PodType))
             {
                 Managers.Input.PlanetObjectType = Managers.Input.PodType;
             }
-            else if (compatibleObjectTypes.Contains(Managers.Input.PodContentType))
+            else if (Managers.Input.PodContentType &&
+                compatibleObjectTypes.Contains(Managers.Input.PodContentType))
             {
                 Managers.Input.PlanetObjectType = Managers.Input.PodContentType;
             }
@@ -27,6 +28,7 @@ public class ToolActionButton : ToolButton
                 Managers.Input.PlanetObjectType = compatibleObjectTypes[0];
             }
         }
+        Managers.Input.ToolAction = toolAction;
     }
 
     protected override bool isActive()
