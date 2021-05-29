@@ -51,12 +51,12 @@ public static class HexagonUtility
         HexagonNeighborhood neighborhood = new HexagonNeighborhood();
         Vector3Int groundPos = getGroundPos(pos);
         neighborhood.ground = groundPos;
-        neighborhood.groundLeft = rotate(groundPos, pos, 1);
-        neighborhood.groundRight = rotate(groundPos, pos, -1);
+        neighborhood.groundLeft = rotate(groundPos, pos, -1);
+        neighborhood.groundRight = rotate(groundPos, pos, 1);
         Vector3Int ceilPos = reflect(groundPos, pos);
         neighborhood.ceiling = ceilPos;
-        neighborhood.ceilingLeft = rotate(ceilPos, pos, -1);
-        neighborhood.ceilingRight = rotate(ceilPos, pos, 1);
+        neighborhood.ceilingLeft = rotate(ceilPos, pos, 1);
+        neighborhood.ceilingRight = rotate(ceilPos, pos, -1);
         neighborhood.neighbors = new Vector3Int[]
         {
             neighborhood.ground,
