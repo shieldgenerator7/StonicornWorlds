@@ -10,6 +10,8 @@ public class PlanetManagerEffects : MonoBehaviour
     public GameObject stonicornPrefab;
     public GameObject cursorObject;
 
+    public TMP_Text stonicornName;
+
     List<GameObject> editPods = new List<GameObject>();
     List<GameObject> selectObjects = new List<GameObject>();
 
@@ -174,5 +176,17 @@ public class PlanetManagerEffects : MonoBehaviour
         editPods.ForEach(go =>
             go.transform.GetChild(0).up = up
         );
+    }
+
+    public void updateStonicornInfo(Stonicorn stonicorn)
+    {
+        if (stonicorn != null)
+        {
+            stonicornName.text = stonicorn.name;
+        }
+        else
+        {
+            stonicornName.text = "";
+        }
     }
 }

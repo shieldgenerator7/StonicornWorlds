@@ -27,6 +27,7 @@ public class MagnifyAction : ToolAction
         }
         //Track Stonicorn
         Managers.Camera.focusObject = null;
+        Managers.PlanetEffects.updateStonicornInfo(null);
         if (origPosList.Count == 1)
         {
             Vector2 pos = Managers.Planet.Planet.getHexPos(origPosList[0]);
@@ -45,6 +46,7 @@ public class MagnifyAction : ToolAction
                     .GetComponent<StonicornDisplayer>();
                 Managers.Camera.Locked = true;
                 Managers.Camera.autoFrame(stonicorn.position, origPosList);
+                Managers.PlanetEffects.updateStonicornInfo(stonicorn);
             }
         }
     }
