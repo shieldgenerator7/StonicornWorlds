@@ -30,22 +30,34 @@ public class MagnifyAction : ToolAction
         Managers.PlanetEffects.updateStonicornInfo(null);
         if (origPosList.Count == 1)
         {
-            Vector2 pos = Managers.Planet.Planet.getHexPos(origPosList[0]);
-            Stonicorn stonicorn = Managers.Planet.Planet.residents.FirstOrDefault(
-                stncrn => Managers.Planet.Planet.getHexPos(stncrn.position) == pos
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 pos = Managers.Planet.Planet.getHexPos(mousePos);
+            List<Stonicorn> stonicorns = Managers.Planet.Planet.residents.FindAll(
+                stncrn => Vector2.Distance(stncrn.position, mousePos) < 1.0f
                 );
-            if (stonicorn == null)
+            if (stonicorns.Count == 0)
             {
-                stonicorn = Managers.Planet.Planet.residents.FirstOrDefault(
+                stonicorns = Managers.Planet.Planet.residents.FindAll(
                     stncrn => Managers.Planet.Planet.getHexPos(stncrn.homePosition) == pos
                     );
             }
-            if (stonicorn != null)
+            stonicorns.RemoveAll(stncrn => stncrn == null);
+            if (Managers.Camera.focusObject)
             {
-                Managers.Camera.focusObject = Managers.PlanetEffects.stonicorns[stonicorn]
-                    .GetComponent<StonicornDisplayer>();
+                stonicorns.Remove(Managers.Camera.focusObject.stonicorn);
+            }
+            if (stonicorns.Count > 0)
+            {
+                Stonicorn stonicorn = stonicorns.OrderBy(
+                        stncrn => Vector2.Distance(stncrn.position, mousePos)
+                    ).ToList()[0];
+                Managers.Camera.focusObject = Managers.PlanetEffects
+                    .stonicorns[stonicorn].GetComponent<StonicornDisplayer>();
                 Managers.Camera.Locked = true;
-                Managers.Camera.autoFrame(stonicorn.position, origPosList);
+                Managers.Camera.autoFrame(
+                    stonicorn.position,
+                    new List<Vector2>() { stonicorn.position }
+                    );
                 Managers.PlanetEffects.updateStonicornInfo(stonicorn);
             }
         }
