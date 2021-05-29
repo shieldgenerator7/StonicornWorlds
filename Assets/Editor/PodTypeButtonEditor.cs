@@ -36,6 +36,8 @@ public class PlanetObjectTypeButtonEditor : Editor
                     }
                 }
                 ptb.image.sprite = ptb.planetObjectType.preview;
+                ptb.activeImage.color = ptb.planetObjectType.uiColor;
+                ptb.mouseOverImage.color = ptb.planetObjectType.uiColor;
                 if (ptb.compatibleToolActions.Count == 0)
                 {
                     if (ptb.planetObjectType is PodType pt)
@@ -50,6 +52,8 @@ public class PlanetObjectTypeButtonEditor : Editor
                 }
                 EditorUtility.SetDirty(ptb);
                 EditorUtility.SetDirty(ptb.image);
+                EditorUtility.SetDirty(ptb.activeImage);
+                EditorUtility.SetDirty(ptb.mouseOverImage);
                 EditorSceneManager.MarkSceneDirty(ptb.gameObject.scene);
             }
         }

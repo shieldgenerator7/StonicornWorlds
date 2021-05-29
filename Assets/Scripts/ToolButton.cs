@@ -46,7 +46,7 @@ public abstract class ToolButton : MonoBehaviour
     public void checkActive()
     {
         activeButton = isActive();
-        activeImage.enabled = activeButton;
+        activeImage.gameObject.SetActive(activeButton);
     }
 
     public bool Active => activeButton;

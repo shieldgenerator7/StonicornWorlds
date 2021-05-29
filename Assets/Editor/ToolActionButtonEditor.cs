@@ -28,6 +28,8 @@ public class ToolActionButtonEditor : Editor
                     //}
                 }
                 tab.image.sprite = tab.toolAction.preview;
+                tab.activeImage.color = tab.image.color;
+                tab.mouseOverImage.color = tab.image.color;
                 if (tab.compatibleObjectTypes.Count == 0)
                 {
                     tab.compatibleObjectTypes.AddRange(FindObjectOfType<ConstantBank>().allPodTypes);
@@ -35,6 +37,8 @@ public class ToolActionButtonEditor : Editor
                 }
                 EditorUtility.SetDirty(tab);
                 EditorUtility.SetDirty(tab.image);
+                EditorUtility.SetDirty(tab.activeImage);
+                EditorUtility.SetDirty(tab.mouseOverImage);
                 EditorSceneManager.MarkSceneDirty(tab.gameObject.scene);
             }
         }
