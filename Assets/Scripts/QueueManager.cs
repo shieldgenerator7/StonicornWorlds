@@ -69,6 +69,15 @@ public class QueueManager : Manager
             .FindAll(task => task.pos != exclude)
             .FirstOrDefault();
 
+    public bool hasEmptyTaskAt(Vector2 pos)
+        => queue.Any(task => task.pos == pos && !task.Started);
+
+    public void cancelEmptyTasksAt(Vector2 pos)
+    {
+        queue.RemoveAll(task => task.pos == pos && !task.Started);
+        callOnQueueChanged();
+    }
+
     /// <summary>
     /// 
     /// </summary>
