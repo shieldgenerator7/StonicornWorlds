@@ -190,11 +190,27 @@ public class CustomMenu
         int problemCount = 0;
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
         ProgressionManager progressionManager = GameObject.FindObjectOfType<ProgressionManager>();
+        progressionManager.buttonProgressors = GameObject.FindObjectsOfType<ButtonProgressor>(true).ToList();
+        //Try to fill in empty button progressors
+        progressionManager.buttonProgressors
+            .FindAll(btnpro => btnpro.button == null)
+            .ForEach(btnpro =>
+            {
+                //like "Pod Core"
+                string subName = btnpro.gameObject.name.Split(' ')[1];
+                btnpro.button = GameObject.FindObjectsOfType<ToolButton>(true)
+                    //like "btn Core"
+                    .FirstOrDefault(btn => subName == btn.gameObject.name.Split(' ')[1]);
+                if (btnpro.button != null)
+                {
+                    Debug.LogWarning("Put button " + btnpro.button.name + " in button progressor " + btnpro.name, btnpro);
+                }
+            });
         //Check to make sure buttons are registered
         inputManager.buttons
             .FindAll(
-            btn => !progressionManager.proreqs.Any(
-                    proreq => proreq.button == btn
+            btn => !progressionManager.buttonProgressors.Any(
+                    btnpro => btnpro.button == btn
                     )
             )
             .ForEach(btn =>
@@ -203,16 +219,16 @@ public class CustomMenu
                 Debug.LogError("Button " + btn + " is not registered in ProgressManager!", btn);
             });
         //Check to make sure no button is registered twice (or more)
-        progressionManager.proreqs
+        progressionManager.buttonProgressors
             .FindAll(
-            proreq => progressionManager.proreqs.Any(
-                pr => pr != proreq && pr.button == proreq.button
+            btnpro => progressionManager.buttonProgressors.Any(
+                br => br != btnpro && br.button == btnpro.button
                 )
             )
-            .ForEach(proreq =>
+            .ForEach(btnpro =>
             {
                 problemCount++;
-                Debug.LogError("Button " + proreq.button
+                Debug.LogError("Button " + btnpro.button
                 + " is registered more than once in ProgressManager!", progressionManager);
             });
         //Set active buttons to inactive

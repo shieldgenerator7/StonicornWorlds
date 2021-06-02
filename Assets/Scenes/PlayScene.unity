@@ -324,6 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94103776}
+  - component: {fileID: 94103777}
   m_Layer: 0
   m_Name: Pod Stone
   m_TagString: Untagged
@@ -345,6 +346,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &94103777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94103775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 807291198}
+  proreqs: []
 --- !u!1 &95723307
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,8 +543,9 @@ GameObject:
   m_Component:
   - component: {fileID: 207610544}
   - component: {fileID: 207610543}
+  - component: {fileID: 207610545}
   m_Layer: 0
-  m_Name: Convert
+  m_Name: Action Convert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,6 +578,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &207610545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207610542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 86797397}
+  proreqs: []
 --- !u!1001 &269451798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,6 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372376946}
+  - component: {fileID: 372376947}
   m_Layer: 0
   m_Name: Pod Tree
   m_TagString: Untagged
@@ -741,6 +772,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372376947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372376945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 711767243}
+  proreqs: []
 --- !u!1 &385257796
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +795,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 385257797}
+  - component: {fileID: 385257798}
   m_Layer: 0
   m_Name: Pod Lava
   m_TagString: Untagged
@@ -771,6 +817,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &385257798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385257796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 2141590758}
+  proreqs: []
 --- !u!1 &406603800
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 406603801}
+  - component: {fileID: 406603802}
   m_Layer: 0
   m_Name: Pod Core
   m_TagString: Untagged
@@ -801,6 +862,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &406603802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406603800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 5002807837290620646}
+  proreqs: []
 --- !u!1 &462870972
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,8 +886,9 @@ GameObject:
   m_Component:
   - component: {fileID: 462870973}
   - component: {fileID: 462870974}
+  - component: {fileID: 462870975}
   m_Layer: 0
-  m_Name: Brush Select
+  m_Name: Select Brush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,6 +920,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694d7196081b7c54ebe103a7838df535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &462870975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462870972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 969042643}
+  proreqs: []
 --- !u!1 &466491599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618094741}
+  - component: {fileID: 618094742}
   m_Layer: 0
   m_Name: Pod Water
   m_TagString: Untagged
@@ -1572,6 +1663,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &618094742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618094740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1204566096}
+  proreqs: []
 --- !u!1 &629642235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,8 +1687,9 @@ GameObject:
   m_Component:
   - component: {fileID: 629642236}
   - component: {fileID: 629642237}
+  - component: {fileID: 629642238}
   m_Layer: 0
-  m_Name: Line Select
+  m_Name: Select Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1615,6 +1721,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819b21ab14576d84588fdebac436aa32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &629642238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629642235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1926594514}
+  proreqs: []
 --- !u!1 &636862940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,102 +1778,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cc350881f9fcf4baec014a36bfcac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proreqs:
-  - podType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
-    count: 1
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 2141590758}
-  - podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
-    count: 6
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 807291198}
-  - podType: {fileID: 0}
-    count: 7
-    resourceRequirement: 600
-    requireSaveFile: 0
-    button: {fileID: 5002807837290620646}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1204566096}
-  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1665949740}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 5
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1300821725}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 711767243}
-  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-    count: 20
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1102588521}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1411579189}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 86797397}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 15
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1555254106}
-  - podType: {fileID: 0}
-    count: 57
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1186659370}
-  - podType: {fileID: 0}
-    count: 2
-    resourceRequirement: 0
-    requireSaveFile: 1
-    button: {fileID: 1448358011}
-  - podType: {fileID: 0}
-    count: 30
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 8144703945616408084}
-  - podType: {fileID: 0}
-    count: 30
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1926594514}
-  - podType: {fileID: 0}
-    count: 57
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 24397548}
-  - podType: {fileID: 0}
-    count: 7
-    resourceRequirement: 2000
-    requireSaveFile: 0
-    button: {fileID: 969042643}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 20
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1407939203}
-  - podType: {fileID: 0}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1069150920}
+  buttonProgressors:
+  - {fileID: 1752469041}
+  - {fileID: 673603990}
+  - {fileID: 629642238}
+  - {fileID: 1752226978}
+  - {fileID: 1641698982}
+  - {fileID: 462870975}
+  - {fileID: 207610545}
+  - {fileID: 1168859927}
+  - {fileID: 1284685046}
+  - {fileID: 1012292984}
+  - {fileID: 385257798}
+  - {fileID: 406603802}
+  - {fileID: 1591744648}
+  - {fileID: 1942372797}
+  - {fileID: 1496371736}
+  - {fileID: 618094742}
+  - {fileID: 726293292}
+  - {fileID: 372376947}
+  - {fileID: 94103777}
 --- !u!1 &673603987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,8 +1808,9 @@ GameObject:
   m_Component:
   - component: {fileID: 673603989}
   - component: {fileID: 673603988}
+  - component: {fileID: 673603990}
   m_Layer: 0
-  m_Name: Plant
+  m_Name: Action Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1798,6 +1843,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673603990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673603987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1555254106}
+  proreqs: []
 --- !u!224 &711767242 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -1823,6 +1882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 726293291}
+  - component: {fileID: 726293292}
   m_Layer: 0
   m_Name: Pod House
   m_TagString: Untagged
@@ -1844,6 +1904,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726293292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726293290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1407939203}
+  proreqs: []
 --- !u!1001 &747281964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2515,6 +2589,7 @@ Transform:
   - {fileID: 629642236}
   - {fileID: 1284685044}
   - {fileID: 462870973}
+  - {fileID: 1752469040}
   m_Father: {fileID: 1625964771}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2843,8 +2918,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1012292982}
   - component: {fileID: 1012292983}
+  - component: {fileID: 1012292984}
   m_Layer: 0
-  m_Name: Construct
+  m_Name: Action Construct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2877,6 +2953,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 21300000, guid: db1aaa42c09bb73409d188e3c475b64d, type: 3}
+--- !u!114 &1012292984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012292981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1411579189}
+  proreqs: []
 --- !u!1001 &1037310043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3335,8 +3425,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1168859925}
   - component: {fileID: 1168859926}
+  - component: {fileID: 1168859927}
   m_Layer: 0
-  m_Name: Magnify
+  m_Name: Action Magnify
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3369,6 +3460,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 21300000, guid: 1695ddc42b38127419ae93bfe4e5c912, type: 3}
+--- !u!114 &1168859927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168859924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1186659370}
+  proreqs: []
 --- !u!114 &1186659370 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
@@ -3406,8 +3511,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1284685044}
   - component: {fileID: 1284685045}
+  - component: {fileID: 1284685046}
   m_Layer: 0
-  m_Name: Ring Select
+  m_Name: Select Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3439,6 +3545,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576cc9dd1a1d83244a5814afc3161149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1284685046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284685043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 24397548}
+  proreqs: []
 --- !u!224 &1300821724 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -4728,6 +4848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496371735}
+  - component: {fileID: 1496371736}
   m_Layer: 0
   m_Name: Pod Grass
   m_TagString: Untagged
@@ -4749,6 +4870,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1496371736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496371734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1300821725}
+  proreqs: []
 --- !u!114 &1555254106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
@@ -4769,6 +4904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591744647}
+  - component: {fileID: 1591744648}
   m_Layer: 0
   m_Name: Pod Dirt
   m_TagString: Untagged
@@ -4790,6 +4926,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1591744648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591744646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1665949740}
+  proreqs: []
 --- !u!1 &1624048184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5003,8 +5153,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1641698980}
   - component: {fileID: 1641698981}
+  - component: {fileID: 1641698982}
   m_Layer: 0
-  m_Name: Single Select
+  m_Name: Select Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5036,6 +5187,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b688d4ec0f77a468741146870ba10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1641698982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641698979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8144703945616408084}
+  proreqs: []
 --- !u!224 &1665949739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
@@ -5062,8 +5227,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1752226976}
   - component: {fileID: 1752226977}
+  - component: {fileID: 1752226978}
   m_Layer: 0
-  m_Name: Cancel
+  m_Name: Action Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5096,6 +5262,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 21300000, guid: 9a0e01ba8bc82bb41898926bcd744e36, type: 3}
+--- !u!114 &1752226978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752226975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1069150920}
+  proreqs: []
+--- !u!1 &1752469039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1752469040}
+  - component: {fileID: 1752469041}
+  m_Layer: 0
+  m_Name: Misc Clear Save
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1752469040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752469039}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 877969571}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1752469041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752469039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1448358011}
+  proreqs: []
 --- !u!1001 &1926594512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5286,6 +5511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942372796}
+  - component: {fileID: 1942372797}
   m_Layer: 0
   m_Name: Pod Snow
   m_TagString: Untagged
@@ -5307,6 +5533,20 @@ Transform:
   m_Father: {fileID: 877969571}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1942372797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942372795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97abc11ca26fc345aa83f17de71a739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1102588521}
+  proreqs: []
 --- !u!1001 &2064257490
 PrefabInstance:
   m_ObjectHideFlags: 0
