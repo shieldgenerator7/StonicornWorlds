@@ -128,45 +128,66 @@ public class CustomMenu
 
     #region Prebuild Submenu
     [MenuItem("SG7/Build/Prebuild/Run All Prebuild Tasks &w")]
-    public static void runAllPrebuildTasks()
+    public static int runAllPrebuildTasks()
     {
         ClearLogConsole();
         Debug.Log("=== Prebuild tasks starting ===");
+        int problemCount = 0;
         //
-        setupInputManager();
-        setupPodTypeBank();
-        checkProgressionManager();
+        problemCount += setupInputManager();
+        problemCount += setupPodTypeBank();
+        problemCount += checkProgressionManager();
         //
-        Debug.Log("=== Prebuild tasks finished ===");
+        if (problemCount == 0)
+        {
+            Debug.Log("=== Prebuild tasks finished ===");
+        }
+        else
+        {
+            Debug.Log("=== Prebuild tasks: " + problemCount + " problems.");
+        }
+        return problemCount;
     }
     [MenuItem("SG7/Build/Prebuild/Setup InputManager")]
-    public static void setupInputManager()
+    public static int setupInputManager()
     {
+        int problemCount = 0;
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
         inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList()
             .FindAll(btn => !(btn is ToolBox));
         GameObject.FindObjectsOfType<ToolBox>(true).ToList()
             .FindAll(tb => !inputManager.toolBoxes.Contains(tb))
-            .ForEach(tb => Debug.LogError("Tool " + tb + " is not listed in InputManager!", tb));
+            .ForEach(tb =>
+            {
+                problemCount++;
+                Debug.LogError("Tool " + tb + " is not listed in InputManager!", tb);
+            });
         inputManager.buttons
             .FindAll(btn => !inputManager.toolBoxes.Any(tb => tb.buttons.Contains(btn)))
-            .ForEach(btn => Debug.LogError("Button " + btn + " is not listed in any registered ToolBox!", btn));
+            .ForEach(btn =>
+            {
+                problemCount++;
+                Debug.LogError("Button " + btn + " is not listed in any registered ToolBox!", btn);
+            });
         inputManager.tools = GameObject.FindObjectsOfType<Tool>(true).ToList();
         EditorUtility.SetDirty(inputManager);
         Debug.Log("InputManager setup.", inputManager);
+        return problemCount;
     }
     [MenuItem("SG7/Build/Prebuild/Setup PodTypeBank")]
-    public static void setupPodTypeBank()
+    public static int setupPodTypeBank()
     {
         ConstantBank podTypeBank = GameObject.FindObjectOfType<ConstantBank>();
         podTypeBank.allPodTypes = Resources.FindObjectsOfTypeAll<PodType>().ToList();
         podTypeBank.allPodContentTypes = Resources.FindObjectsOfTypeAll<PodContentType>().ToList();
         EditorUtility.SetDirty(podTypeBank);
         Debug.Log("PodTypeBank setup.", podTypeBank);
+        return 0;
     }
     [MenuItem("SG7/Build/Prebuild/Check ProgressionManager")]
-    public static void checkProgressionManager()
+    public static int checkProgressionManager()
     {
+        int problemCount = 0;
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
         ProgressionManager progressionManager = GameObject.FindObjectOfType<ProgressionManager>();
         //Check to make sure buttons are registered
@@ -177,8 +198,10 @@ public class CustomMenu
                     )
             )
             .ForEach(btn =>
-                Debug.LogError("Button " + btn + " is not registered in ProgressManager!", btn)
-                );
+            {
+                problemCount++;
+                Debug.LogError("Button " + btn + " is not registered in ProgressManager!", btn);
+            });
         //Check to make sure no button is registered twice (or more)
         progressionManager.proreqs
             .FindAll(
@@ -187,9 +210,11 @@ public class CustomMenu
                 )
             )
             .ForEach(proreq =>
+            {
+                problemCount++;
                 Debug.LogError("Button " + proreq.button
-                + " is registered more than once in ProgressManager!", progressionManager)
-            );
+                + " is registered more than once in ProgressManager!", progressionManager);
+            });
         //Set active buttons to inactive
         inputManager.buttons.FindAll(btn => btn.gameObject.activeSelf)
             .ForEach(btn =>
@@ -198,6 +223,7 @@ public class CustomMenu
                 Debug.LogWarning("Set button inactive: " + btn, btn);
             });
         Debug.Log("ProgressionManager checked.", progressionManager);
+        return problemCount;
     }
 
     //2021-05-25: copied from http://answers.unity.com/answers/1318322/view.html
@@ -345,9 +371,12 @@ public class CustomMenu
     public static void finishSession()
     {
         Debug.Log("=== Finishing session ===");
-        runAllPrebuildTasks();
-        EditorSceneManager.SaveOpenScenes();
-        buildWindows();
+        int problemCount = runAllPrebuildTasks();
+        if (problemCount == 0)
+        {
+            EditorSceneManager.SaveOpenScenes();
+            buildWindows();
+        }
     }
 
     [MenuItem("SG7/Upgrade/Force save all assets")]
