@@ -31,4 +31,10 @@ public class Player
     {
         planets.ForEach(planet => planet.inflate());
     }
+
+    public void updateButtonNames(List<string> names)
+    {
+        names.FindAll(name => !buttonNames.Contains(name))
+            .ForEach(name => buttonNames.Add(name));
+    }
 }

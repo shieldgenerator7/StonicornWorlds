@@ -9,6 +9,15 @@ public class ProgressionManager : Manager
 
     public override void setup()
     {
+        //Restore all saved progressed buttons
+        Managers.Player.Player.buttonNames.ForEach(
+            btnName =>
+            {
+                ToolButton button = Managers.Input.buttons.First(btn => btn.gameObject.name == btnName);
+                button.gameObject.SetActive(true);
+            }
+            );
+        //Check all progression
         checkAllProgression();
     }
 

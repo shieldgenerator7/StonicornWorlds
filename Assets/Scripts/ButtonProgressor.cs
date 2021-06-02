@@ -10,6 +10,12 @@ public class ButtonProgressor : MonoBehaviour
 
     public bool checkProgression()
     {
+        //if already progressed,
+        if (button.gameObject.activeSelf)
+        {
+            //return true
+            return true;
+        }
         bool allProgressed = proreqs.All(proreq => proreq.isRequirementMet());
         if (allProgressed)
         {

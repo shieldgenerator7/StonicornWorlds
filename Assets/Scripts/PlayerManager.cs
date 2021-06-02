@@ -30,9 +30,11 @@ public class PlayerManager : Manager
 
     public void prepareForSave()
     {
-        player.buttonNames = Managers.Input.buttons
+        player.updateButtonNames(
+            Managers.Input.buttons
              .FindAll(btn => btn.gameObject.activeSelf)
-             .ConvertAll(btn => btn.gameObject.name);
+             .ConvertAll(btn => btn.gameObject.name)
+             );
         player.lastActiveButtonNames = Managers.Input.ActiveButtons
             .ConvertAll(btn => btn.gameObject.name);
     }
