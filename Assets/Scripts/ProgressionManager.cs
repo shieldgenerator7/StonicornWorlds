@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProgressionManager : Manager
 {
-    public List<ProgressionRequirement> proreqs;
+    public List<ButtonProgressor> buttonProgressors;
 
     public override void setup()
     {
@@ -15,11 +15,11 @@ public class ProgressionManager : Manager
     public void checkAllProgression()
     {
         bool anyProgressed = false;
-        for (int i = proreqs.Count - 1; i >= 0; i--)
+        for (int i = buttonProgressors.Count - 1; i >= 0; i--)
         {
-            if (proreqs[i].checkProgression())
+            if (buttonProgressors[i].checkProgression())
             {
-                proreqs.RemoveAt(i);
+                buttonProgressors.RemoveAt(i);
                 anyProgressed = true;
             }
         }

@@ -13,8 +13,8 @@ public class ProgressionManagerEditor : Editor
         if (GUILayout.Button("Progress All (Play Mode)"))
         {
             ProgressionManager pm = (ProgressionManager)target;
-            pm.proreqs.ForEach(pr => pr.button.gameObject.SetActive(true));
-            pm.proreqs.Clear();
+            pm.buttonProgressors.ForEach(br => br.button.gameObject.SetActive(true));
+            pm.buttonProgressors.Clear();
             Managers.Input.updateToolBoxes();
         }
     }

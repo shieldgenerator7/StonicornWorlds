@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class ButtonProgressor : MonoBehaviour
+{
+    public ToolButton button;
+    public List<Requirement> proreqs;
+
+    public bool checkProgression()
+    {
+        bool allProgressed = proreqs.All(proreq => proreq.isRequirementMet());
+        if (allProgressed)
+        {
+            button.gameObject.SetActive(true);
+            return true;
+        }
+        return false;
+    }
+}
