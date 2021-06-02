@@ -1465,6 +1465,145 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819b21ab14576d84588fdebac436aa32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &636862940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636862941}
+  - component: {fileID: 636862942}
+  m_Layer: 0
+  m_Name: ProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &636862941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636862940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1625964771}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &636862942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636862940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cc350881f9fcf4baec014a36bfcac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proreqs:
+  - podType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    count: 1
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 2141590758}
+  - podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    count: 6
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 807291198}
+  - podType: {fileID: 0}
+    count: 7
+    resourceRequirement: 600
+    requireSaveFile: 0
+    button: {fileID: 5002807837290620646}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1204566096}
+  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    count: 10
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1665949740}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 5
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1300821725}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 10
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 711767243}
+  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    count: 20
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1102588521}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1411579189}
+  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    count: 9
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 86797397}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 15
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1555254106}
+  - podType: {fileID: 0}
+    count: 57
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1186659370}
+  - podType: {fileID: 0}
+    count: 2
+    resourceRequirement: 0
+    requireSaveFile: 1
+    button: {fileID: 1448358011}
+  - podType: {fileID: 0}
+    count: 30
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 8144703945616408084}
+  - podType: {fileID: 0}
+    count: 30
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1926594514}
+  - podType: {fileID: 0}
+    count: 57
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 24397548}
+  - podType: {fileID: 0}
+    count: 7
+    resourceRequirement: 2000
+    requireSaveFile: 0
+    button: {fileID: 969042643}
+  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    count: 20
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1407939203}
+  - podType: {fileID: 0}
+    count: 10
+    resourceRequirement: 0
+    requireSaveFile: 0
+    button: {fileID: 1069150920}
 --- !u!1 &673603987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,7 +4601,6 @@ GameObject:
   - component: {fileID: 1625964775}
   - component: {fileID: 1625964776}
   - component: {fileID: 1625964772}
-  - component: {fileID: 1625964773}
   - component: {fileID: 1625964774}
   m_Layer: 0
   m_Name: Managers
@@ -4498,6 +4636,7 @@ Transform:
   - {fileID: 752787613}
   - {fileID: 774442318}
   - {fileID: 1302935093}
+  - {fileID: 636862941}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4534,114 +4673,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
   - {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
   - {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
---- !u!114 &1625964773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625964769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2cc350881f9fcf4baec014a36bfcac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  proreqs:
-  - podType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
-    count: 1
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 2141590758}
-  - podType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
-    count: 6
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 807291198}
-  - podType: {fileID: 0}
-    count: 7
-    resourceRequirement: 600
-    requireSaveFile: 0
-    button: {fileID: 5002807837290620646}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1204566096}
-  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1665949740}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 5
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1300821725}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 711767243}
-  - podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
-    count: 20
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1102588521}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1411579189}
-  - podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
-    count: 9
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 86797397}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 15
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1555254106}
-  - podType: {fileID: 0}
-    count: 57
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1186659370}
-  - podType: {fileID: 0}
-    count: 2
-    resourceRequirement: 0
-    requireSaveFile: 1
-    button: {fileID: 1448358011}
-  - podType: {fileID: 0}
-    count: 30
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 8144703945616408084}
-  - podType: {fileID: 0}
-    count: 30
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1926594514}
-  - podType: {fileID: 0}
-    count: 57
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 24397548}
-  - podType: {fileID: 0}
-    count: 7
-    resourceRequirement: 2000
-    requireSaveFile: 0
-    button: {fileID: 969042643}
-  - podType: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
-    count: 20
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1407939203}
-  - podType: {fileID: 0}
-    count: 10
-    resourceRequirement: 0
-    requireSaveFile: 0
-    button: {fileID: 1069150920}
 --- !u!114 &1625964774
 MonoBehaviour:
   m_ObjectHideFlags: 0
