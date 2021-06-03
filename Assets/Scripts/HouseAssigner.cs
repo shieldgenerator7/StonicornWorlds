@@ -17,14 +17,7 @@ public class HouseAssigner : MonoBehaviour
     {
         //Find stonicorns without a house (or core)
         Managers.Planet.Planet.residents
-            .FindAll(
-                stncrn => Managers.Planet.Planet.getPod(stncrn.homePosition).podType
-                    != Managers.Constants.corePodType
-                )
-            .FindAll(
-                stncrn => Managers.Planet.Planet.getPod(stncrn.homePosition).podType
-                    != Managers.Constants.spacePodType
-                )
+            .FindAll(stncrn => !stncrn.hasHome())
             .ForEach(stncrn =>
             {
                 stncrn.homePosition = Vector2.zero;
@@ -44,8 +37,7 @@ public class HouseAssigner : MonoBehaviour
             house =>
             {
                 Stonicorn resident = Managers.Planet.Planet.residents.FirstOrDefault(
-                    stncrn => Managers.Planet.Planet.getPod(stncrn.homePosition).podType
-                        == Managers.Constants.corePodType
+                    stncrn => stncrn.isHomeCore()
                     );
                 if (resident != null)
                 {

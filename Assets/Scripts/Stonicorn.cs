@@ -39,6 +39,21 @@ public class Stonicorn
         task = null;
     }
 
+    public bool hasHome() => isHomeCore() || isHomeHouse();
+
+    public bool isHomeCore()
+    {
+        Pod pod = Managers.Planet.Planet.getPod(homePosition);
+        return pod.podType == Managers.Constants.corePodType;
+    }
+
+    public bool isHomeHouse()
+    {
+        Pod pod = Managers.Planet.Planet.getPod(homePosition);
+        return pod.podType == Managers.Constants.spacePodType
+            && pod.hasContent(Managers.Constants.getPodContentType("House"));
+    }
+
     public bool isAtLocationOfInterest
         => Vector2.Distance(position, locationOfInterest) <= workRange;
 
