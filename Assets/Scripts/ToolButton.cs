@@ -10,9 +10,10 @@ public abstract class ToolButton : MonoBehaviour
     public Image mouseOverImage;
     Vector2 position;
     private bool activeButton = false;
+    protected bool canClickWhenActive = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         updatePosition();
     }
@@ -39,7 +40,7 @@ public abstract class ToolButton : MonoBehaviour
 
     public bool checkClick(Vector2 screenPos)
     {
-        return !activeButton
+        return (!activeButton || canClickWhenActive)
             && Vector2.Distance(screenPos, position) <= Managers.Constants.buttonCheckRadius;
     }
 
