@@ -28,7 +28,6 @@ public class NextStonicornButton : ToolButton
         {
             Managers.Camera.FocusObject = null;
         }
-        Managers.Input.checkAllButtons();
     }
 
     protected override bool isActive()

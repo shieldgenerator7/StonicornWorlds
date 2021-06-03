@@ -19,22 +19,25 @@ public class CameraController : Manager
         set
         {
             focusObject = value;
+            Stonicorn stonicorn = null;
             if (focusObject)
             {
+                stonicorn = focusObject.stonicorn;
                 Managers.Camera.Locked = true;
                 Managers.Camera.autoFrame(
-                    focusObject.stonicorn.position,
-                    new List<Vector2>() { focusObject.stonicorn.position }
+                    stonicorn.position,
+                    new List<Vector2>() { stonicorn.position }
                     );
-                Managers.PlanetEffects.updateStonicornInfo(focusObject.stonicorn);
             }
             else
             {
                 Managers.Camera.Locked = false;
-                Managers.PlanetEffects.updateStonicornInfo(null);
             }
+            onFocusObjectChanged?.Invoke(stonicorn);
         }
     }
+    public delegate void OnFocusObjectChanged(Stonicorn stonicorn);
+    public event OnFocusObjectChanged onFocusObjectChanged;
 
     private Vector3 Up;
     private Vector3 position;

@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         //Camera
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
+        Managers.Camera.onFocusObjectChanged += onFocusObjectChanged;
         //Resources
         Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
         //Queue
@@ -76,6 +77,12 @@ public class GameManager : MonoBehaviour
         canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
         Managers.Constants.updateScreenConstants(width, height);
         screenChangedLastFrame = true;
+    }
+
+    void onFocusObjectChanged(Stonicorn stonicorn)
+    {
+        Managers.PlanetEffects.updateStonicornInfo(stonicorn);
+        Managers.Input.checkAllButtons();
     }
 
     void onInputPlanetObjectTypeChanged(PlanetObjectType pot)
