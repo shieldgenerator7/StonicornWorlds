@@ -27,7 +27,7 @@ public class QueueTask
     public float Progress
     {
         get => progress;
-        set
+        private set
         {
             progress = Mathf.Min(value, taskObject.progressRequired);
             onProgressChanged?.Invoke(Percent);
@@ -35,6 +35,29 @@ public class QueueTask
     }
     public delegate void OnProgressChanged(float percent);
     public event OnProgressChanged onProgressChanged;
+
+    /// <summary>
+    /// Uses the given resources to progress this task
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="resources"></param>
+    /// <returns>amount of resources left after making progress</returns>
+    public float makeProgress(float amount, float resources)
+    {
+        float startCost = StartCost;
+        float required = startCost * amount / taskObject.progressRequired;
+        float take = Mathf.Clamp(required, 0, resources);
+        if (required == take)
+        {
+            Progress += amount;
+        }
+        else
+        {
+            float work = taskObject.progressRequired * take / startCost;
+            Progress += work;
+        }
+        return resources - take;
+    }
 
     //Returns a number between 0 and 1: 0 = not started, 1 = completed
     public float Percent => progress / taskObject.progressRequired;

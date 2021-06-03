@@ -156,6 +156,11 @@ public class Planet
         return pod && pod.podType != Managers.Constants.spacePodType;
     }
 
+    public Pod getClosestPod(Vector2 pos, PodType podType)
+        => Pods(podType)
+            .OrderBy(pod => Vector2.Distance(pos, pod.worldPos))
+            .ToList()[0];
+
     public Pod getGroundPod(Vector2 pos)
         => grid.getGround(worldToGrid(pos));
 

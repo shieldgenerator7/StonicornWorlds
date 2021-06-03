@@ -15,6 +15,7 @@ public class Stonicorn
     public float moveSpeed = 2;
     public float maxRest = 1000;
     public float restSpeed = 40;
+    public float toolbeltSize = 300;
     //Personal Data
     public string name;
     public Vector2 homePosition;
@@ -22,6 +23,7 @@ public class Stonicorn
     public Vector2 position;
     public Vector2 locationOfInterest;
     public float rest = 500;
+    public float toolbeltResources = 0;
     public Action action;
 
     public enum Action
@@ -29,6 +31,8 @@ public class Stonicorn
         IDLE,
         WORK,
         REST,
+        PICKUP,
+        DROPOFF,
     }
 
     [System.NonSerialized]

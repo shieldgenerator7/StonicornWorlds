@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StonicornController : MonoBehaviour
@@ -15,11 +16,43 @@ public class StonicornController : MonoBehaviour
         }
         if (stonicorn.action == Stonicorn.Action.IDLE)
         {
-            focusTask();
+            if (stonicorn.rest == 0)
+            {
+                if (stonicorn.toolbeltResources > 0 &&
+                    Managers.Planet.Planet.getPod(stonicorn.position).podType !=
+                    Managers.Constants.corePodType)
+                {
+                    goToDropoffResources();
+                }
+                else
+                {
+                    checkRest();
+                }
+            }
+            if (stonicorn.toolbeltResources == 0)
+            {
+                goToPickupResources();
+            }
+            else
+            {
+                focusTask();
+            }
         }
         if (stonicorn.position != stonicorn.locationOfInterest)
         {
             moveToLocationOfInterest();
+        }
+        if (stonicorn.position == stonicorn.locationOfInterest)
+        {
+            switch (stonicorn.action)
+            {
+                case Stonicorn.Action.PICKUP:
+                    pickupResources();
+                    break;
+                case Stonicorn.Action.DROPOFF:
+                    dropoffResources();
+                    break;
+            }
         }
         if (AtWorkSite)
         {
@@ -85,12 +118,11 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.task == null)
         {
-            stonicorn.task = Managers.Queue.getClosestTask(
-                stonicorn.position,
-                stonicorn.homePosition
-                );
-            if (stonicorn.task)
+            if (Managers.Queue.queue.Count > 0)
             {
+                stonicorn.task = Managers.Queue.queue
+                    .OrderBy(task => Vector2.Distance(task.pos, stonicorn.position))
+                    .ToList()[0];
                 stonicorn.locationOfInterest = stonicorn.task.pos;
             }
         }
@@ -107,14 +139,22 @@ public class StonicornController : MonoBehaviour
 
     void work()
     {
-        bool completed = Managers.Queue.workOnTask(stonicorn.task, stonicorn.workRate);
-        if (completed || !stonicorn.task.Started)
+        float prevResources = stonicorn.toolbeltResources;
+        stonicorn.toolbeltResources = Managers.Queue.workOnTask(
+            stonicorn.task,
+            stonicorn.workRate,
+            stonicorn.toolbeltResources
+            );
+        stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
+        //if task finished
+        if (prevResources == stonicorn.toolbeltResources)
         {
             stonicorn.goHome();
         }
-        else
+        //if ran out of resources
+        else if (stonicorn.toolbeltResources == 0)
         {
-            stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
+            goToPickupResources();
         }
     }
 
@@ -125,5 +165,41 @@ public class StonicornController : MonoBehaviour
             stonicorn.action = Stonicorn.Action.REST;
             stonicorn.goHome();
         }
+    }
+
+    void goToPickupResources()
+    {
+        Vector2 corePos = Managers.Resources.getClosestCore(stonicorn.position);
+        stonicorn.locationOfInterest = corePos;
+        stonicorn.action = Stonicorn.Action.PICKUP;
+    }
+
+    void pickupResources()
+    {
+        float need = stonicorn.toolbeltSize - stonicorn.toolbeltResources;
+        PodContent magma = Managers.Planet.Planet.getPod(stonicorn.position)
+            .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
+        float give = Mathf.Clamp(need, 0, magma.Var);
+        stonicorn.toolbeltResources += give;
+        magma.Var -= give;
+        stonicorn.action = Stonicorn.Action.IDLE;
+    }
+
+    void goToDropoffResources()
+    {
+        Vector2 corePos = Managers.Resources.getClosestCore(stonicorn.position);
+        stonicorn.locationOfInterest = corePos;
+        stonicorn.action = Stonicorn.Action.PICKUP;
+    }
+
+    void dropoffResources()
+    {
+        float excess = stonicorn.toolbeltResources - 0;
+        PodContent magma = Managers.Planet.Planet.getPod(stonicorn.position)
+            .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
+        float take = Mathf.Clamp(excess, 0, Managers.Resources.magmaCapPerCore - magma.Var);
+        stonicorn.toolbeltResources -= take;
+        magma.Var += take;
+        stonicorn.action = Stonicorn.Action.IDLE;
     }
 }

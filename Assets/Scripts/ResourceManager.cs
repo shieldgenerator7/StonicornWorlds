@@ -84,4 +84,8 @@ public class ResourceManager : Manager
             .ConvertAll(core => core.getContent(magmaContentType));
         magmaCap = magmaContents.Count * magmaCapPerCore;
     }
+
+    public Vector2 getClosestCore(Vector2 pos)
+        => Managers.Planet.Planet
+            .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
 }

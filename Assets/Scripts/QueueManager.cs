@@ -83,37 +83,24 @@ public class QueueManager : Manager
     /// </summary>
     /// <param name="worker"></param>
     /// <param name="task"></param>
-    /// <returns>true if completed, false if not completed or not started</returns>
-    public bool workOnTask(QueueTask task, float workRate)
+    /// <returns>amount of resources left after working on the task</returns>
+    public float workOnTask(QueueTask task, float workRate, float resources)
     {
         if (task == null)
         {
-            return false;
+            return resources;
         }
         if (task.Completed)
         {
             //don't work on a task that's already completed
-            return true;
+            return resources;
         }
-        if (!task.Started)
-        {
-            if (Managers.Resources.Resources >= task.StartCost)
-            {
-                Managers.Resources.Resources -= task.StartCost;
-                task.Progress = 0.01f;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        task.Progress += workRate * Time.deltaTime;
+        resources = task.makeProgress(workRate * Time.deltaTime, resources);
         if (task.Completed)
         {
             taskCompleted(task);
-            return true;
         }
-        return false;
+        return resources;
     }
 
     void taskCompleted(QueueTask task)
