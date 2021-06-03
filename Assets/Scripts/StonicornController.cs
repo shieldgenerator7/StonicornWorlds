@@ -11,10 +11,21 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.atHome)
         {
+            float prevRest = stonicorn.Rest;
             stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
             if (stonicorn.Rest == stonicorn.maxRest)
             {
                 stonicorn.resting = false;
+                //if just now finished resting
+                if (prevRest != stonicorn.maxRest)
+                {
+                    if (stonicorn.isHomeHouse())
+                    {
+                        stonicorn.restSpeed += 1;
+                        stonicorn.maxRest += 10;
+                        stonicorn.Rest = stonicorn.maxRest;
+                    }
+                }
             }
         }
         if (!stonicorn.resting)
@@ -22,7 +33,7 @@ public class StonicornController : MonoBehaviour
             if (stonicorn.task == null)
             {
                 stonicorn.task = Managers.Queue.getClosestTask(
-                    stonicorn.position, 
+                    stonicorn.position,
                     stonicorn.homePosition
                     );
                 if (stonicorn.task)
