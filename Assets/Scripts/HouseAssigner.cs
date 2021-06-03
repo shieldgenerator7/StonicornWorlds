@@ -21,7 +21,7 @@ public class HouseAssigner : MonoBehaviour
             .ForEach(stncrn =>
             {
                 stncrn.homePosition = Vector2.zero;
-                if (stncrn.resting)
+                if (stncrn.action == Stonicorn.Action.REST)
                 {
                     stncrn.locationOfInterest = stncrn.homePosition;
                 }
@@ -42,7 +42,7 @@ public class HouseAssigner : MonoBehaviour
                 if (resident != null)
                 {
                     resident.homePosition = house.container.worldPos;
-                    if (resident.resting)
+                    if (resident.action == Stonicorn.Action.REST)
                     {
                         resident.locationOfInterest = resident.homePosition;
                     }

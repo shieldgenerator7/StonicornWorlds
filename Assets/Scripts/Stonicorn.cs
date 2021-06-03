@@ -22,7 +22,14 @@ public class Stonicorn
     public Vector2 position;
     public Vector2 locationOfInterest;
     public float rest = 500;
-    public bool resting = true;
+    public Action action;
+
+    public enum Action
+    {
+        IDLE,
+        WORK,
+        REST,
+    }
 
     [System.NonSerialized]
     public QueueTask task;

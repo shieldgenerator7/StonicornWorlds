@@ -13,7 +13,7 @@ public class StonicornController : MonoBehaviour
         {
             rest();
         }
-        if (!stonicorn.resting)
+        if (stonicorn.action == Stonicorn.Action.IDLE)
         {
             focusTask();
         }
@@ -67,7 +67,7 @@ public class StonicornController : MonoBehaviour
         stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
         if (stonicorn.Rest == stonicorn.maxRest)
         {
-            stonicorn.resting = false;
+            stonicorn.action = Stonicorn.Action.IDLE;
             //if just now finished resting
             if (prevRest != stonicorn.maxRest)
             {
@@ -122,7 +122,7 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.Rest == 0)
         {
-            stonicorn.resting = true;
+            stonicorn.action = Stonicorn.Action.REST;
             stonicorn.goHome();
         }
     }

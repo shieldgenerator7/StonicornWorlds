@@ -55,7 +55,7 @@ public class PlanetManager : Manager
             Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
             planet.residents[0].rest = 500;
-            planet.residents[0].resting = false;
+            planet.residents[0].action = Stonicorn.Action.IDLE;
             FindObjectOfType<StonicornGenerator>().statsFromProfile(
                 planet.residents[0],
                 0
