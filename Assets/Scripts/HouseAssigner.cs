@@ -49,13 +49,5 @@ public class HouseAssigner : MonoBehaviour
                 }
             }
             );
-        //Make new stonicorns
-        houses.RemoveAll(house => Managers.Planet.Planet.residents.Any(
-            stncrn => stncrn.homePosition == house.container.worldPos
-            ));
-        houses.ForEach(house =>
-        {
-            Managers.Planet.Planet.addResident(house.container.worldPos);
-        });
     }
 }
