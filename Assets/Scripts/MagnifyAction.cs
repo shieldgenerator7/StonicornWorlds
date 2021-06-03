@@ -16,6 +16,7 @@ public class MagnifyAction : ToolAction
         //If any of the positions are on the planet
         if (posList.Any(v => isActionValidAt(v)))
         {
+            Managers.Camera.FocusObject = null;
             Vector2 center = posList.Aggregate((sum, v) => sum + v) / posList.Count;
             Managers.Camera.Locked = true;
             Managers.Camera.autoFrame(center, posList);
@@ -40,7 +41,7 @@ public class MagnifyAction : ToolAction
                     );
             }
             stonicorns.RemoveAll(stncrn => stncrn == null);
-            if (Managers.Camera.FocusObject)
+            if (stonicorns.Count > 1 && Managers.Camera.FocusObject)
             {
                 stonicorns.Remove(Managers.Camera.FocusObject.stonicorn);
             }
@@ -52,7 +53,7 @@ public class MagnifyAction : ToolAction
                 Managers.Camera.FocusObject = Managers.PlanetEffects
                     .stonicorns[stonicorn].GetComponent<StonicornDisplayer>();
             }
-            else
+            else if (Managers.Camera.FocusObject != null)
             {
                 Managers.Camera.FocusObject = null;
             }
