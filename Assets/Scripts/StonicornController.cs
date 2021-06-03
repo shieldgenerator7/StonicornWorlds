@@ -11,63 +11,20 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.atHome)
         {
-            float prevRest = stonicorn.Rest;
-            stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
-            if (stonicorn.Rest == stonicorn.maxRest)
-            {
-                stonicorn.resting = false;
-                //if just now finished resting
-                if (prevRest != stonicorn.maxRest)
-                {
-                    if (stonicorn.isHomeHouse())
-                    {
-                        stonicorn.restSpeed += 1;
-                        stonicorn.maxRest += 10;
-                        stonicorn.Rest = stonicorn.maxRest;
-                    }
-                }
-            }
+            rest();
         }
         if (!stonicorn.resting)
         {
-            if (stonicorn.task == null)
-            {
-                stonicorn.task = Managers.Queue.getClosestTask(
-                    stonicorn.position,
-                    stonicorn.homePosition
-                    );
-                if (stonicorn.task)
-                {
-                    stonicorn.locationOfInterest = stonicorn.task.pos;
-                }
-            }
-            else if (stonicorn.locationOfInterest != stonicorn.task.pos)
-            {
-                stonicorn.locationOfInterest = stonicorn.task.pos;
-            }
+            focusTask();
         }
         if (stonicorn.position != stonicorn.locationOfInterest)
         {
             moveToLocationOfInterest();
         }
-        bool atWorkSite = !stonicorn.atHomeOrGoing && stonicorn.isAtLocationOfInterest;
-        if (atWorkSite && stonicorn.task != null)
+        if (AtWorkSite)
         {
-            //Work
-            bool completed = Managers.Queue.workOnTask(stonicorn.task, stonicorn.workRate);
-            if (completed || !stonicorn.task.Started)
-            {
-                stonicorn.goHome();
-            }
-            else
-            {
-                stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
-            }
-            if (stonicorn.Rest == 0)
-            {
-                stonicorn.resting = true;
-                stonicorn.goHome();
-            }
+            work();
+            checkRest();
         }
     }
 
@@ -101,6 +58,72 @@ public class StonicornController : MonoBehaviour
         if (Vector2.Distance(stonicorn.position, aboveLoI) <= 0.01f)
         {
             stonicorn.position = aboveLoI;
+        }
+    }
+
+    void rest()
+    {
+        float prevRest = stonicorn.Rest;
+        stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
+        if (stonicorn.Rest == stonicorn.maxRest)
+        {
+            stonicorn.resting = false;
+            //if just now finished resting
+            if (prevRest != stonicorn.maxRest)
+            {
+                if (stonicorn.isHomeHouse())
+                {
+                    stonicorn.restSpeed += 1;
+                    stonicorn.maxRest += 10;
+                    stonicorn.Rest = stonicorn.maxRest;
+                }
+            }
+        }
+    }
+
+    void focusTask()
+    {
+        if (stonicorn.task == null)
+        {
+            stonicorn.task = Managers.Queue.getClosestTask(
+                stonicorn.position,
+                stonicorn.homePosition
+                );
+            if (stonicorn.task)
+            {
+                stonicorn.locationOfInterest = stonicorn.task.pos;
+            }
+        }
+        else if (stonicorn.locationOfInterest != stonicorn.task.pos)
+        {
+            stonicorn.locationOfInterest = stonicorn.task.pos;
+        }
+    }
+
+    bool AtWorkSite
+        => !stonicorn.atHomeOrGoing
+        && stonicorn.isAtLocationOfInterest
+        && stonicorn.task != null;
+
+    void work()
+    {
+        bool completed = Managers.Queue.workOnTask(stonicorn.task, stonicorn.workRate);
+        if (completed || !stonicorn.task.Started)
+        {
+            stonicorn.goHome();
+        }
+        else
+        {
+            stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
+        }
+    }
+
+    void checkRest()
+    {
+        if (stonicorn.Rest == 0)
+        {
+            stonicorn.resting = true;
+            stonicorn.goHome();
         }
     }
 }
