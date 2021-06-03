@@ -17,6 +17,7 @@ public class ButtonProgressorEditor : Editor
             typeof(PodTypeRequirement),
             typeof(PodContentTypeRequirement),
             typeof(ResourceRequirement),
+            typeof(StonicornRequirement),
             typeof(QueueRequirement),
             typeof(SaveFileRequirement),
         };
