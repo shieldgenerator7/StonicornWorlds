@@ -11,7 +11,30 @@ public class CameraController : Manager
 
     public bool Locked = false;
 
-    public StonicornDisplayer focusObject;
+    [SerializeField]
+    private StonicornDisplayer focusObject;
+    public StonicornDisplayer FocusObject
+    {
+        get => focusObject;
+        set
+        {
+            focusObject = value;
+            if (focusObject)
+            {
+                Managers.Camera.Locked = true;
+                Managers.Camera.autoFrame(
+                    focusObject.stonicorn.position,
+                    new List<Vector2>() { focusObject.stonicorn.position }
+                    );
+                Managers.PlanetEffects.updateStonicornInfo(focusObject.stonicorn);
+            }
+            else
+            {
+                Managers.Camera.Locked = false;
+                Managers.PlanetEffects.updateStonicornInfo(null);
+            }
+        }
+    }
 
     private Vector3 Up;
     private Vector3 position;

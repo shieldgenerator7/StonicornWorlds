@@ -26,8 +26,6 @@ public class MagnifyAction : ToolAction
             Managers.Camera.autoFrame(posList);
         }
         //Track Stonicorn
-        Managers.Camera.focusObject = null;
-        Managers.PlanetEffects.updateStonicornInfo(null);
         if (origPosList.Count == 1)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -42,23 +40,21 @@ public class MagnifyAction : ToolAction
                     );
             }
             stonicorns.RemoveAll(stncrn => stncrn == null);
-            if (Managers.Camera.focusObject)
+            if (Managers.Camera.FocusObject)
             {
-                stonicorns.Remove(Managers.Camera.focusObject.stonicorn);
+                stonicorns.Remove(Managers.Camera.FocusObject.stonicorn);
             }
             if (stonicorns.Count > 0)
             {
                 Stonicorn stonicorn = stonicorns.OrderBy(
                         stncrn => Vector2.Distance(stncrn.position, mousePos)
                     ).ToList()[0];
-                Managers.Camera.focusObject = Managers.PlanetEffects
+                Managers.Camera.FocusObject = Managers.PlanetEffects
                     .stonicorns[stonicorn].GetComponent<StonicornDisplayer>();
-                Managers.Camera.Locked = true;
-                Managers.Camera.autoFrame(
-                    stonicorn.position,
-                    new List<Vector2>() { stonicorn.position }
-                    );
-                Managers.PlanetEffects.updateStonicornInfo(stonicorn);
+            }
+            else
+            {
+                Managers.Camera.FocusObject = null;
             }
         }
     }
