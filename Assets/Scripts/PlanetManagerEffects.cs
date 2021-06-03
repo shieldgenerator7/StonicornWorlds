@@ -63,6 +63,12 @@ public class PlanetManagerEffects : MonoBehaviour
                         transform
                         );
                     go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                    //special case: pointing straight down
+                    if (go.transform.eulerAngles.x != 0 || go.transform.eulerAngles.y != 0)
+                    {
+                        //prevent (-180,0,0)
+                        go.transform.eulerAngles = Vector3.forward * 180;
+                    }
                     displayObjects.Add(pod, go);
                 }
                 //Check for added pod contents
@@ -77,6 +83,13 @@ public class PlanetManagerEffects : MonoBehaviour
                             transform
                             );
                         go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
+                        //special case: pointing straight down
+                        if (go.transform.eulerAngles.x != 0 || go.transform.eulerAngles.y != 0)
+                        {
+                            //prevent (-180,0,0)
+                            go.transform.eulerAngles = Vector3.forward * 180;
+                        }
+                        //Check for PodContentDisplayer
                         PodContentDisplayer pcd = go.GetComponent<PodContentDisplayer>();
                         if (pcd)
                         {
