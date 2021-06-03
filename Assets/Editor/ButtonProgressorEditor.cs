@@ -11,59 +11,32 @@ public class ButtonProgressorEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        if (GUILayout.Button("Pod Type Requirement"))
+
+        List<System.Type> options = new List<System.Type>()
         {
-            foreach (object o in targets)
-            {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                addRequirement<PodTypeRequirement>(bp);
-            }
-        }
-        if (GUILayout.Button("Pod Content Type Requirement"))
+            typeof(PodTypeRequirement),
+            typeof(PodContentTypeRequirement),
+            typeof(ResourceRequirement),
+            typeof(QueueRequirement),
+            typeof(SaveFileRequirement),
+        };
+        options.RemoveAll(opt => anyHas(targets, opt));
+        if (options.Count > 0)
         {
-            foreach (object o in targets)
+            int selected = EditorGUILayout.Popup(
+                "Requirement Type",
+                -1,
+                options.ConvertAll(opt => opt.Name).ToArray()
+                );
+            if (selected >= 0)
             {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                addRequirement<PodContentTypeRequirement>(bp);
-            }
-        }
-        if (!anyHas<ResourceRequirement>(targets) &&
-            GUILayout.Button("Resource Requirement"))
-        {
-            foreach (object o in targets)
-            {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                addRequirement<ResourceRequirement>(bp);
-            }
-        }
-        if (!anyHas<QueueRequirement>(targets) &&
-            GUILayout.Button("Queue Requirement"))
-        {
-            foreach (object o in targets)
-            {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                addRequirement<QueueRequirement>(bp);
-            }
-        }
-        if (!anyHas<SaveFileRequirement>(targets) &&
-            GUILayout.Button("SaveFile Requirement"))
-        {
-            foreach (object o in targets)
-            {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                addRequirement<SaveFileRequirement>(bp);
-            }
-        }
-        if (anyHas<Requirement>(targets) &&
-            GUILayout.Button("---X--- Clear Reqs ---X---"))
-        {
-            foreach (object o in targets)
-            {
-                ButtonProgressor bp = (ButtonProgressor)o;
-                bp.proreqs.ForEach(
-                    proreq => DestroyImmediate(proreq)
-                    );
-                bp.proreqs.Clear();
+                foreach (object o in targets)
+                {
+                    ButtonProgressor bp = (ButtonProgressor)o;
+                    System.Type type = options[selected];
+                    addRequirement(bp, type);
+                    EditorUtility.SetDirty(bp);
+                }
             }
         }
     }
@@ -75,12 +48,29 @@ public class ButtonProgressorEditor : Editor
             .Any(btnpro => btnpro.GetComponent<T>());
     }
 
+    bool anyHas(Object[] targets, System.Type t)
+    {
+        return targets.ToList()
+            .ConvertAll(target => (ButtonProgressor)target)
+            .Any(btnpro => btnpro.GetComponent(t));
+    }
+
     void addRequirement<T>(ButtonProgressor bp) where T : Requirement
     {
         T req = bp.gameObject.AddComponent<T>();
         if (req)
         {
             bp.proreqs.Add(req);
+        }
+    }
+
+    void addRequirement(ButtonProgressor bp, System.Type t)
+    {
+        Requirement req = (Requirement)bp.gameObject.AddComponent(t);
+        if (req)
+        {
+            bp.proreqs.Add(req);
+            EditorUtility.SetDirty(req);
         }
     }
 }
