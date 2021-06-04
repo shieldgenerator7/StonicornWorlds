@@ -106,9 +106,15 @@ public class ResourceManager : Manager
             .FindAll(magma => magma && magma.Var > 0);
         if (magmaList.Count > 0)
         {
-            return magmaList
+            magmaList = magmaList
                 .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
-                .ToList()[0].container.worldPos;
+                .ToList();
+            PodContent magma = magmaList.FirstOrDefault(magma => magma.Var > 10);
+            if (!magma)
+            {
+                magma = magmaList[0];
+            }
+            return magma.container.worldPos;
         }
         else
         {

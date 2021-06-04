@@ -34,12 +34,12 @@ public class StonicornController : MonoBehaviour
                 goIdle();
             }
         }
+        if (stonicorn.position != stonicorn.locationOfInterest)
+        {
+            moveToLocationOfInterest();
+        }
         if (currentActivity)
         {
-            if (stonicorn.position != stonicorn.locationOfInterest)
-            {
-                moveToLocationOfInterest();
-            }
             if (currentActivity.isInRange)
             {
                 if (currentActivity.canContinue)
