@@ -40,6 +40,7 @@ public class RestActivity : Activity
 
     protected override Vector2 chooseActivityLocation()
     {
+        stonicorn.task = null;
         return stonicorn.homePosition;
     }
 }

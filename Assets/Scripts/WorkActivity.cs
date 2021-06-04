@@ -24,7 +24,7 @@ public class WorkActivity : Activity
 
     protected override Vector2 chooseActivityLocation()
     {
-        if (stonicorn.task == null)
+        if (stonicorn.task == null || stonicorn.task.Completed)
         {
             stonicorn.task = Managers.Queue.getAvailableTasks()
                 .OrderBy(task => Vector2.Distance(task.pos, stonicorn.position))

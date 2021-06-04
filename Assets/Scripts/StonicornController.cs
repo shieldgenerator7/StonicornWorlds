@@ -60,7 +60,6 @@ public class StonicornController : MonoBehaviour
     void goIdle()
     {
         currentActivity = null;
-        stonicorn.task = null;
         stonicorn.action = Stonicorn.Action.IDLE;
         stonicorn.locationOfInterest = stonicorn.homePosition;
     }
