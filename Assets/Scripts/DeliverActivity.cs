@@ -8,20 +8,28 @@ public class DeliverActivity : Activity
     readonly PickupActivity pickup;
     readonly DropoffActivity dropoff;
 
-    Func<PodContent, bool> sourceFunc =
-        (magma) => magma.Var >= Managers.Resources.halfFull;
-    Func<PodContent, bool> destinationFunc =
-        (magma) => magma.Var < Managers.Resources.nearEmpty;
+    bool droppingOff = false;
+
+    Func<PodContent, bool> sourceFunc;
+    Func<PodContent, bool> destinationFunc;
+    Func<PodContent, bool> filterFunc;
 
     public DeliverActivity(Stonicorn stonicorn, PickupActivity pickup, DropoffActivity dropoff)
         : base(stonicorn)
     {
         this.pickup = pickup;
         this.dropoff = dropoff;
+
+        filterFunc = (magma) =>
+             Vector2.Distance(magma.container.worldPos, stonicorn.position) > ActivityRange + 0.1f;
+        sourceFunc = (magma) => magma.Var >= Managers.Resources.halfFull
+            && filterFunc(magma);
+        destinationFunc = (magma) => magma.Var < Managers.Resources.nearEmpty
+            && filterFunc(magma);
     }
 
     public override Stonicorn.Action action
-        => (stonicorn.toolbeltResources > 0)
+        => (droppingOff)
             ? Stonicorn.Action.DROPOFF
             : Stonicorn.Action.PICKUP;
 
@@ -31,14 +39,14 @@ public class DeliverActivity : Activity
         && Managers.Resources.anyCore(sourceFunc)
         && Managers.Resources.anyCore(destinationFunc);
 
-        => (stonicorn.toolbeltResources > 0)
     public override bool canContinue
         => stonicorn.rest > 0 &&
+        (droppingOff)
             ? dropoff.canContinue
             : pickup.canContinue;
 
     public override bool isDone
-        => (stonicorn.toolbeltResources > 0)
+        => (droppingOff)
             ? dropoff.isDone
             : pickup.isDone;
 
@@ -46,7 +54,7 @@ public class DeliverActivity : Activity
 
     public override void doActivity()
     {
-        if(stonicorn.toolbeltResources > 0)
+        if (droppingOff)
         {
             dropoff.doActivity();
         }
@@ -59,7 +67,8 @@ public class DeliverActivity : Activity
 
     public override Vector2 chooseActivityLocation()
     {
-        if (stonicorn.toolbeltResources > 0)
+        droppingOff = stonicorn.toolbeltResources > 0;
+        if (droppingOff)
         {
             //dropoff
             return Managers.Resources.getClosestCore(stonicorn.position, destinationFunc);
