@@ -69,6 +69,9 @@ public class QueueManager : Manager
             .FindAll(task => task.pos != exclude)
             .FirstOrDefault();
 
+    public List<QueueTask> getAvailableTasks()
+        => queue.FindAll(task => isTaskAvailable(task));
+
     public bool hasEmptyTaskAt(Vector2 pos)
         => queue.Any(task => task.pos == pos && !task.Started);
 

@@ -12,7 +12,7 @@ public class WorkActivity : Activity
     public override bool canStart
         => stonicorn.rest > 0
         //&& stonicorn.toolbeltResources > 0
-        && Managers.Queue.queue.Count > 0;
+        && Managers.Queue.getAvailableTasks().Count > 0;
 
     public override bool canContinue
         => stonicorn.rest > 0;
@@ -26,7 +26,7 @@ public class WorkActivity : Activity
     {
         if (stonicorn.task == null)
         {
-            stonicorn.task = Managers.Queue.queue
+            stonicorn.task = Managers.Queue.getAvailableTasks()
                 .OrderBy(task => Vector2.Distance(task.pos, stonicorn.position))
                 .ToList()[0];
         }
