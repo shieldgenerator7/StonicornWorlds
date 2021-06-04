@@ -39,6 +39,12 @@ public class StonicornGenerator : MonoBehaviour
         string firstName = names[Random.Range(0, names.Count)];
         string lastName = names[Random.Range(0, names.Count)];
         stonicorn.name = firstName + " " + lastName;
+        int enumCount = System.Enum.GetValues(typeof(Stonicorn.TaskPriority)).Length;
+        while (stonicorn.taskPriority == stonicorn.taskPriority2)
+        {
+            stonicorn.taskPriority = (Stonicorn.TaskPriority)Random.Range(0, enumCount);
+            stonicorn.taskPriority2 = (Stonicorn.TaskPriority)Random.Range(0, enumCount);
+        }
         //
         return stonicorn;
     }
@@ -51,5 +57,7 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.moveSpeed = model.moveSpeed;
         stonicorn.restSpeed = model.restSpeed;
         stonicorn.maxRest = model.maxRest;
+        stonicorn.taskPriority = model.taskPriority;
+        stonicorn.taskPriority2 = model.taskPriority2;
     }
 }

@@ -1539,6 +1539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minOrthoSize: 1.5
   Locked: 0
+  focusObject: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2862,12 +2863,17 @@ MonoBehaviour:
     moveSpeed: 2
     maxRest: 1000
     restSpeed: 40
+    toolbeltSize: 300
+    transferRate: 100
     name: 
     homePosition: {x: 0, y: 0}
+    taskPriority: 5
+    taskPriority2: 6
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
     rest: 0
-    resting: 0
+    toolbeltResources: 0
+    action: 0
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}

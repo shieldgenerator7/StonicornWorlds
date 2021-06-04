@@ -17,7 +17,7 @@ public class QueueTask
         PLANT
     }
     public Type type;
-    private float StartCost =>
+    public float StartCost =>
         (type == Type.CONVERT) ? taskObject.convertCost : taskObject.startCost;
 
     public Vector2 pos;

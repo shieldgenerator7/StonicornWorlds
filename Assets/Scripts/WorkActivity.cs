@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,59 @@ public class WorkActivity : Activity
     {
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
-            stonicorn.task = Managers.Queue.getAvailableTasks()
-                .OrderBy(task => Vector2.Distance(task.pos, stonicorn.position))
-                .ToList()[0];
+            List<QueueTask> tasks = Managers.Queue.getAvailableTasks();
+            tasks = sortTasks(tasks, stonicorn.taskPriority2);
+            tasks = sortTasks(tasks, stonicorn.taskPriority);
+            stonicorn.task = tasks[0];
         }
         return stonicorn.task.pos;
+    }
+    private List<QueueTask> sortTasks(List<QueueTask> tasks, Stonicorn.TaskPriority taskPriority)
+    {
+        Func<QueueTask, float> sortFunction = task => 0;
+        switch (taskPriority)
+        {
+            case Stonicorn.TaskPriority.CLOSE:
+            case Stonicorn.TaskPriority.FAR:
+                sortFunction = task => Vector2.Distance(task.pos, stonicorn.position);
+                break;
+            case Stonicorn.TaskPriority.CHEAP:
+            case Stonicorn.TaskPriority.EXPENSIVE:
+                sortFunction = task => task.StartCost;
+                break;
+            case Stonicorn.TaskPriority.EMPTY:
+            case Stonicorn.TaskPriority.STARTED:
+                sortFunction = task => task.Percent;
+                break;
+            case Stonicorn.TaskPriority.NEXT:
+            case Stonicorn.TaskPriority.LAST:
+                sortFunction = task => Managers.Queue.queue.IndexOf(task);
+                break;
+            case Stonicorn.TaskPriority.SOLO:
+            case Stonicorn.TaskPriority.GROUP:
+                sortFunction = task => Managers.Planet.Planet.residents
+                  .FindAll(stncrn => stncrn.task == task)
+                  .Count;
+                break;
+            default:
+                Debug.LogError("Unknown TaskPriority!: " + taskPriority);
+                break;
+        }
+        bool descend = new List<Stonicorn.TaskPriority>() {
+            Stonicorn.TaskPriority.FAR,
+            Stonicorn.TaskPriority.EXPENSIVE,
+            Stonicorn.TaskPriority.STARTED,
+            Stonicorn.TaskPriority.LAST,
+            Stonicorn.TaskPriority.GROUP,
+        }.Contains(taskPriority);
+        if (descend)
+        {
+            return tasks.OrderByDescending(sortFunction).ToList();
+        }
+        else
+        {
+            return tasks.OrderBy(sortFunction).ToList();
+        }
     }
 
     public override void doActivity()

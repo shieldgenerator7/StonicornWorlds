@@ -20,6 +20,8 @@ public class Stonicorn
     //Personal Data
     public string name;
     public Vector2 homePosition;
+    public TaskPriority taskPriority;
+    public TaskPriority taskPriority2;
     //Runtime Vars
     public Vector2 position;
     public Vector2 locationOfInterest;
@@ -34,6 +36,19 @@ public class Stonicorn
         REST,
         PICKUP,
         DROPOFF,
+    }
+    public enum TaskPriority
+    {
+        CLOSE,//nearby
+        FAR,//must travel long way to get there
+        CHEAP,//costs hardly any resources
+        EXPENSIVE,//costs a lot of resources
+        EMPTY,//not started
+        STARTED,//some progress on it has been made
+        NEXT,//next task in the queue
+        LAST,//last task in the queue
+        SOLO,//no one else is working on it
+        GROUP,//at least one other pony is working on it
     }
 
     [System.NonSerialized]
@@ -81,6 +96,12 @@ public class Stonicorn
         if (eyeColor == Color.black)
         {
             eyeColor = hairColor;
+        }
+        //
+        if (taskPriority == taskPriority2)
+        {
+            taskPriority = TaskPriority.STARTED;
+            taskPriority2 = TaskPriority.NEXT;
         }
     }
 }
