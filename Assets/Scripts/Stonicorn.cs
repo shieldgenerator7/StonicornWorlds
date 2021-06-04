@@ -57,8 +57,14 @@ public class Stonicorn
             && pod.hasContent(Managers.Constants.getPodContentType("House"));
     }
 
-    public bool isAtWorkSite
-       => task != null && Vector2.Distance(position, locationOfInterest) <= workRange;
+    List<Action> magicActions = new List<Action>() {
+            Action.WORK,
+            Action.PICKUP,
+            Action.DROPOFF
+        };
+    public bool isUsingMagic
+       => Vector2.Distance(position, locationOfInterest) <= workRange
+        && magicActions.Contains(action);
 
     public float Rest
     {

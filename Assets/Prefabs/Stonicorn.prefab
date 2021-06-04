@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 21
+  m_SortingOrder: 23
   m_Sprite: {fileID: 21300000, guid: 185466ca8ea369949aa8871932480caa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 21
+  m_SortingOrder: 22
   m_Sprite: {fileID: 21300000, guid: 6dc0163e511195b4389ac1e846513452, type: 3}
   m_Color: {r: 0.284, g: 0.284, b: 0.284, a: 1}
   m_FlipX: 0
@@ -340,7 +340,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 21
   m_Sprite: {fileID: 21300000, guid: 4b5a6e46a59ed824da5238b531f7ee1d, type: 3}
   m_Color: {r: 0.72300005, g: 0.72300005, b: 0.72300005, a: 1}
   m_FlipX: 0
@@ -412,12 +412,15 @@ MonoBehaviour:
     moveSpeed: 2
     maxRest: 1000
     restSpeed: 40
+    toolbeltSize: 300
+    transferRate: 100
     name: 
     homePosition: {x: 0, y: 0}
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
     rest: 500
-    resting: 1
+    toolbeltResources: 0
+    action: 0
 --- !u!114 &1939388258390965799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,12 +442,15 @@ MonoBehaviour:
     moveSpeed: 2
     maxRest: 1000
     restSpeed: 40
+    toolbeltSize: 300
+    transferRate: 100
     name: 
     homePosition: {x: 0, y: 0}
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
     rest: 500
-    resting: 1
+    toolbeltResources: 0
+    action: 0
   bodySR: {fileID: 5606281556685499231}
   hairSR: {fileID: 5606281556637797395}
   eyeSR: {fileID: 5654749102713740068}
@@ -687,7 +693,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 929499c8e3d973240ab54076dd3748eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
