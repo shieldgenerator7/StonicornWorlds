@@ -97,7 +97,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 21
 --- !u!114 &4790744201795173420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 21
   m_Sprite: {fileID: 21300000, guid: 32a6d0daca7e600418f5e289e7079327, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
