@@ -28,6 +28,9 @@ public class CameraController : Manager
                     stonicorn.position,
                     new List<Vector2>() { stonicorn.position }
                     );
+#if UNITY_EDITOR
+                UnityEditor.Selection.activeGameObject = focusObject.gameObject;
+#endif
             }
             else
             {
