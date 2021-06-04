@@ -15,7 +15,7 @@ public class PickupActivity : Activity
 
     public override bool canContinue
         => stonicorn.toolbeltResources < stonicorn.toolbeltSize
-        && Managers.Resources.getResourcesAt(stonicorn.locationOfInterest) > 0;
+        && Managers.Resources.getResourcesAt(stonicorn.locationOfInterest) > 10;
 
     public override bool isDone
         => stonicorn.toolbeltResources == stonicorn.toolbeltSize;
