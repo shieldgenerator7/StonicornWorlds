@@ -98,6 +98,15 @@ public class ResourceManager : Manager
     public Vector2 getClosestCore(Vector2 pos)
         => Managers.Planet.Planet
             .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
+
+    public bool anyCoreNonEmpty()
+    {
+        return Managers.Planet.Planet
+            .Pods(Managers.Constants.corePodType)
+            .ConvertAll(pod => pod.getContent(magmaContentType))
+            .FindAll(magma => magma && magma.Var >= 100)
+            .Count > 0;
+    }
     public Vector2 getClosestNonEmptyCore(Vector2 pos)
     {
         List<PodContent> magmaList = Managers.Planet.Planet
@@ -107,9 +116,10 @@ public class ResourceManager : Manager
         if (magmaList.Count > 0)
         {
             magmaList = magmaList
+                .OrderByDescending(magma => magma.Var)
                 .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
                 .ToList();
-            PodContent magma = magmaList.FirstOrDefault(magma => magma.Var > 10);
+            PodContent magma = magmaList.FirstOrDefault(magma => magma.Var > 100);
             if (!magma)
             {
                 magma = magmaList[0];
