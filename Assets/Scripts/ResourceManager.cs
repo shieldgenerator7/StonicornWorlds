@@ -87,12 +87,14 @@ public class ResourceManager : Manager
 
     public float getResourcesAt(Vector2 pos)
     {
-        Pod pod = Managers.Planet.Planet.getPod(pos);
-        if (!pod || pod.podType != Managers.Constants.corePodType)
+        PodContent magma = magmaContents.FirstOrDefault(
+            magma => magma.container.worldPos == pos
+            );
+        if (magma)
         {
-            return 0;
+            return magma.Var;
         }
-        return pod.getContent(magmaContentType).Var;
+        return 0;
     }
 
     public Vector2 getClosestCore(Vector2 pos)
@@ -100,19 +102,12 @@ public class ResourceManager : Manager
             .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
 
     public bool anyCoreNonEmpty()
-    {
-        return Managers.Planet.Planet
-            .Pods(Managers.Constants.corePodType)
-            .ConvertAll(pod => pod.getContent(magmaContentType))
-            .FindAll(magma => magma && magma.Var >= 100)
-            .Count > 0;
-    }
+        => magmaContents.Any(magma => magma.Var > 100);
+
     public Vector2 getClosestNonEmptyCore(Vector2 pos)
     {
-        List<PodContent> magmaList = Managers.Planet.Planet
-            .Pods(Managers.Constants.corePodType)
-            .ConvertAll(pod => pod.getContent(magmaContentType))
-            .FindAll(magma => magma && magma.Var > 0);
+        List<PodContent> magmaList = magmaContents
+            .FindAll(magma => magma.Var > 0);
         if (magmaList.Count > 0)
         {
             magmaList = magmaList
@@ -133,19 +128,11 @@ public class ResourceManager : Manager
     }
 
     public bool anyCoreNonFull()
-    {
-        return Managers.Planet.Planet
-            .Pods(Managers.Constants.corePodType)
-            .ConvertAll(pod => pod.getContent(magmaContentType))
-            .FindAll(magma => magma && magma.Var < magmaCapPerCore)
-            .Count > 0;
-    }
+        => magmaContents.Any(magma => magma.Var < magmaCapPerCore);
     public Vector2 getClosestNonFullCore(Vector2 pos)
     {
-        List<PodContent> magmaList = Managers.Planet.Planet
-            .Pods(Managers.Constants.corePodType)
-            .ConvertAll(pod => pod.getContent(magmaContentType))
-            .FindAll(magma => magma && magma.Var < magmaCapPerCore);
+        List<PodContent> magmaList = magmaContents
+            .FindAll(magma => magma.Var < magmaCapPerCore);
         if (magmaList.Count > 0)
         {
             return magmaList
