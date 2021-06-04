@@ -16,19 +16,6 @@ public class StonicornController : MonoBehaviour
         }
         if (stonicorn.action == Stonicorn.Action.IDLE)
         {
-            if (stonicorn.rest == 0)
-            {
-                if (stonicorn.toolbeltResources > 0 &&
-                    Managers.Planet.Planet.getPod(stonicorn.position).podType !=
-                    Managers.Constants.corePodType)
-                {
-                    goToDropoffResources();
-                }
-                else
-                {
-                    checkRest();
-                }
-            }
             if (stonicorn.toolbeltResources == 0)
             {
                 goToPickupResources();
@@ -37,6 +24,7 @@ public class StonicornController : MonoBehaviour
             {
                 focusTask();
             }
+            checkRest();
         }
         if (stonicorn.position != stonicorn.locationOfInterest)
         {
@@ -162,8 +150,17 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.Rest == 0)
         {
-            stonicorn.action = Stonicorn.Action.REST;
-            stonicorn.goHome();
+            if (stonicorn.toolbeltResources > 0 &&
+                    Managers.Planet.Planet.getPod(stonicorn.position).podType !=
+                    Managers.Constants.corePodType)
+            {
+                goToDropoffResources();
+            }
+            else
+            {
+                stonicorn.action = Stonicorn.Action.REST;
+                stonicorn.goHome();
+            }
         }
     }
 
@@ -189,7 +186,7 @@ public class StonicornController : MonoBehaviour
     {
         Vector2 corePos = Managers.Resources.getClosestCore(stonicorn.position);
         stonicorn.locationOfInterest = corePos;
-        stonicorn.action = Stonicorn.Action.PICKUP;
+        stonicorn.action = Stonicorn.Action.DROPOFF;
     }
 
     void dropoffResources()
