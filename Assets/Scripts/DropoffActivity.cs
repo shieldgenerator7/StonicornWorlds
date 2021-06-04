@@ -24,7 +24,11 @@ public class DropoffActivity : Activity
 
     public override void doActivity()
     {
-        float excess = stonicorn.toolbeltResources - 0;
+        float excess = Mathf.Clamp(
+            stonicorn.transferRate * Time.deltaTime,
+            0,
+            stonicorn.toolbeltResources - 0
+            );
         PodContent magma = Managers.Planet.Planet.getPod(stonicorn.locationOfInterest)
             .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
         float take = Mathf.Clamp(excess, 0, Managers.Resources.magmaCapPerCore - magma.Var);

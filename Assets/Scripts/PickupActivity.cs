@@ -24,7 +24,11 @@ public class PickupActivity : Activity
 
     public override void doActivity()
     {
-        float need = stonicorn.toolbeltSize - stonicorn.toolbeltResources;
+        float need = Mathf.Clamp(
+            stonicorn.transferRate * Time.deltaTime,
+            0,
+            stonicorn.toolbeltSize - stonicorn.toolbeltResources
+            );
         PodContent magma = Managers.Planet.Planet.getPod(stonicorn.locationOfInterest)
             .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
         float give = Mathf.Clamp(need, 0, magma.Var);
