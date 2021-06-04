@@ -30,7 +30,7 @@ public class StonicornController : MonoBehaviour
             }
             else
             {
-                stonicorn.locationOfInterest = stonicorn.homePosition;
+                goIdle();
             }
         }
         if (currentActivity)
@@ -46,17 +46,23 @@ public class StonicornController : MonoBehaviour
                     currentActivity.doActivity();
                     if (currentActivity.isDone)
                     {
-                        currentActivity = null;
-                        stonicorn.task = null;
+                        goIdle();
                     }
                 }
                 else
                 {
-                    currentActivity = null;
-                    stonicorn.task = null;
+                    goIdle();
                 }
             }
         }
+    }
+
+    void goIdle()
+    {
+        currentActivity = null;
+        stonicorn.task = null;
+        stonicorn.action = Stonicorn.Action.IDLE;
+        stonicorn.locationOfInterest = stonicorn.homePosition;
     }
 
     void moveToLocationOfInterest()
