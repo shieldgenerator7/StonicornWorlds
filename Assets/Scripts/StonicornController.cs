@@ -16,15 +16,18 @@ public class StonicornController : MonoBehaviour
         }
         if (stonicorn.action == Stonicorn.Action.IDLE)
         {
-            if (stonicorn.toolbeltResources == 0)
-            {
-                goToPickupResources();
-            }
-            else
-            {
-                focusTask();
-            }
             checkRest();
+            if (stonicorn.action == Stonicorn.Action.IDLE)
+            {
+                if (stonicorn.toolbeltResources == 0)
+                {
+                    goToPickupResources();
+                }
+                else
+                {
+                    focusTask();
+                }
+            }
         }
         if (stonicorn.position != stonicorn.locationOfInterest)
         {
@@ -150,17 +153,18 @@ public class StonicornController : MonoBehaviour
     {
         if (stonicorn.Rest == 0)
         {
-            if (stonicorn.toolbeltResources > 0 &&
-                    Managers.Planet.Planet.getPod(stonicorn.position).podType !=
-                    Managers.Constants.corePodType)
-            {
-                goToDropoffResources();
-            }
-            else
-            {
+            //if (stonicorn.toolbeltResources > 0 &&
+            //        Managers.Planet.Planet.getPod(stonicorn.position).podType !=
+            //        Managers.Constants.corePodType)
+            //{
+            //    goToDropoffResources();
+            //    stonicorn.task = null;
+            //}
+            //else
+            //{
                 stonicorn.action = Stonicorn.Action.REST;
                 stonicorn.goHome();
-            }
+            //}
         }
     }
 
@@ -195,7 +199,7 @@ public class StonicornController : MonoBehaviour
         PodContent magma = Managers.Planet.Planet.getPod(stonicorn.position)
             .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
         float take = Mathf.Clamp(excess, 0, Managers.Resources.magmaCapPerCore - magma.Var);
-        stonicorn.toolbeltResources -= take;
+        stonicorn.toolbeltResources = 0;//-= take;
         magma.Var += take;
         stonicorn.action = Stonicorn.Action.IDLE;
     }
