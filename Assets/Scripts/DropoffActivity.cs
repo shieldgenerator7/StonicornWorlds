@@ -36,7 +36,7 @@ public class DropoffActivity : Activity
         magma.Var += take;
     }
 
-    protected override Vector2 chooseActivityLocation()
+    public override Vector2 chooseActivityLocation()
     {
         Vector2 corePos = Managers.Resources.getClosestNonFullCore(stonicorn.position);
         return corePos;

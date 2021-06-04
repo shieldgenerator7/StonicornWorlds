@@ -37,7 +37,7 @@ public class PickupActivity : Activity
         magma.Var -= give;
     }
 
-    protected override Vector2 chooseActivityLocation()
+    public override Vector2 chooseActivityLocation()
     {
         Vector2 corePos = Managers.Resources.getClosestNonEmptyCore(stonicorn.position);
         return corePos;

@@ -26,7 +26,7 @@ public abstract class Activity
         stonicorn.locationOfInterest = chooseActivityLocation();
     }
 
-    protected abstract Vector2 chooseActivityLocation();
+    public abstract Vector2 chooseActivityLocation();
 
     public abstract float ActivityRange { get; }
 

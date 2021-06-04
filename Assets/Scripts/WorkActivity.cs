@@ -23,7 +23,7 @@ public class WorkActivity : Activity
 
     public override Stonicorn.Action action => Stonicorn.Action.WORK;
 
-    protected override Vector2 chooseActivityLocation()
+    public override Vector2 chooseActivityLocation()
     {
         if (stonicorn.task == null || stonicorn.task.Completed)
         {

@@ -12,10 +12,13 @@ public class StonicornController : MonoBehaviour
 
     private void Start()
     {
+        PickupActivity pickup = new PickupActivity(stonicorn);
+        DropoffActivity dropoff = new DropoffActivity(stonicorn);
+        activities.Add(new DeliverActivity(stonicorn, pickup, dropoff));
         activities.Add(new WorkActivity(stonicorn));
-        activities.Add(new PickupActivity(stonicorn));
+        activities.Add(pickup);
         activities.Add(new RestActivity(stonicorn));
-        activities.Add(new DropoffActivity(stonicorn));
+        activities.Add(dropoff);
     }
 
     // Update is called once per frame

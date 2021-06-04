@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class ResourceManager : Manager
 {
     public float magmaCapPerCore = 700;
+    public float nearEmpty = 100;
+    public float halfFull = 401;
     public PodContentType magmaContentType;
 
     private List<PodContent> magmaContents;
@@ -102,7 +105,7 @@ public class ResourceManager : Manager
             .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
 
     public bool anyCoreNonEmpty()
-        => magmaContents.Any(magma => magma.Var > 100);
+        => magmaContents.Any(magma => magma.Var > nearEmpty);
 
     public Vector2 getClosestNonEmptyCore(Vector2 pos)
     {
@@ -114,7 +117,7 @@ public class ResourceManager : Manager
                 .OrderByDescending(magma => magma.Var)
                 .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
                 .ToList();
-            PodContent magma = magmaList.FirstOrDefault(magma => magma.Var > 100);
+            PodContent magma = magmaList.FirstOrDefault(magma => magma.Var > nearEmpty);
             if (!magma)
             {
                 magma = magmaList[0];
@@ -133,6 +136,25 @@ public class ResourceManager : Manager
     {
         List<PodContent> magmaList = magmaContents
             .FindAll(magma => magma.Var < magmaCapPerCore);
+        if (magmaList.Count > 0)
+        {
+            return magmaList
+                .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
+                .ToList()[0].container.worldPos;
+        }
+        else
+        {
+            return getClosestCore(pos);
+        }
+    }
+
+    public bool anyCore(Func<PodContent, bool> findFunc)
+        => magmaContents.Any(magma => findFunc(magma));
+
+    public Vector2 getClosestCore(Vector2 pos, Func<PodContent, bool> findFunc)
+    {
+        List<PodContent> magmaList = magmaContents
+            .FindAll(magma => findFunc(magma));
         if (magmaList.Count > 0)
         {
             return magmaList
