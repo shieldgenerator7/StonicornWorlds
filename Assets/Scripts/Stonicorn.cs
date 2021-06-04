@@ -38,17 +38,8 @@ public class Stonicorn
     [System.NonSerialized]
     public QueueTask task;
 
-    public bool atHome
-        => position == homePosition;
-
     public bool atHomeOrGoing
         => locationOfInterest == homePosition;
-
-    public void goHome()
-    {
-        locationOfInterest = homePosition;
-        task = null;
-    }
 
     public bool hasHome() => isHomeCore() || isHomeHouse();
 
@@ -65,8 +56,8 @@ public class Stonicorn
             && pod.hasContent(Managers.Constants.getPodContentType("House"));
     }
 
-    public bool isAtLocationOfInterest
-        => Vector2.Distance(position, locationOfInterest) <= workRange;
+    public bool isAtWorkSite
+       => task != null && Vector2.Distance(position, locationOfInterest) <= workRange;
 
     public float Rest
     {

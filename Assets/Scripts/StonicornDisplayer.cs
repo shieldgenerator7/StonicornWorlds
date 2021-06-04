@@ -32,7 +32,7 @@ public class StonicornDisplayer : MonoBehaviour
         transform.position = stonicorn.position;
         transform.up = Managers.Planet.Planet.getUpDirection(stonicorn.position);
         //Working
-        if (stonicorn.isAtLocationOfInterest && !stonicorn.atHomeOrGoing)
+        if (stonicorn.isAtWorkSite)
         {
             //Effects
             ui_work.transform.up = (stonicorn.locationOfInterest - stonicorn.position);
