@@ -15,6 +15,7 @@ public class StonicornController : MonoBehaviour
         activities.Add(new WorkActivity(stonicorn));
         activities.Add(new PickupActivity(stonicorn));
         activities.Add(new RestActivity(stonicorn));
+        activities.Add(new DropoffActivity(stonicorn));
     }
 
     // Update is called once per frame

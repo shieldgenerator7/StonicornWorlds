@@ -10,7 +10,8 @@ public class PickupActivity : Activity
 
     public override bool canStart
         => stonicorn.rest > 0
-        && stonicorn.toolbeltResources < stonicorn.toolbeltSize;
+        && stonicorn.toolbeltResources < stonicorn.toolbeltSize
+        && Managers.Queue.getAvailableTasks().Count > 0;
 
     public override bool canContinue
         => stonicorn.toolbeltResources < stonicorn.toolbeltSize

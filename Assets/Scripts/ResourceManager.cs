@@ -115,4 +115,30 @@ public class ResourceManager : Manager
             return getClosestCore(pos);
         }
     }
+
+    public bool anyCoreNonFull()
+    {
+        return Managers.Planet.Planet
+            .Pods(Managers.Constants.corePodType)
+            .ConvertAll(pod => pod.getContent(magmaContentType))
+            .FindAll(magma => magma && magma.Var < magmaCapPerCore)
+            .Count > 0;
+    }
+    public Vector2 getClosestNonFullCore(Vector2 pos)
+    {
+        List<PodContent> magmaList = Managers.Planet.Planet
+            .Pods(Managers.Constants.corePodType)
+            .ConvertAll(pod => pod.getContent(magmaContentType))
+            .FindAll(magma => magma && magma.Var < magmaCapPerCore);
+        if (magmaList.Count > 0)
+        {
+            return magmaList
+                .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
+                .ToList()[0].container.worldPos;
+        }
+        else
+        {
+            return getClosestCore(pos);
+        }
+    }
 }
