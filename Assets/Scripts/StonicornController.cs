@@ -72,15 +72,18 @@ public class StonicornController : MonoBehaviour
     void moveToLocationOfInterest()
     {
         Vector2 aboveLoI = stonicorn.locationOfInterest;
-        float range = currentActivity.ActivityRange;
-        if (range != 0)
+        if (currentActivity)
         {
-            aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
-            if (range != 1)
+            float range = currentActivity.ActivityRange;
+            if (range != 0)
             {
-                aboveLoI = stonicorn.locationOfInterest +
-                    ((aboveLoI - stonicorn.locationOfInterest).normalized
-                    * (range - 0.1f));
+                aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
+                if (range != 1)
+                {
+                    aboveLoI = stonicorn.locationOfInterest +
+                        ((aboveLoI - stonicorn.locationOfInterest).normalized
+                        * (range - 0.1f));
+                }
             }
         }
         if (Vector2.Distance(stonicorn.position, aboveLoI) > 1.0f)

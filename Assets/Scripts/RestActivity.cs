@@ -7,7 +7,7 @@ public class RestActivity : Activity
     public RestActivity(Stonicorn stonicorn) : base(stonicorn) { }
 
     public override bool canStart
-        => stonicorn.rest < stonicorn.maxRest
+        => stonicorn.rest < stonicorn.maxRest * 0.1f
         && (stonicorn.toolbeltResources == 0 || !Managers.Resources.anyCoreNonFull());
 
     public override bool canContinue
