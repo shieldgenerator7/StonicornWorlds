@@ -85,7 +85,34 @@ public class ResourceManager : Manager
         magmaCap = magmaContents.Count * magmaCapPerCore;
     }
 
+    public float getResourcesAt(Vector2 pos)
+    {
+        Pod pod = Managers.Planet.Planet.getPod(pos);
+        if (!pod || pod.podType != Managers.Constants.corePodType)
+        {
+            return 0;
+        }
+        return pod.getContent(magmaContentType).Var;
+    }
+
     public Vector2 getClosestCore(Vector2 pos)
         => Managers.Planet.Planet
             .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
+    public Vector2 getClosestNonEmptyCore(Vector2 pos)
+    {
+        List<PodContent> magmaList = Managers.Planet.Planet
+            .Pods(Managers.Constants.corePodType)
+            .ConvertAll(pod => pod.getContent(magmaContentType))
+            .FindAll(magma => magma && magma.Var > 0);
+        if (magmaList.Count > 0)
+        {
+            return magmaList
+                .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
+                .ToList()[0].container.worldPos;
+        }
+        else
+        {
+            return getClosestCore(pos);
+        }
+    }
 }

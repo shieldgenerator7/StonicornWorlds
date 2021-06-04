@@ -11,12 +11,12 @@ public class WorkActivity : Activity
 
     public override bool canStart
         => stonicorn.rest > 0
-        //&& stonicorn.toolbeltResources > 0
+        && stonicorn.toolbeltResources > 0
         && Managers.Queue.getAvailableTasks().Count > 0;
 
     public override bool canContinue
-        => stonicorn.rest > 0;
-    //&& stonicorn.toolbeltResources > 0;
+        => stonicorn.rest > 0
+        && stonicorn.toolbeltResources > 0;
 
     public override float ActivityRange => stonicorn.workRange;
 
@@ -38,7 +38,7 @@ public class WorkActivity : Activity
         stonicorn.toolbeltResources = Managers.Queue.workOnTask(
             stonicorn.task,
             stonicorn.workRate,
-            100//stonicorn.toolbeltResources
+            stonicorn.toolbeltResources
             );
         stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
     }

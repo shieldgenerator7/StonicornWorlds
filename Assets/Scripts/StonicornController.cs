@@ -13,6 +13,7 @@ public class StonicornController : MonoBehaviour
     private void Start()
     {
         activities.Add(new WorkActivity(stonicorn));
+        activities.Add(new PickupActivity(stonicorn));
         activities.Add(new RestActivity(stonicorn));
     }
 
