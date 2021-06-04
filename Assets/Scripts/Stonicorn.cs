@@ -23,6 +23,7 @@ public class Stonicorn
     public Vector2 homePosition;
     public TaskPriority taskPriority;
     public TaskPriority taskPriority2;
+    public QueueTask.Type favoriteJobType;
     //Runtime Vars
     public Vector2 position;
     public Vector2 locationOfInterest;

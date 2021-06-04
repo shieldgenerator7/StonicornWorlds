@@ -14,7 +14,8 @@ public class QueueTask
         CONSTRUCT,
         CONVERT,
         DESTRUCT,
-        PLANT
+        PLANT,
+        DELIVER,
     }
     public Type type;
     public float StartCost =>

@@ -28,6 +28,10 @@ public class WorkActivity : Activity
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
             List<QueueTask> tasks = Managers.Queue.getAvailableTasks();
+            if (tasks.Any(task=>task.type == stonicorn.favoriteJobType))
+            {
+                tasks.RemoveAll(task => task.type != stonicorn.favoriteJobType);
+            }
             tasks = sortTasks(tasks, stonicorn.taskPriority2);
             tasks = sortTasks(tasks, stonicorn.taskPriority);
             stonicorn.task = tasks[0];

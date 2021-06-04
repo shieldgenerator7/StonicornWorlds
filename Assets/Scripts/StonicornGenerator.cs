@@ -39,12 +39,14 @@ public class StonicornGenerator : MonoBehaviour
         string firstName = names[Random.Range(0, names.Count)];
         string lastName = names[Random.Range(0, names.Count)];
         stonicorn.name = firstName + " " + lastName;
-        int enumCount = System.Enum.GetValues(typeof(Stonicorn.TaskPriority)).Length;
+        int enumCountTask = System.Enum.GetValues(typeof(Stonicorn.TaskPriority)).Length;
         while (stonicorn.taskPriority == stonicorn.taskPriority2)
         {
-            stonicorn.taskPriority = (Stonicorn.TaskPriority)Random.Range(0, enumCount);
-            stonicorn.taskPriority2 = (Stonicorn.TaskPriority)Random.Range(0, enumCount);
+            stonicorn.taskPriority = (Stonicorn.TaskPriority)Random.Range(0, enumCountTask);
+            stonicorn.taskPriority2 = (Stonicorn.TaskPriority)Random.Range(0, enumCountTask);
         }
+        int enumCountJob = System.Enum.GetValues(typeof(QueueTask.Type)).Length;
+        stonicorn.favoriteJobType = (QueueTask.Type)Random.Range(0, enumCountJob);
         //
         return stonicorn;
     }
