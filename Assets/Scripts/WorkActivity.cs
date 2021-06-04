@@ -28,7 +28,7 @@ public class WorkActivity : Activity
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
             List<QueueTask> tasks = Managers.Queue.getAvailableTasks();
-            if (tasks.Any(task=>task.type == stonicorn.favoriteJobType))
+            if (tasks.Any(task => task.type == stonicorn.favoriteJobType))
             {
                 tasks.RemoveAll(task => task.type != stonicorn.favoriteJobType);
             }
@@ -51,6 +51,10 @@ public class WorkActivity : Activity
             case Stonicorn.TaskPriority.EXPENSIVE:
                 sortFunction = task => task.StartCost;
                 break;
+            case Stonicorn.TaskPriority.FAST:
+            case Stonicorn.TaskPriority.SLOW:
+                sortFunction = task => task.taskObject.progressRequired;
+                break;
             case Stonicorn.TaskPriority.EMPTY:
             case Stonicorn.TaskPriority.STARTED:
                 sortFunction = task => task.Percent;
@@ -72,6 +76,7 @@ public class WorkActivity : Activity
         bool descend = new List<Stonicorn.TaskPriority>() {
             Stonicorn.TaskPriority.FAR,
             Stonicorn.TaskPriority.EXPENSIVE,
+            Stonicorn.TaskPriority.SLOW,
             Stonicorn.TaskPriority.STARTED,
             Stonicorn.TaskPriority.LAST,
             Stonicorn.TaskPriority.GROUP,

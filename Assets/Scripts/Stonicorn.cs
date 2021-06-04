@@ -45,6 +45,8 @@ public class Stonicorn
         FAR,//must travel long way to get there
         CHEAP,//costs hardly any resources
         EXPENSIVE,//costs a lot of resources
+        FAST,//requires not a lot of progress
+        SLOW,//requires a lot of progress
         EMPTY,//not started
         STARTED,//some progress on it has been made
         NEXT,//next task in the queue
