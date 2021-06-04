@@ -27,11 +27,13 @@ public class DeliverActivity : Activity
 
     public override bool canStart
         => stonicorn.favoriteJobType == QueueTask.Type.DELIVER
+        && stonicorn.rest > 0
         && Managers.Resources.anyCore(sourceFunc)
         && Managers.Resources.anyCore(destinationFunc);
 
-    public override bool canContinue 
         => (stonicorn.toolbeltResources > 0)
+    public override bool canContinue
+        => stonicorn.rest > 0 &&
             ? dropoff.canContinue
             : pickup.canContinue;
 
@@ -52,17 +54,20 @@ public class DeliverActivity : Activity
         {
             pickup.doActivity();
         }
+        stonicorn.rest -= stonicorn.workRate * Time.deltaTime / 2;
     }
 
     public override Vector2 chooseActivityLocation()
     {
         if (stonicorn.toolbeltResources > 0)
         {
-            return dropoff.chooseActivityLocation();
+            //dropoff
+            return Managers.Resources.getClosestCore(stonicorn.position, destinationFunc);
         }
         else
         {
-            return pickup.chooseActivityLocation();
+            //pickup
+            return Managers.Resources.getClosestCore(stonicorn.position, sourceFunc);
         }
     }
 }
