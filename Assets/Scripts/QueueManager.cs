@@ -28,11 +28,6 @@ public class QueueManager : Manager
 
     public bool isTaskAvailable(QueueTask task)
     {
-        //Resources
-        if (!task.Started && Managers.Resources.Resources < task.StartCost)
-        {
-            return false;
-        }
         //Context
         switch (task.type)
         {
