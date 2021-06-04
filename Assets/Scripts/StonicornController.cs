@@ -56,6 +56,10 @@ public class StonicornController : MonoBehaviour
                 }
             }
         }
+        if (stonicorn.action != Stonicorn.Action.REST)
+        {
+            stonicorn.Rest -= stonicorn.passiveExhaustRate * Time.deltaTime;
+        }
     }
 
     void goIdle()

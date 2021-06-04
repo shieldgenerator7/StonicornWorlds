@@ -15,6 +15,7 @@ public class Stonicorn
     public float moveSpeed = 2;
     public float maxRest = 1000;
     public float restSpeed = 40;
+    public float passiveExhaustRate = 4;
     public float toolbeltSize = 300;
     public float transferRate = 100;
     //Personal Data
