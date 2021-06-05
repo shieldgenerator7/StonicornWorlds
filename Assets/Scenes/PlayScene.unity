@@ -6283,6 +6283,7 @@ GameObject:
   - component: {fileID: 1752469040}
   - component: {fileID: 1752469041}
   - component: {fileID: 1752469042}
+  - component: {fileID: 1752469043}
   m_Layer: 0
   m_Name: Misc Clear Save
   m_TagString: Untagged
@@ -6319,6 +6320,7 @@ MonoBehaviour:
   button: {fileID: 1448358011}
   proreqs:
   - {fileID: 1752469042}
+  - {fileID: 1752469043}
 --- !u!114 &1752469042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6331,6 +6333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af9cd8ae565f0b43bbe15ffebede8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1752469043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752469039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7fbeb97ab4c424aa4c2d35743f236c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 100
 --- !u!1001 &1926594512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6583,10 +6598,6 @@ PrefabInstance:
     - target: {fileID: 1353187739912260257, guid: b024136ff27269f40a56e6ba32c89894, type: 3}
       propertyPath: m_Name
       value: box Misc
-      objectReference: {fileID: 0}
-    - target: {fileID: 1353187739912260257, guid: b024136ff27269f40a56e6ba32c89894, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1902168721739209213, guid: b024136ff27269f40a56e6ba32c89894, type: 3}
       propertyPath: m_Pivot.x
