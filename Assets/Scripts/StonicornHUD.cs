@@ -14,6 +14,9 @@ public class StonicornHUD : MonoBehaviour
     public Image imgEye;
     public Image sleepMeter;
     public Image resourceMeter;
+    public SpriteSelection sltFavJob;
+    public SpriteSelection sltTaskPriority1;
+    public SpriteSelection sltTaskPriority2;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,9 @@ public class StonicornHUD : MonoBehaviour
             imgHair.color = stonicorn.hairColor;
             imgEye.color = stonicorn.eyeColor;
             Update();
+            sltFavJob.selectSprite((int)stonicorn.favoriteJobType);
+            sltTaskPriority1.selectSprite((int)stonicorn.taskPriority);
+            sltTaskPriority2.selectSprite((int)stonicorn.taskPriority2);
         }
     }
 }
