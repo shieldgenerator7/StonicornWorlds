@@ -6304,16 +6304,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e739c4d04df0a34294064580d552dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 300
+  startDelay: 600
   cooldownDelays:
+  - 1
+  - 2
+  - 3
   - 5
-  - 10
   - 10
   - 15
   - 20
   - 25
-  - 25
-  - 30
   - 500
   - 1000
   asteroidPrefab: {fileID: 6643148867230897265, guid: e4e787653f897304aa0e1c94968e5576, type: 3}
