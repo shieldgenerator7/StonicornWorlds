@@ -21,33 +21,45 @@ public class FileManager : Manager
     public void SaveFile()
     {
         Managers.Player.prepareForSave();
-        ES3.Save<string>("player", JsonUtility.ToJson(Managers.Player.Player), fileName);
+        File.WriteAllText(Application.persistentDataPath + "/" + fileName, JsonUtility.ToJson(Managers.Player.Player));
     }
 
     public void LoadFile()
     {
         if (ES3.FileExists(fileName))
         {
-            //0.020 File Format
-            if (ES3.KeyExists("player", fileName))
+            string saveData = File.ReadAllText(Application.persistentDataPath + "/" + fileName);
+            //pre-0.027 File Format
+            if (saveData.Contains("__type"))
             {
-                //Planet
-                Player player = JsonUtility.FromJson<Player>(
-                    ES3.Load<string>("player", fileName)
-                    );
-                player.inflate();
-                Managers.Player.Player = player;
+                //0.020 File Format
+                if (ES3.KeyExists("player", fileName))
+                {
+                    //Planet
+                    Player player = JsonUtility.FromJson<Player>(
+                        ES3.Load<string>("player", fileName)
+                        );
+                    player.inflate();
+                    Managers.Player.Player = player;
+                }
+                //0.019 File Format
+                else
+                {
+                    //Planet
+                    Planet planet = JsonUtility.FromJson<Planet>(
+                        ES3.Load<string>("planet", fileName)
+                        );
+                    planet.inflate();
+                    Managers.Player.Player.planets.Add(planet);
+                    Managers.Planet.Planet = planet;
+                }
             }
-            //0.019 File Format
+            //0.027 File Format
             else
             {
-                //Planet
-                Planet planet = JsonUtility.FromJson<Planet>(
-                    ES3.Load<string>("planet", fileName)
-                    );
-                planet.inflate();
-                Managers.Player.Player.planets.Add(planet);
-                Managers.Planet.Planet = planet;
+                Player player = JsonUtility.FromJson<Player>(saveData);
+                player.inflate();
+                Managers.Player.Player = player;
             }
         }
     }
