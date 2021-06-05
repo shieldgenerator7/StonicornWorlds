@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Managers.Camera.FocusObject = null;
+            Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
         }
     }
 
