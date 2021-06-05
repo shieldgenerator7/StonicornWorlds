@@ -3072,8 +3072,8 @@ MonoBehaviour:
     transferRate: 100
     name: 
     homePosition: {x: 0, y: 0}
-    taskPriority: 5
-    taskPriority2: 6
+    taskPriority: 7
+    taskPriority2: 8
     favoriteJobType: 0
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
