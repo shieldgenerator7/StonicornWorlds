@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class PlanetManagerEffects : MonoBehaviour
@@ -10,13 +9,18 @@ public class PlanetManagerEffects : MonoBehaviour
     public GameObject stonicornPrefab;
     public GameObject cursorObject;
 
-    public TMP_Text stonicornName;
+    public StonicornHUD stonicornHUD;
 
     List<GameObject> editPods = new List<GameObject>();
     List<GameObject> selectObjects = new List<GameObject>();
 
     Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
     public Dictionary<Stonicorn, GameObject> stonicorns = new Dictionary<Stonicorn, GameObject>();
+
+    private void Start()
+    {
+        updateStonicornInfo(null);
+    }
 
     public void updateCursor(Vector2 pos)
     {
@@ -193,13 +197,6 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateStonicornInfo(Stonicorn stonicorn)
     {
-        if (stonicorn != null)
-        {
-            stonicornName.text = stonicorn.name;
-        }
-        else
-        {
-            stonicornName.text = "";
-        }
+        stonicornHUD.trackStonicorn(stonicorn);
     }
 }
