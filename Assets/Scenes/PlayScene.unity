@@ -6141,6 +6141,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
   - {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
   - {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+  allSolidPodContentTypes:
+  - {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+  - {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+  - {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
 --- !u!114 &1625964774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6271,6 +6275,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1177ddbe8cb844b8c99366be1bc87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1694731316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1694731318}
+  - component: {fileID: 1694731317}
+  m_Layer: 0
+  m_Name: AsteroidEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1694731317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694731316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e739c4d04df0a34294064580d552dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDelay: 300
+  cooldownDelays:
+  - 5
+  - 10
+  - 20
+  - 30
+  - 500
+  asteroidPrefab: {fileID: 6643148867230897265, guid: e4e787653f897304aa0e1c94968e5576, type: 3}
+  timeLeft: 0
+--- !u!4 &1694731318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694731316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752226975
 GameObject:
   m_ObjectHideFlags: 0

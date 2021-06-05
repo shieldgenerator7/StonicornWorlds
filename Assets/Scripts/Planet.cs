@@ -80,11 +80,16 @@ public class Planet
 
     public void removePod(Vector2 pos)
     {
-        Vector3Int v = worldToGrid(pos);
-        Pod pod = grid.get(v);
-        grid.removeAt(v);
-        podLists.Remove(pod);
+        Pod pod = grid.get(worldToGrid(pos));
+        removePod(pod);
+    }
+    public void removePod(Pod pod)
+    {
         pod.onPodContentChanged -= podContentAdded;
+        pods.Remove(pod);
+        grid.removeAt(pod.gridPos);
+        podLists.Remove(pod);
+        fillSpace(pod.gridPos);
         onStateChanged?.Invoke(this);
     }
 
@@ -114,18 +119,18 @@ public class Planet
             );
         if (emptySpaces.Count > 0)
         {
-            PodType space = Managers.Constants.spacePodType;
-            emptySpaces.ForEach(v =>
-            {
-                Pod pod = new Pod(gridToWorld(v), space);
-                pod.gridPos = v;
-                pods.Add(pod);
-                grid.add(v, pod);
-                podLists.Add(pod);
-                pod.onPodContentChanged += podContentAdded;
-            }
-            );
+            emptySpaces.ForEach(v => fillSpace(v));
         }
+    }
+    private void fillSpace(Vector3Int v)
+    {
+        PodType space = Managers.Constants.spacePodType;
+        Pod pod = new Pod(gridToWorld(v), space);
+        pod.gridPos = v;
+        pods.Add(pod);
+        grid.add(v, pod);
+        podLists.Add(pod);
+        pod.onPodContentChanged += podContentAdded;
     }
     #endregion
 
@@ -162,7 +167,7 @@ public class Planet
             .ToList()[0];
 
     public Pod getGroundPod(Vector2 pos)
-        => grid.getGround(worldToGrid(pos));
+        => grid.get(worldToGrid(getGroundPos(pos)));
 
     public Vector2 getGroundPos(Vector2 pos)
         => gridToWorld(HexagonUtility.getGroundPos(worldToGrid(pos)));
