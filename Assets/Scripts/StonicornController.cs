@@ -9,6 +9,7 @@ public class StonicornController : MonoBehaviour
     List<Activity> activities = new List<Activity>();
 
     Activity currentActivity;
+    Vector2 aboveLoI;
 
     private void Start()
     {
@@ -36,10 +37,11 @@ public class StonicornController : MonoBehaviour
             {
                 goIdle();
             }
+            Vector2 aboveLoI = getAboveLoI();
         }
-        if (stonicorn.position != stonicorn.locationOfInterest)
+        if (stonicorn.position != aboveLoI)
         {
-            moveToLocationOfInterest();
+            moveToLocationOfInterest(aboveLoI);
         }
         if (currentActivity)
         {
@@ -72,7 +74,7 @@ public class StonicornController : MonoBehaviour
         stonicorn.locationOfInterest = stonicorn.homePosition;
     }
 
-    void moveToLocationOfInterest()
+    Vector2 getAboveLoI()
     {
         Vector2 aboveLoI = stonicorn.locationOfInterest;
         if (currentActivity)
@@ -89,6 +91,11 @@ public class StonicornController : MonoBehaviour
                 }
             }
         }
+        return aboveLoI;
+    }
+
+    void moveToLocationOfInterest(Vector2 aboveLoI)
+    {
         if (Vector2.Distance(stonicorn.position, aboveLoI) > 1.0f)
         {
             stonicorn.position +=
