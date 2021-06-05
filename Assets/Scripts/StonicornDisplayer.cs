@@ -21,7 +21,7 @@ public class StonicornDisplayer : MonoBehaviour
     {
         bodySR.color = stonicorn.bodyColor;
         hairSR.color = stonicorn.hairColor;
-        eyeSR.color = stonicorn.hairColor;
+        eyeSR.color = stonicorn.eyeColor;
         ui_work.color = stonicorn.eyeColor;
     }
 

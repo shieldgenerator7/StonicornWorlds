@@ -17,11 +17,6 @@ public class PlanetManagerEffects : MonoBehaviour
     Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
     public Dictionary<Stonicorn, GameObject> stonicorns = new Dictionary<Stonicorn, GameObject>();
 
-    private void Start()
-    {
-        updateStonicornInfo(null);
-    }
-
     public void updateCursor(Vector2 pos)
     {
         cursorObject.SetActive(

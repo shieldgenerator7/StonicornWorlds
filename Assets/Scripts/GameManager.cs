@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
         Managers.init();
         registerDelegates();
         setup();
+        Managers.Camera.FocusObject = Managers.PlanetEffects
+            .stonicorns[Managers.Planet.Planet.residents[0]]
+            .GetComponent<StonicornDisplayer>();
     }
 
     // Update is called once per frame

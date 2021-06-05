@@ -9,6 +9,9 @@ public class StonicornHUD : MonoBehaviour
     public Stonicorn stonicorn;
 
     public TMP_Text stonicornName;
+    public Image imgBody;
+    public Image imgHair;
+    public Image imgEye;
     public Image sleepMeter;
     public Image resourceMeter;
 
@@ -29,10 +32,13 @@ public class StonicornHUD : MonoBehaviour
     {
         this.stonicorn = stonicorn;
         bool turnOn = stonicorn != null;
-        stonicornName.text = (turnOn) ? stonicorn.name : "";
         gameObject.SetActive(turnOn);
         if (turnOn)
         {
+            stonicornName.text = stonicorn.name;
+            imgBody.color = stonicorn.bodyColor;
+            imgHair.color = stonicorn.hairColor;
+            imgEye.color = stonicorn.eyeColor;
             Update();
         }
     }
