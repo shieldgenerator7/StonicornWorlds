@@ -32,12 +32,12 @@ public class StonicornController : MonoBehaviour
             {
                 stonicorn.action = currentActivity.action;
                 currentActivity.goToActivity();
+                aboveLoI = getAboveLoI();
             }
             else
             {
                 goIdle();
             }
-            Vector2 aboveLoI = getAboveLoI();
         }
         if (stonicorn.position != aboveLoI)
         {
@@ -72,6 +72,7 @@ public class StonicornController : MonoBehaviour
         currentActivity = null;
         stonicorn.action = Stonicorn.Action.IDLE;
         stonicorn.locationOfInterest = stonicorn.homePosition;
+        aboveLoI = getAboveLoI();
     }
 
     Vector2 getAboveLoI()
