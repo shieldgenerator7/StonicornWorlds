@@ -2987,6 +2987,24 @@ MonoBehaviour:
     samples: 5
     decimalPlaces: 2
     choice: 0
+  passiveExhaustGen:
+    min: 0.4
+    max: 7
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  toolbeltGen:
+    min: 100
+    max: 500
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
+  transferRateGen:
+    min: 10
+    max: 200
+    samples: 5
+    decimalPlaces: 2
+    choice: 0
   names:
   - Twilight
   - Rainbow
@@ -3074,7 +3092,7 @@ MonoBehaviour:
     homePosition: {x: 0, y: 0}
     taskPriority: 7
     taskPriority2: 8
-    favoriteJobType: 0
+    favoriteJobType: 1
     position: {x: 0, y: 0}
     locationOfInterest: {x: 0, y: 0}
     rest: 0

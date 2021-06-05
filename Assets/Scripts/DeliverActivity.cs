@@ -22,9 +22,11 @@ public class DeliverActivity : Activity
 
         filterFunc = (magma) =>
              Vector2.Distance(magma.container.worldPos, stonicorn.position) > ActivityRange + 0.1f;
-        sourceFunc = (magma) => magma.Var >= Managers.Resources.halfFull
+        sourceFunc = (magma) =>
+            magma.Var >= Managers.Resources.nearEmpty + stonicorn.toolbeltSize + 1
             && filterFunc(magma);
-        destinationFunc = (magma) => magma.Var < Managers.Resources.nearEmpty
+        destinationFunc = (magma) =>
+            magma.Var < Managers.Resources.nearEmpty
             && filterFunc(magma);
     }
 

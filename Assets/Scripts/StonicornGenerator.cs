@@ -15,6 +15,9 @@ public class StonicornGenerator : MonoBehaviour
     public ValueGenerator moveSpeedGen;
     public ValueGenerator restRateGen;
     public ValueGenerator restCapGen;
+    public ValueGenerator passiveExhaustGen;
+    public ValueGenerator toolbeltGen;
+    public ValueGenerator transferRateGen;
 
     [Header("Personal Data")]
     public List<string> names;
@@ -35,6 +38,9 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.moveSpeed = moveSpeedGen.generate();
         stonicorn.restSpeed = restRateGen.generate();
         stonicorn.maxRest = restCapGen.generate();
+        stonicorn.passiveExhaustRate = passiveExhaustGen.generate();
+        stonicorn.toolbeltSize = toolbeltGen.generate();
+        stonicorn.transferRate = transferRateGen.generate();
         //Personal Data
         string firstName = names[Random.Range(0, names.Count)];
         string lastName = names[Random.Range(0, names.Count)];
@@ -58,6 +64,9 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.workRange = model.workRange;
         stonicorn.moveSpeed = model.moveSpeed;
         stonicorn.restSpeed = model.restSpeed;
+        stonicorn.passiveExhaustRate = model.passiveExhaustRate;
+        stonicorn.toolbeltSize = model.toolbeltSize;
+        stonicorn.transferRate = model.transferRate;
         stonicorn.maxRest = model.maxRest;
         stonicorn.taskPriority = model.taskPriority;
         stonicorn.taskPriority2 = model.taskPriority2;
