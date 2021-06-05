@@ -46,7 +46,7 @@ public class StonicornGenerator : MonoBehaviour
         string lastName = names[Random.Range(0, names.Count)];
         stonicorn.name = firstName + " " + lastName;
         int enumCountTask = System.Enum.GetValues(typeof(Stonicorn.TaskPriority)).Length;
-        while (stonicorn.taskPriority == stonicorn.taskPriority2)
+        while (!taskPriorityCompatible(stonicorn.taskPriority, stonicorn.taskPriority2))
         {
             stonicorn.taskPriority = (Stonicorn.TaskPriority)Random.Range(0, enumCountTask);
             stonicorn.taskPriority2 = (Stonicorn.TaskPriority)Random.Range(0, enumCountTask);
@@ -70,5 +70,27 @@ public class StonicornGenerator : MonoBehaviour
         stonicorn.maxRest = model.maxRest;
         stonicorn.taskPriority = model.taskPriority;
         stonicorn.taskPriority2 = model.taskPriority2;
+    }
+
+    bool taskPriorityCompatible(Stonicorn.TaskPriority tp1, Stonicorn.TaskPriority tp2)
+    {
+        //if they are the same
+        if (tp1 == tp2)
+        {
+            return false;
+        }
+        //if they are opposites
+        int itp1 = (int)tp1;
+        int itp2 = (int)tp2;
+        if (itp1 % 2 == 0 && itp2 == itp1 + 1)
+        {
+            return false;
+        }
+        if (itp2 % 2 == 0 && itp1 == itp2 + 1)
+        {
+            return false;
+        }
+        //Else, they are compatible
+        return true;
     }
 }
