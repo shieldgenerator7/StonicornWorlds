@@ -51,7 +51,9 @@ public class PlanetManagerEffects : MonoBehaviour
     {
         //Check for added pods
         List<Pod> podsAll = planet.PodsAll;
-        podsAll.ForEach(pod =>
+        podsAll
+            .FindAll(pod => pod.podType != Managers.Constants.spacePodType)
+            .ForEach(pod =>
             {
                 if (!displayObjects.ContainsKey(pod))
                 {
