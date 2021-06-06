@@ -11,7 +11,7 @@ public class WorkActivity : Activity
     public override bool isDone => stonicorn.task.Completed;
 
     public override bool canStart
-        => stonicorn.rest > 0
+        => !stonicorn.Sleepy
         && stonicorn.toolbeltResources > 0
         && Managers.Queue.getAvailableTasks().Count > 0;
 

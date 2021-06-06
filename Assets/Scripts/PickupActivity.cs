@@ -9,7 +9,7 @@ public class PickupActivity : Activity
     public override Stonicorn.Action action => Stonicorn.Action.PICKUP;
 
     public override bool canStart
-        => stonicorn.rest > 0
+        => !stonicorn.Sleepy
         && stonicorn.toolbeltResources < stonicorn.toolbeltSize
         && Managers.Resources.anyCoreNonEmpty()
         && Managers.Queue.getAvailableTasks().Count > 0;

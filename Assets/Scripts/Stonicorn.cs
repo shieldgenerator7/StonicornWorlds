@@ -91,6 +91,8 @@ public class Stonicorn
         set => rest = Mathf.Clamp(value, 0, maxRest);
     }
 
+    public bool Sleepy => rest <= maxRest * 0.1f;
+
     public void inflate()
     {
         task = (atHomeOrGoing)

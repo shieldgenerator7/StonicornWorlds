@@ -37,7 +37,7 @@ public class DeliverActivity : Activity
 
     public override bool canStart
         => stonicorn.favoriteJobType == QueueTask.Type.DELIVER
-        && stonicorn.rest > 0
+        && !stonicorn.Sleepy
         && Managers.Resources.anyCore(sourceFunc)
         && Managers.Resources.anyCore(destinationFunc);
 
