@@ -52,7 +52,19 @@ public class CameraController : Manager
             position = (Vector3)(Vector2)value + camOffset;
         }
     }
-    private float ZoomLevel;
+
+    private float zoomLevel;
+    public float ZoomLevel
+    {
+        get => zoomLevel;
+        set
+        {
+            zoomLevel = value;
+            onZoomChanged?.Invoke(zoomLevel);
+        }
+    }
+    public delegate void OnZoomChanged(float zoomLevel);
+    public event OnZoomChanged onZoomChanged;
 
     private int pixelWidth;
     private int pixelHeight;
@@ -83,14 +95,17 @@ public class CameraController : Manager
             }
             onRotationChanged?.Invoke(transform.up);
         }
+        //Position
         if (transform.position != Position)
         {
             transform.position = Vector3.Lerp(transform.position, Position, deltaTime);
         }
+        //Zoom Level
         if (Camera.main.orthographicSize != ZoomLevel)
         {
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, ZoomLevel, deltaTime);
         }
+        //Screen Size
         checkScreenSize();
     }
     public delegate void OnRotationChanged(Vector2 up);

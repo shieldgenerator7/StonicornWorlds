@@ -10,6 +10,7 @@ public class PlanetManagerEffects : MonoBehaviour
     public GameObject cursorObject;
 
     public StonicornHUD stonicornHUD;
+    public SpriteRenderer spaceField;
 
     List<GameObject> editPods = new List<GameObject>();
     List<GameObject> selectObjects = new List<GameObject>();
@@ -192,6 +193,15 @@ public class PlanetManagerEffects : MonoBehaviour
         editPods.ForEach(go =>
             go.transform.GetChild(0).up = up
         );
+    }
+
+    public void updateSpaceField(float scale)
+    {
+        Camera cam = Camera.main;
+        Vector2 sizeWorld =
+            cam.ScreenToWorldPoint(Vector2.zero) -
+            cam.ScreenToWorldPoint(new Vector2(cam.pixelWidth, cam.pixelHeight));
+        spaceField.size = sizeWorld;
     }
 
     public void updateStonicornInfo(Stonicorn stonicorn)

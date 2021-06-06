@@ -220,6 +220,10 @@ public class Planet
         => Pods(Managers.Constants.spacePodType)
         .ConvertAll(pod => pod.worldPos);
     //=> grid.getBorder().ConvertAll(v => gridToWorld(v));
+
+    public float PlanetSize
+        => HexagonUtility.maxRing(PodsNotEmpty.ConvertAll(pod => pod.gridPos))
+            * 2 * size;
     #endregion
 
     #region Grid Conversion

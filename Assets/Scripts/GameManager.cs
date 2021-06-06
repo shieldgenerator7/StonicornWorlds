@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
         Managers.Camera.onFocusObjectChanged += onFocusObjectChanged;
+        Managers.Camera.onZoomChanged += Managers.PlanetEffects.updateSpaceField;
         //Resources
         Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
         //Queue
