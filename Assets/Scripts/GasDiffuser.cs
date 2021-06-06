@@ -16,17 +16,27 @@ public class GasDiffuser : MonoBehaviour
     public PodContentType gasPodContentType;
     public PodType emitterPodType;
 
+    HexagonGrid<float> grid = new HexagonGrid<float>();
+    float upsideThreshold;
+    float downsideThreshold;
+    float diffusionDelta;
+
     // Update is called once per frame
     void Update()
     {
         bool filledAny = false;
 
-        Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
-            .FindAll(pod => currentPressure(pod) >= minAmount)
-            .ForEach(pod => filledAny = diffuse(pod) || filledAny);
+        float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
+        float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
+        upsideThreshold = (diff * 2 / 3) + min;
+        downsideThreshold = (diff * 1 / 3) + min;
+        diffusionDelta = diffusionRate * Time.deltaTime;
 
-        Managers.Planet.Planet.Pods(emitterPodType)
-            .ForEach(pod => filledAny = diffuse(pod) || filledAny);
+        grid = PressureGrid;
+        grid.Keys
+            .FindAll(v => grid[v] >= minAmount)
+            .ForEach(v => filledAny = diffuse(v) || filledAny);
+        PressureGrid = grid;
 
         if (filledAny)
         {
@@ -34,38 +44,86 @@ public class GasDiffuser : MonoBehaviour
         }
     }
 
-    bool diffuse(Pod pod)
+    HexagonGrid<float> PressureGrid
     {
-        float diffuseAmount = 0;
-        if (pod.podType == Managers.Constants.spacePodType)
+        get
         {
-            diffuseAmount = diffuse(pod.worldPos, currentPressure(pod));
-            adjustPressure(pod, -diffuseAmount);
+            HexagonGrid<float> grid = new HexagonGrid<float>();
+            Managers.Planet.Planet.PodsAll
+                .ForEach(pod =>
+                {
+                    float pressure = 0;
+                    //Valid place for gas to be
+                    if (pod.podType == Managers.Constants.spacePodType)
+                    {
+                        PodContent content = pod.getContent(gasPodContentType);
+                        if (content)
+                        {
+                            pressure = content.Var;
+                        }
+                        else
+                        {
+                            pressure = 0;
+                        }
+                    }
+                    //Gas emitter
+                    else if (pod.podType == emitterPodType)
+                    {
+                        pressure = emitterPressure;
+                    }
+                    //Invalid place for gas to be
+                    else
+                    {
+                        pressure = -1;
+                    }
+                    grid.add(pod.gridPos, pressure);
+                });
+            return grid;
         }
-        else if (pod.podType == emitterPodType)
+        set
         {
-            diffuseAmount = diffuse(pod.worldPos, emitterPressure);
+            HexagonGrid<float> grid = value;
+            int count = 0;
+            grid.Keys
+                .FindAll(v => grid[v] >= 0)
+                .ForEach(
+                v =>
+                {
+                    Pod pod = Managers.Planet.Planet.getPod(v);
+                    if (!pod && grid[v] > 0)
+                    {
+                        pod = Managers.Planet.Planet.fillSpace(v);
+                    }
+                    if (pod)
+                    {
+                        PodContent content = pod.getContent(gasPodContentType);
+                        if (!content && grid[v] > 0)
+                        {
+                            content = new PodContent(gasPodContentType, pod);
+                            pod.addContent(content);
+                        }
+                        if (content)
+                        {
+                            content.Var = grid[v];
+                            count++;
+                        }
+                    }
+                }
+                );
         }
-        return diffuseAmount > 0;
     }
 
-    float diffuse(Vector2 pos, float curAmount)
+
+    bool diffuse(Vector3Int v)
     {
-        if (curAmount < minAmount)
-        {
-            return 0;
-        }
-        Managers.Planet.Planet.getEmptyNeighborhood(pos)
-            .ForEach(
-                v => Managers.Planet.Planet.addPod(
-                    new Pod(v, Managers.Constants.spacePodType),
-                    v
-                    )
-            );
-        Neighborhood<Pod> neighborhood = Managers.Planet.Planet.getNeighborhood(pos);
-        List<Pod> spaces = new List<Pod>();
-        float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
-        float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
+        float diffuseAmount = diffuse(v, grid[v]);
+        grid[v] += -diffuseAmount;
+        return diffuseAmount > 0;
+    }
+    float diffuse(Vector3Int v, float curAmount)
+    {
+        HexagonNeighborhood neighborhood = HexagonUtility.getNeighborhood(v);
+        List<Vector3Int> spaces = new List<Vector3Int>();
         if (canDiffuse(
                 neighborhood.ceiling,
                 curAmount,
@@ -75,10 +133,10 @@ public class GasDiffuser : MonoBehaviour
             spaces.Add(neighborhood.ceiling);
         }
         spaces.AddRange(neighborhood.upsides.ToList()
-            .FindAll(pod => canDiffuse(
-                pod,
+            .FindAll(v2 => canDiffuse(
+                v2,
                 curAmount,
-                ((giveThresholdFactorUp - giveThresholdFactorDown) * 2 / 3) + giveThresholdFactorDown
+                upsideThreshold
                 )));
         if (canDiffuse(
                 neighborhood.ground,
@@ -89,52 +147,16 @@ public class GasDiffuser : MonoBehaviour
             spaces.Add(neighborhood.ground);
         }
         spaces.AddRange(neighborhood.downsides.ToList()
-            .FindAll(pod => canDiffuse(
-                pod,
+            .FindAll(v2 => canDiffuse(
+                v2,
                 curAmount,
-                ((giveThresholdFactorUp - giveThresholdFactorDown) * 1 / 3) + giveThresholdFactorDown
+                downsideThreshold
                 )));
-        spaces.ForEach(pod => fillWithGas(pod));
-        return spaces.Count * diffusionRate * Time.deltaTime;
+        spaces.ForEach(v2 => grid[v2] += diffusionDelta);
+        return spaces.Count * diffusionDelta;
     }
 
-    bool canDiffuse(Pod pod, float curAmount, float threshold)
-        => pod && pod.podType == Managers.Constants.spacePodType
-        && currentPressure(pod) < curAmount * threshold;
-
-    PodContent getGas(Pod pod)
-        => pod.getContent(gasPodContentType);
-
-    float currentPressure(Pod pod)
-    {
-        PodContent content = getGas(pod);
-        if (content)
-        {
-            return content.Var;
-        }
-        return 0;
-    }
-
-    void adjustPressure(Pod pod, float delta)
-    {
-        PodContent content = getGas(pod);
-        if (content)
-        {
-            content.Var += delta;
-        }
-    }
-
-    bool fillWithGas(Pod pod)
-    {
-        PodContent content = getGas(pod);
-        if (!content)
-        {
-            content = new PodContent(gasPodContentType, pod);
-            pod.addContent(content);
-            content.Var = 0;
-            return true;
-        }
-        content.Var += diffusionRate * Time.deltaTime;
-        return false;
-    }
+    bool canDiffuse(Vector3Int v, float curAmount, float threshold)
+        => grid[v] >= 0
+        && grid[v] < curAmount * threshold;
 }

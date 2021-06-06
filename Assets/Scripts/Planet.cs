@@ -122,7 +122,7 @@ public class Planet
             emptySpaces.ForEach(v => fillSpace(v));
         }
     }
-    private void fillSpace(Vector3Int v)
+    public Pod fillSpace(Vector3Int v)
     {
         PodType space = Managers.Constants.spacePodType;
         Pod pod = new Pod(gridToWorld(v), space);
@@ -131,6 +131,7 @@ public class Planet
         grid.add(v, pod);
         podLists.Add(pod);
         pod.onPodContentChanged += podContentAdded;
+        return pod;
     }
     #endregion
 
@@ -154,6 +155,8 @@ public class Planet
 
     public Pod getPod(Vector2 pos)
         => grid.get(worldToGrid(pos));
+    public Pod getPod(Vector3Int v)
+        => grid[v];
 
     public bool hasPod(Vector2 pos)
     {
