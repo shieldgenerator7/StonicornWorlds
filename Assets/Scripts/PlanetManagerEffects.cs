@@ -12,7 +12,7 @@ public class PlanetManagerEffects : MonoBehaviour
     public StonicornHUD stonicornHUD;
     public SpriteRenderer spaceField;
 
-    List<GameObject> editPods = new List<GameObject>();
+    List<SpriteRenderer> editPods = new List<SpriteRenderer>();
     List<GameObject> selectObjects = new List<GameObject>();
 
     Dictionary<PlanetObject, GameObject> displayObjects = new Dictionary<PlanetObject, GameObject>();
@@ -29,11 +29,13 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateSelect(List<Vector2> posList)
     {
-        selectObjects.ForEach(go => go.SetActive(false));
+        //special case: no selection
         if (posList.Count == 0)
         {
+            selectObjects.ForEach(go => go.SetActive(false));
             return;
         }
+        //fill up select objects list
         while (selectObjects.Count < posList.Count)
         {
             GameObject select = Instantiate(cursorObject);
@@ -41,10 +43,16 @@ public class PlanetManagerEffects : MonoBehaviour
             select.transform.localScale *= 0.9f;
             selectObjects.Add(select);
         }
+        //display select objects
         for (int i = 0; i < posList.Count; i++)
         {
-            selectObjects[i].SetActive(true);
             selectObjects[i].transform.position = posList[i];
+            selectObjects[i].SetActive(true);
+        }
+        //hide unnecessary select objects
+        for (int i = posList.Count; i < selectObjects.Count; i++)
+        {
+            selectObjects[i].SetActive(false);
         }
     }
 
@@ -166,27 +174,38 @@ public class PlanetManagerEffects : MonoBehaviour
     }
     public void updateEditDisplay(List<Vector2> posList)
     {
-        //Update edit pod UI
-        editPods.ForEach(go => Destroy(go));
-        editPods.Clear();
-        Color color = Managers.Input.ToolAction.color;
-        Vector2 up = Managers.Camera.transform.up;
-        Sprite preview = Managers.Input.ToolAction.preview;
-        posList.ForEach(edge =>
+        //Fill up editPods list
+        while (editPods.Count < posList.Count)
         {
             GameObject editPod = Instantiate(
                 editPodPrefab,
-                edge,
+                Vector2.zero,
                 Quaternion.identity,
                 transform
                 );
-            editPod.GetComponent<SpriteRenderer>().color = color;
-            SpriteRenderer sr = editPod.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            editPods.Add(editPod.GetComponent<SpriteRenderer>());
+        }
+        //Display positions
+        Color color = Managers.Input.ToolAction.color;
+        Vector2 up = Managers.Camera.transform.up;
+        Sprite preview = Managers.Input.ToolAction.preview;
+        for (int i = 0; i < posList.Count; i++)
+        {
+            SpriteRenderer psr = editPods[i];
+            psr.transform.position = posList[i];
+            psr.transform.up = up;
+            psr.color = color;
+            SpriteRenderer sr = psr.transform.GetChild(0).GetComponent<SpriteRenderer>();
             sr.sprite = preview;
             sr.color = color;
-            sr.transform.up = up;
-            editPods.Add(editPod);
-        });
+            psr.gameObject.SetActive(true);
+        }
+        //Turn off unnecessary editPods
+        for (int i = posList.Count; i < editPods.Count; i++)
+        {
+            SpriteRenderer psr = editPods[i];
+            psr.gameObject.SetActive(false);
+        }
     }
     public void updateEditDisplay(Vector2 up)
     {
