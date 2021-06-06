@@ -44,6 +44,18 @@ public class HexagonGrid<T>
     public List<Vector3Int> getBorder()
         => HexagonUtility.getBorder(grid.Keys.ToList());
 
+    public T this [Vector3Int index]
+    {
+        get => (grid.ContainsKey(index)) ? grid[index] : default(T);
+        set => grid[index] = value;
+    }
+
+    public List<Vector3Int> Keys
+        => grid.Keys.ToList();
+
+    public List<T> Values
+        => grid.Values.ToList();
+
     public static implicit operator List<T>(HexagonGrid<T> hg)
         => hg.grid.Values.ToList();
 }

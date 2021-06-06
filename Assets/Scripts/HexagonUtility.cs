@@ -66,6 +66,16 @@ public static class HexagonUtility
             neighborhood.ceilingLeft,
             neighborhood.ceilingRight,
         };
+        neighborhood.upsides = new Vector3Int[]
+        {
+            neighborhood.ceilingLeft,
+            neighborhood.ceilingRight,
+        };
+        neighborhood.downsides = new Vector3Int[]
+        {
+            neighborhood.groundLeft,
+            neighborhood.groundRight,
+        };
         return neighborhood;
     }
 
