@@ -49,13 +49,15 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateDisplay(Planet planet)
     {
+        PodType spacePodType = Managers.Constants.spacePodType;
         //Check for added pods
         List<Pod> podsAll = planet.PodsAll;
         podsAll
-            .FindAll(pod => pod.podType != Managers.Constants.spacePodType)
             .ForEach(pod =>
             {
-                if (!displayObjects.ContainsKey(pod))
+                if (pod.podType != spacePodType &&
+                    !displayObjects.ContainsKey(pod)
+                )
                 {
                     GameObject go = Instantiate(
                         pod.podType.prefab,
