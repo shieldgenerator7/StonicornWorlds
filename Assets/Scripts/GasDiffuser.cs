@@ -24,8 +24,6 @@ public class GasDiffuser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool filledAny = false;
-
         float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
         float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
         upsideThreshold = (diff * 2 / 3) + min;
@@ -35,13 +33,8 @@ public class GasDiffuser : MonoBehaviour
         grid = PressureGrid;
         grid.Keys
             .FindAll(v => grid[v] >= minAmount)
-            .ForEach(v => filledAny = diffuse(v) || filledAny);
+            .ForEach(v => diffuseFrom(v));
         PressureGrid = grid;
-
-        if (filledAny)
-        {
-            Managers.Queue.callOnQueueChanged();
-        }
     }
 
     HexagonGrid<float> PressureGrid
@@ -83,7 +76,7 @@ public class GasDiffuser : MonoBehaviour
         set
         {
             HexagonGrid<float> grid = value;
-            int count = 0;
+            bool addedAny = false;
             grid.Keys
                 .FindAll(v => grid[v] >= 0)
                 .ForEach(
@@ -93,6 +86,7 @@ public class GasDiffuser : MonoBehaviour
                     if (!pod && grid[v] > 0)
                     {
                         pod = Managers.Planet.Planet.fillSpace(v);
+                        addedAny = true;
                     }
                     if (pod)
                     {
@@ -101,30 +95,29 @@ public class GasDiffuser : MonoBehaviour
                         {
                             content = new PodContent(gasPodContentType, pod);
                             pod.addContent(content);
+                            addedAny = true;
                         }
                         if (content)
                         {
                             content.Var = grid[v];
-                            count++;
                         }
                     }
                 }
                 );
+            if (addedAny)
+            {
+                Managers.Queue.callOnQueueChanged();
+            }
         }
     }
 
-
-    bool diffuse(Vector3Int v)
+    void diffuseFrom(Vector3Int v)
     {
-        float diffuseAmount = diffuse(v, grid[v]);
-        grid[v] += -diffuseAmount;
-        return diffuseAmount > 0;
-    }
-    float diffuse(Vector3Int v, float curAmount)
-    {
+        float curAmount = grid[v];
+        //Determine which neighbors get diffused into
         HexagonNeighborhood neighborhood = HexagonUtility.getNeighborhood(v);
         List<Vector3Int> spaces = new List<Vector3Int>();
-        if (canDiffuse(
+        if (canDiffuseInto(
                 neighborhood.ceiling,
                 curAmount,
                 giveThresholdFactorUp
@@ -133,12 +126,12 @@ public class GasDiffuser : MonoBehaviour
             spaces.Add(neighborhood.ceiling);
         }
         spaces.AddRange(neighborhood.upsides.ToList()
-            .FindAll(v2 => canDiffuse(
+            .FindAll(v2 => canDiffuseInto(
                 v2,
                 curAmount,
                 upsideThreshold
                 )));
-        if (canDiffuse(
+        if (canDiffuseInto(
                 neighborhood.ground,
                 curAmount,
                 giveThresholdFactorDown
@@ -147,16 +140,18 @@ public class GasDiffuser : MonoBehaviour
             spaces.Add(neighborhood.ground);
         }
         spaces.AddRange(neighborhood.downsides.ToList()
-            .FindAll(v2 => canDiffuse(
+            .FindAll(v2 => canDiffuseInto(
                 v2,
                 curAmount,
                 downsideThreshold
                 )));
+        //Diffuse gas into neighbors
         spaces.ForEach(v2 => grid[v2] += diffusionDelta);
-        return spaces.Count * diffusionDelta;
+        //Take gas from origin
+        grid[v] -= spaces.Count * diffusionDelta;
     }
 
-    bool canDiffuse(Vector3Int v, float curAmount, float threshold)
+    bool canDiffuseInto(Vector3Int v, float curAmount, float threshold)
         => grid[v] >= 0
         && grid[v] < curAmount * threshold;
 }
