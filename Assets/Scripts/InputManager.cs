@@ -116,6 +116,9 @@ public class InputManager : Manager
     public List<ToolButton> ActiveButtons
         => buttons.FindAll(btn => btn.Active);
 
+    public KeyCode cheatKey;
+    public List<ToolButton> cheatButtons;
+
     // Update is called once per frame
     void Update()
     {
@@ -175,6 +178,12 @@ public class InputManager : Manager
         else
         {
             tool.inputIdle(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+
+        //Cheat Key
+        if (Input.GetKeyDown(cheatKey))
+        {
+            cheatButtons.ForEach(btn => btn.gameObject.SetActive(true));
         }
     }
 }
