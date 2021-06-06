@@ -212,6 +212,7 @@ public class PlanetManagerEffects : MonoBehaviour
         editPods.ForEach(go =>
             go.transform.GetChild(0).up = up
         );
+        spaceField.transform.up = Vector2.up;
     }
 
     public void updateSpaceField(float scale)
