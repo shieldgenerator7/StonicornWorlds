@@ -146,7 +146,6 @@ public class PlanetManagerEffects : MonoBehaviour
                     transform
                     );
                 go.transform.up = Managers.Planet.Planet.getUpDirection(go.transform.position);
-                go.GetComponent<StonicornController>().stonicorn = stncrn;
                 go.GetComponent<StonicornDisplayer>().stonicorn = stncrn;
                 stonicorns.Add(stncrn, go);
             });

@@ -2983,6 +2983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774442318}
+  - component: {fileID: 774442320}
   - component: {fileID: 774442319}
   m_Layer: 0
   m_Name: Stonicorn Manager
@@ -3183,6 +3184,18 @@ MonoBehaviour:
     rest: 0
     toolbeltResources: 0
     action: 0
+--- !u!114 &774442320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774442317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2fcb83acd92414081dcb0dcf21a84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &807291197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913201341599360042, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}

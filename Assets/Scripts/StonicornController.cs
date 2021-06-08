@@ -5,59 +5,47 @@ using UnityEngine;
 
 public class StonicornController : MonoBehaviour
 {
-    public Stonicorn stonicorn;
-    List<Activity> activities = new List<Activity>();
-
-    Activity currentActivity;
-    Vector2 aboveLoI;
-
-    private void Start()
-    {
-        PickupActivity pickup = new PickupActivity(stonicorn);
-        DropoffActivity dropoff = new DropoffActivity(stonicorn);
-        activities.Add(new DeliverActivity(stonicorn, pickup, dropoff));
-        activities.Add(new WorkActivity(stonicorn));
-        activities.Add(pickup);
-        activities.Add(new RestActivity(stonicorn));
-        activities.Add(dropoff);
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (!currentActivity)
+        Managers.Planet.Planet.residents
+            .ForEach(resident => Update(resident));
+    }
+    void Update(Stonicorn stonicorn)
+    {
+        if (!stonicorn.currentActivity)
         {
-            currentActivity = activities.FirstOrDefault(act => act.canStart);
-            if (currentActivity)
+            stonicorn.currentActivity = stonicorn.activities.FirstOrDefault(act => act.canStart);
+            if (stonicorn.currentActivity)
             {
-                stonicorn.action = currentActivity.action;
-                currentActivity.goToActivity();
-                aboveLoI = getAboveLoI();
+                stonicorn.action = stonicorn.currentActivity.action;
+                stonicorn.currentActivity.goToActivity();
+                stonicorn.aboveLoI = getAboveLoI(stonicorn);
             }
             else
             {
-                goIdle();
+                goIdle(stonicorn);
             }
         }
-        if (stonicorn.position != aboveLoI)
+        if (stonicorn.position != stonicorn.aboveLoI)
         {
-            moveToLocationOfInterest(aboveLoI);
+            moveToLocationOfInterest(stonicorn);
         }
-        if (currentActivity)
+        if (stonicorn.currentActivity)
         {
-            if (currentActivity.isInRange)
+            if (stonicorn.currentActivity.isInRange)
             {
-                if (currentActivity.canContinue)
+                if (stonicorn.currentActivity.canContinue)
                 {
-                    currentActivity.doActivity();
-                    if (currentActivity.isDone)
+                    stonicorn.currentActivity.doActivity();
+                    if (stonicorn.currentActivity.isDone)
                     {
-                        goIdle();
+                        goIdle(stonicorn);
                     }
                 }
                 else
                 {
-                    goIdle();
+                    goIdle(stonicorn);
                 }
             }
         }
@@ -67,20 +55,20 @@ public class StonicornController : MonoBehaviour
         }
     }
 
-    void goIdle()
+    void goIdle(Stonicorn stonicorn)
     {
-        currentActivity = null;
+        stonicorn.currentActivity = null;
         stonicorn.action = Stonicorn.Action.IDLE;
         stonicorn.locationOfInterest = stonicorn.homePosition;
-        aboveLoI = getAboveLoI();
+        stonicorn.aboveLoI = getAboveLoI(stonicorn);
     }
 
-    Vector2 getAboveLoI()
+    Vector2 getAboveLoI(Stonicorn stonicorn)
     {
         Vector2 aboveLoI = stonicorn.locationOfInterest;
-        if (currentActivity)
+        if (stonicorn.currentActivity)
         {
-            float range = currentActivity.ActivityRange;
+            float range = stonicorn.currentActivity.ActivityRange;
             if (range != 0)
             {
                 aboveLoI = Managers.Planet.Planet.getCeilingPos(stonicorn.locationOfInterest);
@@ -95,25 +83,25 @@ public class StonicornController : MonoBehaviour
         return aboveLoI;
     }
 
-    void moveToLocationOfInterest(Vector2 aboveLoI)
+    void moveToLocationOfInterest(Stonicorn stonicorn)
     {
-        if (Vector2.Distance(stonicorn.position, aboveLoI) > 1.0f)
+        if (Vector2.Distance(stonicorn.position, stonicorn.aboveLoI) > 1.0f)
         {
             stonicorn.position +=
-                (aboveLoI - stonicorn.position).normalized
+                (stonicorn.aboveLoI - stonicorn.position).normalized
                 * stonicorn.moveSpeed * Time.deltaTime;
         }
         else
         {
             stonicorn.position = Vector2.Lerp(
                 stonicorn.position,
-                aboveLoI,
+                stonicorn.aboveLoI,
                 Time.deltaTime * stonicorn.moveSpeed
                 );
         }
-        if (Vector2.Distance(stonicorn.position, aboveLoI) <= 0.01f)
+        if (Vector2.Distance(stonicorn.position, stonicorn.aboveLoI) <= 0.01f)
         {
-            stonicorn.position = aboveLoI;
+            stonicorn.position = stonicorn.aboveLoI;
         }
     }
 }

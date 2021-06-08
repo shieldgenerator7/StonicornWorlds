@@ -30,6 +30,13 @@ public class Stonicorn
     public float rest = 500;
     public float toolbeltResources = 0;
     public Action action;
+    //Controller Vars
+    [System.NonSerialized]
+    public List<Activity> activities = new List<Activity>();
+    [System.NonSerialized]
+    public Activity currentActivity;
+    [System.NonSerialized]
+    public Vector2 aboveLoI;
 
     public enum Action
     {
@@ -109,5 +116,22 @@ public class Stonicorn
             taskPriority = TaskPriority.STARTED;
             taskPriority2 = TaskPriority.NEXT;
         }
+        //init activities
+        initActivities();
+    }
+
+    void initActivities()
+    {
+        PickupActivity pickup = new PickupActivity(this);
+        DropoffActivity dropoff = new DropoffActivity(this);
+        activities.Add(new DeliverActivity(this, pickup, dropoff));
+        activities.Add(new WorkActivity(this));
+        activities.Add(pickup);
+        activities.Add(new RestActivity(this));
+        activities.Add(dropoff);
+    }
+    public Stonicorn()
+    {
+        initActivities();
     }
 }
