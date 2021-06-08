@@ -1,47 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QueueManagerEffects : MonoBehaviour
 {
     public GameObject constructingPrefab;
 
-    List<ConstructingEffect> constructs = new List<ConstructingEffect>();
+    Dictionary<QueueTask, ConstructingEffect> constructs = new Dictionary<QueueTask, ConstructingEffect>();
 
     public void updateDisplay(List<QueueTask> tasks)
     {
-        constructs.ForEach(con => Destroy(con.gameObject));
-        constructs.Clear();
-        foreach (QueueTask task in tasks)
-        {
-            if (task.Completed)
+        //Find new tasks
+        tasks
+            .FindAll(task => !constructs.ContainsKey(task))
+            .ForEach(task =>
             {
-                //don't process pods that have been completed
-                continue;
-            }
-            GameObject construct = Instantiate(
-                constructingPrefab,
-                task.pos,
-                Quaternion.identity,
-                transform
-                );
-            construct.transform.up = Managers.Planet.Planet.getUpDirection(construct.transform.position);
-            ConstructingEffect effect = construct.GetComponent<ConstructingEffect>();
-            effect.init(task);
-            Color color = Color.white;
-            if (task.taskObject is PodType pt)
+                GameObject constructPod = Instantiate(
+                   constructingPrefab,
+                   task.pos,
+                   Quaternion.identity,
+                   transform
+                   );
+                ConstructingEffect construct = constructPod.GetComponent<ConstructingEffect>();
+                construct.transform.up = Managers.Planet.Planet.getUpDirection(task.pos);
+                construct.init(task);
+                Color color = task.taskObject.uiColor;
+                constructPod.GetComponent<SpriteRenderer>()
+                    .color = color;
+                construct.fillSR
+                    .color = color;
+                constructs.Add(
+                    task,
+                    constructPod.GetComponent<ConstructingEffect>()
+                    );
+            });
+        //Remove missing tasks
+        constructs.Keys.ToList()
+            .FindAll(task => !tasks.Contains(task))
+            .ForEach(task =>
             {
-                color = pt.uiColor;
-            }
-            else if (task.taskObject is PodContentType pct)
-            {
-                color = pct.uiColor;
-            }
-            construct.GetComponent<SpriteRenderer>()
-                .color = color;
-            effect.fillSR
-                .color = color;
-            constructs.Add(effect);
-        }
+                Destroy(constructs[task].gameObject);
+                constructs.Remove(task);
+            });
     }
 }
