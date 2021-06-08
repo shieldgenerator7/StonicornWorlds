@@ -9,13 +9,49 @@ public class ToolBox : ToolButton
 
     public bool Enabled => buttons.Any(btn => btn.gameObject.activeSelf);
 
-    public bool ShowSelf => false;
+    public bool collapsed = false;
+    private int savedIndexY;
+
+    public bool ShowSelf => buttons.Count(btn => btn.gameObject.activeSelf) >= 3;
 
     /// <summary>
     /// Arranges the buttons in their positions.
     /// </summary>
     /// <param name="indexY">The index of this toolbox, starting from 0 at the bottom left</param>
     public void organize(int indexY)
+    {
+        savedIndexY = indexY;
+        if (collapsed)
+        {
+            organizeCollapsed(indexY);
+        }
+        else
+        {
+            organizeFull(indexY);
+        }
+        //Button direction
+        Vector3 scale = transform.localScale;
+        scale.x = (collapsed) ? -1 : 1;
+        transform.localScale = scale;
+    }
+    void organizeCollapsed(int indexY)
+    {
+        float spacing = Managers.Constants.buttonSpacing;
+        float spacing2 = spacing / 2;
+        setPosition(
+            spacing2,
+            spacing2 + (indexY * spacing)
+            );
+        gameObject.SetActive(true);
+        //Hide buttons
+        float hideX = -spacing * 2;
+        buttons.FindAll(b => b.gameObject.activeSelf)
+             .ForEach(btn =>
+             {
+                 btn.setPosition(hideX, 0);
+             });
+    }
+    void organizeFull(int indexY)
     {
         float spacing = Managers.Constants.buttonSpacing;
         float offsetX = spacing / 2;
@@ -46,6 +82,8 @@ public class ToolBox : ToolButton
 
     public override void activate()
     {
+        collapsed = !collapsed;
+        organize(savedIndexY);
     }
 
     protected override bool isActive()

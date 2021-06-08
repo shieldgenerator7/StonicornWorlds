@@ -153,16 +153,16 @@ public class CustomMenu
     {
         int problemCount = 0;
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
-        inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList()
-            .FindAll(btn => !(btn is ToolBox));
+        inputManager.buttons = GameObject.FindObjectsOfType<ToolButton>(true).ToList();
         GameObject.FindObjectsOfType<ToolBox>(true).ToList()
             .FindAll(tb => !inputManager.toolBoxes.Contains(tb))
             .ForEach(tb =>
             {
                 problemCount++;
-                Debug.LogError("Tool " + tb + " is not listed in InputManager!", tb);
+                Debug.LogError("ToolBox " + tb + " is not listed in InputManager!", tb);
             });
         inputManager.buttons
+            .FindAll(btn => !(btn is ToolBox))
             .FindAll(btn => !inputManager.toolBoxes.Any(tb => tb.buttons.Contains(btn)))
             .ForEach(btn =>
             {
@@ -208,6 +208,7 @@ public class CustomMenu
             });
         //Check to make sure buttons are registered
         inputManager.buttons
+            .FindAll(btn => !(btn is ToolBox))
             .FindAll(
             btn => !progressionManager.buttonProgressors.Any(
                     btnpro => btnpro.button == btn
@@ -233,6 +234,7 @@ public class CustomMenu
             });
         //Set active buttons to inactive
         inputManager.buttons.FindAll(btn => btn.gameObject.activeSelf)
+            .FindAll(btn => !(btn is ToolBox))
             .ForEach(btn =>
             {
                 btn.gameObject.SetActive(false);
