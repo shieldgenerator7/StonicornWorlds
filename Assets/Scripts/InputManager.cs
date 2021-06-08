@@ -104,6 +104,7 @@ public class InputManager : Manager
             .ForEach(tb =>
             {
                 tb.organize(index);
+                tb.updateColor();
                 index++;
             });
     }
@@ -152,6 +153,7 @@ public class InputManager : Manager
                     //Click on Button
                     clickedButton.activate();
                     buttonActivation = true;
+                    toolBoxes.ForEach(tb => tb.updateColor());
                 }
                 else
                 {

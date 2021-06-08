@@ -90,4 +90,20 @@ public class ToolBox : ToolButton
     {
         return false;
     }
+    public override Color Color
+    {
+        get
+        {
+            ToolButton colorButton = buttons.FirstOrDefault(btn => btn.Active);
+            if (!colorButton)
+            {
+                colorButton = buttons.FirstOrDefault(btn => btn.gameObject.activeSelf);
+            }
+            return (colorButton) ? colorButton.Color : base.Color;
+        }
+    }
+    public void updateColor()
+    {
+        image.color = this.Color;
+    }
 }

@@ -8,6 +8,8 @@ public class PlanetObjectTypeButton : ToolButton
 
     public List<ToolAction> compatibleToolActions;
 
+    public override Color Color => planetObjectType.uiColor;
+
     public override void activate()
     {
         Managers.Input.PlanetObjectType = planetObjectType;

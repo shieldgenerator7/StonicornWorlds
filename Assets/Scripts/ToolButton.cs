@@ -18,6 +18,8 @@ public abstract class ToolButton : MonoBehaviour
         updatePosition();
     }
 
+    public virtual Color Color => image.color;
+
     public void setPosition(float x, float y)
     {
         RectTransform rect = GetComponent<RectTransform>();
