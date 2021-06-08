@@ -428,7 +428,7 @@ MonoBehaviour:
   hairSR: {fileID: 5606281556637797395}
   eyeSR: {fileID: 5654749102713740068}
   ui_work: {fileID: 1828720895694824219}
-  ui_sleep: {fileID: 2171321016374724422}
+  ui_sleep: {fileID: 1337999458923864229}
 --- !u!1 &7482136296251810858
 GameObject:
   m_ObjectHideFlags: 0

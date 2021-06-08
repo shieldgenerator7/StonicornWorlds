@@ -14,7 +14,7 @@ public class StonicornDisplayer : MonoBehaviour
     [SerializeField]
     private SpriteRenderer ui_work;
     [SerializeField]
-    private SpriteRenderer ui_sleep;
+    private Animator ui_sleep;
 
     // Start is called before the first frame update
     void Start()
@@ -46,9 +46,13 @@ public class StonicornDisplayer : MonoBehaviour
             ui_work.gameObject.SetActive(false);
         }
         //Sleeping
-        ui_sleep.gameObject.SetActive(
-            stonicorn.action == Stonicorn.Action.REST &&
-            stonicorn.position == stonicorn.homePosition
-            );
+        bool prevSleeping = ui_sleep.gameObject.activeSelf;
+        bool sleeping = stonicorn.action == Stonicorn.Action.REST &&
+            stonicorn.position == stonicorn.homePosition;
+        if (prevSleeping != sleeping)
+        {
+            ui_sleep.gameObject.SetActive(sleeping);
+            ui_sleep.enabled = sleeping;
+        }
     }
 }
