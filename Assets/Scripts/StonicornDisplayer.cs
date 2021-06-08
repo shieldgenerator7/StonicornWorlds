@@ -51,8 +51,8 @@ public class StonicornDisplayer : MonoBehaviour
             stonicorn.position == stonicorn.homePosition;
         if (prevSleeping != sleeping)
         {
-            ui_sleep.gameObject.SetActive(sleeping);
             ui_sleep.enabled = sleeping;
+            ui_sleep.gameObject.SetActive(sleeping);
         }
     }
 }
