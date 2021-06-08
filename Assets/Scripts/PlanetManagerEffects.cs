@@ -209,8 +209,8 @@ public class PlanetManagerEffects : MonoBehaviour
     public void updateEditDisplay(Vector2 up)
     {
         editPods.ForEach(go =>
-            go.transform.GetChild(0).up = up;
-            });
+            go.transform.GetChild(0).up = up
+        );
         spaceField.transform.up = Vector2.up;
     }
 
