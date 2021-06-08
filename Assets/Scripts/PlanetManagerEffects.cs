@@ -192,11 +192,11 @@ public class PlanetManagerEffects : MonoBehaviour
         {
             SpriteRenderer psr = editPods[i];
             psr.transform.position = posList[i];
-            psr.transform.up = up;
             psr.color = color;
             SpriteRenderer sr = psr.transform.GetChild(0).GetComponent<SpriteRenderer>();
             sr.sprite = preview;
             sr.color = color;
+            sr.transform.up = up;
             psr.gameObject.SetActive(true);
         }
         //Turn off unnecessary editPods
@@ -209,8 +209,8 @@ public class PlanetManagerEffects : MonoBehaviour
     public void updateEditDisplay(Vector2 up)
     {
         editPods.ForEach(go =>
-            go.transform.GetChild(0).up = up
-        );
+            go.transform.GetChild(0).up = up;
+            });
         spaceField.transform.up = Vector2.up;
     }
 
