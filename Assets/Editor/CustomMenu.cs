@@ -383,6 +383,8 @@ public class CustomMenu
         //Save and Log
         EditorSceneManager.SaveOpenScenes();
         Debug.LogWarning("Updated build version number from " + oldVersion + " to " + newVersion);
+        //Open folders
+        openAppDataFolder();
     }
 
     [MenuItem("SG7/Session/Finish Session")]
@@ -395,6 +397,8 @@ public class CustomMenu
             EditorSceneManager.SaveOpenScenes();
             buildWindows();
         }
+        //Open folders
+        openBuildFolder();
     }
 
     [MenuItem("SG7/Upgrade/Force save all assets")]
