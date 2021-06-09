@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             Managers.Planet.calculatePlannedState();
         }
+        //
         Managers.Input.buttons
             .FindAll(btn => p.lastActiveButtonNames.Contains(btn.gameObject.name))
             .ForEach(btn => btn.activate());

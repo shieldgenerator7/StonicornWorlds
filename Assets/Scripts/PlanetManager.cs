@@ -46,9 +46,9 @@ public class PlanetManager : Manager
         if (planet.PodsAll.Count == 0)
         {
             planet.position = Vector2.zero;
-            PlannedPlanet = planet.deepCopy();
             Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
+            PlannedPlanet = planet.deepCopy();
             planet.residents[0].rest = 500;
             planet.residents[0].action = Stonicorn.Action.IDLE;
             FindObjectOfType<StonicornGenerator>().statsFromProfile(
