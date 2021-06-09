@@ -18,6 +18,7 @@ public class Planet
     [SerializeField]
     private List<Pod> pods = new List<Pod>();
     public List<QueueTask> tasks = new List<QueueTask>();
+    public Planet plans;
     [NonSerialized]
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
     [NonSerialized]

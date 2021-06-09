@@ -11,6 +11,7 @@ public class PodContentType : PlanetObjectType
     public List<PodType> requiredGround;
     public List<PodType> requiredNeighbors;
     public List<PodContentType> requiredContent;
+    public List<PodContentType> requiredPlanContent;
 
     public bool hasRequiredGround(PodType podType)
     {
@@ -40,6 +41,13 @@ public class PodContentType : PlanetObjectType
     {
         return requiredContent.Count == 0 ||
             (curPod && requiredContent.Any(
+                ctntType => curPod.hasContent(ctntType)
+                ));
+    }
+    public bool hasRequiredPlanContent(Pod curPod)
+    {
+        return requiredPlanContent.Count == 0 ||
+            (curPod && requiredPlanContent.Any(
                 ctntType => curPod.hasContent(ctntType)
                 ));
     }

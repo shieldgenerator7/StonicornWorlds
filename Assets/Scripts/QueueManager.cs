@@ -17,6 +17,7 @@ public class QueueManager : Manager
             return;
         }
         queue.Add(task);
+        Managers.Planet.updatePlans(task);
         callOnQueueChanged();
     }
     public void callOnQueueChanged()
@@ -34,21 +35,18 @@ public class QueueManager : Manager
             case QueueTask.Type.CONSTRUCT:
                 return Managers.Planet.canBuildAtPosition(
                     (PodType)task.taskObject,
-                    task.pos,
-                    false
+                    task.pos
                     );
             case QueueTask.Type.CONVERT:
                 return Managers.Planet.Planet.hasPod(task.pos) &&
                     Managers.Planet.canBuildAtPosition(
                         (PodType)task.taskObject,
-                        task.pos,
-                        false
+                        task.pos
                         );
             case QueueTask.Type.PLANT:
                 return Managers.Planet.canPlantAtPosition(
                     (PodContentType)task.taskObject,
-                    task.pos,
-                    false
+                    task.pos
                     );
             case QueueTask.Type.DESTRUCT:
                 return true;

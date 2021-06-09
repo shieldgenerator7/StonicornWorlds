@@ -17,32 +17,27 @@ public class PlanetManager : Manager
             }
             planet = value;
             planet.onStateChanged += planetChanged;
-            //onPlanetSwapped?.Invoke(planet);
             onPlanetStateChanged?.Invoke(planet);
         }
     }
     public delegate void OnPlanetStateChanged(Planet p);
-    //public event OnPlanetStateChanged onPlanetSwapped;
     public event OnPlanetStateChanged onPlanetStateChanged;
-    //public event OnPlanetStateChanged onFuturePlanetSwapped;
-    public event OnPlanetStateChanged onFuturePlanetStateChanged;
+    public event OnPlanetStateChanged onPlannedPlanetStateChanged;
     private void planetChanged(Planet p) => onPlanetStateChanged?.Invoke(p);
-    private void futurePlanetChanged(Planet p) => onFuturePlanetStateChanged?.Invoke(p);
+    private void plannedPlanetChanged(Planet p) => onPlannedPlanetStateChanged?.Invoke(p);
 
-    private Planet futurePlanet;
-    public Planet FuturePlanet
+    public Planet PlannedPlanet
     {
-        get => futurePlanet;
+        get => planet.plans;
         set
         {
-            if (futurePlanet != null)
+            if (planet.plans != null)
             {
-                futurePlanet.onStateChanged -= futurePlanetChanged;
+                planet.plans.onStateChanged -= plannedPlanetChanged;
             }
-            futurePlanet = value;
-            futurePlanet.onStateChanged += futurePlanetChanged;
-            //onFuturePlanetSwapped?.Invoke(futurePlanet);
-            onFuturePlanetStateChanged?.Invoke(futurePlanet);
+            planet.plans = value;
+            planet.plans.onStateChanged += plannedPlanetChanged;
+            onPlannedPlanetStateChanged?.Invoke(planet.plans);
         }
     }
 
@@ -51,7 +46,7 @@ public class PlanetManager : Manager
         if (planet.PodsAll.Count == 0)
         {
             planet.position = Vector2.zero;
-            FuturePlanet = planet;
+            PlannedPlanet = planet.deepCopy();
             Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
             planet.residents[0].rest = 500;
@@ -95,17 +90,38 @@ public class PlanetManager : Manager
         }
     }
 
-    public bool canBuildAtPosition(PodType podType, Vector2 pos, bool useFuture = true)
+    public void updatePlans(QueueTask task)
+    {
+        switch (task.type)
+        {
+            case QueueTask.Type.CONSTRUCT:
+                PlannedPlanet.addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
+                break;
+            case QueueTask.Type.CONVERT:
+                PlannedPlanet.addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
+                break;
+            case QueueTask.Type.DESTRUCT:
+                PlannedPlanet.removePod(task.pos);
+                break;
+            case QueueTask.Type.PLANT:
+                new PodContent(
+                    (PodContentType)task.taskObject,
+                    PlannedPlanet.getPod(task.pos)
+                );
+                break;
+        }
+    }
+
+    public bool canBuildAtPosition(PodType podType, Vector2 pos)
     {
         if (!podType)
         {
             return false;
         }
-        Planet canPlanet = (useFuture) ? futurePlanet : planet;
-        List<PodType> neighborTypes = getNeighbors(pos, canPlanet)
+        List<PodType> neighborTypes = getNeighbors(pos, planet)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = canPlanet.getPod(pos);
+        Pod curPod = planet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -115,19 +131,18 @@ public class PlanetManager : Manager
             && podType.canConvertFrom(curPodType);
     }
 
-    public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos, bool useFuture = true)
+    public bool canPlantAtPosition(PodContentType podContentType, Vector2 pos)
     {
-        Planet canPlanet = (useFuture) ? futurePlanet : planet;
-        List<PodType> neighborTypes = getNeighbors(pos, canPlanet)
+        List<PodType> neighborTypes = getNeighbors(pos, planet)
                .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = canPlanet.getPod(pos);
+        Pod curPod = planet.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
         }
         PodType groundPodType = null;
-        Pod groundPod = canPlanet.getGroundPod(pos);
+        Pod groundPod = planet.getGroundPod(pos);
         if (groundPod)
         {
             groundPodType = groundPod.podType;
@@ -139,6 +154,48 @@ public class PlanetManager : Manager
             && !(curPod && curPod.hasContent(podContentType));
     }
 
+    public bool canPlanBuildAtPosition(PodType podType, Vector2 pos)
+    {
+        if (!podType)
+        {
+            return false;
+        }
+        List<PodType> neighborTypes = getNeighbors(pos, planet.plans)
+            .ConvertAll(pod => pod.podType);
+        PodType curPodType = null;
+        Pod curPod = planet.plans.getPod(pos);
+        if (curPod)
+        {
+            curPodType = curPod.podType;
+        }
+        return podType.areAllNeighborsAllowed(neighborTypes)
+            && podType.isRequiredNeighborPresent(neighborTypes)
+            && podType.canConvertFrom(curPodType);
+    }
+
+    public bool canPlanPlantAtPosition(PodContentType podContentType, Vector2 pos)
+    {
+        List<PodType> neighborTypes = getNeighbors(pos, planet.plans)
+               .ConvertAll(pod => pod.podType);
+        PodType curPodType = null;
+        Pod curPod = planet.plans.getPod(pos);
+        if (curPod)
+        {
+            curPodType = curPod.podType;
+        }
+        PodType groundPodType = null;
+        Pod groundPod = planet.plans.getGroundPod(pos);
+        if (groundPod)
+        {
+            groundPodType = groundPod.podType;
+        }
+        return podContentType.hasRequiredGround(groundPodType)
+            && podContentType.canPlantIn(curPodType)
+            && podContentType.isRequiredNeighborPresent(neighborTypes)
+            && podContentType.hasRequiredPlanContent(curPod)
+            && !(curPod && curPod.hasContent(podContentType));
+    }
+
     public List<Pod> getNeighbors(Vector2 pos, Planet p)
     {
         return p.getNeighborhood(pos).neighbors.ToList()
@@ -146,7 +203,22 @@ public class PlanetManager : Manager
     }
 
     #region Predict State
-    public void calculateFutureState()
+    public void destroyPod(Pod pod)
+    {
+        if (PlannedPlanet.hasPod(pod.worldPos))
+        {
+            Managers.Queue.addToQueue(new QueueTask(pod.podType, pod.worldPos, QueueTask.Type.CONSTRUCT));
+            pod.forEachContent(
+                content => Managers.Queue.addToQueue(new QueueTask(
+                    content.contentType,
+                    content.container.worldPos,
+                    QueueTask.Type.PLANT
+                    ))
+                );
+        }
+        planet.removePod(pod);
+    }
+    public void calculatePlannedState()
     {
         Planet fp = planet.deepCopy();
         planet.tasks.ForEach(task =>
@@ -172,7 +244,7 @@ public class PlanetManager : Manager
                 }
             }
             );
-        FuturePlanet = fp;
+        PlannedPlanet = fp;
     }
     #endregion
 }

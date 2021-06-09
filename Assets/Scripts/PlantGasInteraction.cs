@@ -34,6 +34,11 @@ public class PlantGasInteraction : MonoBehaviour
         gas.Var += gasPressureDelta * Time.deltaTime;
         if (gas.Var <= 0)
         {
+            Managers.Queue.addToQueue(new QueueTask(
+                gas.contentType,
+                gas.container.worldPos,
+                QueueTask.Type.PLANT
+                ));
             gas.container.removeContent(gas);
         }
     }
