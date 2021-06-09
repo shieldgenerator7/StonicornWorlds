@@ -70,7 +70,13 @@ public class QueueManager : Manager
 
     public void cancelEmptyTasksAt(Vector2 pos)
     {
-        queue.RemoveAll(task => task.pos == pos && !task.Started);
+        queue
+            .FindAll(task => task.pos == pos && !task.Started)
+            .ForEach(task =>
+            {
+                Managers.Planet.cancelPlans(task);
+                queue.Remove(task);
+            });
         callOnQueueChanged();
     }
 

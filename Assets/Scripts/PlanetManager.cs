@@ -218,6 +218,18 @@ public class PlanetManager : Manager
         }
         planet.removePod(pod);
     }
+    public void cancelPlans(QueueTask task)
+    {
+        Pod pod = PlannedPlanet.getPod(task.pos);
+        if (task.taskObject is PodType pt)
+        {
+            PlannedPlanet.removePod(pod);
+        }
+        else if (task.taskObject is PodContentType pct)
+        {
+            pod.removeContent(pct);
+        }
+    }
     public void calculatePlannedState()
     {
         Planet fp = planet.deepCopy();

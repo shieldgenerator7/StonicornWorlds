@@ -44,6 +44,11 @@ public class Pod : PlanetObject
         podContents.Remove(content);
         onPodContentChanged?.Invoke(this);
     }
+    public void removeContent(PodContentType contentType)
+    {
+        podContents.RemoveAll(content => content.contentType == contentType);
+        onPodContentChanged?.Invoke(this);
+    }
 
     public bool hasContent(PodContentType contentType)
         => podContents.Any(content => content.contentType == contentType);
