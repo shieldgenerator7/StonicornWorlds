@@ -7,7 +7,7 @@ public class PlantAction : EditToolAction
     public override Color color => Managers.Input.PodContentType.uiColor;
 
     public override bool isActionValidAt(Vector2 pos)
-        => Managers.Planet.canPlantAtPosition(Managers.Input.PodContentType, pos);
+        => Managers.Planet.canPlanPlantAtPosition(Managers.Input.PodContentType, pos);
 
     protected override void takeAction(Vector2 pos)
     {
