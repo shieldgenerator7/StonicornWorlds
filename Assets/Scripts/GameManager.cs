@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
         Managers.Player.onPlayerChanged += onPlayerChanged;
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
-        Managers.Planet.onPlannedPlanetStateChanged += Managers.Edge.calculateValidPosList;
         //Camera
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
@@ -55,7 +54,7 @@ public class GameManager : MonoBehaviour
         Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
-        Managers.Queue.onQueueChanged += Managers.QueueEffects.updateDisplay;
+        Managers.Queue.onQueueChanged += onQueueChanged;
         //Edge
         Managers.Edge.onValidPositionListChanged += onValidPositionListChanged;
         //Input
@@ -70,12 +69,6 @@ public class GameManager : MonoBehaviour
     void onPlayerChanged(Player p)
     {
         Managers.Planet.Planet = p.LastViewedPlanet;
-        //Check to see if PlannedPlanet is null
-        if (Managers.Planet.PlannedPlanet == null)
-        {
-            Managers.Planet.calculatePlannedState();
-        }
-        //
         Managers.Input.buttons
             .FindAll(btn => p.lastActiveButtonNames.Contains(btn.gameObject.name))
             .ForEach(btn => btn.activate());
@@ -84,6 +77,7 @@ public class GameManager : MonoBehaviour
     void onPlanetStateChanged(Planet p)
     {
         Managers.Resources.updateResourceCaps(p);
+        Managers.Queue.scheduleTasksFromPlans();
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
     }
@@ -101,14 +95,20 @@ public class GameManager : MonoBehaviour
         Managers.Input.checkAllButtons();
     }
 
+    void onQueueChanged(List<QueueTask> tasks)
+    {
+        Managers.QueueEffects.updateDisplay(tasks);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
+    }
+
     void onInputPlanetObjectTypeChanged(PlanetObjectType pot)
     {
-        Managers.Edge.calculateValidPosList(Managers.Planet.PlannedPlanet);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Input.checkAllButtons();
     }
     void onInputToolActionChanged(ToolAction ta)
     {
-        Managers.Edge.calculateValidPosList(Managers.Planet.PlannedPlanet);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Input.checkAllButtons();
     }
 
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         Managers.File.setup();
         Managers.Queue.setup();
         Managers.Resources.setup();
-        Managers.Edge.calculateValidPosList(Managers.Planet.PlannedPlanet);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Progression.setup();
     }
     #endregion

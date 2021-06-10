@@ -9,6 +9,8 @@ public class QueueManager : Manager
 
     public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
+    public Planet plans;
+
     public void addToQueue(QueueTask task)
     {
         if (queue.Contains(task))
@@ -17,7 +19,7 @@ public class QueueManager : Manager
             return;
         }
         queue.Add(task);
-        Managers.Planet.updatePlans(task);
+        plans.updatePlanet(task);
         callOnQueueChanged();
     }
     public void callOnQueueChanged()
@@ -74,7 +76,15 @@ public class QueueManager : Manager
             .FindAll(task => task.pos == pos && !task.Started)
             .ForEach(task =>
             {
-                Managers.Planet.cancelPlans(task);
+                Pod pod = plans.getPod(task.pos);
+                if (task.taskObject is PodType pt)
+                {
+                    plans.removePod(pod);
+                }
+                else if (task.taskObject is PodContentType pct)
+                {
+                    pod.removeContent(pct);
+                }
                 queue.Remove(task);
             });
         callOnQueueChanged();
@@ -117,5 +127,55 @@ public class QueueManager : Manager
     public override void setup()
     {
         callOnQueueChanged();
+        calculatePlannedStateFromTasks();
+    }
+
+    public void scheduleTasksFromPlans()
+    {
+        Planet planet = Managers.Planet.Planet;
+        List<Pod> planPods = plans.PodsNotEmpty;
+        List<Pod> planetPods = planet.PodsNotEmpty;
+        if (planPods.Count != planetPods.Count)
+        {
+            //Check for pods that need added
+            planPods
+                .FindAll(pod => !planet.hasPod(pod.worldPos))
+                .ForEach(pod =>
+                {
+                    QueueTask task = new QueueTask(pod.podType, pod.worldPos, QueueTask.Type.CONSTRUCT);
+                    addToQueue(task);
+                });
+            //TODO: check for pod contents that need added
+            //TODO: check for pods that need destroyed
+            //TODO: check for pod contents that need destroyed
+        }
+    }
+
+    public void calculatePlannedStateFromTasks()
+    {
+        Planet fp = Managers.Planet.Planet.deepCopy();
+        queue.ForEach(task =>
+        {
+            switch (task.type)
+            {
+                case QueueTask.Type.CONSTRUCT:
+                case QueueTask.Type.CONVERT:
+                    fp.addPod(
+                        new Pod(task.pos, (PodType)task.taskObject),
+                        task.pos
+                        );
+                    break;
+                case QueueTask.Type.PLANT:
+                    Pod pod = fp.getPod(task.pos);
+                    pod.addContent(
+                        new PodContent((PodContentType)task.taskObject, pod)
+                        );
+                    break;
+                default:
+                    Debug.LogError("No case for value: " + task.type);
+                    break;
+            }
+        });
+        plans = fp;
     }
 }

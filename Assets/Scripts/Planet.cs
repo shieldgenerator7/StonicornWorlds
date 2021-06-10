@@ -18,7 +18,6 @@ public class Planet
     [SerializeField]
     private List<Pod> pods = new List<Pod>();
     public List<QueueTask> tasks = new List<QueueTask>();
-    public Planet plans;
     [NonSerialized]
     private HexagonGrid<Pod> grid = new HexagonGrid<Pod>();
     [NonSerialized]
@@ -55,6 +54,25 @@ public class Planet
     public delegate void OnStateChanged(Planet p);
     public event OnStateChanged onStateChanged;
 
+    public void updatePlanet(QueueTask task)
+    {
+        switch (task.type)
+        {
+            case QueueTask.Type.CONSTRUCT:
+                addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
+                break;
+            case QueueTask.Type.CONVERT:
+                addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
+                break;
+            case QueueTask.Type.DESTRUCT:
+                removePod(task.pos);
+                break;
+            case QueueTask.Type.PLANT:
+                new PodContent((PodContentType)task.taskObject, getPod(task.pos)
+                );
+                break;
+        }
+    }
     public void addPod(Pod pod, Vector2 pos)
     {
         pod.gridPos = worldToGrid(pos);

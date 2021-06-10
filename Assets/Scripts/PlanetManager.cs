@@ -22,24 +22,8 @@ public class PlanetManager : Manager
     }
     public delegate void OnPlanetStateChanged(Planet p);
     public event OnPlanetStateChanged onPlanetStateChanged;
-    public event OnPlanetStateChanged onPlannedPlanetStateChanged;
     private void planetChanged(Planet p) => onPlanetStateChanged?.Invoke(p);
-    private void plannedPlanetChanged(Planet p) => onPlannedPlanetStateChanged?.Invoke(p);
 
-    public Planet PlannedPlanet
-    {
-        get => planet.plans;
-        set
-        {
-            if (planet.plans != null)
-            {
-                planet.plans.onStateChanged -= plannedPlanetChanged;
-            }
-            planet.plans = value;
-            planet.plans.onStateChanged += plannedPlanetChanged;
-            onPlannedPlanetStateChanged?.Invoke(planet.plans);
-        }
-    }
 
     public override void setup()
     {
@@ -48,7 +32,6 @@ public class PlanetManager : Manager
             planet.position = Vector2.zero;
             Pod starter = new Pod(Vector2.zero, Managers.Constants.corePodType);
             addPod(starter);
-            PlannedPlanet = planet.deepCopy();
             planet.residents[0].rest = 500;
             planet.residents[0].action = Stonicorn.Action.IDLE;
             FindObjectOfType<StonicornGenerator>().statsFromProfile(
@@ -70,46 +53,7 @@ public class PlanetManager : Manager
 
     public void updatePlanet(QueueTask task)
     {
-        switch (task.type)
-        {
-            case QueueTask.Type.CONSTRUCT:
-                addPod(new Pod(task.pos, (PodType)task.taskObject));
-                break;
-            case QueueTask.Type.CONVERT:
-                convertPod(new Pod(task.pos, (PodType)task.taskObject));
-                break;
-            case QueueTask.Type.DESTRUCT:
-                planet.removePod(task.pos);
-                break;
-            case QueueTask.Type.PLANT:
-                new PodContent(
-                    (PodContentType)task.taskObject,
-                    planet.getPod(task.pos)
-                );
-                break;
-        }
-    }
-
-    public void updatePlans(QueueTask task)
-    {
-        switch (task.type)
-        {
-            case QueueTask.Type.CONSTRUCT:
-                PlannedPlanet.addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
-                break;
-            case QueueTask.Type.CONVERT:
-                PlannedPlanet.addPod(new Pod(task.pos, (PodType)task.taskObject), task.pos);
-                break;
-            case QueueTask.Type.DESTRUCT:
-                PlannedPlanet.removePod(task.pos);
-                break;
-            case QueueTask.Type.PLANT:
-                new PodContent(
-                    (PodContentType)task.taskObject,
-                    PlannedPlanet.getPod(task.pos)
-                );
-                break;
-        }
+        planet.updatePlanet(task);
     }
 
     public bool canBuildAtPosition(PodType podType, Vector2 pos)
@@ -160,10 +104,11 @@ public class PlanetManager : Manager
         {
             return false;
         }
-        List<PodType> neighborTypes = getNeighbors(pos, planet.plans)
+        Planet plans = Managers.Queue.plans;
+        List<PodType> neighborTypes = getNeighbors(pos, plans)
             .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = planet.plans.getPod(pos);
+        Pod curPod = plans.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
@@ -175,16 +120,17 @@ public class PlanetManager : Manager
 
     public bool canPlanPlantAtPosition(PodContentType podContentType, Vector2 pos)
     {
-        List<PodType> neighborTypes = getNeighbors(pos, planet.plans)
+        Planet plans = Managers.Queue.plans;
+        List<PodType> neighborTypes = getNeighbors(pos, plans)
                .ConvertAll(pod => pod.podType);
         PodType curPodType = null;
-        Pod curPod = planet.plans.getPod(pos);
+        Pod curPod = plans.getPod(pos);
         if (curPod)
         {
             curPodType = curPod.podType;
         }
         PodType groundPodType = null;
-        Pod groundPod = planet.plans.getGroundPod(pos);
+        Pod groundPod = plans.getGroundPod(pos);
         if (groundPod)
         {
             groundPodType = groundPod.podType;
@@ -202,61 +148,8 @@ public class PlanetManager : Manager
             .FindAll(pod => pod);
     }
 
-    #region Predict State
     public void destroyPod(Pod pod)
     {
-        if (PlannedPlanet.hasPod(pod.worldPos))
-        {
-            Managers.Queue.addToQueue(new QueueTask(pod.podType, pod.worldPos, QueueTask.Type.CONSTRUCT));
-            pod.forEachContent(
-                content => Managers.Queue.addToQueue(new QueueTask(
-                    content.contentType,
-                    content.container.worldPos,
-                    QueueTask.Type.PLANT
-                    ))
-                );
-        }
         planet.removePod(pod);
     }
-    public void cancelPlans(QueueTask task)
-    {
-        Pod pod = PlannedPlanet.getPod(task.pos);
-        if (task.taskObject is PodType pt)
-        {
-            PlannedPlanet.removePod(pod);
-        }
-        else if (task.taskObject is PodContentType pct)
-        {
-            pod.removeContent(pct);
-        }
-    }
-    public void calculatePlannedState()
-    {
-        Planet fp = planet.deepCopy();
-        planet.tasks.ForEach(task =>
-            {
-                switch (task.type)
-                {
-                    case QueueTask.Type.CONSTRUCT:
-                    case QueueTask.Type.CONVERT:
-                        fp.addPod(
-                            new Pod(task.pos, (PodType)task.taskObject),
-                            task.pos
-                            );
-                        break;
-                    case QueueTask.Type.PLANT:
-                        Pod pod = fp.getPod(task.pos);
-                        pod.addContent(
-                            new PodContent((PodContentType)task.taskObject, pod)
-                            );
-                        break;
-                    default:
-                        Debug.LogError("No case for value: " + task.type);
-                        break;
-                }
-            }
-            );
-        PlannedPlanet = fp;
-    }
-    #endregion
 }

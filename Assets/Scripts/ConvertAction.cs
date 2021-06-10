@@ -7,7 +7,7 @@ public class ConvertAction : EditToolAction
     public override Color color => Managers.Input.PodType.uiColor;
 
     public override bool isActionValidAt(Vector2 pos)
-        => Managers.Planet.PlannedPlanet.hasPod(pos)
+        => Managers.Queue.plans.hasPod(pos)
         && Managers.Planet.canPlanBuildAtPosition(Managers.Input.PodType, pos);
 
     protected override void takeAction(Vector2 pos)
