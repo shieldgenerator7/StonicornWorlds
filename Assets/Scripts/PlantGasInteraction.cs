@@ -15,13 +15,16 @@ public class PlantGasInteraction : MonoBehaviour
     {
         List<Pod> interactPods = Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
             .FindAll(pod => pod.hasContent(plantType) && pod.hasContent(gasType));
-        interactPods.ForEach(
+        List<PodContent> destroyedPlants = interactPods.FindAll(
             pod => interact(pod.getContent(plantType), pod.getContent(gasType))
-            );
+            )
+            .ConvertAll(pod=>pod.getContent(plantType));
+        Managers.Planet.destroyPodContents(destroyedPlants);
     }
 
-    void interact(PodContent plant, PodContent gas)
+    bool interact(PodContent plant, PodContent gas)
     {
+        bool plantDestroyed = false;
         plant.Var = Mathf.Clamp(
             plant.Var + (plantHealthDelta * Time.deltaTime),
             0.0f,
@@ -29,7 +32,7 @@ public class PlantGasInteraction : MonoBehaviour
             );
         if (plant.Var == 0)
         {
-            plant.container.removeContent(plant);
+            plantDestroyed = true;
         }
         gas.Var += gasPressureDelta * Time.deltaTime;
         if (gas.Var <= 0)
@@ -41,5 +44,6 @@ public class PlantGasInteraction : MonoBehaviour
                 ));
             gas.container.removeContent(gas);
         }
+        return plantDestroyed;
     }
 }

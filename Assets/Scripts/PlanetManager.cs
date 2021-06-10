@@ -154,6 +154,11 @@ public class PlanetManager : Manager
         pods.ForEach(pod => planet.removePod(pod));
         onPlanetStateChangedUnplanned(planet);
     }
+    public void destroyPodContents(List<PodContent> contents)
+    {
+        contents.ForEach(content => content.container.removeContent(content));
+        onPlanetStateChangedUnplanned(planet);
+    }
     public void createPods(List<Pod> pods)
     {
         pods.ForEach(pod => planet.addPod(pod, pod.worldPos));

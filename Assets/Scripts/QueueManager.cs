@@ -155,7 +155,7 @@ public class QueueManager : Manager
         Planet planet = Managers.Planet.Planet;
         List<Pod> planPods = plans.PodsNotEmpty;
         List<Pod> planetPods = planet.PodsNotEmpty;
-        if (planPods.Count != planetPods.Count)
+        if (true || planPods.Count != planetPods.Count)
         {
             //Check for pods that need added
             planPods
@@ -166,12 +166,14 @@ public class QueueManager : Manager
                     addToQueue(task);
                 });
             //Check for pod contents that need added
-            planPods.ForEach(pod =>
+            plans.PodsAll.ForEach(pod =>
             {
                 pod.forEachContent(content =>
                 {
                     Pod planetPod = planet.getPod(pod.worldPos);
-                    if (!planetPod || !planetPod.hasContent(content.contentType))
+                    if (content.contentType.constructible &&
+                        planetPod && !planetPod.hasContent(content.contentType)
+                    )
                     {
                         QueueTask task = new QueueTask(content.contentType, pod.worldPos, QueueTask.Type.PLANT);
                         addToQueue(task);
@@ -221,6 +223,9 @@ public class QueueManager : Manager
                     pod.addContent(
                         new PodContent((PodContentType)task.taskObject, pod)
                         );
+                    break;
+                case QueueTask.Type.DESTRUCT:
+                    fp.removePod(task.pos);
                     break;
                 default:
                     Debug.LogError("No case for value: " + task.type);
