@@ -35,6 +35,7 @@ public class CameraController : Manager
             else
             {
                 Managers.Camera.Locked = false;
+                Managers.Camera.autoFrame(new List<Vector2>());
             }
             onFocusObjectChanged?.Invoke(stonicorn);
         }
