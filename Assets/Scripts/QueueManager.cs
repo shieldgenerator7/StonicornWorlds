@@ -15,6 +15,11 @@ public class QueueManager : Manager
 
     public void addToQueue(QueueTask task)
     {
+        if (queue.Any(t => t.pos == task.pos && t.taskObject == task.taskObject))
+        {
+            //don't add tasks that are already in the queue
+            return;
+        }
         if (queue.Contains(task))
         {
             Debug.LogError("Task already in queue");
@@ -160,9 +165,40 @@ public class QueueManager : Manager
                     QueueTask task = new QueueTask(pod.podType, pod.worldPos, QueueTask.Type.CONSTRUCT);
                     addToQueue(task);
                 });
-            //TODO: check for pod contents that need added
-            //TODO: check for pods that need destroyed
-            //TODO: check for pod contents that need destroyed
+            //Check for pod contents that need added
+            planPods.ForEach(pod =>
+            {
+                pod.forEachContent(content =>
+                {
+                    Pod planetPod = planet.getPod(pod.worldPos);
+                    if (!planetPod || !planetPod.hasContent(content.contentType))
+                    {
+                        QueueTask task = new QueueTask(content.contentType, pod.worldPos, QueueTask.Type.PLANT);
+                        addToQueue(task);
+                    }
+                });
+            });
+            //Check for pods that need destroyed
+            planetPods
+                .FindAll(pod => !plans.hasPod(pod.worldPos))
+                .ForEach(pod =>
+                {
+                    QueueTask task = new QueueTask(pod.podType, pod.worldPos, QueueTask.Type.DESTRUCT);
+                    addToQueue(task);
+                });
+            //TODO: Check for pod contents that need destroyed
+            //planetPods.ForEach(pod =>
+            //{
+            //    pod.forEachContent(content =>
+            //    {
+            //        Pod plansPod = plans.getPod(pod.worldPos);
+            //        if (!plansPod || !plansPod.hasContent(content.contentType))
+            //        {
+            //            QueueTask task = new QueueTask(content.contentType, pod.worldPos, QueueTask.Type.PLANT);
+            //            addToQueue(task);
+            //        }
+            //    });
+            //});
         }
     }
 

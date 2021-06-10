@@ -45,13 +45,16 @@ public class GameManager : MonoBehaviour
         Managers.Player.onPlayerChanged += onPlayerChanged;
         //Planet
         Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
+        Managers.Planet.onPlanetStateChangedUnplanned += 
+            (p) => Managers.Queue.scheduleTasksFromPlans();
         //Camera
         Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
         Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
         Managers.Camera.onFocusObjectChanged += onFocusObjectChanged;
         Managers.Camera.onZoomChanged += Managers.PlanetEffects.updateSpaceField;
         //Resources
-        Managers.Resources.onResourcesChanged += (resources) => Managers.Progression.checkAllProgression();
+        Managers.Resources.onResourcesChanged += 
+            (resources) => Managers.Progression.checkAllProgression();
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
         Managers.Queue.onQueueChanged += onQueueChanged;

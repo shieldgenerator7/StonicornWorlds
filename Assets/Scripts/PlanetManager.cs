@@ -22,6 +22,7 @@ public class PlanetManager : Manager
     }
     public delegate void OnPlanetStateChanged(Planet p);
     public event OnPlanetStateChanged onPlanetStateChanged;
+    public event OnPlanetStateChanged onPlanetStateChangedUnplanned;
     private void planetChanged(Planet p) => onPlanetStateChanged?.Invoke(p);
 
 
@@ -151,6 +152,11 @@ public class PlanetManager : Manager
     public void destroyPods(List<Pod> pods)
     {
         pods.ForEach(pod => planet.removePod(pod));
-        Managers.Queue.scheduleTasksFromPlans();
+        onPlanetStateChangedUnplanned(planet);
+    }
+    public void createPods(List<Pod> pods)
+    {
+        pods.ForEach(pod => planet.addPod(pod, pod.worldPos));
+        onPlanetStateChangedUnplanned(planet);
     }
 }
