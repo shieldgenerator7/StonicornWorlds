@@ -76,7 +76,6 @@ public class GasDiffuser : MonoBehaviour
         set
         {
             HexagonGrid<float> grid = value;
-            bool addedAny = false;
             grid.Keys
                 .FindAll(v => grid[v] >= 0)
                 .ForEach(
@@ -86,7 +85,6 @@ public class GasDiffuser : MonoBehaviour
                     if (!pod && grid[v] > 0)
                     {
                         pod = Managers.Planet.Planet.fillSpace(v);
-                        addedAny = true;
                     }
                     if (pod)
                     {
@@ -95,7 +93,6 @@ public class GasDiffuser : MonoBehaviour
                         {
                             content = new PodContent(gasPodContentType, pod);
                             pod.addContent(content);
-                            addedAny = true;
                         }
                         if (content)
                         {
@@ -104,10 +101,6 @@ public class GasDiffuser : MonoBehaviour
                     }
                 }
                 );
-            if (addedAny)
-            {
-                Managers.Queue.callOnQueueChanged();
-            }
         }
     }
 

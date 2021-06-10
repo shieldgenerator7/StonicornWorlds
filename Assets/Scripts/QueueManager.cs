@@ -22,7 +22,7 @@ public class QueueManager : Manager
         plans.updatePlanet(task);
         callOnQueueChanged();
     }
-    public void callOnQueueChanged()
+    private void callOnQueueChanged()
     {
         onQueueChanged?.Invoke(queue);
     }
