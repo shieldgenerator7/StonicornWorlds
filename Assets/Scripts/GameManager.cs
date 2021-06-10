@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
         Managers.Queue.onQueueChanged += onQueueChanged;
+        Managers.Queue.onPlansChanged += onPlansChanged;
         //Edge
         Managers.Edge.onValidPositionListChanged += onValidPositionListChanged;
         //Input
@@ -98,7 +99,10 @@ public class GameManager : MonoBehaviour
     void onQueueChanged(List<QueueTask> tasks)
     {
         Managers.QueueEffects.updateDisplay(tasks);
-        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
+    }
+    void onPlansChanged(Planet plans)
+    {
+        Managers.Edge.calculateValidPosList(plans);
     }
 
     void onInputPlanetObjectTypeChanged(PlanetObjectType pot)

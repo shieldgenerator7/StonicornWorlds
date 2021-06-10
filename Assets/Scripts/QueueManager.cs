@@ -10,6 +10,8 @@ public class QueueManager : Manager
     public List<QueueTask> queue => Managers.Planet.Planet.tasks;
 
     public Planet plans;
+    public delegate void OnPlansChanged(Planet p);
+    public event OnPlansChanged onPlansChanged;
 
     public void addToQueue(QueueTask task)
     {
@@ -21,10 +23,15 @@ public class QueueManager : Manager
         queue.Add(task);
         plans.updatePlanet(task);
         callOnQueueChanged();
+        callOnPlansChanged();
     }
     private void callOnQueueChanged()
     {
         onQueueChanged?.Invoke(queue);
+    }
+    private void callOnPlansChanged()
+    {
+        onPlansChanged?.Invoke(plans);
     }
     public delegate void OnQueueChanged(List<QueueTask> queue);
     public event OnQueueChanged onQueueChanged;
@@ -88,6 +95,7 @@ public class QueueManager : Manager
                 queue.Remove(task);
             });
         callOnQueueChanged();
+        callOnPlansChanged();
     }
 
     /// <summary>
@@ -177,5 +185,6 @@ public class QueueManager : Manager
             }
         });
         plans = fp;
+        callOnPlansChanged();
     }
 }
