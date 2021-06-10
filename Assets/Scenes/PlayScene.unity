@@ -2785,6 +2785,7 @@ MonoBehaviour:
   cursorObject: {fileID: 1466314831}
   stonicornHUD: {fileID: 919628011606000815}
   spaceField: {fileID: 139889798}
+  starFieldScale: 1.1
 --- !u!114 &752787615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4529,6 +4530,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultWorkRate: 20
+  plans:
+    position: {x: 0, y: 0}
+    size: 0.5
+    pods: []
+    tasks: []
+    residents: []
 --- !u!4 &1302935093
 Transform:
   m_ObjectHideFlags: 0

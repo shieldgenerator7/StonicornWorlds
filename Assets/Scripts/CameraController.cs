@@ -60,7 +60,6 @@ public class CameraController : Manager
         set
         {
             zoomLevel = value;
-            onZoomChanged?.Invoke(zoomLevel);
         }
     }
     public delegate void OnZoomChanged(float zoomLevel);
@@ -104,6 +103,7 @@ public class CameraController : Manager
         if (Camera.main.orthographicSize != ZoomLevel)
         {
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, ZoomLevel, deltaTime);
+            onZoomChanged?.Invoke(zoomLevel);
         }
         //Screen Size
         checkScreenSize();

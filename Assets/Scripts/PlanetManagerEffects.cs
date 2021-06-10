@@ -11,6 +11,7 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public StonicornHUD stonicornHUD;
     public SpriteRenderer spaceField;
+    public float starFieldScale = 1.1f;
 
     List<SpriteRenderer> editPods = new List<SpriteRenderer>();
     List<GameObject> selectObjects = new List<GameObject>();
@@ -220,7 +221,8 @@ public class PlanetManagerEffects : MonoBehaviour
         Vector2 sizeWorld =
             cam.ScreenToWorldPoint(Vector2.zero) -
             cam.ScreenToWorldPoint(new Vector2(cam.pixelWidth, cam.pixelHeight));
-        spaceField.size = sizeWorld;
+        spaceField.size = Vector2.one * sizeWorld.magnitude;
+        //spaceField.transform.localScale = Vector3.one * (scale * starFieldScale);
     }
 
     public void updateStonicornInfo(Stonicorn stonicorn)
