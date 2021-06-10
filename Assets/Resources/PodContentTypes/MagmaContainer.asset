@@ -25,3 +25,4 @@ MonoBehaviour:
   requiredGround: []
   requiredNeighbors: []
   requiredContent: []
+  requiredPlanContent: []

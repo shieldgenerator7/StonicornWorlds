@@ -27,3 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
   requiredContent:
   - {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+  requiredPlanContent: []
