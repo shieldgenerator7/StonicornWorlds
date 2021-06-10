@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     void onPlanetStateChanged(Planet p)
     {
         Managers.Resources.updateResourceCaps(p);
-        Managers.Queue.scheduleTasksFromPlans();
+        //Managers.Queue.scheduleTasksFromPlans();
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
     }

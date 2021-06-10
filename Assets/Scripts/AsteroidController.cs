@@ -41,7 +41,7 @@ public class AsteroidController : MonoBehaviour
         List<Pod> pods = Managers.Planet.Planet
             .getNeighborhood(transform.position).neighbors.ToList();
         pods.Add(Managers.Planet.Planet.getPod(transform.position));
-        pods.ForEach(pod => Managers.Planet.destroyPod(pod));
+        Managers.Planet.destroyPods(pods);
         //Destroy asteroid
         Destroy(gameObject);
     }

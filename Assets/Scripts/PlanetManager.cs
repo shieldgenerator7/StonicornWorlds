@@ -148,8 +148,9 @@ public class PlanetManager : Manager
             .FindAll(pod => pod);
     }
 
-    public void destroyPod(Pod pod)
+    public void destroyPods(List<Pod> pods)
     {
-        planet.removePod(pod);
+        pods.ForEach(pod => planet.removePod(pod));
+        Managers.Queue.scheduleTasksFromPlans();
     }
 }
