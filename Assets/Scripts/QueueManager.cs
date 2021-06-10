@@ -87,6 +87,13 @@ public class QueueManager : Manager
                 if (task.taskObject is PodType pt)
                 {
                     plans.removePod(pod);
+                    Pod planetPod = Managers.Planet.Planet.getPod(task.pos);
+                    if (planetPod && planetPod.podType != Managers.Constants.spacePodType)
+                    {
+                        pod = JsonUtility.FromJson<Pod>(JsonUtility.ToJson(planetPod));
+                        pod.inflate();
+                        plans.addPod(pod, pod.worldPos);
+                    }
                 }
                 else if (task.taskObject is PodContentType pct)
                 {
