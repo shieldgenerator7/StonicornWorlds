@@ -36,6 +36,9 @@ public class PodContent : PlanetObject
     public delegate void OnVarChanged(float val);
     public event OnVarChanged onVarChanged;
 
+    [System.NonSerialized]
+    public Vector2 target;
+
     public override string ToString()
     {
         return "" + typeName + " PodContent";

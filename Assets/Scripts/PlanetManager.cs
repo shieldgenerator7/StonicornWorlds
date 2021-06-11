@@ -151,17 +151,20 @@ public class PlanetManager : Manager
 
     public void destroyPods(List<Pod> pods)
     {
-        pods.ForEach(pod => planet.removePod(pod));
+        pods.FindAll(pod => pod)
+            .ForEach(pod => planet.removePod(pod));
         onPlanetStateChangedUnplanned(planet);
     }
     public void destroyPodContents(List<PodContent> contents)
     {
-        contents.ForEach(content => content.container.removeContent(content));
+        contents.FindAll(content => content)
+            .ForEach(content => content.container.removeContent(content));
         onPlanetStateChangedUnplanned(planet);
     }
     public void createPods(List<Pod> pods)
     {
-        pods.ForEach(pod => planet.addPod(pod, pod.worldPos));
+        pods.FindAll(pod => pod)
+            .ForEach(pod => planet.addPod(pod, pod.worldPos));
         onPlanetStateChangedUnplanned(planet);
     }
 }

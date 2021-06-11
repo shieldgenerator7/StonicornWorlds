@@ -7,6 +7,7 @@ public class AsteroidController : PlanetProcessor
 {
     public float moveSpeed = 2;
     public float exitRadius;
+    public float health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,15 @@ public class AsteroidController : PlanetProcessor
             {
                 explode();
             }
+        }
+    }
+
+    public void damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            explode();
         }
     }
 
