@@ -15,6 +15,10 @@ public class QueueManager : Manager
 
     public void addToQueue(QueueTask task)
     {
+        if (!task.taskObject.constructible)
+        {
+            Debug.LogError("task has non-constructible type!: " + task + ", " + task.taskObject.name);
+        }
         if (queue.Any(t => t.pos == task.pos && t.taskObject == task.taskObject))
         {
             //don't add tasks that are already in the queue
@@ -172,7 +176,7 @@ public class QueueManager : Manager
                 {
                     Pod planetPod = planet.getPod(pod.worldPos);
                     if (content.contentType.constructible &&
-                        planetPod && !planetPod.hasContent(content.contentType)
+                        (!planetPod || !planetPod.hasContent(content.contentType))
                     )
                     {
                         QueueTask task = new QueueTask(content.contentType, pod.worldPos, QueueTask.Type.PLANT);
