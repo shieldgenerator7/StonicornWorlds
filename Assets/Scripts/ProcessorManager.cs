@@ -19,6 +19,7 @@ public class ProcessorManager : Manager
             update(fastForwardTimeDelta);
             timeLeftToProcess -= fastForwardTimeDelta;
         }
+        Managers.Progression.checkAllProgression();
     }
 
     private void Update()
