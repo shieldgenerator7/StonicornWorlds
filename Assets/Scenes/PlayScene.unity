@@ -6614,7 +6614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcd5ccd329a74641b023bd7773ed508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   range: 10
   turretType: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
 --- !u!1001 &1926594512

@@ -11,6 +11,8 @@ public class TurretDisplayer : PodContentDisplayer
     public override void setup(PodContent content)
     {
         turret = content;
+        beam.transform.position = muzzle.transform.position;
+        Update();
     }
 
     // Update is called once per frame
