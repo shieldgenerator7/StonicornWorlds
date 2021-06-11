@@ -54,17 +54,17 @@ public class DeliverActivity : Activity
 
     public override float ActivityRange => stonicorn.workRange;
 
-    public override void doActivity()
+    public override void doActivity(float timeDelta)
     {
         if (droppingOff)
         {
-            dropoff.doActivity();
+            dropoff.doActivity(timeDelta);
         }
         else
         {
-            pickup.doActivity();
+            pickup.doActivity(timeDelta);
         }
-        stonicorn.rest -= stonicorn.workRate * Time.deltaTime / 2;
+        stonicorn.rest -= stonicorn.workRate * timeDelta / 2;
     }
 
     public override Vector2 chooseActivityLocation()

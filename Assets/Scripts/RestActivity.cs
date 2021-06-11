@@ -20,10 +20,10 @@ public class RestActivity : Activity
 
     public override Stonicorn.Action action => Stonicorn.Action.REST;
 
-    public override void doActivity()
+    public override void doActivity(float timeDelta)
     {
         float prevRest = stonicorn.Rest;
-        stonicorn.Rest += stonicorn.restSpeed * Time.deltaTime;
+        stonicorn.Rest += stonicorn.restSpeed * timeDelta;
         if (stonicorn.Rest == stonicorn.maxRest)
         {
             //if just now finished resting

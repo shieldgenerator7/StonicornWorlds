@@ -22,10 +22,10 @@ public class DropoffActivity : Activity
 
     public override float ActivityRange => stonicorn.workRange;
 
-    public override void doActivity()
+    public override void doActivity(float timeDelta)
     {
         float excess = Mathf.Clamp(
-            stonicorn.transferRate * Time.deltaTime,
+            stonicorn.transferRate * timeDelta,
             0,
             stonicorn.toolbeltResources - 0
             );

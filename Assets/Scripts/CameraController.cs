@@ -23,8 +23,8 @@ public class CameraController : Manager
             if (focusObject)
             {
                 stonicorn = focusObject.stonicorn;
-                Managers.Camera.Locked = true;
-                Managers.Camera.autoFrame(
+                Locked = true;
+                autoFrame(
                     stonicorn.position,
                     new List<Vector2>() { stonicorn.position }
                     );
@@ -34,8 +34,8 @@ public class CameraController : Manager
             }
             else
             {
-                Managers.Camera.Locked = false;
-                Managers.Camera.autoFrame(new List<Vector2>());
+                Locked = false;
+                autoFrame(new List<Vector2>());
             }
             onFocusObjectChanged?.Invoke(stonicorn);
         }

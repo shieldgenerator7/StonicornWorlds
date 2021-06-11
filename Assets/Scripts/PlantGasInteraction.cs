@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantGasInteraction : MonoBehaviour
+public class PlantGasInteraction : PlanetProcessor
 {
     public PodContentType plantType;
     public PodContentType gasType;
@@ -11,22 +11,22 @@ public class PlantGasInteraction : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
         List<Pod> interactPods = Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
             .FindAll(pod => pod.hasContent(plantType) && pod.hasContent(gasType));
         List<PodContent> destroyedPlants = interactPods.FindAll(
-            pod => interact(pod.getContent(plantType), pod.getContent(gasType))
+            pod => interact(pod.getContent(plantType), pod.getContent(gasType), timeDelta)
             )
             .ConvertAll(pod=>pod.getContent(plantType));
         Managers.Planet.destroyPodContents(destroyedPlants);
     }
 
-    bool interact(PodContent plant, PodContent gas)
+    bool interact(PodContent plant, PodContent gas, float timeDelta)
     {
         bool plantDestroyed = false;
         plant.Var = Mathf.Clamp(
-            plant.Var + (plantHealthDelta * Time.deltaTime),
+            plant.Var + (plantHealthDelta * timeDelta),
             0.0f,
             plantType.initialVarValue
             );
@@ -34,7 +34,7 @@ public class PlantGasInteraction : MonoBehaviour
         {
             plantDestroyed = true;
         }
-        gas.Var += gasPressureDelta * Time.deltaTime;
+        gas.Var += gasPressureDelta * timeDelta;
         if (gas.Var <= 0)
         {
             Managers.Queue.addToQueue(new QueueTask(

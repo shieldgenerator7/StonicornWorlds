@@ -137,6 +137,7 @@ public class CustomMenu
         problemCount += setupInputManager();
         problemCount += setupPodTypeBank();
         problemCount += checkProgressionManager();
+        problemCount += fillProcessorManager();
         //
         if (problemCount == 0)
         {
@@ -241,6 +242,16 @@ public class CustomMenu
                 Debug.LogWarning("Set button inactive: " + btn, btn);
             });
         Debug.Log("ProgressionManager checked.", progressionManager);
+        return problemCount;
+    }
+    [MenuItem("SG7/Build/Prebuild/Fill ProcessorManager")]
+    public static int fillProcessorManager()
+    {
+        int problemCount = 0;
+        ProcessorManager processorManager = GameObject.FindObjectOfType<ProcessorManager>();
+        processorManager.processors = GameObject.FindObjectsOfType<PlanetProcessor>(true).ToList();
+        EditorUtility.SetDirty(processorManager);
+        Debug.Log("ProcessorManager filled.", processorManager);
         return problemCount;
     }
 

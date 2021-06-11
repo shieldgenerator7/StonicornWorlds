@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceGenerator : MonoBehaviour
+public class ResourceGenerator : PlanetProcessor
 {
     public PodType generatorPodType;
     public float generateRate = 1;
@@ -15,9 +15,9 @@ public class ResourceGenerator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
-        Managers.Resources.Resources += count * generateRate * Time.deltaTime;
+        Managers.Resources.Resources += count * generateRate * timeDelta;
     }
 
     void updateCount(Planet planet)

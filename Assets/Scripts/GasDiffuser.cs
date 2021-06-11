@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GasDiffuser : MonoBehaviour
+public class GasDiffuser : PlanetProcessor
 {
     public float diffusionRate = 5;
     public float minAmount = 10;//min pressure amount to start diffusing
@@ -22,13 +22,13 @@ public class GasDiffuser : MonoBehaviour
     float diffusionDelta;
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
         float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
         float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
         upsideThreshold = (diff * 2 / 3) + min;
         downsideThreshold = (diff * 1 / 3) + min;
-        diffusionDelta = diffusionRate * Time.deltaTime;
+        diffusionDelta = diffusionRate * timeDelta;
 
         grid = PressureGrid;
         grid.Keys

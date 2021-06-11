@@ -17,7 +17,7 @@ public abstract class Activity
 
     public abstract bool canContinue { get; }
 
-    public abstract void doActivity();
+    public abstract void doActivity(float timeDelta);
 
     public abstract bool isDone { get; }
 

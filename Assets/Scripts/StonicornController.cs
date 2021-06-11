@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class StonicornController : MonoBehaviour
+public class StonicornController : PlanetProcessor
 {
     // Update is called once per frame
-    private void Update()
+    public override void update(float timeDelta)
     {
         Managers.Planet.Planet.residents
-            .ForEach(resident => Update(resident));
+            .ForEach(resident => update(resident, timeDelta));
     }
-    void Update(Stonicorn stonicorn)
+    void update(Stonicorn stonicorn, float timeDelta)
     {
         if (!stonicorn.currentActivity)
         {
@@ -29,7 +29,7 @@ public class StonicornController : MonoBehaviour
         }
         if (stonicorn.position != stonicorn.aboveLoI)
         {
-            moveToLocationOfInterest(stonicorn);
+            moveToLocationOfInterest(stonicorn, timeDelta);
         }
         if (stonicorn.currentActivity)
         {
@@ -37,7 +37,7 @@ public class StonicornController : MonoBehaviour
             {
                 if (stonicorn.currentActivity.canContinue)
                 {
-                    stonicorn.currentActivity.doActivity();
+                    stonicorn.currentActivity.doActivity(timeDelta);
                     if (stonicorn.currentActivity.isDone)
                     {
                         goIdle(stonicorn);
@@ -51,7 +51,7 @@ public class StonicornController : MonoBehaviour
         }
         if (stonicorn.action != Stonicorn.Action.REST)
         {
-            stonicorn.Rest -= stonicorn.passiveExhaustRate * Time.deltaTime;
+            stonicorn.Rest -= stonicorn.passiveExhaustRate * timeDelta;
         }
     }
 
@@ -83,20 +83,20 @@ public class StonicornController : MonoBehaviour
         return aboveLoI;
     }
 
-    void moveToLocationOfInterest(Stonicorn stonicorn)
+    void moveToLocationOfInterest(Stonicorn stonicorn, float timeDelta)
     {
         if (Vector2.Distance(stonicorn.position, stonicorn.aboveLoI) > 1.0f)
         {
             stonicorn.position +=
                 (stonicorn.aboveLoI - stonicorn.position).normalized
-                * stonicorn.moveSpeed * Time.deltaTime;
+                * stonicorn.moveSpeed * timeDelta;
         }
         else
         {
             stonicorn.position = Vector2.Lerp(
                 stonicorn.position,
                 stonicorn.aboveLoI,
-                Time.deltaTime * stonicorn.moveSpeed
+                timeDelta * stonicorn.moveSpeed
                 );
         }
         if (Vector2.Distance(stonicorn.position, stonicorn.aboveLoI) <= 0.01f)

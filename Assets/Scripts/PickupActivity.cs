@@ -23,10 +23,10 @@ public class PickupActivity : Activity
 
     public override float ActivityRange => stonicorn.workRange;
 
-    public override void doActivity()
+    public override void doActivity(float timeDelta)
     {
         float need = Mathf.Clamp(
-            stonicorn.transferRate * Time.deltaTime,
+            stonicorn.transferRate * timeDelta,
             0,
             stonicorn.toolbeltSize - stonicorn.toolbeltResources
             );

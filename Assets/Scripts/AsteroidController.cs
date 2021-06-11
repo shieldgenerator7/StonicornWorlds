@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour
+public class AsteroidController : PlanetProcessor
 {
     public float moveSpeed = 2;
     public float exitRadius;
@@ -15,9 +15,9 @@ public class AsteroidController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
-        transform.position += transform.up * moveSpeed * Time.deltaTime;
+        transform.position += transform.up * moveSpeed * timeDelta;
         //if missed the planet and went off screen
         if (transform.position.magnitude > exitRadius)
         {

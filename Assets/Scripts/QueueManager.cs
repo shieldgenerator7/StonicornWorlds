@@ -116,7 +116,7 @@ public class QueueManager : Manager
     /// <param name="worker"></param>
     /// <param name="task"></param>
     /// <returns>amount of resources left after working on the task</returns>
-    public float workOnTask(QueueTask task, float workRate, float resources)
+    public float workOnTask(QueueTask task, float workRate, float resources, float timeDelta)
     {
         if (task == null)
         {
@@ -127,7 +127,7 @@ public class QueueManager : Manager
             //don't work on a task that's already completed
             return resources;
         }
-        resources = task.makeProgress(workRate * Time.deltaTime, resources);
+        resources = task.makeProgress(workRate * timeDelta, resources);
         if (task.Completed)
         {
             taskCompleted(task);

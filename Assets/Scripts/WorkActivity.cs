@@ -91,13 +91,14 @@ public class WorkActivity : Activity
         }
     }
 
-    public override void doActivity()
+    public override void doActivity(float timeDelta)
     {
         stonicorn.toolbeltResources = Managers.Queue.workOnTask(
             stonicorn.task,
             stonicorn.workRate,
-            stonicorn.toolbeltResources
+            stonicorn.toolbeltResources,
+            timeDelta
             );
-        stonicorn.Rest -= stonicorn.workRate * Time.deltaTime;
+        stonicorn.Rest -= stonicorn.workRate * timeDelta;
     }
 }
