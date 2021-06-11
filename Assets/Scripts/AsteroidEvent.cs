@@ -10,7 +10,7 @@ public class AsteroidEvent : PlanetProcessor
 
     [SerializeField]
     private float timeLeft = 100;
-    private float delay = 0;
+    private float delay = 100;
     private float lastEventTime = 0;
 
     // Start is called before the first frame update
