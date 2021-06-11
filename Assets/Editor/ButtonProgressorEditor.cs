@@ -20,6 +20,7 @@ public class ButtonProgressorEditor : Editor
             typeof(StonicornRequirement),
             typeof(QueueRequirement),
             typeof(SaveFileRequirement),
+            typeof(AsteroidRequirement),
         };
         options.RemoveAll(opt => anyHas(targets, opt));
         if (options.Count > 0)

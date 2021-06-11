@@ -29,6 +29,7 @@ public class AsteroidEvent : PlanetProcessor
         {
             scheduleNextEvent();
             processEvent();
+            Managers.Progression.checkAllProgression();
         }
         timeLeft = lastEventTime + delay - Time.time;
     }

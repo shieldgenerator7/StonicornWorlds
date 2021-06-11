@@ -1230,10 +1230,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 322053939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e7fbeb97ab4c424aa4c2d35743f236c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73849174fbe48b546bfaafbe0f2b9fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 4
 --- !u!114 &322053942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6238,6 +6237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasScaler: {fileID: 95723308}
+  screenChangedLastFrame: 0
 --- !u!114 &1625964776
 MonoBehaviour:
   m_ObjectHideFlags: 0
