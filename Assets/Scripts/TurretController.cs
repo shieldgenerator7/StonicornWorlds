@@ -8,7 +8,7 @@ public class TurretController : PlanetProcessor
     public float damage = 10;
     public float range = 10;
     public PodContentType turretType;
-    List<PodContent> turrets;
+    List<PodContent> turrets = new List<PodContent>();
     List<AsteroidController> targets;
 
     private void Start()
@@ -27,6 +27,10 @@ public class TurretController : PlanetProcessor
 
     public override void update(float timeDelta)
     {
+        if (turrets.Count == 0)
+        {
+            return;
+        }
         targets = FindObjectsOfType<AsteroidController>().ToList();
         if (targets.Count > 0)
         {
