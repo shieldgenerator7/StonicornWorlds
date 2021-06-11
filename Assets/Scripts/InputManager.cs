@@ -187,5 +187,9 @@ public class InputManager : Manager
         {
             cheatButtons.ForEach(btn => btn.gameObject.SetActive(true));
         }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            updateToolBoxes();
+        }
     }
 }

@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        screenChangedLastFrame = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
