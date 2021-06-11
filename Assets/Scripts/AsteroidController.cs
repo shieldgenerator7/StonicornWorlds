@@ -11,7 +11,11 @@ public class AsteroidController : PlanetProcessor
     // Start is called before the first frame update
     void Start()
     {
-
+        Managers.Processor.processors.Add(this);
+    }
+    private void OnDestroy()
+    {
+        Managers.Processor.processors.Remove(this);
     }
 
     // Update is called once per frame

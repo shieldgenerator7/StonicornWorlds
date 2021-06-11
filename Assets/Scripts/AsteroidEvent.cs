@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidEvent : MonoBehaviour
+public class AsteroidEvent : PlanetProcessor
 {
     public float startDelay = 300;//sec before it can start doing events
     public List<float> cooldownDelays;
     public GameObject asteroidPrefab;
 
     [SerializeField]
-    private float timeLeft;
+    private float timeLeft = 100;
     private float delay = 0;
     private float lastEventTime = 0;
 
@@ -22,7 +22,7 @@ public class AsteroidEvent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
         if (timeLeft <= 0)
         //if (Time.time > lastEventTime + delay)

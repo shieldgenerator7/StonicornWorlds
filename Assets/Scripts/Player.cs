@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class Player
 {
+    public long lastSavedTicks = System.DateTime.Now.Ticks;
+
     public List<Planet> planets = new List<Planet>();
 
     public List<string> buttonNames = new List<string>();

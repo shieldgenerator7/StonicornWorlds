@@ -30,6 +30,7 @@ public class PlayerManager : Manager
 
     public void prepareForSave()
     {
+        player.lastSavedTicks = System.DateTime.Now.Ticks;
         player.updateButtonNames(
             Managers.Input.buttons
              .FindAll(btn => btn.gameObject.activeSelf)

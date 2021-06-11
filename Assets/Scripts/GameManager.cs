@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         Managers.Resources.setup();
         Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Progression.setup();
+        Managers.Processor.setup();
     }
     #endregion
 
