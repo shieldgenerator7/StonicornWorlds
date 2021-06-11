@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
 
-    private bool screenChangedLastFrame = false;
+    public bool screenChangedLastFrame = false;
 
     void Awake()
     {
