@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
 
-    public bool screenChangedLastFrame = false;
+    private bool screenChangedLastFrame = false;
 
     void Awake()
     {
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
         if (screenChangedLastFrame)
         {
             screenChangedLastFrame = false;
-            Managers.Input.updateToolBoxes();
         }
     }
 
@@ -47,90 +46,109 @@ public class GameManager : MonoBehaviour
     {
         Application.quitting += onQuitting;
         //Player
-        Managers.Player.onPlayerChanged += onPlayerChanged;
+        Managers.Player.onPlayerChanged +=
+            (p) => Managers.Planet.Planet = p.LastViewedPlanet;
         //Planet
-        Managers.Planet.onPlanetStateChanged += this.onPlanetStateChanged;
-        Managers.Planet.onPlanetStateChangedUnplanned += 
+        Managers.Planet.onPlanetStateChanged +=
+            (p) => Managers.Resources.updateResourceCaps(p);
+        Managers.Planet.onPlanetStateChangedUnplanned +=
             (p) => Managers.Queue.scheduleTasksFromPlans();
-        //Camera
-        Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
-        Managers.Camera.onScreenSizeChanged += onScreenSizeChanged;
-        Managers.Camera.onFocusObjectChanged += onFocusObjectChanged;
-        Managers.Camera.onZoomChanged += Managers.PlanetEffects.updateSpaceField;
-        //Resources
-        Managers.Resources.onResourcesChanged += 
-            (resources) => Managers.Progression.checkAllProgression();
         //Queue
         Managers.Queue.onTaskCompleted += Managers.Planet.updatePlanet;
-        Managers.Queue.onQueueChanged += onQueueChanged;
-        Managers.Queue.onPlansChanged += onPlansChanged;
+        //Processor
+        Managers.Processor.onFastForwardFinished += onFastForwardFinished;
+    }
+
+    void onFastForwardFinished()
+    {
+        registerUIDelegates();
+        screenChangedLastFrame = true;
+        Managers.Input.updateToolBoxes();
+    }
+    #endregion
+
+    #region UI Delegates
+    private void registerUIDelegates()
+    {
+        //Player
+        Managers.Player.onPlayerChanged += onPlayerChangedUI;
+        //Planet
+        Managers.Planet.onPlanetStateChanged += this.onPlanetStateChangedUI;
+        //Camera
+        Managers.Camera.onRotationChanged += Managers.PlanetEffects.updateEditDisplay;
+        Managers.Camera.onScreenSizeChanged += onScreenSizeChangedUI;
+        Managers.Camera.onFocusObjectChanged += onFocusObjectChangedUI;
+        Managers.Camera.onZoomChanged += Managers.PlanetEffects.updateSpaceField;
+        //Resources
+        Managers.Resources.onResourcesChanged +=
+            (resources) => Managers.Progression.checkAllProgression();
+        //Queue
+        Managers.Queue.onQueueChanged += onQueueChangedUI;
+        Managers.Queue.onPlansChanged += onPlansChangedUI;
         //Edge
-        Managers.Edge.onValidPositionListChanged += onValidPositionListChanged;
+        Managers.Edge.onValidPositionListChanged += onValidPositionListChangedUI;
         //Input
-        Managers.Input.onPlanetObjectTypeChanged += onInputPlanetObjectTypeChanged;
-        Managers.Input.onToolActionChanged += onInputToolActionChanged;
+        Managers.Input.onPlanetObjectTypeChanged += onInputPlanetObjectTypeChangedUI;
+        Managers.Input.onToolActionChanged += onInputToolActionChangedUI;
         Managers.Input.onMouseOverMoved += Managers.PlanetEffects.updateCursor;
         Managers.Input.onSelectListChanged += Managers.PlanetEffects.updateSelect;
         //Progression
-        Managers.Progression.onProgressionChanged += onProgressChanged;
+        Managers.Progression.onProgressionChanged += onProgressChangedUI;
     }
 
-    void onPlayerChanged(Player p)
+    void onPlayerChangedUI(Player p)
     {
-        Managers.Planet.Planet = p.LastViewedPlanet;
         Managers.Input.buttons
             .FindAll(btn => p.lastActiveButtonNames.Contains(btn.gameObject.name))
             .ForEach(btn => btn.activate());
     }
 
-    void onPlanetStateChanged(Planet p)
+    void onPlanetStateChangedUI(Planet p)
     {
-        Managers.Resources.updateResourceCaps(p);
-        //Managers.Queue.scheduleTasksFromPlans();
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
     }
 
-    void onScreenSizeChanged(int width, int height)
+    void onScreenSizeChangedUI(int width, int height)
     {
         canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
         Managers.Constants.updateScreenConstants(width, height);
         screenChangedLastFrame = true;
     }
 
-    void onFocusObjectChanged(Stonicorn stonicorn)
+    void onFocusObjectChangedUI(Stonicorn stonicorn)
     {
         Managers.PlanetEffects.updateStonicornInfo(stonicorn);
         Managers.Input.checkAllButtons();
     }
 
-    void onQueueChanged(List<QueueTask> tasks)
+    void onQueueChangedUI(List<QueueTask> tasks)
     {
         Managers.QueueEffects.updateDisplay(tasks);
     }
-    void onPlansChanged(Planet plans)
+    void onPlansChangedUI(Planet plans)
     {
         Managers.Edge.calculateValidPosList(plans);
     }
 
-    void onInputPlanetObjectTypeChanged(PlanetObjectType pot)
+    void onInputPlanetObjectTypeChangedUI(PlanetObjectType pot)
     {
         Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Input.checkAllButtons();
     }
-    void onInputToolActionChanged(ToolAction ta)
+    void onInputToolActionChangedUI(ToolAction ta)
     {
         Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Input.checkAllButtons();
     }
 
-    void onValidPositionListChanged(List<Vector2> edges)
+    void onValidPositionListChangedUI(List<Vector2> edges)
     {
         Managers.PlanetEffects.updateEditDisplay(edges);
         Managers.Camera.autoFrame(edges);
     }
 
-    void onProgressChanged()
+    void onProgressChangedUI()
     {
         Managers.Input.updateToolBoxes();
         Managers.Input.checkAllButtons();

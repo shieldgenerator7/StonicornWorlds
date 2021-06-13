@@ -28,8 +28,10 @@ public class ProcessorManager : Manager
             update(fastForwardTimeDelta);
             timeLeftToProcess -= fastForwardTimeDelta;
         }
-        FindObjectOfType<GameManager>().screenChangedLastFrame = true;
+        onFastForwardFinished?.Invoke();
     }
+    public delegate void OnFastForwardFinished();
+    public event OnFastForwardFinished onFastForwardFinished;
 
     private void Update()
     {
