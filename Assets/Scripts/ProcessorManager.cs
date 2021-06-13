@@ -5,15 +5,24 @@ using UnityEngine;
 
 public class ProcessorManager : Manager
 {
+    public bool fastForwardOnLoad = true;
     public float fastForwardTimeDelta = 0.1f;
     public List<PlanetProcessor> processors;
 
     public override void setup()
     {
-        long now = DateTime.Now.Ticks;
-        long lastTime = Managers.Player.Player.lastSavedTicks;
-        TimeSpan span = new TimeSpan(now - lastTime);
-        float timeLeftToProcess = (float)span.TotalSeconds;
+        if (fastForwardOnLoad)
+        {
+            long now = DateTime.Now.Ticks;
+            long lastTime = Managers.Player.Player.lastSavedTicks;
+            TimeSpan span = new TimeSpan(now - lastTime);
+            float timeLeftToProcess = (float)span.TotalSeconds;
+            fastForward(timeLeftToProcess);
+        }
+    }
+
+    private void fastForward(float timeLeftToProcess)
+    {
         while (timeLeftToProcess > 0)
         {
             update(fastForwardTimeDelta);
