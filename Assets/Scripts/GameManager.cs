@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         registerUIDelegates();
         screenChangedLastFrame = true;
         Managers.Input.updateToolBoxes();
+        setupUI();
     }
     #endregion
 
@@ -163,17 +164,21 @@ public class GameManager : MonoBehaviour
     #region Setup
     void setup()
     {
-        Managers.Constants.setup();
-        Managers.Camera.setup();
-        Managers.Input.setup();
         Managers.Player.setup();
         Managers.Planet.setup();
         Managers.File.setup();
         Managers.Queue.setup();
         Managers.Resources.setup();
+        Managers.Processor.setup();
+    }
+
+    void setupUI()
+    {
+        Managers.Constants.setup();
+        Managers.Camera.setup();
+        Managers.Input.setup();
         Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Progression.setup();
-        Managers.Processor.setup();
     }
     #endregion
 
