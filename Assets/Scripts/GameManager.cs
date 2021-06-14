@@ -112,6 +112,8 @@ public class GameManager : MonoBehaviour
         Managers.Input.onSelectListChanged += Managers.PlanetEffects.updateSelect;
         //Progression
         Managers.Progression.onProgressionChanged += onProgressChangedUI;
+        //AsteroidEvent
+        FindObjectOfType<AsteroidEvent>().onEventTriggered += Managers.Progression.checkAllProgression;
     }
 
     void callUIDelegates()

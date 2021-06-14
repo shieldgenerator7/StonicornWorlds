@@ -29,10 +29,12 @@ public class AsteroidEvent : PlanetProcessor
         {
             scheduleNextEvent();
             processEvent();
-            Managers.Progression.checkAllProgression();
+            onEventTriggered?.Invoke();
         }
         timeLeft = lastEventTime + delay - Time.time;
     }
+    public delegate void OnEventTriggered();
+    public event OnEventTriggered onEventTriggered;
 
     void scheduleNextEvent()
     {
