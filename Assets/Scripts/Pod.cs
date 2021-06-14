@@ -67,6 +67,9 @@ public class Pod : PlanetObject
     public PodContent getContent(PodContentType contentType)
         => podContents.FirstOrDefault(content => content.contentType == contentType);
 
+    public List<PodContentType> getContentTypes()
+        => podContents.ConvertAll(content => content.contentType);
+
     public void forEachContent(Action<PodContent> contentFunc)
     {
         podContents.ForEach(content => contentFunc(content));

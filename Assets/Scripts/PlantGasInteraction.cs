@@ -13,8 +13,8 @@ public class PlantGasInteraction : PlanetProcessor
     // Update is called once per frame
     public override void update(float timeDelta)
     {
-        List<Pod> interactPods = Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
-            .FindAll(pod => pod.hasContent(plantType) && pod.hasContent(gasType));
+        List<Pod> interactPods = Managers.Planet.Planet.Pods(plantType)
+            .FindAll(pod => pod.hasContent(gasType));
         List<PodContent> destroyedPlants = interactPods.FindAll(
             pod => interact(pod.getContent(plantType), pod.getContent(gasType), timeDelta)
             )

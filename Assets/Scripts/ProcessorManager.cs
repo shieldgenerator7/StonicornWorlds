@@ -48,6 +48,10 @@ public class ProcessorManager : Manager
             float timeDelta = Time.deltaTime;
             update(timeDelta);
         }
+        else
+        {
+            Debug.Log("Processor update: fastForwardFinishined: " + fastForwardFinished);
+        }
     }
 
     private void update(float timeDelta)

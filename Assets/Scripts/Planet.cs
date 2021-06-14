@@ -24,6 +24,9 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
+    private MultiGroupedList<PodContentType, Pod> podMultiLists = new MultiGroupedList<PodContentType, Pod>(
+        pod => pod.getContentTypes()
+        );
 
     public List<Stonicorn> residents = new List<Stonicorn>();
 
@@ -81,12 +84,14 @@ public class Planet
         Pod oldPod = grid.get(pod.gridPos);
         grid.add(pod.gridPos, pod);
         podLists.Add(pod);
+        podMultiLists.Add(pod);
         if (oldPod)
         {
             pods.Remove(oldPod);
             podLists.Remove(oldPod);
+            podMultiLists.Remove(oldPod);
         }
-        pod.onPodContentChanged += podContentAdded;
+        pod.onPodContentChanged += podContentChanged;
         fillSpaceAround(pod.worldPos);
         //Stonicorn
         if (pod.podType == Managers.Constants.corePodType)
@@ -104,16 +109,18 @@ public class Planet
     }
     public void removePod(Pod pod)
     {
-        pod.onPodContentChanged -= podContentAdded;
+        pod.onPodContentChanged -= podContentChanged;
         pods.Remove(pod);
         grid.removeAt(pod.gridPos);
         podLists.Remove(pod);
+        podMultiLists.Remove(pod);
         fillSpace(pod.gridPos);
         onStateChanged?.Invoke(this);
     }
 
-    private void podContentAdded(Pod p)
+    private void podContentChanged(Pod p)
     {
+        podMultiLists.Update(p);
         onStateChanged?.Invoke(this);
     }
 
@@ -149,7 +156,8 @@ public class Planet
         pods.Add(pod);
         grid.add(v, pod);
         podLists.Add(pod);
-        pod.onPodContentChanged += podContentAdded;
+        podMultiLists.Add(pod);
+        pod.onPodContentChanged += podContentChanged;
         return pod;
     }
     #endregion
@@ -224,6 +232,15 @@ public class Planet
             Debug.LogError("podType is null!: " + podType);
         }
         return podLists.GetList(podType);
+    }
+
+    public List<Pod> Pods(PodContentType podContentType)
+    {
+        if (!podContentType)
+        {
+            Debug.LogError("podContentType is null!: " + podContentType);
+        }
+        return podMultiLists.GetList(podContentType);
     }
 
     public List<Pod> PodsNotEmpty
