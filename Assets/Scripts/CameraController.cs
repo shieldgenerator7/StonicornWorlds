@@ -44,7 +44,7 @@ public class CameraController : Manager
     public event OnFocusObjectChanged onFocusObjectChanged;
 
     private Vector3 Up;
-    private Vector3 position;
+    private Vector3 position = Vector3.back * 10;
     private Vector3 Position
     {
         get => position;
@@ -54,7 +54,7 @@ public class CameraController : Manager
         }
     }
 
-    private float zoomLevel;
+    private float zoomLevel = 1.5f;
     public float ZoomLevel
     {
         get => zoomLevel;

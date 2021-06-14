@@ -8,8 +8,10 @@ public class StonicornController : PlanetProcessor
     // Update is called once per frame
     public override void update(float timeDelta)
     {
-        Managers.Planet.Planet.residents
-            .ForEach(resident => update(resident, timeDelta));
+        for (int i = 0; i < Managers.Planet.Planet.residents.Count; i++)
+        {
+            update(Managers.Planet.Planet.residents[i], timeDelta);
+        }
     }
     void update(Stonicorn stonicorn, float timeDelta)
     {

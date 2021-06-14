@@ -123,6 +123,10 @@ public class InputManager : Manager
     // Update is called once per frame
     void Update()
     {
+        if (Managers.Processor.FastForwardPercentDone < 1)
+        {
+            return;
+        }
         //Mouse Over
         List<ToolButton> mobs = buttons
             .FindAll(btn => btn.checkMouseOver(Input.mousePosition));

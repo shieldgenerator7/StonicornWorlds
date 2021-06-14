@@ -20,13 +20,33 @@ public class ProcessorManager : Manager
             Debug.Log("processor setup: fastforwarding thru (s): " + span.TotalSeconds);
             Debug.Log("processor setup: fastforwarding thru (m): " + span.TotalMinutes);
             float timeLeftToProcess = (float)span.TotalSeconds;
-            fastForward(timeLeftToProcess);
+            StartCoroutine(fastForwardAsynchronously(timeLeftToProcess));
         }
         else
         {
+            FastForwardPercentDone = 1;
             fastForwardFinished = true;
             onFastForwardFinished?.Invoke();
         }
+    }
+
+    public float FastForwardPercentDone { get; private set; }
+    IEnumerator fastForwardAsynchronously(float timeLeftToProcess)
+    {
+        Debug.Log("fast forward start: time left: " + timeLeftToProcess);
+        float timeTotal = timeLeftToProcess;
+        FastForwardPercentDone = 1 - (timeLeftToProcess / timeTotal);
+        while (timeLeftToProcess > 0)
+        {
+            update(fastForwardTimeDelta);
+            timeLeftToProcess -= fastForwardTimeDelta;
+            FastForwardPercentDone = 1 - (timeLeftToProcess / timeTotal);
+            Debug.Log("fast forward time left: " + timeLeftToProcess);
+            yield return null;
+        }
+        FastForwardPercentDone = 1;
+        fastForwardFinished = true;
+        onFastForwardFinished?.Invoke();
     }
 
     private void fastForward(float timeLeftToProcess)
