@@ -8063,6 +8063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stonicorn HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 4193782917938870314, guid: e36b2de4d5b3b7545991923efe2da47c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7558585675292782233, guid: e36b2de4d5b3b7545991923efe2da47c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
