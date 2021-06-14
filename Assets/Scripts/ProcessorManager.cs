@@ -25,6 +25,7 @@ public class ProcessorManager : Manager
         else
         {
             fastForwardFinished = true;
+            onFastForwardFinished?.Invoke();
         }
     }
 
