@@ -121,12 +121,8 @@ public class InputManager : Manager
     public List<ToolButton> cheatButtons;
 
     // Update is called once per frame
-    void Update()
+    public override void update(float timeDelta)
     {
-        if (Managers.Processor.FastForwardPercentDone < 1)
-        {
-            return;
-        }
         //Mouse Over
         List<ToolButton> mobs = buttons
             .FindAll(btn => btn.checkMouseOver(Input.mousePosition));

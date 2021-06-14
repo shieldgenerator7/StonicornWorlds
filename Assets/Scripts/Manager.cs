@@ -5,4 +5,6 @@ using UnityEngine;
 public abstract class Manager : MonoBehaviour
 {
     public abstract void setup();
+
+    public virtual void update(float timeDelta) { }
 }

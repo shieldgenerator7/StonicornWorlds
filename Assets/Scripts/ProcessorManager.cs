@@ -8,7 +8,6 @@ public class ProcessorManager : Manager
     public bool fastForwardOnLoad = true;
     public float fastForwardTimeDelta = 0.1f;
     public List<PlanetProcessor> processors;
-    private bool fastForwardFinished = false;
 
     public override void setup()
     {
@@ -25,7 +24,6 @@ public class ProcessorManager : Manager
         else
         {
             FastForwardPercentDone = 1;
-            fastForwardFinished = true;
             onFastForwardFinished?.Invoke();
         }
     }
@@ -43,7 +41,6 @@ public class ProcessorManager : Manager
             yield return null;
         }
         FastForwardPercentDone = 1;
-        fastForwardFinished = true;
         onFastForwardFinished?.Invoke();
     }
 
@@ -54,26 +51,12 @@ public class ProcessorManager : Manager
             update(fastForwardTimeDelta);
             timeLeftToProcess -= fastForwardTimeDelta;
         }
-        fastForwardFinished = true;
         onFastForwardFinished?.Invoke();
     }
     public delegate void OnFastForwardFinished();
     public event OnFastForwardFinished onFastForwardFinished;
 
-    private void Update()
-    {
-        if (fastForwardFinished)
-        {
-            float timeDelta = Time.deltaTime;
-            update(timeDelta);
-        }
-        else
-        {
-            Debug.Log("Processor update: fastForwardFinishined: " + fastForwardFinished);
-        }
-    }
-
-    private void update(float timeDelta)
+    public override void update(float timeDelta)
     {
         processors.ForEach(processor => processor.update(timeDelta));
     }

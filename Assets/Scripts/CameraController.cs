@@ -75,7 +75,7 @@ public class CameraController : Manager
         checkScreenSize();
     }
 
-    private void LateUpdate()
+    public override void update(float timeDelta)
     {
         if (focusObject != null)
         {

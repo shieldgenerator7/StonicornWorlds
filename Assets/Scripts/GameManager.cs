@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         Managers.init();
         registerDelegates();
         setup();
+        this.enabled = false;
     }
 
     private void Update()
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
             screenChangeLastFrame = false;
             Managers.Input.updateToolBoxes();
         }
+        float timeDelta = Time.deltaTime;
+        Managers.Input.update(timeDelta);
+        Managers.Processor.update(timeDelta);
+        Managers.Camera.update(timeDelta);
     }
 
     #region Delegates
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            this.enabled = true;
             registerUIDelegates();
             Managers.Input.updateToolBoxes();
             setupUI();
