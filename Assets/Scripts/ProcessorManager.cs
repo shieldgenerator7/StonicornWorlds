@@ -7,6 +7,7 @@ public class ProcessorManager : Manager
 {
     public bool fastForwardOnLoad = true;
     public float fastForwardTimeDelta = 0.1f;
+    public int fastForwardBatchSize = 10;
     public List<PlanetProcessor> processors;
 
     public override void setup()
@@ -35,8 +36,11 @@ public class ProcessorManager : Manager
         FastForwardPercentDone = 1 - (timeLeftToProcess / timeTotal);
         while (timeLeftToProcess > 0)
         {
-            update(fastForwardTimeDelta);
-            timeLeftToProcess -= fastForwardTimeDelta;
+            for (int i = 0; i < fastForwardBatchSize && timeLeftToProcess > 0; i++)
+            {
+                update(fastForwardTimeDelta);
+                timeLeftToProcess -= fastForwardTimeDelta;
+            }
             FastForwardPercentDone = 1 - (timeLeftToProcess / timeTotal);
             yield return null;
         }
