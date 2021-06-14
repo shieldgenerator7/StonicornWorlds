@@ -56,15 +56,13 @@ public class GameManager : MonoBehaviour
                 Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
             }
         }
-        catch (System.Exception e)
+        finally
         {
-            Debug.LogError("Error: " + e);
+            setupEndTime = System.DateTime.Now.Ticks;
+            System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
+            Debug.Log("Setup time (s): " + span.TotalSeconds);
+            Debug.Log("Setup time (m): " + span.TotalMinutes);
         }
-        //
-        setupEndTime = System.DateTime.Now.Ticks;
-        System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
-        Debug.Log("Setup time (s): " + span.TotalSeconds);
-        Debug.Log("Setup time (m): " + span.TotalMinutes);
     }
     #endregion
 
