@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour
     {
         canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
         Managers.Constants.updateScreenConstants(width, height);
-        screenChangedLastFrame = true;
     }
 
     void onFocusObjectChangedUI(Stonicorn stonicorn)
