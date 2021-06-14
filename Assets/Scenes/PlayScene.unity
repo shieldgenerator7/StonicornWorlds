@@ -6237,7 +6237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasScaler: {fileID: 95723308}
-  screenChangedLastFrame: 0
 --- !u!114 &1625964776
 MonoBehaviour:
   m_ObjectHideFlags: 0

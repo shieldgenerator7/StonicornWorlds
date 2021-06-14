@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
 
     private bool screenChangedLastFrame = false;
 
+    private long startTime;
+    private long setupEndTime;
+
     void Awake()
     {
+        startTime = System.DateTime.Now.Ticks;
         Managers.init();
         registerDelegates();
         setup();
@@ -65,6 +69,10 @@ public class GameManager : MonoBehaviour
         screenChangedLastFrame = true;
         Managers.Input.updateToolBoxes();
         setupUI();
+        setupEndTime = System.DateTime.Now.Ticks;
+        System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
+        Debug.Log("Setup time (s): " + span.TotalSeconds);
+        Debug.Log("Setup time (m): " + span.TotalMinutes);
     }
     #endregion
 

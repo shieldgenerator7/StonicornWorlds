@@ -16,6 +16,8 @@ public class ProcessorManager : Manager
             long now = DateTime.Now.Ticks;
             long lastTime = Managers.Player.Player.lastSavedTicks;
             TimeSpan span = new TimeSpan(now - lastTime);
+            Debug.Log("processor setup: fastforwarding thru (s): " + span.TotalSeconds);
+            Debug.Log("processor setup: fastforwarding thru (m): " + span.TotalMinutes);
             float timeLeftToProcess = (float)span.TotalSeconds;
             fastForward(timeLeftToProcess);
         }
