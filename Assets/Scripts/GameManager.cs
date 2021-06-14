@@ -41,10 +41,7 @@ public class GameManager : MonoBehaviour
         registerUIDelegates();
         Managers.Input.updateToolBoxes();
         setupUI();
-        setupEndTime = System.DateTime.Now.Ticks;
-        System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
-        Debug.Log("Setup time (s): " + span.TotalSeconds);
-        Debug.Log("Setup time (m): " + span.TotalMinutes);
+        callUIDelegates();
         if (Managers.Planet.Planet.residents.Count > 1)
         {
             Managers.Camera.FocusObject = Managers.PlanetEffects
@@ -56,6 +53,11 @@ public class GameManager : MonoBehaviour
             Managers.Camera.FocusObject = null;
             Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
         }
+        //
+        setupEndTime = System.DateTime.Now.Ticks;
+        System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
+        Debug.Log("Setup time (s): " + span.TotalSeconds);
+        Debug.Log("Setup time (m): " + span.TotalMinutes);
     }
     #endregion
 
@@ -86,6 +88,33 @@ public class GameManager : MonoBehaviour
         Managers.Input.onSelectListChanged += Managers.PlanetEffects.updateSelect;
         //Progression
         Managers.Progression.onProgressionChanged += onProgressChangedUI;
+    }
+
+    void callUIDelegates()
+    {
+        //Player
+        onPlayerChangedUI(Managers.Player.Player);
+        //Planet
+        onPlanetStateChangedUI(Managers.Planet.Planet);
+        //Camera
+        Managers.PlanetEffects.updateEditDisplay(Managers.Camera.transform.up);
+        onScreenSizeChangedUI(Camera.main.scaledPixelWidth, Camera.main.scaledPixelHeight);
+        onFocusObjectChangedUI(Managers.Camera.FocusObject.stonicorn);
+        Managers.PlanetEffects.updateSpaceField(Managers.Camera.ZoomLevel);
+        //Resources
+        Managers.Progression.checkAllProgression();
+        //Queue
+        onQueueChangedUI(Managers.Queue.queue);
+        onPlansChangedUI(Managers.Queue.plans);
+        //Edge
+        onValidPositionListChangedUI(Managers.Edge.ValidPosList);
+        //Input
+        onInputPlanetObjectTypeChangedUI(Managers.Input.PlanetObjectType);
+        onInputToolActionChangedUI(Managers.Input.ToolAction);
+        Managers.PlanetEffects.updateCursor(Vector2.zero);
+        Managers.PlanetEffects.updateSelect(new List<Vector2>() { Vector2.zero });
+        //Progression
+        onProgressChangedUI();
     }
 
     void onPlayerChangedUI(Player p)
