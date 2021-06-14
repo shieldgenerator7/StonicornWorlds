@@ -23,6 +23,12 @@ public class HexagonGrid<T>
     {
         grid[pos] = default(T);
     }
+
+    public void clear()
+    {
+        grid.Clear();
+    }
+
     public T get(Vector3Int pos)
         => (grid.ContainsKey(pos)) ? grid[pos] : default(T);
 
