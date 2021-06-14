@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
 
-    private bool screenChangedLastFrame = false;
-
     private long startTime;
     private long setupEndTime;
 
@@ -18,31 +16,6 @@ public class GameManager : MonoBehaviour
         Managers.init();
         registerDelegates();
         setup();
-        if (Managers.Planet.Planet.residents.Count > 1)
-        {
-            Managers.Camera.FocusObject = Managers.PlanetEffects
-                .stonicorns[Managers.Planet.Planet.residents[0]]
-                .GetComponent<StonicornDisplayer>();
-        }
-        else
-        {
-            Managers.Camera.FocusObject = null;
-            Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
-        }
-    }
-
-    private void Start()
-    {
-        screenChangedLastFrame = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (screenChangedLastFrame)
-        {
-            screenChangedLastFrame = false;
-        }
     }
 
     #region Delegates
@@ -66,13 +39,23 @@ public class GameManager : MonoBehaviour
     void onFastForwardFinished()
     {
         registerUIDelegates();
-        screenChangedLastFrame = true;
         Managers.Input.updateToolBoxes();
         setupUI();
         setupEndTime = System.DateTime.Now.Ticks;
         System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
         Debug.Log("Setup time (s): " + span.TotalSeconds);
         Debug.Log("Setup time (m): " + span.TotalMinutes);
+        if (Managers.Planet.Planet.residents.Count > 1)
+        {
+            Managers.Camera.FocusObject = Managers.PlanetEffects
+                .stonicorns[Managers.Planet.Planet.residents[0]]
+                .GetComponent<StonicornDisplayer>();
+        }
+        else
+        {
+            Managers.Camera.FocusObject = null;
+            Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
+        }
     }
     #endregion
 
