@@ -38,20 +38,27 @@ public class GameManager : MonoBehaviour
 
     void onFastForwardFinished()
     {
-        registerUIDelegates();
-        Managers.Input.updateToolBoxes();
-        setupUI();
-        callUIDelegates();
-        if (Managers.Planet.Planet.residents.Count > 1)
+        try
         {
-            Managers.Camera.FocusObject = Managers.PlanetEffects
-                .stonicorns[Managers.Planet.Planet.residents[0]]
-                .GetComponent<StonicornDisplayer>();
+            registerUIDelegates();
+            Managers.Input.updateToolBoxes();
+            setupUI();
+            callUIDelegates();
+            if (Managers.Planet.Planet.residents.Count > 1)
+            {
+                Managers.Camera.FocusObject = Managers.PlanetEffects
+                    .stonicorns[Managers.Planet.Planet.residents[0]]
+                    .GetComponent<StonicornDisplayer>();
+            }
+            else
+            {
+                Managers.Camera.FocusObject = null;
+                Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
+            }
         }
-        else
+        catch (System.Exception e)
         {
-            Managers.Camera.FocusObject = null;
-            Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
+            Debug.LogError("Error: " + e);
         }
         //
         setupEndTime = System.DateTime.Now.Ticks;
