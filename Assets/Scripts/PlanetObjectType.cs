@@ -9,6 +9,7 @@ public abstract class PlanetObjectType : ScriptableObject
     public Color uiColor = Color.white;
     public GameObject prefab;
     public bool constructible = true;
+    public bool solid = true;
     public float startCost = 100;
     public float convertCost = 25;
     public float progressRequired = 100;

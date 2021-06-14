@@ -17,6 +17,7 @@ MonoBehaviour:
   uiColor: {r: 1, g: 0.8, b: 0, a: 1}
   prefab: {fileID: 3152663368555482380, guid: d7dfc23b24ce9834292672247912a607, type: 3}
   constructible: 0
+  solid: 0
   startCost: 0
   convertCost: 0
   progressRequired: 0

@@ -44,7 +44,6 @@ public class ConstantBank : Manager
 
     public List<PodType> allPodTypes;
     public List<PodContentType> allPodContentTypes;
-    public List<PodContentType> allSolidPodContentTypes;
 
     public PlanetObjectType getType(string typeName)
     {

@@ -56,7 +56,7 @@ public class Pod : PlanetObject
         => podContents.Contains(content);
 
     public bool hasContentSolid()
-        => hasContentAny(Managers.Constants.allSolidPodContentTypes);
+        => podContents.Any(content => content.contentType.solid);
 
     public bool hasContentAny(List<PodContentType> contentTypes)
         => contentTypes.Any(ct => hasContent(ct));
