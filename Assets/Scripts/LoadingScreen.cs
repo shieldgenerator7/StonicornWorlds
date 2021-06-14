@@ -26,8 +26,6 @@ public class LoadingScreen : MonoBehaviour
         {
             image.fillAmount = 0;
         }
-        //Managers.Time.Paused = false;
-        Time.timeScale = 0;
         //Allow app to load in background
         Application.runInBackground = true;
     }

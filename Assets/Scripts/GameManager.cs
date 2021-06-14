@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         startTime = System.DateTime.Now.Ticks;
+        Time.timeScale = 0;
         Managers.init();
         registerDelegates();
         setup();
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
                 Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
             }
             screenChangeLastFrame = true;
+            Time.timeScale = 1;
         }
         finally
         {
