@@ -24,6 +24,7 @@ public class Planet
     private GroupedList<PodType, Pod> podLists = new GroupedList<PodType, Pod>(
         pod => pod.podType
         );
+    [NonSerialized]
     private MultiGroupedList<PodContentType, Pod> podMultiLists = new MultiGroupedList<PodContentType, Pod>(
         pod => pod.getContentTypes()
         );
