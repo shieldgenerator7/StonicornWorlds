@@ -204,6 +204,8 @@ public class GameManager : MonoBehaviour
         Managers.Queue.setup();
         Managers.Resources.setup();
         Managers.Processor.setup();
+        //one UI thing to take care of toolboxes that shouldn't be on loading screen
+        Managers.Input.updateToolBoxes();
     }
 
     void setupUI()
