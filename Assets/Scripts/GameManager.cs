@@ -97,32 +97,20 @@ public class GameManager : MonoBehaviour
 
     void callUIDelegates()
     {
-        //Player
-        onPlayerChangedUI(Managers.Player.Player);
-        //Planet
-        onPlanetStateChangedUI(Managers.Planet.Planet);
-        //Camera
-        Managers.PlanetEffects.updateEditDisplay(Managers.Camera.transform.up);
-        onScreenSizeChangedUI(Camera.main.scaledPixelWidth, Camera.main.scaledPixelHeight);
-        if (Managers.Camera.FocusObject)
-        {
-            onFocusObjectChangedUI(Managers.Camera.FocusObject.stonicorn);
-        }
+        Managers.QueueEffects.updateDisplay(Managers.Queue.queue);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
+        Managers.PlanetEffects.updateDisplay(Managers.Planet.Planet);
+        Managers.PlanetEffects.updateEditDisplay(Managers.Edge.ValidPosList);
         Managers.PlanetEffects.updateSpaceField(Managers.Camera.ZoomLevel);
-        //Resources
-        Managers.Progression.checkAllProgression();
-        //Queue
-        onQueueChangedUI(Managers.Queue.queue);
-        onPlansChangedUI(Managers.Queue.plans);
-        //Edge
-        onValidPositionListChangedUI(Managers.Edge.ValidPosList);
-        //Input
-        onInputPlanetObjectTypeChangedUI(Managers.Input.PlanetObjectType);
-        onInputToolActionChangedUI(Managers.Input.ToolAction);
-        Managers.PlanetEffects.updateCursor(Vector2.zero);
-        Managers.PlanetEffects.updateSelect(new List<Vector2>() { Vector2.zero });
-        //Progression
-        onProgressChangedUI();
+        {
+            //width & height
+            int width = Camera.main.scaledPixelWidth;
+            int height = Camera.main.scaledPixelHeight;
+            canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
+            Managers.Constants.updateScreenConstants(width, height);
+        }
+        Managers.Input.updateToolBoxes();
+        Managers.Input.checkAllButtons();
     }
 
     void onPlayerChangedUI(Player p)
