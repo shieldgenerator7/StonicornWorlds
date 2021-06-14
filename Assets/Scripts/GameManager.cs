@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private long startTime;
     private long setupEndTime;
+    private bool screenChangeLastFrame = true;
 
     void Awake()
     {
@@ -16,6 +17,15 @@ public class GameManager : MonoBehaviour
         Managers.init();
         registerDelegates();
         setup();
+    }
+
+    private void Update()
+    {
+        if (screenChangeLastFrame)
+        {
+            screenChangeLastFrame = false;
+            Managers.Input.updateToolBoxes();
+        }
     }
 
     #region Delegates
@@ -55,6 +65,7 @@ public class GameManager : MonoBehaviour
                 Managers.Camera.FocusObject = null;
                 Managers.PlanetEffects.updateStonicornInfo(Managers.Planet.Planet.residents[0]);
             }
+            screenChangeLastFrame = true;
         }
         finally
         {
