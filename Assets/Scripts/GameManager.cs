@@ -99,7 +99,10 @@ public class GameManager : MonoBehaviour
         //Camera
         Managers.PlanetEffects.updateEditDisplay(Managers.Camera.transform.up);
         onScreenSizeChangedUI(Camera.main.scaledPixelWidth, Camera.main.scaledPixelHeight);
-        onFocusObjectChangedUI(Managers.Camera.FocusObject.stonicorn);
+        if (Managers.Camera.FocusObject)
+        {
+            onFocusObjectChangedUI(Managers.Camera.FocusObject.stonicorn);
+        }
         Managers.PlanetEffects.updateSpaceField(Managers.Camera.ZoomLevel);
         //Resources
         Managers.Progression.checkAllProgression();
