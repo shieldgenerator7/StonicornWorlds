@@ -51,4 +51,11 @@ public class PodContentType : PlanetObjectType
                 ctntType => curPod.hasContent(ctntType)
                 ));
     }
+    public bool hasRoomFor(Pod curPod)
+    {
+        return !curPod || (
+            !curPod.hasContent(this) &&
+            !(this.solid && curPod.hasContentSolid())
+            );
+    }
 }

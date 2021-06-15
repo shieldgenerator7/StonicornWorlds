@@ -96,7 +96,7 @@ public class PlanetManager : Manager
             && podContentType.canPlantIn(curPodType)
             && podContentType.isRequiredNeighborPresent(neighborTypes)
             && podContentType.hasRequiredContent(curPod)
-            && !(curPod && curPod.hasContent(podContentType));
+            && podContentType.hasRoomFor(curPod);
     }
 
     public bool canPlanBuildAtPosition(PodType podType, Vector2 pos)
@@ -140,7 +140,7 @@ public class PlanetManager : Manager
             && podContentType.canPlantIn(curPodType)
             && podContentType.isRequiredNeighborPresent(neighborTypes)
             && podContentType.hasRequiredPlanContent(curPod)
-            && !(curPod && curPod.hasContent(podContentType));
+            && podContentType.hasRoomFor(curPod);
     }
 
     public List<Pod> getNeighbors(Vector2 pos, Planet p)
