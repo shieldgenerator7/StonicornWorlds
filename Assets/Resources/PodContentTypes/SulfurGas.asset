@@ -21,6 +21,7 @@ MonoBehaviour:
   startCost: 10
   convertCost: 10
   progressRequired: 10
+  isGas: 1
   initialVarValue: 0
   podImplantTypes: []
   requiredGround: []

@@ -87,7 +87,7 @@ public class PlanetManagerEffects : MonoBehaviour
                 //Check for added pod contents
                 pod.forEachContent(content =>
                 {
-                    if (!displayObjects.ContainsKey(content))
+                    if (!content.contentType.isGas && !displayObjects.ContainsKey(content))
                     {
                         GameObject go = Instantiate(
                             content.contentType.prefab,
@@ -122,7 +122,10 @@ public class PlanetManagerEffects : MonoBehaviour
                 {
                     p.forEachContent(pc =>
                     {
-                        removeDisplayObject(pc);
+                        if (!pc.contentType.isGas)
+                        {
+                            removeDisplayObject(pc);
+                        }
                     });
                     removeDisplayObject(p);
                 }

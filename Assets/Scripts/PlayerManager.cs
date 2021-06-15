@@ -38,5 +38,6 @@ public class PlayerManager : Manager
              );
         player.lastActiveButtonNames = Managers.Input.ActiveButtons
             .ConvertAll(btn => btn.gameObject.name);
+        player.planets.ForEach(planet => planet.prepareForSave());
     }
 }

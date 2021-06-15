@@ -21,85 +21,25 @@ public class GasDiffuser : PlanetProcessor
     float downsideThreshold = 0;
     float diffusionDelta;
 
+    private void Start()
+    {
+        Managers.Planet.Planet.pullGasGrid(gasPodContentType, emitterPodType, emitterPressure);
+        grid = Managers.Planet.Planet.getGasGrid(gasPodContentType);
+        //
+        float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
+        float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
+        upsideThreshold = (diff * 2 / 3) + min;
+        downsideThreshold = (diff * 1 / 3) + min;
+    }
+
     // Update is called once per frame
     public override void update(float timeDelta)
     {
-        if (upsideThreshold == 0 || downsideThreshold == 0)
-        {
-            float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
-            float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);
-            upsideThreshold = (diff * 2 / 3) + min;
-            downsideThreshold = (diff * 1 / 3) + min;
-        }
         diffusionDelta = diffusionRate * timeDelta;
 
-        pullPressureGrid();
         grid.Keys
             .FindAll(v => grid[v] >= minAmount)
             .ForEach(v => diffuseFrom(v));
-        pushPressureGrid();
-    }
-
-    void pullPressureGrid()
-    {
-        grid.clear();
-        Managers.Planet.Planet.PodsAll
-            .ForEach(pod =>
-            {
-                float pressure = 0;
-                //Valid place for gas to be
-                if (pod.podType == Managers.Constants.spacePodType)
-                {
-                    PodContent content = pod.getContent(gasPodContentType);
-                    if (content)
-                    {
-                        pressure = content.Var;
-                    }
-                    else
-                    {
-                        pressure = 0;
-                    }
-                }
-                //Gas emitter
-                else if (pod.podType == emitterPodType)
-                {
-                    pressure = emitterPressure;
-                }
-                //Invalid place for gas to be
-                else
-                {
-                    pressure = -1;
-                }
-                grid.add(pod.gridPos, pressure);
-            });
-    }
-    void pushPressureGrid()
-    {
-        grid.Keys
-            .FindAll(v => grid[v] >= 0)
-            .ForEach(
-            v =>
-            {
-                Pod pod = Managers.Planet.Planet.getPod(v);
-                if (!pod && grid[v] > 0)
-                {
-                    pod = Managers.Planet.Planet.fillSpace(v);
-                }
-                if (pod)
-                {
-                    PodContent content = pod.getContent(gasPodContentType);
-                    if (!content && grid[v] > 0)
-                    {
-                        content = new PodContent(gasPodContentType, pod);
-                        pod.addContent(content);
-                    }
-                    if (content)
-                    {
-                        content.Var = grid[v];
-                    }
-                }
-            }
-            );
     }
 
     void diffuseFrom(Vector3Int v)
@@ -139,7 +79,10 @@ public class GasDiffuser : PlanetProcessor
         //Diffuse gas into neighbors
         spaces.ForEach(v2 => grid[v2] += diffusionDelta);
         //Take gas from origin
-        grid[v] -= spaces.Count * diffusionDelta;
+        if (grid[v] != emitterPressure)
+        {
+            grid[v] -= spaces.Count * diffusionDelta;
+        }
     }
 
     bool canDiffuseInto(Vector3Int v, float curAmount, float threshold)

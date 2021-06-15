@@ -2867,8 +2867,6 @@ GameObject:
   - component: {fileID: 752787623}
   - component: {fileID: 752787615}
   - component: {fileID: 752787622}
-  - component: {fileID: 752787616}
-  - component: {fileID: 752787617}
   - component: {fileID: 752787621}
   - component: {fileID: 752787620}
   - component: {fileID: 752787619}
@@ -2939,44 +2937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707a2ab29b9a1dd4b8f5c5fae4ac1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &752787616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752787611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diffusionRate: 1
-  minAmount: 12.5
-  emitterPressure: 200
-  giveThresholdFactorUp: 0.5
-  giveThresholdFactorDown: 1
-  gasPodContentType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
-  emitterPodType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
---- !u!114 &752787617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752787611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diffusionRate: 0.5
-  minAmount: 12.5
-  emitterPressure: 200
-  giveThresholdFactorUp: 0.5
-  giveThresholdFactorDown: 1
-  gasPodContentType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
-  emitterPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
 --- !u!114 &752787618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6966,6 +6926,10 @@ GameObject:
   - component: {fileID: 1856548193}
   - component: {fileID: 1856548194}
   - component: {fileID: 1856548195}
+  - component: {fileID: 1856548199}
+  - component: {fileID: 1856548198}
+  - component: {fileID: 1856548197}
+  - component: {fileID: 1856548196}
   m_Layer: 0
   m_Name: ProcessorManager
   m_TagString: Untagged
@@ -7004,8 +6968,8 @@ MonoBehaviour:
   fastForwardBatchSize: 10
   batchCount: 100
   processors:
-  - {fileID: 752787616}
-  - {fileID: 752787617}
+  - {fileID: 1856548199}
+  - {fileID: 1856548197}
   - {fileID: 752787618}
   - {fileID: 752787619}
   - {fileID: 752787620}
@@ -7031,6 +6995,70 @@ MonoBehaviour:
   damage: 20
   range: 10
   turretType: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
+--- !u!114 &1856548196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856548192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a22056c83f46c4ba0b8fb860376c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gasDiffuser: {fileID: 1856548197}
+--- !u!114 &1856548197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856548192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diffusionRate: 0.5
+  minAmount: 12.5
+  emitterPressure: 200
+  giveThresholdFactorUp: 0.5
+  giveThresholdFactorDown: 1
+  gasPodContentType: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+  emitterPodType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+--- !u!114 &1856548198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856548192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a22056c83f46c4ba0b8fb860376c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gasDiffuser: {fileID: 1856548199}
+--- !u!114 &1856548199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856548192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24934117be728941b1de086b7abc483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diffusionRate: 1
+  minAmount: 12.5
+  emitterPressure: 200
+  giveThresholdFactorUp: 0.5
+  giveThresholdFactorDown: 1
+  gasPodContentType: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
+  emitterPodType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
 --- !u!1001 &1926594512
 PrefabInstance:
   m_ObjectHideFlags: 0

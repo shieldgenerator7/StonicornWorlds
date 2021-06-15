@@ -28,6 +28,8 @@ public class Planet
     private MultiGroupedList<PodContentType, Pod> podMultiLists = new MultiGroupedList<PodContentType, Pod>(
         pod => pod.getContentTypes()
         );
+    [NonSerialized]
+    private Dictionary<PodContentType, HexagonGrid<float>> gasGrids = new Dictionary<PodContentType, HexagonGrid<float>>();
 
     public List<Stonicorn> residents = new List<Stonicorn>();
 
@@ -52,6 +54,11 @@ public class Planet
         }
         //Inflat residents
         residents.ForEach(t => t.inflate());
+    }
+
+    public void prepareForSave()
+    {
+        gasGrids.Keys.ToList().ForEach(pct => pushGasGrid(pct));
     }
 
     #region Write State
@@ -164,6 +171,8 @@ public class Planet
     #endregion
 
     #region Read State
+    public Vector2 getHexPos(Vector3Int v)
+        => gridToWorld(v);
     public Vector2 getHexPos(Vector2 pos)
         => gridToWorld(worldToGrid(pos));
 
@@ -283,6 +292,80 @@ public class Planet
         float s = -(q + r);
 
         return HexagonUtility.round(q, s, r);
+    }
+    #endregion
+
+    #region Gas Grids
+    public HexagonGrid<float> getGasGrid(PodContentType podContentType)
+    {
+        if (!gasGrids.ContainsKey(podContentType))
+        {
+            gasGrids.Add(podContentType, new HexagonGrid<float>());
+        }
+        return gasGrids[podContentType];
+    }
+    public void pullGasGrid(PodContentType podContentType, PodType emitterPodType, float emitterPressure)
+    {
+        HexagonGrid<float> grid = getGasGrid(podContentType);
+        grid.clear();
+        Managers.Planet.Planet.PodsAll
+            .ForEach(pod =>
+            {
+                float pressure = 0;
+                //Valid place for gas to be
+                if (pod.podType == Managers.Constants.spacePodType)
+                {
+                    PodContent content = pod.getContent(podContentType);
+                    if (content)
+                    {
+                        pressure = content.Var;
+                    }
+                    else
+                    {
+                        pressure = 0;
+                    }
+                }
+                //Gas emitter
+                else if (pod.podType == emitterPodType)
+                {
+                    pressure = emitterPressure;
+                }
+                //Invalid place for gas to be
+                else
+                {
+                    pressure = -1;
+                }
+                grid.add(pod.gridPos, pressure);
+            });
+    }
+    void pushGasGrid(PodContentType podContentType)
+    {
+        HexagonGrid<float> grid = getGasGrid(podContentType);
+        grid.Keys
+            .FindAll(v => grid[v] >= 0)
+            .ForEach(
+            v =>
+            {
+                Pod pod = Managers.Planet.Planet.getPod(v);
+                if (!pod && grid[v] > 0)
+                {
+                    pod = Managers.Planet.Planet.fillSpace(v);
+                }
+                if (pod)
+                {
+                    PodContent content = pod.getContent(podContentType);
+                    if (!content && grid[v] > 0)
+                    {
+                        content = new PodContent(podContentType, pod);
+                        pod.addContent(content);
+                    }
+                    if (content)
+                    {
+                        content.Var = grid[v];
+                    }
+                }
+            }
+            );
     }
     #endregion
 
