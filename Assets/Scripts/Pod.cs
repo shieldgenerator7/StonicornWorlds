@@ -75,7 +75,10 @@ public class Pod : PlanetObject
 
     public void forEachContent(Action<PodContent> contentFunc)
     {
-        podContents.ForEach(content => contentFunc(content));
+        for (int i = 0; i < podContents.Count; i++)
+        {
+            contentFunc(podContents[i]);
+        }
     }
 
     public override void inflate()
