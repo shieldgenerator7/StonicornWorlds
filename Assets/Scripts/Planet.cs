@@ -304,6 +304,10 @@ public class Planet
         }
         return gasGrids[podContentType];
     }
+    public float getGasPressure(PodContentType podContentType, Vector3Int v)
+    {
+        return getGasGrid(podContentType)[v];
+    }
     public void pullGasGrid(PodContentType podContentType, PodType emitterPodType, float emitterPressure)
     {
         HexagonGrid<float> grid = getGasGrid(podContentType);

@@ -43,6 +43,8 @@ public class PodContentType : PlanetObjectType
         return requiredContent.Count == 0 ||
             (curPod && requiredContent.Any(
                 ctntType => curPod.hasContent(ctntType)
+                || (ctntType.isGas &&
+                Managers.Planet.Planet.getGasPressure(ctntType, curPod.gridPos) > 0)
                 ));
     }
     public bool hasRequiredPlanContent(Pod curPod)
@@ -50,6 +52,8 @@ public class PodContentType : PlanetObjectType
         return requiredPlanContent.Count == 0 ||
             (curPod && requiredPlanContent.Any(
                 ctntType => curPod.hasContent(ctntType)
+                || (ctntType.isGas && 
+                Managers.Planet.Planet.getGasPressure(ctntType,curPod.gridPos) > 0)
                 ));
     }
     public bool hasRoomFor(Pod curPod)
