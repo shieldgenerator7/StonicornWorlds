@@ -3576,10 +3576,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1813250844281816534, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b4a5747894e27e747a527993af8be3f5, type: 3}
     - target: {fileID: 2130847798164095153, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Name
       value: btn Rafters
@@ -3591,7 +3587,7 @@ PrefabInstance:
     - target: {fileID: 7891775795150619609, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: eac69ab6ace17114094fb0e2a642a6b9, type: 3}
+      objectReference: {fileID: 21300000, guid: b4a5747894e27e747a527993af8be3f5, type: 3}
     m_RemovedComponents:
     - {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
