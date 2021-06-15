@@ -18,7 +18,9 @@ public class DropoffActivity : Activity
             < Managers.Resources.magmaCapPerCore;
 
     public override bool isDone
-        => stonicorn.toolbeltResources == 0;
+        => stonicorn.toolbeltResources == 0
+        //acount for case where magma container gets destroyed mid-process
+        || Managers.Resources.getResourcesAt(stonicorn.locationOfInterest) == 0;
 
     public override float ActivityRange => stonicorn.workRange;
 
@@ -31,6 +33,11 @@ public class DropoffActivity : Activity
             );
         PodContent magma = Managers.Planet.Planet.getPod(stonicorn.locationOfInterest)
             .getContent(Managers.Constants.getPodContentType("MagmaContainer"));
+        if (!magma)
+        {
+            //acount for case where magma container gets destroyed mid-process
+            return;
+        }
         float take = Mathf.Clamp(excess, 0, Managers.Resources.magmaCapPerCore - magma.Var);
         stonicorn.toolbeltResources -= take;
         magma.Var += take;
