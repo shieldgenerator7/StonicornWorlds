@@ -8,6 +8,7 @@ public class QueueManagerEffects : MonoBehaviour
     public GameObject constructingPrefab;
 
     Dictionary<QueueTask, ConstructingEffect> constructs = new Dictionary<QueueTask, ConstructingEffect>();
+    public bool showEffects = true;
 
     public void updateDisplay(List<QueueTask> tasks)
     {
@@ -22,6 +23,7 @@ public class QueueManagerEffects : MonoBehaviour
                    Quaternion.identity,
                    transform
                    );
+                constructPod.SetActive(showEffects);
                 ConstructingEffect construct = constructPod.GetComponent<ConstructingEffect>();
                 construct.transform.up = Managers.Planet.Planet.getUpDirection(task.pos);
                 construct.init(task);
@@ -43,5 +45,14 @@ public class QueueManagerEffects : MonoBehaviour
                 Destroy(constructs[task].gameObject);
                 constructs.Remove(task);
             });
+    }
+
+    public void setShowEffects(bool active)
+    {
+        showEffects = active;
+        constructs.Values.ToList().ForEach(
+            ce => ce.gameObject.SetActive(showEffects)
+            );
+        Managers.Input.checkAllButtons();
     }
 }

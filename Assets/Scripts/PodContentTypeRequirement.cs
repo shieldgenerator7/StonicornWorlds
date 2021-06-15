@@ -9,7 +9,8 @@ public class PodContentTypeRequirement : Requirement
     public int count;
 
     public override bool isRequirementMet()
-        => Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
-            .FindAll(pod => pod.hasContent(podContentType)).Count
-            >= count;
+        => (podContentType != null)
+        ? Managers.Planet.Planet.Pods(podContentType).Count >= count
+        : Managers.Planet.Planet.Pods(Managers.Constants.spacePodType)
+            .Count(pod => pod.hasContentConstructible()) >= count;
 }
