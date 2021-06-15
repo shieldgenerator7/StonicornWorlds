@@ -8,6 +8,7 @@ public class ProcessorManager : Manager
     public bool fastForwardOnLoad = true;
     public float fastForwardTimeDelta = 0.1f;
     public int fastForwardBatchSize = 10;
+    public int batchCount = 100;
     public List<PlanetProcessor> processors;
 
     public override void setup()
@@ -34,6 +35,7 @@ public class ProcessorManager : Manager
     {
         float timeTotal = timeLeftToProcess;
         FastForwardPercentDone = 1 - (timeLeftToProcess / timeTotal);
+        fastForwardBatchSize = Mathf.FloorToInt(Mathf.Max(1, timeLeftToProcess / batchCount));
         while (timeLeftToProcess > 0)
         {
             for (int i = 0; i < fastForwardBatchSize && timeLeftToProcess > 0; i++)

@@ -7002,6 +7002,7 @@ MonoBehaviour:
   fastForwardOnLoad: 1
   fastForwardTimeDelta: 0.1
   fastForwardBatchSize: 10
+  batchCount: 100
   processors:
   - {fileID: 752787616}
   - {fileID: 752787617}
