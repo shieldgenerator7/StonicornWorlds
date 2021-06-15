@@ -34,7 +34,7 @@ public class ResourceManager : Manager
                 {
                     float diff = newAmount - oldAmount;
                     int i = magmaContents.Count - 1;
-                    while (!Mathf.Approximately(diff, 0))
+                    while (!Mathf.Approximately(diff, 0) && i < magmaContents.Count)
                     {
                         float oldVarVal = magmaContents[i].Var;
                         magmaContents[i].Var = Mathf.Clamp(
