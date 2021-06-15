@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class StonicornController : PlanetProcessor
 {
+    private void Start()
+    {
+        Managers.Queue.onPlansChanged += clearStonicornTaskPriorities;
+    }
+
     // Update is called once per frame
     public override void update(float timeDelta)
     {
@@ -105,5 +110,12 @@ public class StonicornController : PlanetProcessor
         {
             stonicorn.position = stonicorn.aboveLoI;
         }
+    }
+
+    void clearStonicornTaskPriorities(Planet planet)
+    {
+        planet.residents.ForEach(
+            resident => resident.taskPriorities = null
+            );
     }
 }

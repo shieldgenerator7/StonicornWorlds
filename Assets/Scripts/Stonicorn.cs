@@ -37,6 +37,8 @@ public class Stonicorn
     public Activity currentActivity;
     [System.NonSerialized]
     public Vector2 aboveLoI;
+    [System.NonSerialized]
+    public List<QueueTask> taskPriorities;
 
     public enum Action
     {

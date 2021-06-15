@@ -13,7 +13,7 @@ public class WorkActivity : Activity
     public override bool canStart
         => !stonicorn.Sleepy
         && stonicorn.toolbeltResources > 0
-        && Managers.Queue.getAvailableTasks().Count > 0;
+        && getTaskPriorities().Count > 0;
 
     public override bool canContinue
         => stonicorn.rest > 0
@@ -27,6 +27,18 @@ public class WorkActivity : Activity
     {
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
+            if (stonicorn.taskPriorities.Count > 0)
+            {
+                stonicorn.task = stonicorn.taskPriorities[0];
+            }
+        }
+        return stonicorn.task.pos;
+    }
+
+    List<QueueTask> getTaskPriorities()
+    {
+        if (stonicorn.taskPriorities == null || stonicorn.taskPriorities.Count == 0)
+        {
             List<QueueTask> tasks = Managers.Queue.getAvailableTasks();
             if (tasks.Any(task => task.type == stonicorn.favoriteJobType))
             {
@@ -34,10 +46,19 @@ public class WorkActivity : Activity
             }
             tasks = sortTasks(tasks, stonicorn.taskPriority2);
             tasks = sortTasks(tasks, stonicorn.taskPriority);
-            stonicorn.task = tasks[0];
+            stonicorn.taskPriorities = tasks;
         }
-        return stonicorn.task.pos;
+        return stonicorn.taskPriorities;
     }
+
+    static List<Stonicorn.TaskPriority> descendList = new List<Stonicorn.TaskPriority>() {
+        Stonicorn.TaskPriority.FAR,
+        Stonicorn.TaskPriority.EXPENSIVE,
+        Stonicorn.TaskPriority.SLOW,
+        Stonicorn.TaskPriority.STARTED,
+        Stonicorn.TaskPriority.LAST,
+        Stonicorn.TaskPriority.GROUP,
+    };
     private List<QueueTask> sortTasks(List<QueueTask> tasks, Stonicorn.TaskPriority taskPriority)
     {
         Func<QueueTask, float> sortFunction = task => 0;
@@ -73,14 +94,7 @@ public class WorkActivity : Activity
                 Debug.LogError("Unknown TaskPriority!: " + taskPriority);
                 break;
         }
-        bool descend = new List<Stonicorn.TaskPriority>() {
-            Stonicorn.TaskPriority.FAR,
-            Stonicorn.TaskPriority.EXPENSIVE,
-            Stonicorn.TaskPriority.SLOW,
-            Stonicorn.TaskPriority.STARTED,
-            Stonicorn.TaskPriority.LAST,
-            Stonicorn.TaskPriority.GROUP,
-        }.Contains(taskPriority);
+        bool descend = descendList.Contains(taskPriority);
         if (descend)
         {
             return tasks.OrderByDescending(sortFunction).ToList();
@@ -100,5 +114,9 @@ public class WorkActivity : Activity
             timeDelta
             );
         stonicorn.Rest -= stonicorn.workRate * timeDelta;
+        if (stonicorn.task && stonicorn.task.Completed)
+        {
+            stonicorn.taskPriorities.Remove(stonicorn.task);
+        }
     }
 }
