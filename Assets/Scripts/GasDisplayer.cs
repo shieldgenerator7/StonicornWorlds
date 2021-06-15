@@ -13,7 +13,6 @@ public class GasDisplayer : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        Debug.Log("Displaying gas: " + gasDiffuser.gasPodContentType.name);
         gasGrid = Managers.Planet.Planet.getGasGrid(gasDiffuser.gasPodContentType);
         this.enabled = false;
         Managers.Processor.onFastForwardFinished += () => this.enabled = true;
@@ -29,6 +28,7 @@ public class GasDisplayer : MonoBehaviour
                 {
                     GameObject goGas = Instantiate(gasDiffuser.gasPodContentType.prefab);
                     goGas.transform.position = Managers.Planet.Planet.getHexPos(v);
+                    goGas.transform.parent = transform;
                     srs.Add(v, goGas.GetComponent<SpriteRenderer>());
                 }
                 updateDisplay(srs[v], gasGrid[v]);
