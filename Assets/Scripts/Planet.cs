@@ -41,6 +41,7 @@ public class Planet
             p.inflate();
             grid.add(p.gridPos, p);
             podLists.Add(p);
+            podMultiLists.Add(p);
         });
         this.tasks.ForEach(t => t.inflate());
         //0.020 save backwards compatibility

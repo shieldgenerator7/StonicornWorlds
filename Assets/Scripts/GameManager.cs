@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
             canvasScaler.matchWidthOrHeight = (width > height) ? 0 : 1;
             Managers.Constants.updateScreenConstants(width, height);
         }
+        Managers.Progression.checkAllProgression();
         Managers.Input.updateToolBoxes();
         Managers.Input.checkAllButtons();
     }
