@@ -124,8 +124,8 @@ public class Planet
         grid.removeAt(pod.gridPos);
         podLists.Remove(pod);
         podMultiLists.Remove(pod);
-        fillSpace(pod.gridPos);
-        updateGasGrids(pod);
+        Pod fillPod = fillSpace(pod.gridPos);
+        updateGasGrids(fillPod);
         onStateChanged?.Invoke(this);
     }
 
