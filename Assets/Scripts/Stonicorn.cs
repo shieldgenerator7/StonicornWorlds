@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -122,6 +123,8 @@ public class Stonicorn
         initActivities();
     }
 
+    #region Activities
+
     void initActivities()
     {
         PickupActivity pickup = new PickupActivity(this);
@@ -132,6 +135,76 @@ public class Stonicorn
         activities.Add(new RestActivity(this));
         activities.Add(dropoff);
     }
+    public List<QueueTask> getTaskPriorities()
+    {
+        if (taskPriorities == null || taskPriorities.Count == 0)
+        {
+            List<QueueTask> tasks = Managers.Queue.queue.ToList();
+            if (tasks.Any(task => task.type == favoriteJobType))
+            {
+                tasks.RemoveAll(task => task.type != favoriteJobType);
+            }
+            tasks = sortTasks(tasks, taskPriority2);
+            tasks = sortTasks(tasks, taskPriority);
+            taskPriorities = tasks;
+        }
+        return taskPriorities;
+    }
+    static List<Stonicorn.TaskPriority> descendList = new List<Stonicorn.TaskPriority>() {
+        Stonicorn.TaskPriority.FAR,
+        Stonicorn.TaskPriority.EXPENSIVE,
+        Stonicorn.TaskPriority.SLOW,
+        Stonicorn.TaskPriority.STARTED,
+        Stonicorn.TaskPriority.LAST,
+        Stonicorn.TaskPriority.GROUP,
+    };
+    private List<QueueTask> sortTasks(List<QueueTask> tasks, Stonicorn.TaskPriority taskPriority)
+    {
+        System.Func<QueueTask, float> sortFunction = task => 0;
+        switch (taskPriority)
+        {
+            case Stonicorn.TaskPriority.CLOSE:
+            case Stonicorn.TaskPriority.FAR:
+                sortFunction = task => Vector2.Distance(task.pos, position);
+                break;
+            case Stonicorn.TaskPriority.CHEAP:
+            case Stonicorn.TaskPriority.EXPENSIVE:
+                sortFunction = task => task.StartCost;
+                break;
+            case Stonicorn.TaskPriority.FAST:
+            case Stonicorn.TaskPriority.SLOW:
+                sortFunction = task => task.taskObject.progressRequired;
+                break;
+            case Stonicorn.TaskPriority.EMPTY:
+            case Stonicorn.TaskPriority.STARTED:
+                sortFunction = task => task.Percent;
+                break;
+            case Stonicorn.TaskPriority.NEXT:
+            case Stonicorn.TaskPriority.LAST:
+                sortFunction = task => Managers.Queue.queue.IndexOf(task);
+                break;
+            case Stonicorn.TaskPriority.SOLO:
+            case Stonicorn.TaskPriority.GROUP:
+                sortFunction = task => Managers.Planet.Planet.residents
+                  .FindAll(stncrn => stncrn.task == task)
+                  .Count;
+                break;
+            default:
+                Debug.LogError("Unknown TaskPriority!: " + taskPriority);
+                break;
+        }
+        bool descend = descendList.Contains(taskPriority);
+        if (descend)
+        {
+            return tasks.OrderByDescending(sortFunction).ToList();
+        }
+        else
+        {
+            return tasks.OrderBy(sortFunction).ToList();
+        }
+    }
+    #endregion
+
     public Stonicorn()
     {
         initActivities();

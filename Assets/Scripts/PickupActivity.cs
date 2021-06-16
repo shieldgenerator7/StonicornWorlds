@@ -12,7 +12,7 @@ public class PickupActivity : Activity
         => !stonicorn.Sleepy
         && stonicorn.toolbeltResources < stonicorn.toolbeltSize
         && Managers.Resources.anyCoreNonEmpty()
-        && Managers.Queue.getAvailableTasks().Count > 0;
+        && stonicorn.getTaskPriorities().Count > 0;
 
     public override bool canContinue
         => stonicorn.toolbeltResources < stonicorn.toolbeltSize
