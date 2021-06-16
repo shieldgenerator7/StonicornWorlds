@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PickupActivity : Activity
@@ -12,7 +13,8 @@ public class PickupActivity : Activity
         => !stonicorn.Sleepy
         && stonicorn.toolbeltResources < stonicorn.toolbeltSize
         && Managers.Resources.anyCoreNonEmpty()
-        && stonicorn.getTaskPriorities().Count > 0;
+        && stonicorn.getTaskPriorities()
+            .Any(task => Managers.Queue.isTaskAvailable(task));
 
     public override bool canContinue
         => stonicorn.toolbeltResources < stonicorn.toolbeltSize

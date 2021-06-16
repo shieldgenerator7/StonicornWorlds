@@ -148,6 +148,7 @@ public class Stonicorn
             tasks = sortTasks(tasks, taskPriority);
             taskPriorities = tasks;
         }
+        taskPriorities.RemoveAll(task => task.Completed);
         return taskPriorities;
     }
     static List<Stonicorn.TaskPriority> descendList = new List<Stonicorn.TaskPriority>() {

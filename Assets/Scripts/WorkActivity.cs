@@ -11,7 +11,8 @@ public class WorkActivity : Activity
     public override bool canStart
         => !stonicorn.Sleepy
         && stonicorn.toolbeltResources > 0
-        && stonicorn.getTaskPriorities().Count > 0;
+        && stonicorn.getTaskPriorities()
+            .Any(task => Managers.Queue.isTaskAvailable(task));
 
     public override bool canContinue
         => stonicorn.rest > 0
@@ -25,16 +26,8 @@ public class WorkActivity : Activity
     {
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
-            if (stonicorn.taskPriorities == null)
-            {
-                stonicorn.getTaskPriorities();
-            }
-            stonicorn.taskPriorities.RemoveAll(task => task.Completed);
-            if (stonicorn.taskPriorities.Count > 0)
-            {
-                stonicorn.task = stonicorn.taskPriorities
-                    .FirstOrDefault(task => Managers.Queue.isTaskAvailable(task));
-            }
+            stonicorn.task = stonicorn.taskPriorities
+                .First(task => Managers.Queue.isTaskAvailable(task));
         }
         return stonicorn.task.pos;
     }
