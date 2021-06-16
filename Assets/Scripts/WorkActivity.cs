@@ -27,6 +27,11 @@ public class WorkActivity : Activity
     {
         if (stonicorn.task == null || stonicorn.task.Completed)
         {
+            if (stonicorn.taskPriorities == null)
+            {
+                getTaskPriorities();
+            }
+            stonicorn.taskPriorities.RemoveAll(task => task.Completed);
             if (stonicorn.taskPriorities.Count > 0)
             {
                 stonicorn.task = stonicorn.taskPriorities[0];
