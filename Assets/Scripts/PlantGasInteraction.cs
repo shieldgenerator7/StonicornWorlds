@@ -21,7 +21,7 @@ public class PlantGasInteraction : PlanetProcessor
     {
         if (gasGrid == null)
         {
-            gasGrid = Managers.Planet.Planet.getGasGrid(gasType);
+            return;
         }
         List<Pod> interactPods = Managers.Planet.Planet.Pods(plantType)
             .FindAll(pod => gasGrid[pod.gridPos] > 0 && pod.hasContent(plantType));

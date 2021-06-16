@@ -23,8 +23,8 @@ public class GasDiffuser : PlanetProcessor
 
     private void Start()
     {
-        Managers.Planet.Planet.pullGasGrid(gasPodContentType, emitterPodType, emitterPressure);
-        grid = Managers.Planet.Planet.getGasGrid(gasPodContentType);
+        Managers.Planet.Planet.pullGasGrid(this);
+        grid = Managers.Planet.Planet.getGasGrid(this);
         //
         float diff = Mathf.Abs(giveThresholdFactorUp - giveThresholdFactorDown);
         float min = Mathf.Min(giveThresholdFactorUp, giveThresholdFactorDown);

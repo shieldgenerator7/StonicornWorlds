@@ -13,7 +13,7 @@ public class GasDisplayer : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        gasGrid = Managers.Planet.Planet.getGasGrid(gasDiffuser.gasPodContentType);
+        gasGrid = Managers.Planet.Planet.getGasGrid(gasDiffuser);
         this.enabled = false;
         Managers.Processor.onFastForwardFinished += () => this.enabled = true;
     }

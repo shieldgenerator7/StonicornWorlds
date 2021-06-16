@@ -29,7 +29,7 @@ public class Planet
         pod => pod.getContentTypes()
         );
     [NonSerialized]
-    private Dictionary<PodContentType, HexagonGrid<float>> gasGrids = new Dictionary<PodContentType, HexagonGrid<float>>();
+    private Dictionary<GasDiffuser, HexagonGrid<float>> gasGrids = new Dictionary<GasDiffuser, HexagonGrid<float>>();
 
     public List<Stonicorn> residents = new List<Stonicorn>();
 
@@ -102,6 +102,7 @@ public class Planet
         }
         pod.onPodContentChanged += podContentChanged;
         fillSpaceAround(pod.worldPos);
+        updateGasGrids(pod);
         //Stonicorn
         if (pod.podType == Managers.Constants.corePodType)
         {
@@ -124,6 +125,7 @@ public class Planet
         podLists.Remove(pod);
         podMultiLists.Remove(pod);
         fillSpace(pod.gridPos);
+        updateGasGrids(pod);
         onStateChanged?.Invoke(this);
     }
 
@@ -299,19 +301,29 @@ public class Planet
     #region Gas Grids
     public HexagonGrid<float> getGasGrid(PodContentType podContentType)
     {
-        if (!gasGrids.ContainsKey(podContentType))
+        GasDiffuser key = gasGrids.Keys.FirstOrDefault(gd => gd.gasPodContentType == podContentType);
+        if (key == null)
         {
-            gasGrids.Add(podContentType, new HexagonGrid<float>());
+            Debug.LogError("No grid found for content type!: " + podContentType);
+            return null;
         }
-        return gasGrids[podContentType];
+        return gasGrids[key];
+    }
+    public HexagonGrid<float> getGasGrid(GasDiffuser diffuser)
+    {
+        if (!gasGrids.ContainsKey(diffuser))
+        {
+            gasGrids.Add(diffuser, new HexagonGrid<float>());
+        }
+        return gasGrids[diffuser];
     }
     public float getGasPressure(PodContentType podContentType, Vector3Int v)
     {
         return getGasGrid(podContentType)[v];
     }
-    public void pullGasGrid(PodContentType podContentType, PodType emitterPodType, float emitterPressure)
+    public void pullGasGrid(GasDiffuser diffuser)
     {
-        HexagonGrid<float> grid = getGasGrid(podContentType);
+        HexagonGrid<float> grid = getGasGrid(diffuser);
         grid.clear();
         Managers.Planet.Planet.PodsAll
             .ForEach(pod =>
@@ -320,7 +332,7 @@ public class Planet
                 //Valid place for gas to be
                 if (pod.podType == Managers.Constants.spacePodType)
                 {
-                    PodContent content = pod.getContent(podContentType);
+                    PodContent content = pod.getContent(diffuser.gasPodContentType);
                     if (content)
                     {
                         pressure = content.Var;
@@ -331,9 +343,9 @@ public class Planet
                     }
                 }
                 //Gas emitter
-                else if (pod.podType == emitterPodType)
+                else if (pod.podType == diffuser.emitterPodType)
                 {
-                    pressure = emitterPressure;
+                    pressure = diffuser.emitterPressure;
                 }
                 //Invalid place for gas to be
                 else
@@ -343,9 +355,35 @@ public class Planet
                 grid.add(pod.gridPos, pressure);
             });
     }
-    void pushGasGrid(PodContentType podContentType)
+    void updateGasGrids(Pod pod)
     {
-        HexagonGrid<float> grid = getGasGrid(podContentType);
+        gasGrids.Keys.ToList().ForEach(
+            diffuser => pullGasGrid(pod, diffuser));
+    }
+    void pullGasGrid(Pod pod, GasDiffuser diffuser)
+    {
+        HexagonGrid<float> grid = getGasGrid(diffuser);
+        float pressure;
+        //Valid place for gas to be
+        if (pod.podType == Managers.Constants.spacePodType)
+        {
+            pressure = 0;
+        }
+        //Gas emitter
+        else if (pod.podType == diffuser.emitterPodType)
+        {
+            pressure = diffuser.emitterPressure;
+        }
+        //Invalid place for gas to be
+        else
+        {
+            pressure = -1;
+        }
+        grid[pod.gridPos] = pressure;
+    }
+    void pushGasGrid(GasDiffuser diffuser)
+    {
+        HexagonGrid<float> grid = getGasGrid(diffuser);
         grid.Keys
             .FindAll(v => grid[v] >= 0)
             .ForEach(
@@ -358,10 +396,10 @@ public class Planet
                 }
                 if (pod)
                 {
-                    PodContent content = pod.getContent(podContentType);
+                    PodContent content = pod.getContent(diffuser.gasPodContentType);
                     if (!content && grid[v] > 0)
                     {
-                        content = new PodContent(podContentType, pod);
+                        content = new PodContent(diffuser.gasPodContentType, pod);
                         pod.addContent(content);
                     }
                     if (content)
