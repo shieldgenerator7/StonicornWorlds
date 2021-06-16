@@ -13,4 +13,7 @@ public abstract class PlanetObjectType : ScriptableObject
     public float startCost = 100;
     public float convertCost = 25;
     public float progressRequired = 100;
+
+    public override string ToString()
+        => typeName;
 }

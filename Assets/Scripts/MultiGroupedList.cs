@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class MultiGroupedList<T, K>
 {
@@ -54,5 +55,14 @@ public class MultiGroupedList<T, K>
     public List<List<K>> GetLists(List<T> keys)
     {
         return keys.ConvertAll(key => GetList(key));
+    }
+
+    void print()
+    {
+        string output = "MultiGroupList counts: ";
+        list.Keys.ToList().ForEach(
+            key => output += "" + key + ": " + list[key].Count + ", "
+            );
+        Debug.Log(output);
     }
 }
