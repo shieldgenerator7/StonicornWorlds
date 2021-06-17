@@ -227,6 +227,13 @@ public class Planet
         }
         return (hexPos - getGroundPos(pos)).normalized;
     }
+    public Vector2 getUpDirectionClosestCore(Vector2 pos)
+    {
+        Vector2 corePos = Pods(Managers.Constants.corePodType)
+            .OrderBy(pod => Vector2.Distance(pod.worldPos, pos))
+            .ToList()[0].worldPos;
+        return getUpDirection(pos - corePos);
+    }
 
     public Neighborhood<Pod> getNeighborhood(Vector2 pos)
         => grid.getNeighborhood(worldToGrid(pos));
