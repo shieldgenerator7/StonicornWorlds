@@ -100,7 +100,13 @@ public class ResourceManager : Manager
         return 0;
     }
 
-    public Vector2 getClosestCore(Vector2 pos)
+    public PodContent getClosestCore(Vector2 pos)
+    {
+        return magmaContents
+            .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
+            .ToList()[0];
+    }
+    public Vector2 getClosestCorePos(Vector2 pos)
         => Managers.Planet.Planet
             .getClosestPod(pos, Managers.Constants.corePodType).worldPos;
 
@@ -126,7 +132,7 @@ public class ResourceManager : Manager
         }
         else
         {
-            return getClosestCore(pos);
+            return getClosestCorePos(pos);
         }
     }
 
@@ -144,7 +150,7 @@ public class ResourceManager : Manager
         }
         else
         {
-            return getClosestCore(pos);
+            return getClosestCorePos(pos);
         }
     }
 
@@ -163,7 +169,7 @@ public class ResourceManager : Manager
         }
         else
         {
-            return getClosestCore(pos);
+            return getClosestCorePos(pos);
         }
     }
 }

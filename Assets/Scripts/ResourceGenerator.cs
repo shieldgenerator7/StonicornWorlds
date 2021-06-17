@@ -10,19 +10,22 @@ public class ResourceGenerator : PlanetProcessor
 
     private void Start()
     {
-        Managers.Planet.onPlanetStateChanged += updateCount;
-        updateCount(Managers.Planet.Planet);
     }
 
     // Update is called once per frame
     public override void update(float timeDelta)
     {
-        Managers.Resources.Resources += count * generateRate * timeDelta;
+        float generateAmount = generateRate * timeDelta;
+        Managers.Planet.Planet.Pods(generatorPodType)
+            .ForEach(pod =>
+            {
+                PodContent magmaCore = Managers.Resources.getClosestCore(pod.worldPos);
+                magmaCore.Var = Mathf.Clamp(
+                    magmaCore.Var + generateAmount,
+                    0,
+                    Managers.Resources.magmaCapPerCore
+                    );
+            });
     }
 
-    void updateCount(Planet planet)
-    {
-        count = planet.Pods(generatorPodType).Count;
-        enabled = count > 0;
-    }
 }
