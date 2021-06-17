@@ -6642,6 +6642,7 @@ MonoBehaviour:
   - {fileID: 8983483392905896743}
   planetObjectType: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
   toolAction: {fileID: 1012292983}
+  cheatsActive: 0
   cheatKey: 114
   cheatButtons:
   - {fileID: 1448358011}

@@ -117,6 +117,7 @@ public class InputManager : Manager
     public List<ToolButton> ActiveButtons
         => buttons.FindAll(btn => btn.Active);
 
+    public bool cheatsActive = false;
     public KeyCode cheatKey;
     public List<ToolButton> cheatButtons;
 
@@ -183,13 +184,55 @@ public class InputManager : Manager
         }
 
         //Cheat Key
-        if (Input.GetKeyDown(cheatKey))
+        if (Input.anyKeyDown)
         {
-            cheatButtons.ForEach(btn => btn.gameObject.SetActive(true));
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            updateToolBoxes();
+            if (cheatsActive)
+            {
+                //Activate cheat buttons
+                if (Input.GetKeyDown(cheatKey))
+                {
+                    cheatButtons.ForEach(btn => btn.gameObject.SetActive(true));
+                }
+                //Relayout Toolboxes
+                else if (Input.GetKeyDown(KeyCode.B))
+                {
+                    updateToolBoxes();
+                }
+                //Summon Asteroids
+                else if (Input.GetKeyDown(KeyCode.A))
+                {
+                    FindObjectOfType<AsteroidEvent>().timeLeft = 0;
+                }
+                //Progress All Buttons
+                else if (Input.GetKeyDown(KeyCode.P))
+                {
+                    FindObjectsOfType<ToolButton>(true).ToList()
+                        .FindAll(btn => !cheatButtons.Contains(btn))
+                        .ForEach(btn => btn.gameObject.SetActive(true));
+                }
+                //Exit Game
+                else if (Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.X))
+                {
+                    Application.Quit();
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.ExitPlaymode();
+#endif
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.BackQuote) && Input.GetKey(KeyCode.LeftControl))
+            {
+                cheatsActive = true;
+                BuildInfoDisplayer bid = FindObjectOfType<BuildInfoDisplayer>();
+                bid.buildMessages.Add("CHEATS ACTIVE");
+                bid.updateBuildInfoTexts();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.ExitPlaymode();
+#endif
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ public class BuildInfoDisplayer : MonoBehaviour
         updateBuildInfoTexts();
     }
 
-    void updateBuildInfoTexts()
+    public void updateBuildInfoTexts()
     {
         string text = Application.productName.ToUpper() + " " + Application.version;
         buildMessages.ForEach(m => text += "\n[" + m + "]");

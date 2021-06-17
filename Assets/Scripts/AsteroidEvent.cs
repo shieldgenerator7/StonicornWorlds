@@ -8,8 +8,7 @@ public class AsteroidEvent : PlanetProcessor
     public List<float> cooldownDelays;
     public GameObject asteroidPrefab;
 
-    [SerializeField]
-    private float timeLeft = 100;
+    public float timeLeft = 100;
     private float delay = 100;
     private float lastEventTime = 0;
 
