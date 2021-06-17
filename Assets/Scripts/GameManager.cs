@@ -80,7 +80,14 @@ public class GameManager : MonoBehaviour
             setupEndTime = System.DateTime.Now.Ticks;
             System.TimeSpan span = new System.TimeSpan(setupEndTime - startTime);
             Debug.Log("Setup time (s): " + span.TotalSeconds);
-            Debug.Log("Setup time (m): " + span.TotalMinutes);
+            if (span.TotalSeconds >= 120)
+            {
+                Debug.Log("Setup time (m): " + span.TotalMinutes);
+                if (span.TotalMinutes >= 120)
+                {
+                    Debug.Log("Setup time (h): " + span.TotalHours);
+                }
+            }
         }
     }
     #endregion

@@ -19,7 +19,14 @@ public class ProcessorManager : Manager
             long lastTime = Managers.Player.Player.lastSavedTicks;
             TimeSpan span = new TimeSpan(now - lastTime);
             Debug.Log("processor setup: fastforwarding thru (s): " + span.TotalSeconds);
-            Debug.Log("processor setup: fastforwarding thru (m): " + span.TotalMinutes);
+            if (span.TotalSeconds >= 120)
+            {
+                Debug.Log("processor setup: fastforwarding thru (m): " + span.TotalMinutes);
+                if (span.TotalMinutes >= 120)
+                {
+                    Debug.Log("processor setup: fastforwarding thru (h): " + span.TotalHours);
+                }
+            }
             float timeLeftToProcess = Mathf.Floor((float)span.TotalSeconds);
             StartCoroutine(fastForwardAsynchronously(timeLeftToProcess));
         }
