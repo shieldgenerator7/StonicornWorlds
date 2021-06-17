@@ -12,15 +12,24 @@ public class ToolBox : ToolButton
     public bool collapsed = false;
     private int savedIndexY;
 
-    public bool ShowSelf => buttons.Count(btn => btn.gameObject.activeSelf) >= 3;
+    public bool ShowRow = true;
+    public bool ShowSelf => false;// buttons.Count(btn => btn.gameObject.activeSelf) >= 3;
 
     /// <summary>
     /// Arranges the buttons in their positions.
     /// </summary>
     /// <param name="indexY">The index of this toolbox, starting from 0 at the bottom left</param>
-    public void organize(int indexY)
+    public int organize(int indexY)
     {
         savedIndexY = indexY;
+        if (!ShowRow)
+        {
+            //Hide toolbox and its buttons
+            organizeCollapsed(indexY);
+            float hideX = -Managers.Constants.buttonSpacing * 2;
+            setPosition(hideX, 0);
+            return 0;
+        }
         if (collapsed)
         {
             organizeCollapsed(indexY);
@@ -33,6 +42,7 @@ public class ToolBox : ToolButton
         Vector3 scale = transform.localScale;
         scale.x = (collapsed) ? -1 : 1;
         transform.localScale = scale;
+        return 1;
     }
     void organizeCollapsed(int indexY)
     {

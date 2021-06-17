@@ -103,9 +103,9 @@ public class InputManager : Manager
         toolBoxes.FindAll(tb => tb.Enabled)
             .ForEach(tb =>
             {
-                tb.organize(index);
+                int rowsUsed = tb.organize(index);
                 tb.updateColor();
-                index++;
+                index += rowsUsed;
             });
     }
 
