@@ -13,6 +13,8 @@ public class ResourceManager : Manager
 
     private List<PodContent> magmaContents;
 
+    private Dictionary<Vector2, PodContent> closestCoreGrid = new Dictionary<Vector2, PodContent>();
+
     public float Resources
     {
         get => magmaContents.Sum(magma => magma.Var);
@@ -95,7 +97,12 @@ public class ResourceManager : Manager
     {
         magmaContents = p.Pods(Managers.Constants.corePodType)
             .ConvertAll(core => core.getContent(magmaContentType));
+        float prevMagmaCap = magmaCap;
         magmaCap = magmaContents.Count * magmaCapPerCore;
+        if (magmaCap != prevMagmaCap)
+        {
+            closestCoreGrid.Clear();
+        }
     }
 
     public float getResourcesAt(Vector2 pos)
@@ -112,9 +119,16 @@ public class ResourceManager : Manager
 
     public PodContent getClosestCore(Vector2 pos)
     {
-        return magmaContents
-            .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
-            .ToList()[0];
+        if (!closestCoreGrid.ContainsKey(pos))
+        {
+            closestCoreGrid.Add(
+                pos,
+                magmaContents
+                    .OrderBy(magma => Vector2.Distance(pos, magma.container.worldPos))
+                    .ToList()[0]
+            );
+        }
+        return closestCoreGrid[pos];
     }
     public Vector2 getClosestCorePos(Vector2 pos)
         => Managers.Planet.Planet
