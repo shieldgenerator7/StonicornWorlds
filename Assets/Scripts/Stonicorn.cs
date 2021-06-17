@@ -137,18 +137,14 @@ public class Stonicorn
     }
     public List<QueueTask> getTaskPriorities()
     {
-        if (taskPriorities == null || taskPriorities.Count == 0)
+        List<QueueTask> tasks = Managers.Queue.queue.ToList();
+        if (tasks.Any(task => task.type == favoriteJobType))
         {
-            List<QueueTask> tasks = Managers.Queue.queue.ToList();
-            if (tasks.Any(task => task.type == favoriteJobType))
-            {
-                tasks.RemoveAll(task => task.type != favoriteJobType);
-            }
-            tasks = sortTasks(tasks, taskPriority2);
-            tasks = sortTasks(tasks, taskPriority);
-            taskPriorities = tasks;
+            tasks.RemoveAll(task => task.type != favoriteJobType);
         }
-        taskPriorities.RemoveAll(task => task.Completed);
+        tasks = sortTasks(tasks, taskPriority2);
+        tasks = sortTasks(tasks, taskPriority);
+        taskPriorities = tasks;
         return taskPriorities;
     }
     static List<Stonicorn.TaskPriority> descendList = new List<Stonicorn.TaskPriority>() {
