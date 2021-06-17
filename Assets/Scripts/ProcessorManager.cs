@@ -54,6 +54,7 @@ public class ProcessorManager : Manager
             yield return null;
         }
         FastForwardPercentDone = 1;
+        yield return null;
         onFastForwardFinished?.Invoke();
     }
 

@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
             screenChangeLastFrame = true;
             Time.timeScale = 1;
         }
+        catch (System.Exception e)
+        {
+            Debug.LogError("onFastForward ERROR: " + e);
+        }
         finally
         {
             setupEndTime = System.DateTime.Now.Ticks;
