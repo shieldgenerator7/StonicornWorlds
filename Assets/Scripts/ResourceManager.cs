@@ -68,6 +68,16 @@ public class ResourceManager : Manager
     }
     public delegate void OnResourcesChanged(float resources);
     public event OnResourcesChanged onResourcesChanged;
+    public void addResourcesAt(Vector2 pos, float resourceDelta)
+    {
+        if (resourceDelta < 0)
+        {
+            Debug.LogError("Not allowed to use a negative resourceDelta!: " + resourceDelta);
+        }
+        PodContent magmaCore = getClosestCore(pos);
+        magmaCore.Var = Mathf.Clamp(magmaCore.Var + resourceDelta, 0, magmaCapPerCore);
+        onResourcesChanged?.Invoke(Resources);
+    }
 
     private float magmaCap;
     public float MagmaCap => magmaCap;
