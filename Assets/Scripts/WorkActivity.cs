@@ -16,7 +16,8 @@ public class WorkActivity : Activity
 
     public override bool canContinue
         => stonicorn.rest > 0
-        && stonicorn.toolbeltResources > 0;
+        && stonicorn.toolbeltResources > 0
+        && stonicorn.task;
 
     public override float ActivityRange => stonicorn.workRange;
 

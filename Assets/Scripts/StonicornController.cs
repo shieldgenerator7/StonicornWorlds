@@ -115,7 +115,10 @@ public class StonicornController : PlanetProcessor
     void clearStonicornTaskPriorities(Planet planet)
     {
         planet.residents.ForEach(
-            resident => resident.taskPriorities = null
-            );
+            resident =>
+            {
+                resident.task = null;
+                resident.taskPriorities = null;
+            });
     }
 }
