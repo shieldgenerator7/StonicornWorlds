@@ -41,5 +41,5 @@ public abstract class SelectTool : Tool
 
     protected abstract List<Vector2> getSelectList(Vector2 start, Vector2 end);
     protected virtual List<Vector2> getIdleSelectList(Vector2 pos)
-        => new List<Vector2>() { pos };
+        => new List<Vector2>();
 }
