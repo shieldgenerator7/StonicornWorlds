@@ -28,11 +28,6 @@ public class ToolButtonEditor : Editor
                     {
                         string toolName = tb.gameObject.name.Split(' ')[1];
                         tab.toolAction = GameObject.Find(toolName).GetComponent<ToolAction>();
-                        //PodType podType = Resources.Load<PodType>("PodTypes/" + typeName);
-                        //if (podType)
-                        //{
-                        //    tab.planetObjectType = podType;
-                        //}
                     }
                     tab.image.sprite = tab.toolAction.preview;
                 }
@@ -58,8 +53,24 @@ public class ToolButtonEditor : Editor
                     }
                     ptb.image.sprite = ptb.planetObjectType.preview;
                 }
-                tb.activeImage.color = tb.image.color;
-                tb.mouseOverImage.color = tb.image.color;
+                //Colors
+                if (tb.activeImage.color == Color.white)
+                {
+                    tb.activeImage.color = tb.image.color;
+                    if (tb.activeImage.color == Color.white)
+                    {
+                        tb.activeImage.color = tb.Color;
+                    }
+                }
+                if (tb.mouseOverImage.color == Color.white)
+                {
+                    tb.mouseOverImage.color = tb.image.color;
+                    if (tb.mouseOverImage.color == Color.white)
+                    {
+                        tb.mouseOverImage.color = tb.Color;
+                    }
+                }
+                //Compatibilities
                 if (!tb.compatibilities.ganzEgal)
                 {
                     //compatible tools
@@ -112,7 +123,7 @@ public class ToolButtonEditor : Editor
                         }
                     }
                 }
-                //set dirty
+                //Set dirty
                 EditorUtility.SetDirty(tb);
                 EditorUtility.SetDirty(tb.image);
                 EditorUtility.SetDirty(tb.activeImage);
