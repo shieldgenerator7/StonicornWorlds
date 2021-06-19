@@ -15,8 +15,14 @@ MonoBehaviour:
   image: {fileID: 1620383086619692998}
   activeImage: {fileID: 133673031445212421}
   mouseOverImage: {fileID: 3433065025135104301}
+  compatibilities:
+    ganzEgal: 1
+    tools: []
+    toolActions: []
+    planetObjectTypes: []
   buttons: []
   collapsed: 0
+  ShowRow: 1
 --- !u!1001 &8356521888512474528
 PrefabInstance:
   m_ObjectHideFlags: 0
