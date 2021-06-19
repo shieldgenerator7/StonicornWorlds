@@ -133,7 +133,7 @@ public class CameraController : Manager
             return;
         }
         //override the posList value
-        posList.AddRange(Managers.Planet.Planet.PodsAll.ConvertAll(pod => pod.worldPos));
+        posList.AddRange(Managers.Planet.Planet.PodsNotEmpty.ConvertAll(pod => pod.worldPos));
         //
         autoFrame(Vector2.zero, posList);
     }
