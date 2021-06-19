@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MissionObjective : MonoBehaviour
 {
@@ -16,22 +17,28 @@ public class MissionObjective : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Image>().enabled = false;
         }
         if (canDestroyOnClick && Managers.Planet.Planet.PodsAll.Count > 7)
         {
             Destroy(gameObject);
+        }
+        if (Managers.Processor.FastForwardPercentDone < 1)
+        {
+            GetComponent<Image>().enabled = false;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (canDestroyOnClick)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Managers.Processor.FastForwardPercentDone == 1)
             {
-                if (Managers.Processor.FastForwardPercentDone == 1)
+                GetComponent<Image>().enabled = true;
+                if (Input.GetMouseButtonDown(0))
                 {
                     Destroy(gameObject);
                 }
@@ -43,7 +50,7 @@ public class MissionObjective : MonoBehaviour
             {
                 if (Managers.Planet.Planet.Pods(goalObject).Count > goalReq)
                 {
-                    GetComponent<SpriteRenderer>().enabled = true;
+                    GetComponent<Image>().enabled = true;
                     canDestroyOnClick = true;
                 }
             }
