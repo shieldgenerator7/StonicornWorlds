@@ -12,7 +12,7 @@ public class ToggleUIButton : ToolButton
         canClickWhenActive = true;
     }
 
-    public override void activate()
+    protected override void activateImpl()
     {
         bool active = isActive();
         Managers.Input.toolBoxes.ForEach(
@@ -25,7 +25,7 @@ public class ToggleUIButton : ToolButton
         Managers.Input.checkAllButtons();
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
         => Managers.Input.toolBoxes.Count(box => box.ShowRow) >= 2;
 
 }

@@ -10,12 +10,12 @@ public class ToggleRaftersButton : ToolButton
         canClickWhenActive = true;
     }
 
-    public override void activate()
+    protected override void activateImpl()
     {
         Managers.QueueEffects.setShowEffects(!isActive());
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
     {
         return Managers.QueueEffects.showEffects;
     }

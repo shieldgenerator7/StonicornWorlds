@@ -6,12 +6,12 @@ public class ToolToolButton : ToolButton
 {
     public Tool tool;
 
-    public override void activate()
+    protected override void activateImpl()
     {
         Managers.Input.tool = tool;
         Managers.Input.checkAllButtons();
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
         => Managers.Input.tool == tool;
 }

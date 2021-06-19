@@ -10,7 +10,7 @@ public class NextStonicornButton : ToolButton
         canClickWhenActive = true;
     }
 
-    public override void activate()
+    protected override void activateImpl()
     {
         int index = -1;
         if (Managers.Camera.FocusObject != null)
@@ -30,6 +30,6 @@ public class NextStonicornButton : ToolButton
         }
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
         => Managers.Camera.FocusObject != null;
 }

@@ -90,13 +90,13 @@ public class ToolBox : ToolButton
             });
     }
 
-    public override void activate()
+    protected override void activateImpl()
     {
         collapsed = !collapsed;
         organize(savedIndexY);
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
     {
         return false;
     }

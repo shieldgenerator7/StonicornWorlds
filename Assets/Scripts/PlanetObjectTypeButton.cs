@@ -6,20 +6,13 @@ public class PlanetObjectTypeButton : ToolButton
 {
     public PlanetObjectType planetObjectType;
 
-    public List<ToolAction> compatibleToolActions;
-
     public override Color Color => planetObjectType.uiColor;
 
-    public override void activate()
+    protected override void activateImpl()
     {
         Managers.Input.PlanetObjectType = planetObjectType;
-        if (!compatibleToolActions.Contains(Managers.Input.ToolAction))
-        {
-            Managers.Input.ToolAction = compatibleToolActions[0];
-        }
     }
 
-    protected override bool isActive()
-        => Managers.Input.PlanetObjectType == planetObjectType
-        && compatibleToolActions.Contains(Managers.Input.ToolAction);
+    protected override bool isActiveImpl()
+        => Managers.Input.PlanetObjectType == planetObjectType;
 }

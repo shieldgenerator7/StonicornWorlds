@@ -10,11 +10,11 @@ public class ViewWorldButton : ToolButton
         canClickWhenActive = true;
     }
 
-    public override void activate()
+    protected override void activateImpl()
     {
         Managers.Camera.FocusObject = null;
     }
 
-    protected override bool isActive()
+    protected override bool isActiveImpl()
         => Managers.Camera.FocusObject == null;
 }

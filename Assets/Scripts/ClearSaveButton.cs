@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ClearSaveButton : ToolButton
 {
-    public override void activate()
+    protected override void activateImpl()
     {
         string origFileName = Managers.File.fileName;
         string[] split = origFileName.Split('.');
@@ -16,5 +16,5 @@ public class ClearSaveButton : ToolButton
         SceneManager.LoadScene(0);
     }
 
-    protected override bool isActive() => false;
+    protected override bool isActiveImpl() => false;
 }

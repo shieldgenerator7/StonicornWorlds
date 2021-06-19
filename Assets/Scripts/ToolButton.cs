@@ -11,6 +11,7 @@ public abstract class ToolButton : MonoBehaviour
     Vector2 position;
     private bool activeButton = false;
     protected bool canClickWhenActive = false;
+    public CompatibilitySet compatibilities;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -48,13 +49,31 @@ public abstract class ToolButton : MonoBehaviour
 
     public void checkActive()
     {
-        activeButton = isActive();
+        activeButton = isActiveImpl();
         activeImage.gameObject.SetActive(activeButton);
     }
 
     public bool Active => activeButton;
 
-    public abstract void activate();
+    public void activate()
+    {
+        activateImpl();
+        if (!compatibilities.ganzEgal)
+        {
+            if (!compatibilities.compatibleWithCurrentInput())
+            {
+                compatibilities.setInputCompatible();
+            }
+        }
+    }
 
-    protected abstract bool isActive();
+    protected abstract void activateImpl();
+
+    protected bool isActive()
+    {
+        return isActiveImpl() &&
+            (!compatibilities.ganzEgal || compatibilities.compatibleWithCurrentInput());
+    }
+
+    protected abstract bool isActiveImpl();
 }
