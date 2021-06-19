@@ -14,7 +14,7 @@ public class ToggleUIButton : ToolButton
 
     protected override void activateImpl()
     {
-        bool active = isActive();
+        bool active = isActiveImpl();
         Managers.Input.toolBoxes.ForEach(
             box => box.ShowRow = !active
             );
