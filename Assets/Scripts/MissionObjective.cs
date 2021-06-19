@@ -31,8 +31,7 @@ public class MissionObjective : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {        
         if (canDestroyOnClick)
         {
             if (Managers.Processor.FastForwardPercentDone == 1)

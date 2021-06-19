@@ -189,10 +189,11 @@ public class Planet
 
     public List<Vector2> getHexPosRing(Vector2 center, Vector2 ringSample)
     {
+        Vector2 hexCenter = getHexPos(center);
         return HexagonUtility.getRing(HexagonUtility.ring(worldToGrid(
             ringSample - center
             )))
-           .ConvertAll(v => gridToWorld(v) + center);
+           .ConvertAll(v => gridToWorld(v) + hexCenter);
     }
 
     public Pod getPod(Vector2 pos)

@@ -8,8 +8,6 @@ public abstract class SelectTool : Tool
     private Vector2 startPos;
     private Vector2 endPos;
 
-    private Vector2 prevIdlePosition;
-
     public sealed override void inputDown(Vector2 pos)
     {
         startPos = pos;
@@ -31,15 +29,7 @@ public abstract class SelectTool : Tool
 
     public sealed override void inputIdle(Vector2 pos)
     {
-        pos = Managers.Planet.Planet.getHexPos(pos);
-        if (pos != prevIdlePosition)
-        {
-            prevIdlePosition = pos;
-            Managers.Input.SelectList = getIdleSelectList(pos);
-        }
     }
 
     protected abstract List<Vector2> getSelectList(Vector2 start, Vector2 end);
-    protected virtual List<Vector2> getIdleSelectList(Vector2 pos)
-        => new List<Vector2>();
 }
