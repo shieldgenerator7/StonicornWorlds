@@ -187,10 +187,12 @@ public class Planet
             .ConvertAll(v => gridToWorld(v));
     }
 
-    public List<Vector2> getHexPosRing(Vector2 sample)
+    public List<Vector2> getHexPosRing(Vector2 center, Vector2 ringSample)
     {
-        return HexagonUtility.getRing(HexagonUtility.ring(worldToGrid(sample)))
-           .ConvertAll(v => gridToWorld(v));
+        return HexagonUtility.getRing(HexagonUtility.ring(worldToGrid(
+            ringSample - center
+            )))
+           .ConvertAll(v => gridToWorld(v) + center);
     }
 
     public Pod getPod(Vector2 pos)
