@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConstructingEffect : MonoBehaviour
 {
     public SpriteRenderer fillSR;
+    public SpriteMask mask;
     public bool reverseEffect = false;
 
     private QueueTask task;
@@ -23,6 +24,7 @@ public class ConstructingEffect : MonoBehaviour
             reverseEffect = true;
             fillSR.color = new Color(1, 1, 1, 0.5f);
         }
+        mask.sprite = this.task.taskObject.preview;
         updateDisplay(this.task.Percent);
     }
 
