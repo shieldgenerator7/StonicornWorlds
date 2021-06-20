@@ -5,6 +5,7 @@ using UnityEngine;
 public class ConstructingEffect : MonoBehaviour
 {
     public SpriteRenderer fillSR;
+    public bool reverseEffect = false;
 
     private QueueTask task;
 
@@ -17,6 +18,11 @@ public class ConstructingEffect : MonoBehaviour
         }
         this.task = task;
         this.task.onProgressChanged += updateDisplay;
+        if (this.task.type == QueueTask.Type.DESTRUCT)
+        {
+            reverseEffect = true;
+            fillSR.color = new Color(1, 1, 1, 0.5f);
+        }
         updateDisplay(this.task.Percent);
     }
 
@@ -30,5 +36,9 @@ public class ConstructingEffect : MonoBehaviour
         Vector2 size = fillSR.size;
         size.y = percent;
         fillSR.size = size;
+        if (reverseEffect)
+        {
+            percent = 1 - percent;
+        }
     }
 }
