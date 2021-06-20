@@ -12,7 +12,7 @@ public class ToggleRaftersButton : ToolButton
 
     protected override void activateImpl()
     {
-        Managers.QueueEffects.setShowEffects(!isActive());
+        Managers.QueueEffects.setShowEffects(!isActiveImpl());
     }
 
     protected override bool isActiveImpl()
