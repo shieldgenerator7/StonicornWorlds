@@ -11,7 +11,7 @@ public class ClearSaveButton : ToolButton
         string[] split = origFileName.Split('.');
         Managers.File.fileName = split[0] + "_" + System.DateTime.Now.Ticks + "." + split[1];
         Managers.File.SaveFile();
-        ES3.DeleteFile(origFileName);
+        Managers.File.DeleteFile(origFileName);
         Managers.File.saveOnExit = false;
         SceneManager.LoadScene(0);
     }
