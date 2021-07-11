@@ -3316,6 +3316,7 @@ GameObject:
   - component: {fileID: 618094741}
   - component: {fileID: 618094742}
   - component: {fileID: 618094743}
+  - component: {fileID: 618094744}
   m_Layer: 0
   m_Name: Pod Water
   m_TagString: Untagged
@@ -3352,6 +3353,7 @@ MonoBehaviour:
   button: {fileID: 1204566096}
   proreqs:
   - {fileID: 618094743}
+  - {fileID: 618094744}
 --- !u!114 &618094743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,6 +3369,21 @@ MonoBehaviour:
   podType: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
   count: 9
   requireNone: 0
+--- !u!114 &618094744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618094740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdeb67362180549419afd358ccaba509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  podType: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+  count: 0
+  requireNone: 1
 --- !u!1 &629642235
 GameObject:
   m_ObjectHideFlags: 0
@@ -8246,6 +8263,7 @@ GameObject:
   - component: {fileID: 1591744647}
   - component: {fileID: 1591744648}
   - component: {fileID: 1591744649}
+  - component: {fileID: 1591744650}
   m_Layer: 0
   m_Name: Pod Dirt
   m_TagString: Untagged
@@ -8282,6 +8300,7 @@ MonoBehaviour:
   button: {fileID: 1665949740}
   proreqs:
   - {fileID: 1591744649}
+  - {fileID: 1591744650}
 --- !u!114 &1591744649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8297,6 +8316,21 @@ MonoBehaviour:
   podType: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
   count: 10
   requireNone: 0
+--- !u!114 &1591744650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591744646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdeb67362180549419afd358ccaba509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  podType: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+  count: 0
+  requireNone: 1
 --- !u!1 &1624048184
 GameObject:
   m_ObjectHideFlags: 0
