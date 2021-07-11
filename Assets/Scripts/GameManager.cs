@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
     {
         Managers.Progression.checkAllProgression();
         Managers.PlanetEffects.updateDisplay(p);
+        Managers.Edge.calculateValidPosList(Managers.Queue.plans);
     }
 
     void onScreenSizeChangedUI(int width, int height)
