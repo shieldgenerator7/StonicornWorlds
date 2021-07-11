@@ -140,10 +140,13 @@ public class PlanetManagerEffects : MonoBehaviour
             }
         }
         //Rotate lava pods to face closest core
-        planet.Pods(Managers.Constants.getPodType("Lava")).ForEach(
-            lava => displayObjects[lava].transform.up =
-            planet.getUpDirectionClosestCore(lava.worldPos)
-            );
+        new List<string>() { "Lava", "Lava2" }.ForEach(podName =>
+        {
+            planet.Pods(Managers.Constants.getPodType(podName)).ForEach(
+                lava => displayObjects[lava].transform.up =
+                planet.getUpDirectionClosestCore(lava.worldPos)
+                );
+        });
         //Check for added stonicorns
         planet.residents.FindAll(stncrn => !stonicorns.ContainsKey(stncrn))
             .ForEach(stncrn =>
