@@ -13,7 +13,7 @@ public class MouseGestureInput : GestureInput
 
     private Vector2 origPosScreen;
     private Vector2 OrigPosWorld
-        => Utility.ScreenToWorldPoint(origPosScreen);
+        => Camera.main.ScreenToWorldPoint(origPosScreen);
 
     private float origTime;
 
@@ -92,14 +92,14 @@ public class MouseGestureInput : GestureInput
                 case MouseEvent.DRAG:
                     profile.processDragGesture(
                         OrigPosWorld,
-                        Utility.ScreenToWorldPoint(Input.mousePosition),
+                        Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         dragType,
                         Input.GetMouseButtonUp(mouseButton) || Input.GetMouseButtonUp(mouseButton2)
                         );
                     break;
                 case MouseEvent.HOLD:
                     profile.processHoldGesture(
-                        Utility.ScreenToWorldPoint(Input.mousePosition),
+                        Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         Time.time - origTime,
                         Input.GetMouseButtonUp(mouseButton) || Input.GetMouseButtonUp(mouseButton2)
                         );
@@ -126,7 +126,7 @@ public class MouseGestureInput : GestureInput
                 {
                     //Then it's a click.
                     mouseEvent = MouseEvent.CLICK;
-                    profile.processTapGesture(Utility.ScreenToWorldPoint(Input.mousePosition));
+                    profile.processTapGesture(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
             if (Input.GetMouseButtonUp(mouseButton2))
@@ -138,7 +138,7 @@ public class MouseGestureInput : GestureInput
                     mouseEvent = MouseEvent.DRAG;
                     profile.processDragGesture(
                           OrigPosWorld,
-                          Utility.ScreenToWorldPoint(Input.mousePosition),
+                          Camera.main.ScreenToWorldPoint(Input.mousePosition),
                           dragType,
                           true
                           );
@@ -154,7 +154,7 @@ public class MouseGestureInput : GestureInput
             dragType = DragType.UNKNOWN;
             //Hover gesture
             profile.processHoverGesture(
-                Utility.ScreenToWorldPoint(Input.mousePosition)
+                Camera.main.ScreenToWorldPoint(Input.mousePosition)
                 );
             return false;
         }

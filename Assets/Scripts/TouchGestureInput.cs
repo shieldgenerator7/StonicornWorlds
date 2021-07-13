@@ -13,7 +13,7 @@ public class TouchGestureInput : GestureInput
     //Camera Drag processing variables
     private Vector2 origTouchCenter;
     private Vector2 origTouchCenterWorld
-        => Utility.ScreenToWorldPoint(origTouchCenter);
+        => Camera.main.ScreenToWorldPoint(origTouchCenter);
     private List<Vector2> AliveTouchPositions
         => Input.touches
             .Where(t =>
@@ -22,7 +22,13 @@ public class TouchGestureInput : GestureInput
                 ).ToList()
             .ConvertAll(t => t.position);
     private Vector2 TouchCenter
-        => Utility.average(AliveTouchPositions);
+    {
+        get
+        {
+            List<Vector2> atp = AliveTouchPositions;
+            return atp.Aggregate((sum, v) => sum + v) / atp.Count;
+        }
+    }
 
     //Camera Zoom processing variables
     private float origCameraZoom;//camera zoom at the start of pinch gesture
@@ -46,7 +52,7 @@ public class TouchGestureInput : GestureInput
     {
         public Vector2 origPosScreen;
         public Vector2 origPosWorld
-            => Utility.ScreenToWorldPoint(origPosScreen);
+            => Camera.main.ScreenToWorldPoint(origPosScreen);
         public float origTime;
 
         public TouchData(Touch touch)
@@ -136,7 +142,7 @@ public class TouchGestureInput : GestureInput
                     case TouchEvent.DRAG:
                         profile.processDragGesture(
                             data.origPosWorld,
-                            Utility.ScreenToWorldPoint(touch.position),
+                            Camera.main.ScreenToWorldPoint(touch.position),
                             DragType.DRAG_ACTION,
                             true
                             );
@@ -144,7 +150,7 @@ public class TouchGestureInput : GestureInput
                     //HOLD
                     case TouchEvent.HOLD:
                         profile.processHoldGesture(
-                            Utility.ScreenToWorldPoint(touch.position),
+                            Camera.main.ScreenToWorldPoint(touch.position),
                             Time.time - data.origTime,
                             true
                             );
@@ -168,7 +174,7 @@ public class TouchGestureInput : GestureInput
                     case TouchEvent.DRAG:
                         profile.processDragGesture(
                             data.origPosWorld,
-                            Utility.ScreenToWorldPoint(touch.position),
+                            Camera.main.ScreenToWorldPoint(touch.position),
                             DragType.DRAG_ACTION,
                             touch.phase == TouchPhase.Ended
                             );
@@ -176,7 +182,7 @@ public class TouchGestureInput : GestureInput
                     //HOLD
                     case TouchEvent.HOLD:
                         profile.processHoldGesture(
-                            Utility.ScreenToWorldPoint(touch.position),
+                            Camera.main.ScreenToWorldPoint(touch.position),
                             Time.time - data.origTime,
                             touch.phase == TouchPhase.Ended
                             );
@@ -192,7 +198,7 @@ public class TouchGestureInput : GestureInput
                     if (touchEvent == TouchEvent.UNKNOWN)
                     {
                         //Then it's a tap
-                        profile.processTapGesture(Utility.ScreenToWorldPoint(touch.position));
+                        profile.processTapGesture(Camera.main.ScreenToWorldPoint(touch.position));
                     }
                 }
             }
@@ -201,7 +207,7 @@ public class TouchGestureInput : GestureInput
                 //Get the center and drag the camera to it
                 profile.processDragGesture(
                     origTouchCenterWorld,
-                    Utility.ScreenToWorldPoint(TouchCenter),
+                    Camera.main.ScreenToWorldPoint(TouchCenter),
                     DragType.DRAG_CAMERA,
                     Input.touches
                         .Where(t =>
