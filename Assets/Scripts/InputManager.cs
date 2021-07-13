@@ -82,8 +82,6 @@ public class InputManager : Manager
     public delegate void OnSelectListChanged(List<Vector2> selectList);
     public event OnSelectListChanged onSelectListChanged;
 
-    public bool buttonActivation = false;
-
     public override void setup()
     {
         if (planetObjectType is PodType pt)
@@ -136,51 +134,6 @@ public class InputManager : Manager
             MouseOver = Managers.Planet.Planet.getHexPos(
                 Camera.main.ScreenToWorldPoint(Input.mousePosition)
             );
-        }
-
-        bool mouseButtonUp = Input.GetMouseButtonUp(0);
-        //Mouse Click
-        if (Input.GetMouseButton(0) || mouseButtonUp)
-        {
-            //Input Down
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Check click on Tool
-                ToolButton clickedButton = buttons
-                    .FindAll(b => b.gameObject.activeSelf)
-                    .FirstOrDefault(b => b.checkClick(Input.mousePosition));
-                if (clickedButton)
-                {
-                    //Click on Button
-                    clickedButton.activate();
-                    buttonActivation = true;
-                    toolBoxes.ForEach(tb => tb.updateColor());
-                }
-                else
-                {
-                    //Click in world with Tool
-                    tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    buttonActivation = false;
-                }
-            }
-            //Input Up
-            else if (!buttonActivation)
-            {
-                if (mouseButtonUp)
-                {
-                    tool.inputUp(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                }
-                //Input Move
-                else
-                {
-                    tool.inputMove(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                }
-            }
-        }
-        //Input Idle
-        else
-        {
-            tool.inputIdle(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
 
         //Cheat Key

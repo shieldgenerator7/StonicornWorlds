@@ -124,9 +124,14 @@ public class MouseGestureInput : GestureInput
                 //If it's unknown,
                 if (mouseEvent == MouseEvent.UNKNOWN)
                 {
-                    //Then it's a click.
-                    mouseEvent = MouseEvent.CLICK;
-                    profile.processTapGesture(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    //Then it's a camera drag
+                    mouseEvent = MouseEvent.DRAG;
+                    profile.processDragGesture(
+                          OrigPosWorld,
+                          Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                          DragType.DRAG_ACTION,
+                          GesturePhase.ENDED
+                          );
                 }
             }
             if (Input.GetMouseButtonUp(mouseButton2))
@@ -139,7 +144,7 @@ public class MouseGestureInput : GestureInput
                     profile.processDragGesture(
                           OrigPosWorld,
                           Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                          dragType,
+                          DragType.DRAG_CAMERA,
                           GesturePhase.ENDED
                           );
                 }
