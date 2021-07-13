@@ -1,20 +1,22 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public abstract class GestureProfile
+public class MenuGestureProfile : GestureProfile
 {
     /// <summary>
     /// Called when this profile is set to the current one
     /// </summary>
-    public virtual void activate() { }
+    public override void activate() { }
 
     /// <summary>
     /// Called when the GestureManager switches off this profile to a different one
     /// </summary>
-    public virtual void deactivate() { }
+    public override void deactivate() { }
 
-    public virtual void processHoverGesture(Vector2 curMPWorld) {
+    public override void processHoverGesture(Vector2 curMPWorld)
+    {
         //Check click on Tool
         ToolButton clickedButton = Managers.Input.buttons
             .FindAll(b => b.gameObject.activeSelf)
@@ -28,22 +30,14 @@ public abstract class GestureProfile
         }
         else
         {
-            //Click in world with Tool
-            Managers.Input.tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            Managers.Input.buttonActivation = false;
+            
         }
     }
-
-    public void processTapGesture(Vector3 curMPWorld)
+    public override void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, GesturePhase phase)
     {
-        throw new System.NotSupportedException("This function isn't supported: everything is now a drag gesture");
-    }
-    public void processHoldGesture(Vector3 curMPWorld, float holdTime, GesturePhase phase)
-    {
-        throw new System.NotSupportedException("This function isn't supported: everything is now a drag gesture");
-    }
-    public virtual void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, GesturePhase phase)
-    {
+        //Click in world with Tool
+        Managers.Input.tool.inputDown(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Managers.Input.buttonActivation = false;
         //If the player drags on Merky,
         if (dragType == GestureInput.DragType.DRAG_ACTION)
         {
@@ -59,8 +53,5 @@ public abstract class GestureProfile
         {
             throw new System.ArgumentException("DragType must be a valid value! dragType: " + dragType);
         }
-    }
-    public void processZoomLevelChange(float zoomLevel)
-    {
     }
 }

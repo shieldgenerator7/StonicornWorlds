@@ -82,7 +82,7 @@ public class InputManager : Manager
     public delegate void OnSelectListChanged(List<Vector2> selectList);
     public event OnSelectListChanged onSelectListChanged;
 
-    private bool buttonActivation = false;
+    public bool buttonActivation = false;
 
     public override void setup()
     {

@@ -7,7 +7,7 @@ public class GestureManager : Manager
     //2021-07-12: copied from Stonicorn.GestureManager
 
     //Gesture Profiles
-    public enum GestureProfileType { MAIN };
+    public enum GestureProfileType { PLANET, MENU };
     private GestureProfile currentGP;//the current gesture profile
     private Dictionary<GestureProfileType, GestureProfile> gestureProfiles = new Dictionary<GestureProfileType, GestureProfile>();//dict of valid gesture profiles
 
@@ -36,8 +36,9 @@ public class GestureManager : Manager
     // Use this for initialization
     public override void setup()
     {
-        gestureProfiles.Add(GestureProfileType.MAIN, new GestureProfile());
-        switchGestureProfile(GestureProfileType.MAIN);
+        gestureProfiles.Add(GestureProfileType.PLANET, new PlanetGestureProfile());
+        gestureProfiles.Add(GestureProfileType.MENU, new MenuGestureProfile());
+        switchGestureProfile(GestureProfileType.PLANET);
 
         Input.simulateMouseWithTouches = false;
 
