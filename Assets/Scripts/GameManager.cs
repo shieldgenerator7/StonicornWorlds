@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
         float timeDelta = Time.deltaTime;
         Managers.Input.update(timeDelta);
+        Managers.Gesture.update(timeDelta);
         Managers.Processor.update(timeDelta);
         Managers.Camera.update(timeDelta);
     }
@@ -228,6 +229,7 @@ public class GameManager : MonoBehaviour
         Managers.Constants.setup();
         Managers.Camera.setup();
         Managers.Input.setup();
+        Managers.Gesture.setup();
         Managers.Edge.calculateValidPosList(Managers.Queue.plans);
         Managers.Progression.setup();
     }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GestureManager : MonoBehaviour
+public class GestureManager : Manager
 {
     //Gesture Profiles
     public enum GestureProfileType { MAIN };
@@ -32,7 +32,7 @@ public class GestureManager : MonoBehaviour
     private List<GestureInput> gestureInputs;
 
     // Use this for initialization
-    public void init()
+    public override void setup()
     {
         gestureProfiles.Add(GestureProfileType.MAIN, new GestureProfile());
         switchGestureProfile(GestureProfileType.MAIN);
@@ -48,7 +48,7 @@ public class GestureManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void processGestures()
+    public override void update(float timeDelta)
     {
         //
         //Input Processing

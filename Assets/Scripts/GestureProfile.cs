@@ -7,6 +7,7 @@ public class GestureProfile
     /// Called when this profile is set to the current one
     /// </summary>
     public virtual void activate() { }
+
     /// <summary>
     /// Called when the GestureManager switches off this profile to a different one
     /// </summary>

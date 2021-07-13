@@ -12,6 +12,7 @@ public class Managers : MonoBehaviour
     public static QueueManager Queue { get; private set; }
     public static EdgeManager Edge { get; private set; }
     public static InputManager Input { get; private set; }
+    public static GestureManager Gesture { get; private set; }
     public static ProgressionManager Progression { get; private set; }
     public static ProcessorManager Processor { get; private set; }
     public static PlanetManagerEffects PlanetEffects { get; private set; }
@@ -29,6 +30,7 @@ public class Managers : MonoBehaviour
         Queue = FindObjectOfType<QueueManager>();
         Edge = FindObjectOfType<EdgeManager>();
         Input = FindObjectOfType<InputManager>();
+        Gesture = FindObjectOfType<GestureManager>();
         Progression = FindObjectOfType<ProgressionManager>();
         Processor = FindObjectOfType<ProcessorManager>();
         PlanetEffects = FindObjectOfType<PlanetManagerEffects>();
