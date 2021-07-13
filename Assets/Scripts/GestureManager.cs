@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GestureManager : Manager
 {
+    //2021-07-12: copied from Stonicorn.GestureManager
+
     //Gesture Profiles
     public enum GestureProfileType { MAIN };
     private GestureProfile currentGP;//the current gesture profile
