@@ -19,11 +19,11 @@ public class GestureProfile
     {
         //Managers.Player.processTapGesture(curMPWorld);
     }
-    public virtual void processHoldGesture(Vector3 curMPWorld, float holdTime, bool finished)
+    public void processHoldGesture(Vector3 curMPWorld, float holdTime, GesturePhase phase)
     {
         //Managers.Player.processHoldGesture(curMPWorld, holdTime, finished);
     }
-    public virtual void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, bool finished)
+    public virtual void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, GesturePhase phase)
     {
         //If the player drags on Merky,
         if (dragType == GestureInput.DragType.DRAG_ACTION)

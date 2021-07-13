@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TouchGestureInput : GestureInput
 {
-    public float dragThreshold = 50;
-    public float holdThreshold = 0.2f;
+    public float dragThreshold = 0;
+    public float holdThreshold = 1f;
 
     private int maxTouchCount = 0;//the max amount of touches involved in this gesture at any one time
 
@@ -144,7 +144,7 @@ public class TouchGestureInput : GestureInput
                             data.origPosWorld,
                             Camera.main.ScreenToWorldPoint(touch.position),
                             DragType.DRAG_ACTION,
-                            true
+                            GesturePhase.ENDED
                             );
                         break;
                     //HOLD
@@ -152,7 +152,7 @@ public class TouchGestureInput : GestureInput
                         profile.processHoldGesture(
                             Camera.main.ScreenToWorldPoint(touch.position),
                             Time.time - data.origTime,
-                            true
+                            GesturePhase.ENDED
                             );
                         break;
                 }
@@ -176,7 +176,7 @@ public class TouchGestureInput : GestureInput
                             data.origPosWorld,
                             Camera.main.ScreenToWorldPoint(touch.position),
                             DragType.DRAG_ACTION,
-                            touch.phase == TouchPhase.Ended
+                            touch.phase.ToGesturePhase()
                             );
                         break;
                     //HOLD
@@ -184,7 +184,7 @@ public class TouchGestureInput : GestureInput
                         profile.processHoldGesture(
                             Camera.main.ScreenToWorldPoint(touch.position),
                             Time.time - data.origTime,
-                            touch.phase == TouchPhase.Ended
+                            touch.phase.ToGesturePhase()
                             );
                         break;
                 }
@@ -209,12 +209,7 @@ public class TouchGestureInput : GestureInput
                     origTouchCenterWorld,
                     Camera.main.ScreenToWorldPoint(TouchCenter),
                     DragType.DRAG_CAMERA,
-                    Input.touches
-                        .Where(t =>
-                            t.phase != TouchPhase.Ended
-                            && t.phase != TouchPhase.Canceled
-                        ).ToArray()
-                        .Length == 0
+                    GesturePhaseUtility.ToGesturePhase(Input.touches)
                     );
                 //Get the change in scale and zoom the camera
                 float adfc = AverageDistanceFromCenter;

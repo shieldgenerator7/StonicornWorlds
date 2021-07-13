@@ -6,8 +6,8 @@ public class MouseGestureInput : GestureInput
 {
     public int mouseButton = 0;
     public int mouseButton2 = 1;
-    public float dragThreshold = 50;
-    public float holdThreshold = 0.2f;
+    public float dragThreshold = 0;
+    public float holdThreshold = 1f;
 
     private DragType dragType = DragType.UNKNOWN;
 
@@ -94,14 +94,14 @@ public class MouseGestureInput : GestureInput
                         OrigPosWorld,
                         Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         dragType,
-                        Input.GetMouseButtonUp(mouseButton) || Input.GetMouseButtonUp(mouseButton2)
+                        GesturePhaseUtility.ToGesturePhase(mouseButton, mouseButton2)
                         );
                     break;
                 case MouseEvent.HOLD:
                     profile.processHoldGesture(
                         Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         Time.time - origTime,
-                        Input.GetMouseButtonUp(mouseButton) || Input.GetMouseButtonUp(mouseButton2)
+                        GesturePhaseUtility.ToGesturePhase(mouseButton, mouseButton2)
                         );
                     break;
                 case MouseEvent.SCROLL:
@@ -140,7 +140,7 @@ public class MouseGestureInput : GestureInput
                           OrigPosWorld,
                           Camera.main.ScreenToWorldPoint(Input.mousePosition),
                           dragType,
-                          true
+                          GesturePhase.ENDED
                           );
                 }
             }
