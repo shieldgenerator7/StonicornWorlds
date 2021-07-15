@@ -31,10 +31,10 @@ public class MissionObjective : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        if (canDestroyOnClick)
+    {
+        if (Managers.Processor.FastForwardPercentDone == 1)
         {
-            if (Managers.Processor.FastForwardPercentDone == 1)
+            if (canDestroyOnClick)
             {
                 GetComponent<Image>().enabled = true;
                 if (Input.GetMouseButtonDown(0))
@@ -42,15 +42,15 @@ public class MissionObjective : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-        }
-        else
-        {
-            if (goalObject)
+            else
             {
-                if (Managers.Planet.Planet.Pods(goalObject).Count > goalReq)
+                if (goalObject)
                 {
-                    GetComponent<Image>().enabled = true;
-                    canDestroyOnClick = true;
+                    if (Managers.Planet.Planet.Pods(goalObject).Count > goalReq)
+                    {
+                        GetComponent<Image>().enabled = true;
+                        canDestroyOnClick = true;
+                    }
                 }
             }
         }
