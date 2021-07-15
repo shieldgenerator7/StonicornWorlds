@@ -66,7 +66,7 @@ public class InputManager : Manager
     public delegate void OnMouseOverMoved(Vector2 pos);
     public event OnMouseOverMoved onMouseOverMoved;
 
-    private List<Vector2> selectList;
+    private List<Vector2> selectList = new List<Vector2>();
     public List<Vector2> SelectList
     {
         get => selectList;
