@@ -8915,6 +8915,7 @@ MonoBehaviour:
   fastForwardTimeDelta: 0.1
   fastForwardBatchSize: 10
   batchCount: 100
+  maxTimeLeftToProcess: 300
   processors:
   - {fileID: 752787616}
   - {fileID: 752787618}
