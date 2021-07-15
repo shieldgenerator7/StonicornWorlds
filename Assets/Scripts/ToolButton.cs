@@ -22,6 +22,8 @@ public abstract class ToolButton : MonoBehaviour
     public virtual Color Color => image.color;
     public Sprite sprite;
     public Sprite spriteSmall;
+    public string buttonName;
+    public string buttonDescription;
 
     public void setPosition(float x, float y)
     {

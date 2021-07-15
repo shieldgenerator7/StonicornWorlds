@@ -27,6 +27,14 @@ public class ToolButtonEditor : Editor
                 {
                     tb.sprite = outline;
                 }
+                if (string.IsNullOrEmpty(tb.buttonName))
+                {
+                    tb.buttonName = tb.name;
+                }
+                if (tb.buttonName.StartsWith("btn "))
+                {
+                    tb.buttonName = tb.buttonName.Split(' ')[1];
+                }
                 if (tb is ToolBox tbox)
                 {
                     tbox.compatibilities.ganzEgal = true;

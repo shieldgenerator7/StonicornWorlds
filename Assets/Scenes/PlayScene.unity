@@ -378,6 +378,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1284685045}
     - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonName
+      value: Ring Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 789e1d2012dc563479d0d7e566cfe5af, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonDescription
+      value: Select all pods a certain distance from the center.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -852,10 +868,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
-  sprite: {fileID: 0}
-  spriteSmall: {fileID: 0}
-  buttonName: 
-  buttonDescription: 
+  sprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+  spriteSmall: {fileID: 21300000, guid: eac69ab6ace17114094fb0e2a642a6b9, type: 3}
+  buttonName: View Planet
+  buttonDescription: Zooms out to see the whole planet.
 --- !u!1 &139889797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,10 +1124,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
-  sprite: {fileID: 0}
-  spriteSmall: {fileID: 0}
-  buttonName: 
-  buttonDescription: 
+  sprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+  spriteSmall: {fileID: 21300000, guid: 2146aac0526ac3b4c802643e42cc8aa3, type: 3}
+  buttonName: Follow Next Stonicorn
+  buttonDescription: Follows a Stonicorn.
 --- !u!1 &205714888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1352,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5dc96efe74fcf1949891be2fe134506b, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -1343,6 +1367,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Makes soil usable for other plants. Emits breathable air.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -2194,10 +2222,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
-  sprite: {fileID: 0}
-  spriteSmall: {fileID: 0}
-  buttonName: 
-  buttonDescription: 
+  sprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+  spriteSmall: {fileID: 21300000, guid: 7eeae21e33ca73244ab341aa89268732, type: 3}
+  buttonName: Toggle UI
+  buttonDescription: Toggles UI display on / off.
 --- !u!1 &462870972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,12 +2787,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Plant Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 673603988}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: d5d7d0246b840a14fb68c35cb1ecf4b9, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Plants plants or builds buildings.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -2921,6 +2965,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 791bfaf14b72f074e8946674dac773f4, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -2928,6 +2980,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Strong sturdy base for building things.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -3166,6 +3222,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9748ec8341013bf4d9f8ddb704821271, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Super Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -3173,6 +3237,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Generates lots of resources.\nEmits lots of sulfur gas.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -4750,10 +4818,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
-  sprite: {fileID: 0}
-  spriteSmall: {fileID: 0}
-  buttonName: 
-  buttonDescription: 
+  sprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+  spriteSmall: {fileID: 21300000, guid: b4a5747894e27e747a527993af8be3f5, type: 3}
+  buttonName: Toggle Rafters
+  buttonDescription: Toggles planned pods on / off.
 --- !u!1001 &947325087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5034,6 +5102,22 @@ PrefabInstance:
       propertyPath: tool
       value: 
       objectReference: {fileID: 462870974}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonName
+      value: Free Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 66b12f68acbe6da449f206a693b0b510, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonDescription
+      value: Select any contiguous pod.
+      objectReference: {fileID: 0}
     - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 1
@@ -5323,12 +5407,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Convert Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 207610543}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 82f7bb351ba55664fb9a74175ece4f99, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Converts a pod to the selected type.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -5537,6 +5637,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e1e0473b54ee7847ab793075f1346d2, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -5544,6 +5652,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Generates resources.\nEmits sulfur gas.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -5866,12 +5978,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Cancel Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1752226977}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a0e01ba8bc82bb41898926bcd744e36, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Cancels a task in the queue.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -5901,6 +6029,74 @@ PrefabInstance:
       propertyPath: compatibilities.toolActions.Array.data[0]
       value: 
       objectReference: {fileID: 1752226977}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
     - target: {fileID: 7891775795150619609, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6797,12 +6993,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Magnify Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1168859926}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 1695ddc42b38127419ae93bfe4e5c912, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Zooms in on a pod. Can be used to follow a Stonicorn.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -6880,6 +7092,74 @@ PrefabInstance:
       propertyPath: compatibilities.toolActions.Array.data[0]
       value: 
       objectReference: {fileID: 1168859926}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
     - target: {fileID: 7891775795150619609, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6899,6 +7179,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb738fbd629ad9f45b10ad339b4b3139, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -6906,6 +7194,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: A comfy place for Stonicorns to sleep in.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -7116,6 +7408,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 991052c62bae99145be4081a961e5757, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -7123,6 +7423,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Cold.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -7538,10 +7842,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
-  sprite: {fileID: 0}
-  spriteSmall: {fileID: 0}
-  buttonName: 
-  buttonDescription: 
+  sprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+  spriteSmall: {fileID: 21300000, guid: d3fe0324e66e79242be111dd292b7e06, type: 3}
+  buttonName: Clear Save
+  buttonDescription: Clears the current save file and starts a new game.
 --- !u!1001 &1453242919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7550,6 +7854,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f7a9df2cfad3f8840a2c598abcf591f6, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -7557,6 +7869,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Emits breathable air.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -7970,12 +8286,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Destroy Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 252999300}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a120e773f30231429a61d4b39d99e9d, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Destroys a pod.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -8005,6 +8337,74 @@ PrefabInstance:
       propertyPath: compatibilities.toolActions.Array.data[0]
       value: 
       objectReference: {fileID: 252999300}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 21bb2e254cdeb044fb9f4fa379c9c454, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f1aef4a7c88a0be43894200bcb168527, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: bb8ff425d058d694a8af9c3636819054, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7082bf2c4a20991439556475a2645f86, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 02946462749185d47bb238431393ed85, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e7aeb1826f14ba4eb3b86c29069458b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8f3f4e6df661214da186182c7357a1f, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bb5291af4bc91a43915570e00bbeb49, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6850c66a7fd453246ada4ec58c659e9b, type: 2}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: compatibilities.planetObjectTypes.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d35b013c4c89014a893fcb312a1d593, type: 2}
     - target: {fileID: 7891775795150619609, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -8095,6 +8495,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a908adc3aa6309f42b3bf5d77c093e75, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -8102,6 +8510,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 1ba310088e79c4441be5e83c214967af, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Filters out sulfur gas.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -9346,6 +9758,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 629642237}
     - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonName
+      value: Line Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 193cd55ee3aa8154da01fc8f8c03d393, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonDescription
+      value: Select pods in a line.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -9528,6 +9956,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 75f7214bd77ae7141b7ccfa06b64545d, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -9535,6 +9971,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 5fb4bfe3b5ce84a468e9822892522ec1, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Destroys asteroids.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -10107,6 +10547,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 680288d1e4768f14a891a09bf46eec50, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Bush
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -10114,6 +10562,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: a6e2951855c0073478bc000930249168, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Has berries.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -10308,6 +10760,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0084ef5358fe6d442a294146a3502893, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Dirt
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -10315,6 +10775,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 3e07483ddefcdfc458385f8d1335d9a8, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Fertile soil for planting.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 4
@@ -10569,6 +11033,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 95723310}
     m_Modifications:
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4354f514ee914ae40b32faba8f660f7d, type: 3}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonName
+      value: Core
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: checkRadius
       value: 30
       objectReference: {fileID: 0}
@@ -10576,6 +11048,10 @@ PrefabInstance:
       propertyPath: planetObjectType
       value: 
       objectReference: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
+    - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
+      propertyPath: buttonDescription
+      value: Stores resources.\nStonicorns can sleep here.
+      objectReference: {fileID: 0}
     - target: {fileID: 2038300258281541820, guid: 6af5b1b52107612428e140f1625cd75e, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 1
@@ -11039,12 +11515,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonName
+      value: Construct Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: toolAction
       value: 
       objectReference: {fileID: 1012292983}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: checkRadius
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: db1aaa42c09bb73409d188e3c475b64d, type: 3}
+    - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
+      propertyPath: buttonDescription
+      value: Constructs pods.
       objectReference: {fileID: 0}
     - target: {fileID: 4421165488269076892, guid: 1355c5a9c791c484e9c55cd440e15e6e, type: 3}
       propertyPath: compatibilities.tools.Array.size
@@ -11351,6 +11843,22 @@ PrefabInstance:
       propertyPath: tool
       value: 
       objectReference: {fileID: 1641698981}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonName
+      value: Single Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: spriteSmall
+      value: 
+      objectReference: {fileID: 21300000, guid: 3bf790883193cb24eb51385336e0b40c, type: 3}
+    - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
+      propertyPath: buttonDescription
+      value: Select a single pod.
+      objectReference: {fileID: 0}
     - target: {fileID: 6293772546562529825, guid: f101f40a866f37b4fa110ad5310bed97, type: 3}
       propertyPath: compatibilities.tools.Array.size
       value: 1

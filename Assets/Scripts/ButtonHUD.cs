@@ -25,8 +25,10 @@ public class ButtonHUD : MonoBehaviour
         gameObject.SetActive(turnOn);
         if (turnOn)
         {
-            buttonName.text = button.name;
-            buttonDesc.text = button.name + " description goes here.";
+            //Name
+            buttonName.text = button.buttonName;
+            //Description
+            buttonDesc.text = button.buttonDescription.Replace("\\n", "\n");
             //Icon
             imgIcon.sprite = button.spriteSmall;
             imgIcon.color = (button.spriteSmall != null) ? button.Color : Color.white;
