@@ -32,7 +32,8 @@ public class LoadingScreen : MonoBehaviour
 
     private void Update()
     {
-        targetFillAmount = Managers.Processor.FastForwardPercentDone;
+        float percentDone = Managers.Processor.FastForwardPercentDone;
+        targetFillAmount = 1 - Mathf.Pow((1 - percentDone), 2);
         foreach (Image image in images)
         {
             if (image.fillAmount != targetFillAmount)
