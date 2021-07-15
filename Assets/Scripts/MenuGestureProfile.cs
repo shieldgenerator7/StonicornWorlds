@@ -26,7 +26,7 @@ public class MenuGestureProfile : GestureProfile
     }
     public override void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, GesturePhase phase)
     {
-        if (phase == GesturePhase.STARTED)
+        if (phase == GesturePhase.ENDED)
         {
             ToolButton clickedButton = Managers.Input.buttons
                 .FindAll(b => b.gameObject.activeSelf)

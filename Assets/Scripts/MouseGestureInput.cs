@@ -124,7 +124,7 @@ public class MouseGestureInput : GestureInput
                 //If it's unknown,
                 if (mouseEvent == MouseEvent.UNKNOWN)
                 {
-                    //Then it's a camera drag
+                    //Then it's an action drag
                     mouseEvent = MouseEvent.DRAG;
                     profile.processDragGesture(
                           OrigPosWorld,
