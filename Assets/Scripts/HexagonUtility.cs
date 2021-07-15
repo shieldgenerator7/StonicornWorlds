@@ -6,39 +6,54 @@ using UnityEngine;
 
 public static class HexagonUtility
 {
+    private static HexagonGrid<Vector3Int> groundGrid = new HexagonGrid<Vector3Int>();
     public static Vector3Int getGroundPos(Vector3Int pos)
     {
-        if (pos == Vector3Int.zero)
+        Vector3Int groundPos = groundGrid[pos];
+        //If groundPos is not set yet,
+        if (groundPos == Vector3Int.zero && !groundGrid.hasPosition(pos))
         {
-            return new Vector3Int(0, -1, 1);
-        }
-        Vector3Int groundPos = reduceAbs(pos);
-        //if original pos has a zero coordinate
-        if (pos.x == 0 || pos.y == 0 || pos.z == 0)
-        {
-            //all good, no changes needed
-        }
-        //if ground pos has a zero coordinate
-        else if (groundPos.x == 0)
-        {
-            groundPos.x = pos.x;
-        }
-        else if (groundPos.y == 0)
-        {
-            groundPos.y = pos.y;
-        }
-        else if (groundPos.z == 0)
-        {
-            groundPos.z = pos.z;
-        }
-        //else check coordinate sign alignment
-        else if (Math.Sign(pos.x) == Mathf.Sign(pos.y))
-        {
-            groundPos.y = pos.y;
-        }
-        else
-        {
-            groundPos.z = pos.z;
+            //Set it
+            //Special case: if the position is the center
+            if (pos == Vector3Int.zero)
+            {
+                //Set it to the position "below" the center
+                groundPos = new Vector3Int(0, -1, 1);
+            }
+            //Normal case: if the position is not the center
+            else
+            {
+                groundPos = reduceAbs(pos);
+                //if original pos has a zero coordinate
+                if (pos.x == 0 || pos.y == 0 || pos.z == 0)
+                {
+                    //all good, no changes needed
+                }
+                //if ground pos has a zero coordinate
+                else if (groundPos.x == 0)
+                {
+                    groundPos.x = pos.x;
+                }
+                else if (groundPos.y == 0)
+                {
+                    groundPos.y = pos.y;
+                }
+                else if (groundPos.z == 0)
+                {
+                    groundPos.z = pos.z;
+                }
+                //else check coordinate sign alignment
+                else if (Math.Sign(pos.x) == Mathf.Sign(pos.y))
+                {
+                    groundPos.y = pos.y;
+                }
+                else
+                {
+                    groundPos.z = pos.z;
+                }
+            }
+            //Store it back in the grid
+            groundGrid[pos] = groundPos;
         }
         return groundPos;
     }
@@ -46,36 +61,44 @@ public static class HexagonUtility
     public static Vector3Int getCeilingPos(Vector3Int pos)
         => reflect(getGroundPos(pos), pos);
 
+    private static HexagonGrid<HexagonNeighborhood> neighborhoodGrid = new HexagonGrid<HexagonNeighborhood>();
     public static HexagonNeighborhood getNeighborhood(Vector3Int pos)
     {
-        HexagonNeighborhood neighborhood = new HexagonNeighborhood();
-        Vector3Int groundPos = getGroundPos(pos);
-        neighborhood.ground = groundPos;
-        neighborhood.groundLeft = rotate(groundPos, pos, -1);
-        neighborhood.groundRight = rotate(groundPos, pos, 1);
-        Vector3Int ceilPos = reflect(groundPos, pos);
-        neighborhood.ceiling = ceilPos;
-        neighborhood.ceilingLeft = rotate(ceilPos, pos, 1);
-        neighborhood.ceilingRight = rotate(ceilPos, pos, -1);
-        neighborhood.neighbors = new Vector3Int[]
+        HexagonNeighborhood neighborhood = neighborhoodGrid[pos];
+        //If neighborhood has not been set yet,
+        if (neighborhood.ceiling == Vector3Int.zero)
         {
+            //Set it up
+            Vector3Int groundPos = getGroundPos(pos);
+            neighborhood.ground = groundPos;
+            neighborhood.groundLeft = rotate(groundPos, pos, -1);
+            neighborhood.groundRight = rotate(groundPos, pos, 1);
+            Vector3Int ceilPos = reflect(groundPos, pos);
+            neighborhood.ceiling = ceilPos;
+            neighborhood.ceilingLeft = rotate(ceilPos, pos, 1);
+            neighborhood.ceilingRight = rotate(ceilPos, pos, -1);
+            neighborhood.neighbors = new Vector3Int[]
+            {
             neighborhood.ground,
             neighborhood.groundLeft,
             neighborhood.groundRight,
             neighborhood.ceiling,
             neighborhood.ceilingLeft,
             neighborhood.ceilingRight,
-        };
-        neighborhood.upsides = new Vector3Int[]
-        {
+            };
+            neighborhood.upsides = new Vector3Int[]
+            {
             neighborhood.ceilingLeft,
             neighborhood.ceilingRight,
-        };
-        neighborhood.downsides = new Vector3Int[]
-        {
+            };
+            neighborhood.downsides = new Vector3Int[]
+            {
             neighborhood.groundLeft,
             neighborhood.groundRight,
-        };
+            };
+            //Store it back in the grid
+            neighborhoodGrid[pos] = neighborhood;
+        }
         return neighborhood;
     }
 

@@ -29,6 +29,9 @@ public class HexagonGrid<T>
         grid.Clear();
     }
 
+    public bool hasPosition(Vector3Int pos)
+        => grid.ContainsKey(pos);
+
     public T get(Vector3Int pos)
         => (grid.ContainsKey(pos)) ? grid[pos] : default(T);
 
