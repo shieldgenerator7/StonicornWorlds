@@ -9,6 +9,7 @@ public class ProcessorManager : Manager
     public float fastForwardTimeDelta = 0.1f;
     public int fastForwardBatchSize = 10;
     public int batchCount = 100;
+    public float maxTimeLeftToProcess = 300;
     public List<PlanetProcessor> processors;
 
     public override void setup()
@@ -28,6 +29,8 @@ public class ProcessorManager : Manager
                 }
             }
             float timeLeftToProcess = Mathf.Floor((float)span.TotalSeconds);
+            timeLeftToProcess = Mathf.Clamp(timeLeftToProcess, 0, maxTimeLeftToProcess);
+            Debug.Log("timeLeftToProcess: " + timeLeftToProcess);
             StartCoroutine(fastForwardAsynchronously(timeLeftToProcess));
         }
         else
