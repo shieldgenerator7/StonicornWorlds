@@ -92,6 +92,18 @@ public class InputManager : Manager
         {
             PodContentType = pct;
         }
+        if (PodType == null)
+        {
+            List<Pod> podsAll = Managers.Planet.Planet.PodsAll;
+            PodType = Managers.Constants.allPodTypes
+                .First(podType => podsAll.Any(pod => pod.podType == podType));
+        }
+        if (PodContentType == null)
+        {
+            List<Pod> podsAll = Managers.Planet.Planet.PodsAll;
+            PodContentType = Managers.Constants.allPodContentTypes
+                .First(podContentType => podsAll.Any(pod => pod.hasContent(podContentType)));
+        }
     }
 
     public void updateToolBoxes()
