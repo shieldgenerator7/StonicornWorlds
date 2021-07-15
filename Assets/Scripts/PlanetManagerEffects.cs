@@ -239,12 +239,10 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateStonicornInfo(Stonicorn stonicorn)
     {
-        buttonHUD.trackStonicorn(null);
         stonicornHUD.trackStonicorn(stonicorn);
     }
     public void updateButtonInfo(ToolButton button)
     {
-        stonicornHUD.trackStonicorn(null);
         buttonHUD.trackStonicorn(button);
     }
 }

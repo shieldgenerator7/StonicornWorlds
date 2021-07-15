@@ -21,7 +21,17 @@ public class MenuGestureProfile : GestureProfile
                .FindAll(btn => btn.checkMouseOver(Input.mousePosition));
         if (mobs.Count == 0)
         {
+            Managers.PlanetEffects.updateButtonInfo(null);
+            if (Managers.Camera.FocusObject)
+            {
+                Managers.PlanetEffects.updateStonicornInfo(Managers.Camera.FocusObject.stonicorn);
+            }
             Managers.Gesture.switchGestureProfile(GestureManager.GestureProfileType.PLANET);
+        }
+        else
+        {
+            Managers.PlanetEffects.updateStonicornInfo(null);
+            Managers.PlanetEffects.updateButtonInfo(mobs[0]);
         }
     }
     public override void processDragGesture(Vector3 origMPWorld, Vector3 newMPWorld, GestureInput.DragType dragType, GesturePhase phase)
@@ -36,7 +46,6 @@ public class MenuGestureProfile : GestureProfile
                 //Click on Button
                 clickedButton.activate();
                 Managers.Input.toolBoxes.ForEach(tb => tb.updateColor());
-                Managers.PlanetEffects.updateButtonInfo(clickedButton);
             }
         }
     }
