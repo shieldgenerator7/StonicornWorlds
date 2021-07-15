@@ -15,9 +15,18 @@ public class ToolButtonEditor : Editor
         DrawDefaultInspector();
         if (GUILayout.Button("Setup button"))
         {
+            Sprite outline = FindObjectOfType<ConstantBank>().outlineSprite;
             foreach (Object t in targets)
             {
                 ToolButton tb = (ToolButton)t;
+                if (tb.spriteSmall == null)
+                {
+                    tb.spriteSmall = outline;
+                }
+                if (tb.sprite == null)
+                {
+                    tb.sprite = outline;
+                }
                 if (tb is ToolBox tbox)
                 {
                     tbox.compatibilities.ganzEgal = true;
@@ -30,6 +39,8 @@ public class ToolButtonEditor : Editor
                         tab.toolAction = GameObject.Find(toolName).GetComponent<ToolAction>();
                     }
                     tab.image.sprite = tab.toolAction.preview;
+                    tab.spriteSmall = tab.toolAction.preview;
+                    tab.sprite = outline;
                 }
                 else if (tb is PlanetObjectTypeButton ptb)
                 {
@@ -52,6 +63,8 @@ public class ToolButtonEditor : Editor
                         }
                     }
                     ptb.image.sprite = ptb.planetObjectType.preview;
+                    ptb.spriteSmall = null;
+                    ptb.sprite = ptb.planetObjectType.preview;
                 }
                 //Colors
                 if (tb.activeImage.color == Color.white)

@@ -13,6 +13,7 @@ public class ConstantBank : Manager
     public float buttonSpacing = 100;
     private float originalCheckRadius;
     private float originalSpacing;
+    public Sprite outlineSprite;
 
     public override void setup()
     {

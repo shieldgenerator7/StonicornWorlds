@@ -27,8 +27,14 @@ public class ButtonHUD : MonoBehaviour
         {
             buttonName.text = button.name;
             buttonDesc.text = button.name + " description goes here.";
-            imgIcon.color = button.Color;
-            imgOutline.color = button.Color;
+            //Icon
+            imgIcon.sprite = button.spriteSmall;
+            imgIcon.color = (button.spriteSmall != null) ? button.Color : Color.white;
+            imgIcon.enabled = button.spriteSmall != null;
+            //Outline
+            imgOutline.sprite = button.sprite;
+            imgOutline.color = (button.spriteSmall != null) ? button.Color : Color.white;
+            imgOutline.enabled = button.sprite != null;
         }
     }
 }

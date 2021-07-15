@@ -20,6 +20,8 @@ public abstract class ToolButton : MonoBehaviour
     }
 
     public virtual Color Color => image.color;
+    public Sprite sprite;
+    public Sprite spriteSmall;
 
     public void setPosition(float x, float y)
     {

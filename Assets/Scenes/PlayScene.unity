@@ -852,6 +852,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
+  sprite: {fileID: 0}
+  spriteSmall: {fileID: 0}
+  buttonName: 
+  buttonDescription: 
 --- !u!1 &139889797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,6 +1108,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
+  sprite: {fileID: 0}
+  spriteSmall: {fileID: 0}
+  buttonName: 
+  buttonDescription: 
 --- !u!1 &205714888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,6 +2194,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
+  sprite: {fileID: 0}
+  spriteSmall: {fileID: 0}
+  buttonName: 
+  buttonDescription: 
 --- !u!1 &462870972
 GameObject:
   m_ObjectHideFlags: 0
@@ -4738,6 +4750,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
+  sprite: {fileID: 0}
+  spriteSmall: {fileID: 0}
+  buttonName: 
+  buttonDescription: 
 --- !u!1001 &947325087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7522,6 +7538,10 @@ MonoBehaviour:
     tools: []
     toolActions: []
     planetObjectTypes: []
+  sprite: {fileID: 0}
+  spriteSmall: {fileID: 0}
+  buttonName: 
+  buttonDescription: 
 --- !u!1001 &1453242919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8564,6 +8584,7 @@ MonoBehaviour:
   desiredHeight: 1080
   buttonCheckRadius: 50
   buttonSpacing: 100
+  outlineSprite: {fileID: 21300000, guid: 544813fc536b24e4b959fed449bdd1d5, type: 3}
   corePodType: {fileID: 11400000, guid: 3e3b1969990473a4f97c7c72b2d82f89, type: 2}
   spacePodType: {fileID: 11400000, guid: afc885a30c04f1a4a8f4f534acaeb9e7, type: 2}
   allPodTypes:
