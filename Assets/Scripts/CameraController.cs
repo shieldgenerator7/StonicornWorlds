@@ -34,6 +34,7 @@ public class CameraController : Manager
             }
             else
             {
+                Debug.Log("Focus object: " + focusObject);
                 Locked = false;
                 autoFrame(new List<Vector2>());
             }
@@ -44,6 +45,7 @@ public class CameraController : Manager
     public event OnFocusObjectChanged onFocusObjectChanged;
 
     private Vector3 Up;
+    private Vector3 origPosition;
     private Vector3 position = Vector3.back * 10;
     private Vector3 Position
     {
@@ -60,7 +62,9 @@ public class CameraController : Manager
         get => zoomLevel;
         set
         {
-            zoomLevel = value;
+            zoomLevel = Mathf.Clamp(value, minOrthoSize, float.MaxValue);
+            Debug.Log("zoom level changed: " + zoomLevel);
+            onZoomChanged?.Invoke(zoomLevel);
         }
     }
     public delegate void OnZoomChanged(float zoomLevel);
@@ -72,6 +76,7 @@ public class CameraController : Manager
     public override void setup()
     {
         camOffset = transform.position - Vector3.zero;
+        origPosition = transform.position;
         checkScreenSize();
     }
 
@@ -153,5 +158,28 @@ public class CameraController : Manager
             minOrthoSize,
             (maxDist * 3.0f / 2.555f) + 0.5f
             );
+    }
+
+    public void processDragGesture(Vector2 origMPWorld, Vector2 newMPWorld, GesturePhase phase)
+    {
+        switch (phase)
+        {
+            case GesturePhase.STARTED:
+                origPosition = transform.position;
+                float origZoomLevel = zoomLevel;
+                FocusObject = null;
+                Locked = true;
+                transform.position = origPosition;
+                ZoomLevel = origZoomLevel;
+                break;
+            case GesturePhase.ONGOING:
+                transform.position = Position = (Vector3)(origMPWorld - newMPWorld) + origPosition;
+                break;
+            case GesturePhase.ENDED:
+                transform.position = Position = (Vector3)(origMPWorld - newMPWorld) + origPosition;
+                break;
+            default:
+                throw new NotImplementedException("Phase not supported: " + phase);
+        }
     }
 }

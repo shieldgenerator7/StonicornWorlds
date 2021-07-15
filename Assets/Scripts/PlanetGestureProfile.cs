@@ -40,7 +40,7 @@ public class PlanetGestureProfile : GestureProfile
         else if (dragType == GestureInput.DragType.DRAG_CAMERA)
         {
             //Drag the camera
-            //Managers.Camera.processDragGesture(origMPWorld, newMPWorld, finished);
+            Managers.Camera.processDragGesture(origMPWorld, newMPWorld, phase);
         }
         else
         {
