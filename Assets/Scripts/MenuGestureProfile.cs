@@ -36,6 +36,7 @@ public class MenuGestureProfile : GestureProfile
                 //Click on Button
                 clickedButton.activate();
                 Managers.Input.toolBoxes.ForEach(tb => tb.updateColor());
+                Managers.PlanetEffects.updateButtonInfo(clickedButton);
             }
         }
     }

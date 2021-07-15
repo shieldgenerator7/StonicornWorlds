@@ -10,6 +10,7 @@ public class PlanetManagerEffects : MonoBehaviour
     public GameObject cursorObject;
 
     public StonicornHUD stonicornHUD;
+    public ButtonHUD buttonHUD;
     public SpriteRenderer spaceField;
     public float starFieldScale = 1.1f;
 
@@ -238,6 +239,12 @@ public class PlanetManagerEffects : MonoBehaviour
 
     public void updateStonicornInfo(Stonicorn stonicorn)
     {
+        buttonHUD.trackStonicorn(null);
         stonicornHUD.trackStonicorn(stonicorn);
+    }
+    public void updateButtonInfo(ToolButton button)
+    {
+        stonicornHUD.trackStonicorn(null);
+        buttonHUD.trackStonicorn(button);
     }
 }
