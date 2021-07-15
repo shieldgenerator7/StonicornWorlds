@@ -55,31 +55,18 @@ public class MouseGestureInput : GestureInput
                     origPosScreen = Input.mousePosition;
                     origTime = Time.time;
                     dragType = DragType.DRAG_ACTION;
+                    mouseEvent = MouseEvent.DRAG;
                 }
                 else if (Input.GetMouseButtonDown(mouseButton2))
                 {
                     origPosScreen = Input.mousePosition;
                     origTime = Time.time;
                     dragType = DragType.DRAG_CAMERA;
+                    mouseEvent = MouseEvent.DRAG;
                 }
                 else if (Input.GetAxis("Mouse ScrollWheel") != 0)
                 {
                     mouseEvent = MouseEvent.SCROLL;
-                }
-                //Click middle
-                else
-                {
-                    //Check Drag
-                    float dragDistance = Vector2.Distance(origPosScreen, Input.mousePosition);
-                    if (dragDistance >= dragThreshold)
-                    {
-                        mouseEvent = MouseEvent.DRAG;
-                    }
-                    //Check Hold
-                    else if (Time.time - origTime >= holdThreshold)
-                    {
-                        mouseEvent = MouseEvent.HOLD;
-                    }
                 }
             }
 
@@ -94,14 +81,18 @@ public class MouseGestureInput : GestureInput
                         OrigPosWorld,
                         Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         dragType,
-                        GesturePhaseUtility.ToGesturePhase(mouseButton, mouseButton2)
+                        (dragType == DragType.DRAG_ACTION)
+                            ? GesturePhaseUtility.ToGesturePhase(mouseButton)
+                            : GesturePhaseUtility.ToGesturePhase(mouseButton2)
                         );
                     break;
                 case MouseEvent.HOLD:
                     profile.processHoldGesture(
                         Camera.main.ScreenToWorldPoint(Input.mousePosition),
                         Time.time - origTime,
-                        GesturePhaseUtility.ToGesturePhase(mouseButton, mouseButton2)
+                        (dragType == DragType.DRAG_ACTION)
+                            ? GesturePhaseUtility.ToGesturePhase(mouseButton)
+                            : GesturePhaseUtility.ToGesturePhase(mouseButton2)
                         );
                     break;
                 case MouseEvent.SCROLL:
@@ -121,33 +112,23 @@ public class MouseGestureInput : GestureInput
             //
             if (Input.GetMouseButtonUp(mouseButton))
             {
-                //If it's unknown,
-                if (mouseEvent == MouseEvent.UNKNOWN)
-                {
-                    //Then it's an action drag
-                    mouseEvent = MouseEvent.DRAG;
-                    profile.processDragGesture(
-                          OrigPosWorld,
-                          Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                          DragType.DRAG_ACTION,
-                          GesturePhase.ENDED
-                          );
-                }
+                mouseEvent = MouseEvent.DRAG;
+                profile.processDragGesture(
+                      OrigPosWorld,
+                      Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                      DragType.DRAG_ACTION,
+                      GesturePhase.ENDED
+                      );
             }
-            if (Input.GetMouseButtonUp(mouseButton2))
+            else if (Input.GetMouseButtonUp(mouseButton2))
             {
-                //If it's unknown,
-                if (mouseEvent == MouseEvent.UNKNOWN)
-                {
-                    //Then it's a camera drag
-                    mouseEvent = MouseEvent.DRAG;
-                    profile.processDragGesture(
-                          OrigPosWorld,
-                          Camera.main.ScreenToWorldPoint(Input.mousePosition),
-                          DragType.DRAG_CAMERA,
-                          GesturePhase.ENDED
-                          );
-                }
+                mouseEvent = MouseEvent.DRAG;
+                profile.processDragGesture(
+                      OrigPosWorld,
+                      Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                      DragType.DRAG_CAMERA,
+                      GesturePhase.ENDED
+                      );
             }
             return true;
         }
